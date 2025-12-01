@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<!-- saved from url=(0059)https://serviciosvirtuales-wd.apps.bancolombia.com/personas -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+     <!-- Google Tag Manager -->
+     <script async="" src="./gtm(5).js"></script><script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+      new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+      j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+      'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+      })(window,document,'script','dataLayer','GTM-WMKWG36');</script>
+        <!-- End Google Tag Manager -->
+  
+  <title>Widget</title>
+  <!--<base href="/">--><base href=".">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="https://serviciosvirtuales-wd.apps.bancolombia.com/favicon.ico">
+  <script src="./audio_player.js"></script>
+  <script>
+    window.addEventListener("message", (event) => {
+      close = document.getElementById("iconClose");
+      accept = document.getElementById("btn-accept");
+      menu = document.getElementById("btn-menu");
+      if (event.data.toString().match('CHAT')) {
+         if(close){ close.click();}
+         if(accept){accept.click();}
+          if(menu){ menu.click();}
+          setTimeout(openOption('btn-chat'), 200)
+      }
+      if (event.data.toString().match('CB')) {
+        if(close){ close.click();
+         if(accept){accept.click();}}
+          if(menu){ menu.click();}
+          setTimeout(openOption('btn-callback'), 200)
+      }
+      if (event.data.toString().match('C2C')) {
+        if(close){ close.click();}
+         if(accept){accept.click();}
+          if(menu){ menu.click();}
+          setTimeout(openOption('btn-c2c'), 200)
+      }
+    }, false);
+
+    function openOption(cOption){
+      document.getElementById(cOption).click();
+    }
+  </script>
+  <style>@import"https://library-sdb.apps.bancolombia.com/bds/2.2.6/bds.min.css"</style><link rel="stylesheet" href="./styles.12a1ce5f9ee9e7e3.css" media="all" onload="this.media=&#39;all&#39;"><noscript><link rel="stylesheet" href="styles.12a1ce5f9ee9e7e3.css"></noscript><style></style><style>.menu-container[_ngcontent-efx-c46]{display:flex;flex-flow:column;align-items:flex-end;position:fixed;bottom:15px;right:30px;z-index:100}.closed-menu[_ngcontent-efx-c46]{height:0px;overflow:hidden;transition:.2s all;z-index:-1}.open-menu[_ngcontent-efx-c46]{padding-bottom:7px;display:flex;flex-flow:column;overflow:hidden;height:280px;gap:7px;align-content:space-between;transition:.2s all}.open-menu2[_ngcontent-efx-c46]{padding-bottom:7px;display:flex;flex-flow:column;overflow:hidden;height:346px;gap:7px;align-content:space-between;transition:.2s all}.option-menu[_ngcontent-efx-c46]{display:flex;justify-content:flex-end;align-items:center;position:relative;gap:20px}.button-menu[_ngcontent-efx-c46]{background-color:#f0f8ff;border:5px solid}.button-menu[_ngcontent-efx-c46]   em[_ngcontent-efx-c46]{color:#252525}.option-menu[_ngcontent-efx-c46]   span[_ngcontent-efx-c46]{color:#fff}.shaded-screen[_ngcontent-efx-c46]{width:100vw;height:100vh;position:absolute;z-index:99;background:linear-gradient(rgba(44,42,41,.8) 0%,#2C2A29 100%)}em[_ngcontent-efx-c46]{padding-right:33px}</style></head>
+
+  <body>
+    <meta name="”robots”" content="”noindex,nofollow”">
+    <!-- generic spinner for the entire front end -->
+    <ngx-spinner bdcolor="#f0f0f2" size="large" color="#000000" type="ball-clip-rotate" [fullscreen]="false">
+    </ngx-spinner>
+
+    <!-- Google Tag Manager (noscript) -->
+    <noscript>
+      <iframe
+        src="https://www.googletagmanager.com/ns.html?id=GTM-WMKWG36"
+        height="0" width="0" style="display:none;visibility:hidden">
+      </iframe>
+    </noscript>
+    <!-- End Google Tag Manager (noscript) -->
+
+
+    <app-root id="todo" _nghost-efx-c32=""><router-outlet _ngcontent-efx-c32=""></router-outlet><app-root _nghost-efx-c32=""><router-outlet _ngcontent-efx-c32=""></router-outlet><app-menu _nghost-efx-c46=""><container-element _ngcontent-efx-c46=""><div _ngcontent-efx-c46="" id="Menu" class="menu-container"><div _ngcontent-efx-c46="" class="closed-menu"><div _ngcontent-efx-c46="" class="option-menu"><span _ngcontent-efx-c46="">Puntos de atención</span><a _ngcontent-efx-c46="" target="_blank" href="https://www.bancolombia.com/puntos-de-atencion/buscar-en-mapa"><button _ngcontent-efx-c46="" bc-fab-button="" typebutton="secondary" id="btn-location" role="button" tabindex="0" class="bc-fab-button bc-fab-button-secondary"><em _ngcontent-efx-c46="" class="bc-icon">location</em></button></a></div><div _ngcontent-efx-c46="" class="option-menu"><span _ngcontent-efx-c46="">Chat en línea</span><button _ngcontent-efx-c46="" bc-fab-button="" typebutton="secondary" id="btn-chat" role="button" tabindex="0" class="bc-fab-button bc-fab-button-secondary"><em _ngcontent-efx-c46="" class="bc-icon">chat</em></button></div><div _ngcontent-efx-c46="" class="option-menu"><span _ngcontent-efx-c46="">Hablemos por WhatsApp</span><a _ngcontent-efx-c46="" target="_blank" href="https://wa.me/573013536788"><button _ngcontent-efx-c46="" bc-fab-button="" typebutton="secondary" id="btn-whatsapp" role="button" tabindex="0" class="bc-fab-button bc-fab-button-secondary"><em _ngcontent-efx-c46="" class="bc-icon">whatsapp-outline</em></button></a></div><!----><div _ngcontent-efx-c46="" class="option-menu"><span _ngcontent-efx-c46="">Prefieres que te llamemos</span><button _ngcontent-efx-c46="" bc-fab-button="" typebutton="secondary" id="btn-callback" role="button" tabindex="0" class="bc-fab-button bc-fab-button-secondary"><em _ngcontent-efx-c46="" class="bc-icon"> calendar-day</em></button></div><div _ngcontent-efx-c46="" class="option-menu"><span _ngcontent-efx-c46="">Llámanos a nuestra línea</span><button _ngcontent-efx-c46="" bc-fab-button="" typebutton="secondary" id="btn-c2c" role="button" tabindex="0" class="bc-fab-button bc-fab-button-secondary"><em _ngcontent-efx-c46="" class="bc-icon">phone-contact</em></button></div></div><button _ngcontent-efx-c46="" bc-fab-button="" typebutton="secondary" id="btn-menu" class="button-menu bc-fab-button bc-fab-button-secondary" role="button" tabindex="0" style="border-color: rgb(253, 218, 36);"><em _ngcontent-efx-c46="" class="bc-icon">contact-center</em></button></div><!----><!----><!----><!----><!----><!----><!----></container-element><!----></app-menu><!----></app-root><!----></app-root>
+  <script src="./runtime.14427e4b4d7d04ff.js" type="module"></script><script src="./polyfills.942b75e96c9eb6a3.js" type="module"></script><script src="./main.5a7b966577c5504b.js" type="module"></script>
+
+</body></html>

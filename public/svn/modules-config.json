@@ -1,0 +1,232 @@
+{
+    "mfDashboard": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-dashboard/remoteEntry.js",
+      "exposedModule": "./DashboardModule",
+      "routePath": "home",
+      "ngModuleName": "DashboardModule",
+      "isFeatureFlag": false
+    },
+    "mfProfileSettings": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-profile-settings/remoteEntry.js",
+      "exposedModule": "./SettingsModule",
+      "routePath": "profileSettings",
+      "ngModuleName": "SettingsModule",
+      "isFeatureFlag": false
+    },
+    "mfBalances": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-balances/remoteEntry.js",
+      "exposedModule": "./SVNBalancesModule",
+      "routePath": "cuentas",
+      "ngModuleName": "SvnBalancesModule",
+      "isFeatureFlag": true
+    },
+    "mfConsolidatedBalances": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-consolidated-balances/remoteEntry.js",
+      "exposedModule": "./ConsolidatedBalancesModule",
+      "routePath": "saldos-consolidados",
+      "ngModuleName": "SvnConsolidatedBalancesModule",
+      "isFeatureFlag": true
+    },
+    "mfCdt": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-cdt/remoteEntry.js",
+      "exposedModule": "./CdtModule",
+      "routePath": "inversiones",
+      "ngModuleName": "UiModule",
+      "isFeatureFlag": true
+    },
+    "mfCredits": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-credits/remoteEntry.js",
+      "exposedModule": "./CreditsModule",
+      "routePath": "credits",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfTdc": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-tdc/remoteEntry.js",
+      "exposedModule": "./TdcModule",
+      "routePath": "creditCards",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfPaymentHistory": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-payment-history/remoteEntry.js",
+      "exposedModule": "./PaymentHistoryModule",
+      "routePath": "historico-pago-facturas",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfFic": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-fic/remoteEntry.js",
+      "exposedModule": "./FicModule",
+      "routePath": "fic",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfOwnCreditPayment": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-own-credit-payment/remoteEntry.js",
+      "exposedModule": "./OwnCreditPaymentModule",
+      "routePath": "ownCreditPayment",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfAuditReview": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-audit-review/remoteEntry.js",
+      "exposedModule": "./AuditReviewModule",
+      "routePath": "auditReview",
+      "ngModuleName": "UiModule",
+      "isFeatureFlag": true
+    },
+    "mfAuthentication": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-authentication/remoteEntry.js",
+      "exposedModule": "./AuthModule",
+      "routePath": "authentication",
+      "ngModuleName": "UiModule"
+    },
+    "mfStatements": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-statements/remoteEntry.js",
+      "exposedModule": "./StatementsModule",
+      "routePath": "statements",
+      "ngModuleName": "UiModule",
+      "isFeatureFlag": true
+    },
+    "mfMailboxDownload": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-mailbox-download/remoteEntry.js",
+      "exposedModule": "./MailboxDownloadModule",
+      "routePath": "mailboxDownload",
+      "ngModuleName": "UiModule",
+      "isFeatureFlag": true
+    },
+    "mfCreditCardPayment": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-credit-card-payment/remoteEntry.js",
+      "exposedModule": "./CreditCardPaymentModule",
+      "routePath": "creditCardPayment",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfTransfers": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-transfers/remoteEntry.js",
+      "exposedModule": "./TransfersModule",
+      "routePath": "transferencias",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfPayrollProvidersPayment": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-payroll-providers-payment/remoteEntry.js",
+      "exposedModule": "./PayrollProvidersPaymentModule",
+      "routePath": "payrollProvidersPayment",
+      "ngModuleName": "UiModule",
+      "isFeatureFlag": true
+    },
+    "mfProductManagement": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-product-management/remoteEntry.js",
+      "exposedModule": "./ProductManagementModule",
+      "routePath": "productManagement",
+      "ngModuleName": "ProductModule",
+      "isFeatureFlag": true
+    },
+    "mfRegistedInvoices": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-registered-invoices/remoteEntry.js",
+      "exposedModule": "./RegistedInvoicesModule",
+      "routePath": "facturas",
+      "ngModuleName": "UiModule",
+      "isFeatureFlag": true
+    },
+    "mfSupportLanding": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-support-landing/remoteEntry.js",
+      "exposedModule": "./SupportLanding",
+      "routePath": "supportLanding",
+      "ngModuleName": "UiModule",
+      "isFeatureFlag": true
+    },
+    "mfAgilePayment": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-agile-payment/remoteEntry.js",
+      "exposedModule": "./AgilePaymentModule",
+      "routePath": "transferencia-terceros",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfBlockCheck": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-block-check/remoteEntry.js",
+      "exposedModule": "./BlockCheckModule",
+      "routePath": "bloquear-cheques",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfTransactionScheduling": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-transaction-scheduling/remoteEntry.js",
+      "exposedModule": "./TransactionSchedulingModule",
+      "routePath": "programacion-de-transacciones",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfFinancialLeasing": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-financial-leasing/remoteEntry.js",
+      "exposedModule": "./FinancialLeasingModule",
+      "routePath": "leasing-financiero",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfTransactionsRecord": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-transactions-record/remoteEntry.js",
+      "exposedModule": "./TransactionsRecordModule",
+      "routePath": "historial-de-transacciones",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfInternationalTrade": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-international-trade/remoteEntry.js",
+      "exposedModule": "./InternationalTradeRoutes",
+      "routePath": "comercio-internacional",
+      "ngModuleName": "INTERNATIONAL_TRADE_ROUTES",
+      "isFeatureFlag": true
+    },
+    "mfTransactionApproval": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-transaction-approval/remoteEntry.js",
+      "exposedModule": "./TransactionApprovalModule",
+      "routePath": "aprobacion-transacciones",
+      "ngModuleName": "UiModule",
+      "isFeatureFlag": true
+    },
+    "mfPricing": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-pricing/remoteEntry.js",
+      "exposedModule": "./PricingModule",
+      "routePath": "plan-management",
+      "ngModuleName": "AppModule"
+    },
+    "mfCic": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-cic/remoteEntry.js",
+      "exposedModule": "./CicModule",
+      "routePath": "cic",
+      "ngModuleName": "UiModule",
+      "isFeatureFlag": true
+    },
+    "mfOrderAgreement": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-order-agreement/remoteEntry.js",
+      "exposedModule": "./OrderAgreementModule",
+      "routePath": "order-agreement",
+      "ngModuleName": "AppModule",
+      "isFeatureFlag": true
+    },
+    "mfManualPayment": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-manual-payment/remoteEntry.js",
+      "exposedModule": "./ManualPaymentModule",
+      "routePath": "pago-manual",
+      "ngModuleName": "UiModule",
+      "isFeatureFlag": true
+    },
+    "mfFileUploadManagement": {
+      "remoteEntry": "https://svnegocios.apps.bancolombia.com/mf-file-upload-management/remoteEntry.js",
+      "exposedModule": "./FileUploadModule",
+      "routePath": "envio-archivo",
+      "ngModuleName": "UiModule",
+      "isFeatureFlag": true
+    },
+    "mfCollectionsFile": {
+      "remoteEntry": "",
+      "exposedModule": "./CollectionsFileModule",
+      "routePath": "envio-archivo-recaudos",
+      "ngModuleName": "UiModule",
+      "isFeatureFlag": true
+    }
+  }
+  

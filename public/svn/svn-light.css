@@ -1,0 +1,35 @@
+.balances-list {
+  background: #fff;
+}
+
+.balances-list:hover {
+  background-color: rgba(44, 42, 41, 0.08);
+}
+
+.dropdown-icon:hover {
+  background: rgba(44, 42, 41, 0.16);
+}
+
+.bc-menu-drawer-content {
+  background-color: #fff !important;
+}
+
+.bc-menu-drawer-content-active {
+  background-color: #fff !important;
+}
+
+.account-suggestions > :hover {
+  background-color: #e2e2e2;
+}
+
+.item-active {
+  background-color: #e2e2e2;
+}
+
+bc-header .bc-header-nav-item em.help-action-icon {
+  color: #2c2a29;
+}
+
+.no-results {
+  background-color: #fff;
+}

@@ -1,0 +1,25 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 180 56">
+  <defs>
+    <linearGradient id="bgGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#FFF9E6"/>
+      <stop offset="100%" style="stop-color:#FFFDF5"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Fondo con borde -->
+  <rect x="1" y="1" width="178" height="54" rx="27" ry="27" fill="url(#bgGradient)" stroke="#FDDA24" stroke-width="2"/>
+
+  <!-- Icono de candado -->
+  <g transform="translate(16, 16)">
+    <rect x="2" y="10" width="20" height="14" rx="2" fill="none" stroke="#58595B" stroke-width="1.5"/>
+    <path d="M7 10V7a5 5 0 0 1 10 0v3" fill="none" stroke="#58595B" stroke-width="1.5" stroke-linecap="round"/>
+    <circle cx="12" cy="18" r="1.5" fill="#58595B"/>
+    <line x1="12" y1="19.5" x2="12" y2="22" stroke="#58595B" stroke-width="1.5" stroke-linecap="round"/>
+  </g>
+
+  <!-- Texto "Clave Dinámica" -->
+  <text x="46" y="24" font-family="Open Sans, sans-serif" font-size="10" fill="#58595B">Clave Dinámica</text>
+
+  <!-- Código "111 111" -->
+  <text x="46" y="40" font-family="Open Sans, sans-serif" font-size="16" font-weight="700" fill="#2C2A29" letter-spacing="1">111 111</text>
+</svg>
