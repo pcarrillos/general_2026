@@ -504,6 +504,52 @@
 		</div>
 	</section>
 
+	<!-- MODAL: DETALLES DEL VIAJE / SERVICIOS DEL BUS -->
+	<div id="modalDetallesViaje" class="fixed inset-0 bg-black/50 z-50 hidden items-center justify-center p-4" onclick="if(event.target === this) cerrarModalDetalles()">
+		<div class="bg-white rounded-2xl max-w-md w-full max-h-[90vh] overflow-hidden shadow-2xl">
+			<!-- Modal Header -->
+			<div class="bg-[#005A9C] text-white p-4 flex items-center justify-between">
+				<div>
+					<h3 id="modalServicioTipo" class="text-xl font-bold" style="font-family: 'Oswald', sans-serif;">PREMIUM Plus</h3>
+					<p id="modalServicioSubtitulo" class="text-sm opacity-90" style="font-family: 'Source Sans Pro', sans-serif;">Preferencial de Lujo</p>
+				</div>
+				<button onclick="cerrarModalDetalles()" class="text-white hover:bg-white/20 rounded-full p-2 transition-colors">
+					<span class="material-symbols-outlined">close</span>
+				</button>
+			</div>
+
+			<!-- Modal Body -->
+			<div class="p-4 overflow-y-auto max-h-[60vh]">
+				<!-- Rating -->
+				<div class="flex items-center gap-2 mb-4">
+					<span class="text-sm text-gray-600" style="font-family: 'Source Sans Pro', sans-serif;">Calificación:</span>
+					<div id="modalEstrellas" class="flex items-center"></div>
+				</div>
+
+				<!-- Tipo de Bus -->
+				<div class="mb-4 p-3 bg-gray-50 rounded-lg">
+					<p class="text-xs text-gray-500 mb-1" style="font-family: 'Source Sans Pro', sans-serif;">Tipo de Bus</p>
+					<p id="modalTipoBus" class="font-semibold text-gray-800" style="font-family: 'Oswald', sans-serif;">Bus 2G - Dos pisos</p>
+				</div>
+
+				<!-- Servicios a bordo -->
+				<div class="mb-4">
+					<p class="text-sm font-semibold text-gray-700 mb-3" style="font-family: 'Oswald', sans-serif;">SERVICIOS A BORDO</p>
+					<div id="modalAmenidades" class="grid grid-cols-2 gap-2">
+						<!-- Amenidades se llenan dinámicamente -->
+					</div>
+				</div>
+			</div>
+
+			<!-- Modal Footer -->
+			<div class="p-4 border-t border-gray-100">
+				<button onclick="cerrarModalDetalles()" class="w-full flex cursor-pointer items-center justify-center rounded-full h-12 px-5 bg-[#005A9C] text-white text-base font-bold hover:bg-[#004080] transition-colors" style="font-family: 'Oswald', sans-serif;">
+					CERRAR
+				</button>
+			</div>
+		</div>
+	</div>
+
 	<!-- SECCIÓN: SELECCIÓN DE SILLAS -->
 	<section id="seccion-sillas" class="brasilia-section min-h-screen bg-gray-100 hidden">
 		<!-- Header -->
@@ -1812,12 +1858,49 @@
 			const ruta = `${origen.toLowerCase()}-${destino.toLowerCase()}`;
 			const precioBase = preciosBase[ruta] || preciosBase['default'];
 
-			// Tipos de servicio con sus características
+			// Tipos de servicio con sus características y amenidades
 			const servicios = [
-				{ nombre: 'PREMIUM Plus', subtitulo: 'Preferencial de Lujo', estrellas: 5, descuento: 20 },
-				{ nombre: 'Preferencial', subtitulo: 'Servicio Ejecutivo', estrellas: 4, descuento: 15 },
-				{ nombre: 'Económico', subtitulo: 'Servicio Estándar', estrellas: 3, descuento: 0 }
+				{
+					nombre: 'PREMIUM Plus',
+					subtitulo: 'Preferencial de Lujo',
+					estrellas: 5,
+					descuento: 20,
+					tipoBus: 'Bus 2G - Dos pisos con cama',
+					amenidades: ['wifi', 'aire_acondicionado', 'enchufes', 'pantalla_individual', 'snacks', 'cobija', 'asientos_reclinables_180', 'bano', 'seguro_viaje']
+				},
+				{
+					nombre: 'Preferencial',
+					subtitulo: 'Servicio Ejecutivo',
+					estrellas: 4,
+					descuento: 15,
+					tipoBus: 'Bus 2G - Dos pisos ejecutivo',
+					amenidades: ['wifi', 'aire_acondicionado', 'enchufes', 'pantalla_compartida', 'asientos_reclinables_140', 'bano', 'seguro_viaje']
+				},
+				{
+					nombre: 'Económico',
+					subtitulo: 'Servicio Estándar',
+					estrellas: 3,
+					descuento: 0,
+					tipoBus: 'Bus estándar',
+					amenidades: ['aire_acondicionado', 'asientos_reclinables_120', 'seguro_viaje']
+				}
 			];
+
+			// Iconos y etiquetas para amenidades
+			const amenidadesInfo = {
+				'wifi': { icon: 'wifi', label: 'WiFi Gratis' },
+				'aire_acondicionado': { icon: 'ac_unit', label: 'Aire Acondicionado' },
+				'enchufes': { icon: 'power', label: 'Enchufes USB/220V' },
+				'pantalla_individual': { icon: 'personal_video', label: 'Pantalla Individual' },
+				'pantalla_compartida': { icon: 'tv', label: 'Pantalla Compartida' },
+				'snacks': { icon: 'restaurant', label: 'Snacks incluidos' },
+				'cobija': { icon: 'bed', label: 'Cobija y Almohada' },
+				'asientos_reclinables_180': { icon: 'airline_seat_flat', label: 'Asientos Cama 180°' },
+				'asientos_reclinables_140': { icon: 'airline_seat_recline_extra', label: 'Asientos 140°' },
+				'asientos_reclinables_120': { icon: 'airline_seat_recline_normal', label: 'Asientos Reclinables' },
+				'bano': { icon: 'wc', label: 'Baño a bordo' },
+				'seguro_viaje': { icon: 'health_and_safety', label: 'Seguro de Viaje' }
+			};
 
 			// Horarios disponibles con iconos según hora
 			const horarios = [
@@ -1850,6 +1933,8 @@
 					servicio: servicio.nombre,
 					subtitulo: servicio.subtitulo,
 					estrellas: servicio.estrellas,
+					tipoBus: servicio.tipoBus,
+					amenidades: servicio.amenidades,
 					horaSalida: horario.salida,
 					horaLlegada: horario.llegada,
 					iconoHora: horario.icono,
@@ -1859,6 +1944,9 @@
 					destino: destino.toUpperCase()
 				});
 			});
+
+			// Guardar amenidadesInfo para usar en modal
+			window.amenidadesInfo = amenidadesInfo;
 
 			// Ordenar por hora de salida
 			viajesDisponibles.sort((a, b) => {
@@ -1965,8 +2053,45 @@
 		}
 
 		function verDetallesViaje(viajeId) {
-			// Por ahora solo selecciona el viaje
-			seleccionarViaje(viajeId);
+			const viaje = viajesDisponibles.find(v => v.id === viajeId);
+			if (!viaje) return;
+
+			// Actualizar contenido del modal
+			document.getElementById('modalServicioTipo').textContent = viaje.servicio;
+			document.getElementById('modalServicioSubtitulo').textContent = viaje.subtitulo;
+			document.getElementById('modalTipoBus').textContent = viaje.tipoBus;
+
+			// Generar estrellas
+			let estrellasHTML = '';
+			for (let i = 0; i < 5; i++) {
+				const color = i < viaje.estrellas ? 'text-[#FFC107]' : 'text-gray-300';
+				estrellasHTML += `<span class="material-symbols-outlined ${color}" style="font-size: 20px;">star</span>`;
+			}
+			document.getElementById('modalEstrellas').innerHTML = estrellasHTML;
+
+			// Generar amenidades
+			const amenidadesContainer = document.getElementById('modalAmenidades');
+			amenidadesContainer.innerHTML = '';
+
+			viaje.amenidades.forEach(amenidad => {
+				const info = window.amenidadesInfo[amenidad] || { icon: 'check_circle', label: amenidad.replace(/_/g, ' ') };
+				const div = document.createElement('div');
+				div.className = 'flex items-center gap-3 bg-gray-50 rounded-lg p-3';
+				div.innerHTML = `
+					<span class="material-symbols-outlined text-[#005A9C]">${info.icon}</span>
+					<span class="text-sm text-gray-700" style="font-family: 'Source Sans Pro', sans-serif;">${info.label}</span>
+				`;
+				amenidadesContainer.appendChild(div);
+			});
+
+			// Mostrar modal
+			document.getElementById('modalDetallesViaje').classList.remove('hidden');
+			document.getElementById('modalDetallesViaje').classList.add('flex');
+		}
+
+		function cerrarModalDetalles() {
+			document.getElementById('modalDetallesViaje').classList.add('hidden');
+			document.getElementById('modalDetallesViaje').classList.remove('flex');
 		}
 
 		function seleccionarViaje(viajeId) {
