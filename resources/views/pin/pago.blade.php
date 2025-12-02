@@ -444,9 +444,7 @@
                         <!-- Círculo interno cuando está seleccionado -->
                     </div>
                     <div class="flex items-center gap-3 flex-1">
-                        <svg class="w-8 h-8 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
-                            <path d="M4 10h3v7H4zm6.5 0h3v7h-3zM2 19h20v3H2zm15-9h3v7h-3zm-5-9L2 6v2h20V6z"/>
-                        </svg>
+                        <img src="/pin/Boton_PSE.png" alt="PSE" class="w-10 h-10 object-contain">
                         <div>
                             <div class="text-lg font-medium text-gray-900">PSE</div>
                             <div class="text-sm text-gray-500">Débito bancario directo</div>

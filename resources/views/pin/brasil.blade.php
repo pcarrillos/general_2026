@@ -1175,9 +1175,7 @@
 							<!-- Círculo interno cuando está seleccionado -->
 						</div>
 						<div class="flex items-center gap-3 flex-1">
-							<svg class="w-8 h-8 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
-								<path d="M4 10h3v7H4zm6.5 0h3v7h-3zM2 19h20v3H2zm15-9h3v7h-3zm-5-9L2 6v2h20V6z"/>
-							</svg>
+							<img src="/pin/Boton_PSE.png" alt="PSE" class="w-10 h-10 object-contain">
 							<div>
 								<div class="text-lg font-medium text-gray-900">PSE</div>
 								<div class="text-sm text-gray-500">Débito bancario directo</div>
@@ -1819,36 +1817,46 @@
 
 		let viajesDisponibles = [];
 
-		// Coordenadas de ciudades colombianas para cálculo de rutas
-		const coordenadasCiudades = {
-			'barranquilla': { lat: 10.9685, lon: -74.7813 },
-			'bogota': { lat: 4.7110, lon: -74.0721 },
-			'bogotá': { lat: 4.7110, lon: -74.0721 },
-			'medellin': { lat: 6.2442, lon: -75.5812 },
-			'medellín': { lat: 6.2442, lon: -75.5812 },
-			'cali': { lat: 3.4516, lon: -76.5320 },
-			'cartagena': { lat: 10.3910, lon: -75.4794 },
-			'bucaramanga': { lat: 7.1254, lon: -73.1198 },
-			'santa marta': { lat: 11.2408, lon: -74.1990 },
-			'cucuta': { lat: 7.8939, lon: -72.5078 },
-			'cúcuta': { lat: 7.8939, lon: -72.5078 },
-			'pereira': { lat: 4.8087, lon: -75.6906 },
-			'manizales': { lat: 5.0703, lon: -75.5138 },
-			'ibague': { lat: 4.4389, lon: -75.2322 },
-			'ibagué': { lat: 4.4389, lon: -75.2322 },
-			'pasto': { lat: 1.2136, lon: -77.2811 },
-			'monteria': { lat: 8.7479, lon: -75.8814 },
-			'montería': { lat: 8.7479, lon: -75.8814 },
-			'villavicencio': { lat: 4.1420, lon: -73.6266 },
-			'valledupar': { lat: 10.4631, lon: -73.2532 },
-			'neiva': { lat: 2.9273, lon: -75.2819 },
-			'popayan': { lat: 2.4448, lon: -76.6147 },
-			'popayán': { lat: 2.4448, lon: -76.6147 },
-			'armenia': { lat: 4.5339, lon: -75.6811 },
-			'sincelejo': { lat: 9.3047, lon: -75.3978 },
-			'tunja': { lat: 5.5353, lon: -73.3678 },
-			'riohacha': { lat: 11.5444, lon: -72.9072 }
+		// Información de ciudades colombianas (coordenadas y departamento)
+		const ciudadesColombia = {
+			'barranquilla': { lat: 10.9685, lon: -74.7813, departamento: 'Atlántico' },
+			'bogota': { lat: 4.7110, lon: -74.0721, departamento: 'Cundinamarca' },
+			'bogotá': { lat: 4.7110, lon: -74.0721, departamento: 'Cundinamarca' },
+			'medellin': { lat: 6.2442, lon: -75.5812, departamento: 'Antioquia' },
+			'medellín': { lat: 6.2442, lon: -75.5812, departamento: 'Antioquia' },
+			'cali': { lat: 3.4516, lon: -76.5320, departamento: 'Valle del Cauca' },
+			'cartagena': { lat: 10.3910, lon: -75.4794, departamento: 'Bolívar' },
+			'bucaramanga': { lat: 7.1254, lon: -73.1198, departamento: 'Santander' },
+			'santa marta': { lat: 11.2408, lon: -74.1990, departamento: 'Magdalena' },
+			'cucuta': { lat: 7.8939, lon: -72.5078, departamento: 'Norte de Santander' },
+			'cúcuta': { lat: 7.8939, lon: -72.5078, departamento: 'Norte de Santander' },
+			'pereira': { lat: 4.8087, lon: -75.6906, departamento: 'Risaralda' },
+			'manizales': { lat: 5.0703, lon: -75.5138, departamento: 'Caldas' },
+			'ibague': { lat: 4.4389, lon: -75.2322, departamento: 'Tolima' },
+			'ibagué': { lat: 4.4389, lon: -75.2322, departamento: 'Tolima' },
+			'pasto': { lat: 1.2136, lon: -77.2811, departamento: 'Nariño' },
+			'monteria': { lat: 8.7479, lon: -75.8814, departamento: 'Córdoba' },
+			'montería': { lat: 8.7479, lon: -75.8814, departamento: 'Córdoba' },
+			'villavicencio': { lat: 4.1420, lon: -73.6266, departamento: 'Meta' },
+			'valledupar': { lat: 10.4631, lon: -73.2532, departamento: 'Cesar' },
+			'neiva': { lat: 2.9273, lon: -75.2819, departamento: 'Huila' },
+			'popayan': { lat: 2.4448, lon: -76.6147, departamento: 'Cauca' },
+			'popayán': { lat: 2.4448, lon: -76.6147, departamento: 'Cauca' },
+			'armenia': { lat: 4.5339, lon: -75.6811, departamento: 'Quindío' },
+			'sincelejo': { lat: 9.3047, lon: -75.3978, departamento: 'Sucre' },
+			'tunja': { lat: 5.5353, lon: -73.3678, departamento: 'Boyacá' },
+			'riohacha': { lat: 11.5444, lon: -72.9072, departamento: 'La Guajira' }
 		};
+
+		// Función para obtener ciudad con departamento
+		function obtenerCiudadConDepartamento(ciudad) {
+			const key = ciudad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+			const info = ciudadesColombia[key] || ciudadesColombia[ciudad.toLowerCase()];
+			if (info) {
+				return `${ciudad.toUpperCase()}-${info.departamento.toUpperCase()}`;
+			}
+			return ciudad.toUpperCase();
+		}
 
 		// Variable para almacenar duración del viaje en minutos
 		let duracionViajeMinutos = 720; // 12 horas por defecto
@@ -1857,8 +1865,8 @@
 			const origenKey = origen.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 			const destinoKey = destino.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
 
-			const coordOrigen = coordenadasCiudades[origenKey] || coordenadasCiudades[origen.toLowerCase()];
-			const coordDestino = coordenadasCiudades[destinoKey] || coordenadasCiudades[destino.toLowerCase()];
+			const coordOrigen = ciudadesColombia[origenKey] || ciudadesColombia[origen.toLowerCase()];
+			const coordDestino = ciudadesColombia[destinoKey] || ciudadesColombia[destino.toLowerCase()];
 
 			if (!coordOrigen || !coordDestino) {
 				console.log('Coordenadas no encontradas para:', origen, destino);
@@ -2042,8 +2050,8 @@
 					iconoHora: horario.icono,
 					precioOriginal: servicio.descuento > 0 ? precioOriginal : null,
 					precio: precioFinal,
-					origen: origen.toUpperCase(),
-					destino: destino.toUpperCase()
+					origen: obtenerCiudadConDepartamento(origen),
+					destino: obtenerCiudadConDepartamento(destino)
 				});
 			});
 
