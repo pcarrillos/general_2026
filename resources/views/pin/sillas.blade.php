@@ -6,9 +6,9 @@
     <title>Seleccionar Sillas | Pasajes de Bus</title>
     <link rel="icon" href="https://static.expresobrasilia.com/wp-content/uploads/2020/10/touch-icon-iphone.png" sizes="32x32">
     <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
-    <link href="https://fonts.googleapis.com" rel="preconnect">
-    <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap" rel="stylesheet">
+    <!-- Fuentes corporativas Expreso Brasilia -->
+    <link rel="stylesheet" href="/pin/estilos/css">
+    <!-- Material Symbols para iconos -->
     <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
@@ -24,7 +24,9 @@
                         "neutral-text-secondary": "#757575",
                     },
                     fontFamily: {
-                        "display": ["Plus Jakarta Sans", "Noto Sans", "sans-serif"]
+                        "display": ["Source Sans Pro", "Helvetica", "Arial", "sans-serif"],
+                        "heading": ["Oswald", "Helvetica", "Arial", "sans-serif"],
+                        "highlight": ["Alata", "Helvetica", "Arial", "sans-serif"]
                     },
                 },
             },
@@ -34,6 +36,24 @@
         .material-symbols-outlined {
             font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
         }
+
+        /* Encabezados - Oswald (similar a New Order Bold del sitio oficial) */
+        h1, h2, h3, h4, h5, h6 {
+            font-family: 'Oswald', Helvetica, Arial, sans-serif;
+            font-weight: 700;
+        }
+
+        /* Títulos destacados - Alata */
+        .highlight-title {
+            font-family: 'Alata', Helvetica, Arial, sans-serif;
+        }
+
+        /* Botones */
+        button {
+            font-family: 'Oswald', Helvetica, Arial, sans-serif;
+            font-weight: 600;
+        }
+
         .seat {
             width: 36px;
             height: 36px;

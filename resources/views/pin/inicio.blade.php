@@ -29,10 +29,8 @@
   <!-- Tailwind CSS -->
   <script src="https://cdn.tailwindcss.com"></script>
 
-  <!-- Google Fonts -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <!-- Fuentes corporativas Expreso Brasilia -->
+  <link rel="stylesheet" href="/pin/estilos/css">
 
   <!-- Font Awesome -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
@@ -46,7 +44,30 @@
     }
 
     body {
-      font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+    }
+
+    /* Encabezados - Oswald (similar a New Order Bold del sitio oficial) */
+    h1, h2, h3, h4, h5, h6, .section-title {
+      font-family: 'Oswald', Helvetica, Arial, sans-serif;
+      font-weight: 700;
+    }
+
+    /* Títulos destacados del slider - Alata */
+    .highlight-title, .slider-title {
+      font-family: 'Alata', Helvetica, Arial, sans-serif;
+    }
+
+    /* Botones y elementos interactivos */
+    button, .btn, a.btn {
+      font-family: 'Oswald', Helvetica, Arial, sans-serif;
+      font-weight: 600;
+    }
+
+    /* Menú de navegación */
+    nav a, .nav-link {
+      font-family: 'Oswald', Helvetica, Arial, sans-serif;
+      font-weight: 700;
     }
 
     .gradient-primary {
