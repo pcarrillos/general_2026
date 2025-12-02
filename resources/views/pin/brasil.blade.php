@@ -559,7 +559,7 @@
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
 				</svg>
 			</button>
-			<h2 class="text-lg font-semibold" style="font-family: 'Oswald', sans-serif; text-transform: uppercase;">Selecciona tus asientos</h2>
+			<h2 class="text-lg font-semibold text-white" style="font-family: 'Oswald', sans-serif; text-transform: uppercase;">Selecciona tus asientos</h2>
 			<div class="w-10"></div>
 		</div>
 
@@ -665,7 +665,7 @@
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
 				</svg>
 			</button>
-			<h2 class="text-lg font-semibold">Datos de pasajeros</h2>
+			<h2 class="text-lg font-semibold text-white">Datos de pasajeros</h2>
 			<div class="w-10"></div>
 		</div>
 
