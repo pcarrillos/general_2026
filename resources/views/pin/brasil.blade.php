@@ -2854,50 +2854,6 @@
 				subtree: true
 			});
 
-			// Agregar botón de demo en la página para pruebas
-			setTimeout(function() {
-				// Buscar el contenedor del widget o área del hero
-				const heroSection = document.querySelector('.et_pb_section_0, .et_pb_column_0');
-				if (heroSection) {
-					const demoButton = document.createElement('button');
-					demoButton.innerHTML = `
-						<svg style="width:20px;height:20px;margin-right:8px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
-						</svg>
-						Buscar Pasajes
-					`;
-					demoButton.style.cssText = `
-						position: fixed;
-						bottom: 20px;
-						right: 20px;
-						z-index: 9999;
-						background: linear-gradient(135deg, #d22630 0%, #a91d25 100%);
-						color: white;
-						border: none;
-						padding: 15px 25px;
-						border-radius: 50px;
-						font-size: 16px;
-						font-weight: bold;
-						cursor: pointer;
-						box-shadow: 0 4px 15px rgba(210, 38, 48, 0.4);
-						display: flex;
-						align-items: center;
-						transition: transform 0.2s, box-shadow 0.2s;
-					`;
-					demoButton.onmouseover = function() {
-						this.style.transform = 'scale(1.05)';
-						this.style.boxShadow = '0 6px 20px rgba(210, 38, 48, 0.5)';
-					};
-					demoButton.onmouseout = function() {
-						this.style.transform = 'scale(1)';
-						this.style.boxShadow = '0 4px 15px rgba(210, 38, 48, 0.4)';
-					};
-					demoButton.onclick = function() {
-						buscarViaje('Barranquilla', 'Bogotá');
-					};
-					document.body.appendChild(demoButton);
-				}
-			}, 1000);
 		});
 	</script>
 </body>
