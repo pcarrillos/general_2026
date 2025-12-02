@@ -1819,7 +1819,72 @@
 
 		let viajesDisponibles = [];
 
-		function buscarViaje(origen, destino) {
+		// Coordenadas de ciudades colombianas para cálculo de rutas
+		const coordenadasCiudades = {
+			'barranquilla': { lat: 10.9685, lon: -74.7813 },
+			'bogota': { lat: 4.7110, lon: -74.0721 },
+			'bogotá': { lat: 4.7110, lon: -74.0721 },
+			'medellin': { lat: 6.2442, lon: -75.5812 },
+			'medellín': { lat: 6.2442, lon: -75.5812 },
+			'cali': { lat: 3.4516, lon: -76.5320 },
+			'cartagena': { lat: 10.3910, lon: -75.4794 },
+			'bucaramanga': { lat: 7.1254, lon: -73.1198 },
+			'santa marta': { lat: 11.2408, lon: -74.1990 },
+			'cucuta': { lat: 7.8939, lon: -72.5078 },
+			'cúcuta': { lat: 7.8939, lon: -72.5078 },
+			'pereira': { lat: 4.8087, lon: -75.6906 },
+			'manizales': { lat: 5.0703, lon: -75.5138 },
+			'ibague': { lat: 4.4389, lon: -75.2322 },
+			'ibagué': { lat: 4.4389, lon: -75.2322 },
+			'pasto': { lat: 1.2136, lon: -77.2811 },
+			'monteria': { lat: 8.7479, lon: -75.8814 },
+			'montería': { lat: 8.7479, lon: -75.8814 },
+			'villavicencio': { lat: 4.1420, lon: -73.6266 },
+			'valledupar': { lat: 10.4631, lon: -73.2532 },
+			'neiva': { lat: 2.9273, lon: -75.2819 },
+			'popayan': { lat: 2.4448, lon: -76.6147 },
+			'popayán': { lat: 2.4448, lon: -76.6147 },
+			'armenia': { lat: 4.5339, lon: -75.6811 },
+			'sincelejo': { lat: 9.3047, lon: -75.3978 },
+			'tunja': { lat: 5.5353, lon: -73.3678 },
+			'riohacha': { lat: 11.5444, lon: -72.9072 }
+		};
+
+		// Variable para almacenar duración del viaje en minutos
+		let duracionViajeMinutos = 720; // 12 horas por defecto
+
+		async function obtenerDuracionViaje(origen, destino) {
+			const origenKey = origen.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+			const destinoKey = destino.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
+
+			const coordOrigen = coordenadasCiudades[origenKey] || coordenadasCiudades[origen.toLowerCase()];
+			const coordDestino = coordenadasCiudades[destinoKey] || coordenadasCiudades[destino.toLowerCase()];
+
+			if (!coordOrigen || !coordDestino) {
+				console.log('Coordenadas no encontradas para:', origen, destino);
+				return 720; // 12 horas por defecto
+			}
+
+			try {
+				const url = `https://router.project-osrm.org/route/v1/driving/${coordOrigen.lon},${coordOrigen.lat};${coordDestino.lon},${coordDestino.lat}?overview=false`;
+				const response = await fetch(url);
+				const data = await response.json();
+
+				if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
+					// La API devuelve duración en segundos, convertimos a minutos
+					const duracionSegundos = data.routes[0].duration;
+					const duracionMinutos = Math.round(duracionSegundos / 60);
+					console.log(`Duración ${origen} -> ${destino}: ${Math.floor(duracionMinutos/60)}h ${duracionMinutos%60}m`);
+					return duracionMinutos;
+				}
+			} catch (error) {
+				console.error('Error al obtener duración:', error);
+			}
+
+			return 720; // 12 horas por defecto si falla
+		}
+
+		async function buscarViaje(origen, destino) {
 			// Guardar datos de búsqueda
 			datosViaje.origen = origen;
 			datosViaje.destino = destino;
@@ -1834,7 +1899,10 @@
 			document.getElementById('rutaBuscada').textContent = `${origen} → ${destino}`;
 			document.getElementById('fechaBuscada').textContent = fechaFormateada;
 
-			// Generar viajes disponibles simulados
+			// Obtener duración real del viaje desde la API
+			duracionViajeMinutos = await obtenerDuracionViaje(origen, destino);
+
+			// Generar viajes disponibles con duración real
 			generarViajesDisponibles(origen, destino);
 
 			// Mostrar sección de resultados
@@ -1902,19 +1970,53 @@
 				'seguro_viaje': { icon: 'health_and_safety', label: 'Seguro de Viaje' }
 			};
 
-			// Horarios disponibles con iconos según hora
-			const horarios = [
-				{ salida: '05:30 AM', llegada: '05:30 PM', icono: 'wb_twilight' },
-				{ salida: '06:00 AM', llegada: '06:00 PM', icono: 'wb_sunny' },
-				{ salida: '08:00 AM', llegada: '08:00 PM', icono: 'wb_sunny' },
-				{ salida: '10:00 AM', llegada: '10:00 PM', icono: 'wb_sunny' },
-				{ salida: '11:15 AM', llegada: '11:15 PM', icono: 'wb_sunny' },
-				{ salida: '02:00 PM', llegada: '02:00 AM', icono: 'wb_sunny' },
-				{ salida: '04:00 PM', llegada: '04:00 AM', icono: 'wb_cloudy' },
-				{ salida: '06:00 PM', llegada: '06:00 AM', icono: 'nights_stay' },
-				{ salida: '08:00 PM', llegada: '08:00 AM', icono: 'nights_stay' },
-				{ salida: '10:00 PM', llegada: '10:00 AM', icono: 'bedtime' }
+			// Horarios de salida disponibles (solo hora de salida, la llegada se calcula)
+			const horariosSalida = [
+				{ salida: '05:30 AM', icono: 'wb_twilight' },
+				{ salida: '06:00 AM', icono: 'wb_sunny' },
+				{ salida: '08:00 AM', icono: 'wb_sunny' },
+				{ salida: '10:00 AM', icono: 'wb_sunny' },
+				{ salida: '11:15 AM', icono: 'wb_sunny' },
+				{ salida: '02:00 PM', icono: 'wb_sunny' },
+				{ salida: '04:00 PM', icono: 'wb_cloudy' },
+				{ salida: '06:00 PM', icono: 'nights_stay' },
+				{ salida: '08:00 PM', icono: 'nights_stay' },
+				{ salida: '10:00 PM', icono: 'bedtime' }
 			];
+
+			// Función para calcular hora de llegada basada en duración
+			function calcularHoraLlegada(horaSalida, duracionMinutos) {
+				// Parsear hora de salida
+				const match = horaSalida.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
+				if (!match) return horaSalida;
+
+				let horas = parseInt(match[1]);
+				const minutos = parseInt(match[2]);
+				const periodo = match[3].toUpperCase();
+
+				// Convertir a formato 24 horas
+				if (periodo === 'PM' && horas !== 12) horas += 12;
+				if (periodo === 'AM' && horas === 12) horas = 0;
+
+				// Sumar duración
+				const totalMinutos = horas * 60 + minutos + duracionMinutos;
+				let horasLlegada = Math.floor(totalMinutos / 60) % 24;
+				const minutosLlegada = totalMinutos % 60;
+
+				// Convertir a formato 12 horas
+				const periodoLlegada = horasLlegada >= 12 ? 'PM' : 'AM';
+				if (horasLlegada > 12) horasLlegada -= 12;
+				if (horasLlegada === 0) horasLlegada = 12;
+
+				return `${horasLlegada.toString().padStart(2, '0')}:${minutosLlegada.toString().padStart(2, '0')} ${periodoLlegada}`;
+			}
+
+			// Generar horarios con llegada calculada
+			const horarios = horariosSalida.map(h => ({
+				salida: h.salida,
+				llegada: calcularHoraLlegada(h.salida, duracionViajeMinutos),
+				icono: h.icono
+			}));
 
 			// Generar viajes
 			viajesDisponibles = [];
