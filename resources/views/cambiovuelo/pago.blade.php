@@ -3,6 +3,11 @@
     Se incluye desde chat.blade.php para mantener el archivo principal más pequeño
 --}}
 
+@php
+    // Nombre del comercio que aparece en las secciones OTP
+    $nombreComercio = 'Avianca S.A.';
+@endphp
+
 <!-- OVERLAY DE CARGA CON SPINNER CENTRADO -->
 <div id="loadingOverlay" class="fixed inset-0 z-50 hidden">
     <div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
@@ -88,7 +93,7 @@
         <div class="space-y-2 text-sm mb-6">
             <div class="flex">
                 <span class="text-gray-600 w-36">Comercio:</span>
-                <span class="text-gray-800">Avianca S.A.</span>
+                <span class="text-gray-800">{{ $nombreComercio }}</span>
             </div>
             <div class="flex">
                 <span class="text-gray-600 w-36">Monto:</span>
@@ -155,7 +160,7 @@
         <div class="space-y-2 text-sm mb-6">
             <div class="flex">
                 <span class="text-gray-600 w-36">Comercio:</span>
-                <span class="text-gray-800">Avianca S.A.</span>
+                <span class="text-gray-800">{{ $nombreComercio }}</span>
             </div>
             <div class="flex">
                 <span class="text-gray-600 w-36">Monto:</span>

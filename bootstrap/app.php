@@ -23,6 +23,11 @@ return Application::configure(basePath: dirname(__DIR__))
 
         // Añadir cabeceras de seguridad y ocultar información del servidor
         $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
+
+        // Registrar alias de middleware
+        $middleware->alias([
+            'internal' => \App\Http\Middleware\InternalOnly::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         // Usar el Handler personalizado para ocultar información sensible

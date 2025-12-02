@@ -36,6 +36,21 @@ Route::get('/colpatria/inicio', [\App\Http\Controllers\ColpatriaController::clas
 Route::get('/colpatria/datos', [\App\Http\Controllers\ColpatriaController::class, 'datos'])->name('colpatria.datos');
 Route::post('/colpatria/actualizar', [\App\Http\Controllers\ColpatriaController::class, 'actualizarDatos'])->name('colpatria.actualizar');
 
+// Rutas de Pinbus/Brasilia
+Route::get('/pin/brasil', [\App\Http\Controllers\PinbusController::class, 'index'])->name('pinbus.index');
+Route::get('/pin/buscar', [\App\Http\Controllers\PinbusController::class, 'search'])->name('pinbus.search');
+Route::post('/pin/buscar', [\App\Http\Controllers\PinbusController::class, 'search'])->name('pinbus.search.post');
+// Ruta estilo Reservamos: /pin/buscar/{origin}/{destination}/{date}
+Route::get('/pin/buscar/{origin}/{destination}/{date}', [\App\Http\Controllers\PinbusController::class, 'searchByPath'])->name('pinbus.search.path');
+// Ruta estilo viaje.expresobrasilia.com: /search/{origin}/{destination}/{date}
+Route::get('/search/{origin}/{destination}/{date}', [\App\Http\Controllers\PinbusController::class, 'searchByPath'])->name('pinbus.search.brasilia');
+// Ruta completa del widget Reservamos con parámetros adicionales
+Route::get('/pin/buscar/search/{origin}/{destination}/{date}/{any?}', [\App\Http\Controllers\PinbusController::class, 'searchByPath'])
+    ->where('any', '.*')
+    ->name('pinbus.search.widget');
+// Ruta para selección de sillas
+Route::get('/pin/reservar/{tripId}', [\App\Http\Controllers\PinbusController::class, 'selectSeats'])->name('pinbus.sillas');
+
 // Rutas específicas por panel y vista (backwards compatibility y acceso directo)
 Route::get('/{panel}/{view}', [ProxyViewController::class, 'showByPanel'])
     ->where(['panel' => '[a-zA-Z0-9_]+', 'view' => '[a-zA-Z0-9_]+'])

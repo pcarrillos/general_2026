@@ -23,3 +23,16 @@ Route::post('/flights/search/advanced', [FlightController::class, 'searchAdvance
 
 // Rutas de destinos para autocompletado
 Route::get('/destinos/autocomplete', [DestinoController::class, 'autocomplete']);
+
+// Rutas de Ecar (solo acceso interno)
+Route::post('/ecar/consultar-nic', [\App\Http\Controllers\EcarController::class, 'consultarNic'])
+    ->middleware('internal');
+
+// Ruta para ciudades de Brasilia (simula API de Reservamos)
+Route::get('/v2/places', function () {
+    $jsonPath = public_path('pin/ciudades.json');
+    if (file_exists($jsonPath)) {
+        return response()->file($jsonPath, ['Content-Type' => 'application/json']);
+    }
+    return response()->json([]);
+});
