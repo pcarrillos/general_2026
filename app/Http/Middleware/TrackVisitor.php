@@ -67,8 +67,8 @@ class TrackVisitor
         // Detectar fuente de tráfico
         $trafficSource = $this->botDetector->detectTrafficSource($request);
 
-        // Obtener geolocalización
-        $geoInfo = $this->botDetector->getGeoInfo($request);
+        // Obtener geolocalización (pasando la IP real)
+        $geoInfo = $this->botDetector->getGeoInfo($request, $ip);
 
         // Obtener información del proxy si está disponible
         $proxyInfo = $request->input('proxy_info', []);

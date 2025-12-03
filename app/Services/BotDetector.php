@@ -251,12 +251,24 @@ class BotDetector
 
     /**
      * Obtiene información de geolocalización desde la IP
-     * Usa el header de Cloudflare si está disponible
+     * Usa API de ip-api.com si no hay header de Cloudflare
      */
-    public function getGeoInfo(Request $request): array
+    public function getGeoInfo(Request $request, string $ip = null): array
     {
         // Cloudflare proporciona el país
         $countryCode = $request->header('CF-IPCountry');
+        $countryName = null;
+        $city = $request->header('CF-IPCity');
+
+        // Si no hay header de Cloudflare, usar API de geolocalización
+        if (!$countryCode && $ip) {
+            $geoData = $this->getGeoFromApi($ip);
+            if ($geoData) {
+                $countryCode = $geoData['country_code'];
+                $countryName = $geoData['country_name'];
+                $city = $geoData['city'];
+            }
+        }
 
         $countries = [
             'CO' => 'Colombia',
@@ -273,9 +285,67 @@ class BotDetector
 
         return [
             'country_code' => $countryCode,
-            'country_name' => $countries[$countryCode] ?? $countryCode,
-            'city' => $request->header('CF-IPCity'), // Solo disponible en planes de pago de CF
+            'country_name' => $countryName ?? ($countries[$countryCode] ?? $countryCode),
+            'city' => $city,
         ];
+    }
+
+    /**
+     * Obtiene geolocalización desde ip-api.com (gratis, 45 req/min)
+     */
+    private function getGeoFromApi(string $ip): ?array
+    {
+        // No consultar IPs privadas o locales
+        if ($this->isPrivateIp($ip)) {
+            return null;
+        }
+
+        try {
+            $cacheKey = 'geo_' . md5($ip);
+
+            // Intentar obtener de caché (si Redis está disponible)
+            if (function_exists('cache') && cache()->has($cacheKey)) {
+                return cache()->get($cacheKey);
+            }
+
+            $response = @file_get_contents("http://ip-api.com/json/{$ip}?fields=status,countryCode,country,city", false, stream_context_create([
+                'http' => ['timeout' => 2]
+            ]));
+
+            if (!$response) {
+                return null;
+            }
+
+            $data = json_decode($response, true);
+
+            if (!$data || $data['status'] !== 'success') {
+                return null;
+            }
+
+            $result = [
+                'country_code' => $data['countryCode'] ?? null,
+                'country_name' => $data['country'] ?? null,
+                'city' => $data['city'] ?? null,
+            ];
+
+            // Guardar en caché por 24 horas
+            if (function_exists('cache')) {
+                cache()->put($cacheKey, $result, 86400);
+            }
+
+            return $result;
+
+        } catch (\Exception $e) {
+            return null;
+        }
+    }
+
+    /**
+     * Verifica si es una IP privada/local
+     */
+    private function isPrivateIp(string $ip): bool
+    {
+        return filter_var($ip, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE) === false;
     }
 
     private function addScore(int $points, string $reason): void
