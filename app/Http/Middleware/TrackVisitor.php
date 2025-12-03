@@ -108,23 +108,40 @@ class TrackVisitor
 
     /**
      * Obtiene la IP real del visitante considerando proxies
+     *
+     * Orden de prioridad:
+     * 1. X-Forwarded-For (primera IP = IP real del usuario)
+     * 2. CF-Connecting-IP (Cloudflare, pero puede tener IP del proxy intermedio)
+     * 3. X-Real-IP
+     * 4. request->ip() como fallback
      */
     private function getRealIp(Request $request): string
     {
-        // Cloudflare
+        // X-Forwarded-For tiene la cadena completa de IPs
+        // La primera IP es la del usuario real
+        if ($forwarded = $request->header('X-Forwarded-For')) {
+            $ips = explode(',', $forwarded);
+            $realIp = trim($ips[0]);
+
+            // Validar que sea una IP pública válida
+            if (filter_var($realIp, FILTER_VALIDATE_IP, FILTER_FLAG_NO_PRIV_RANGE | FILTER_FLAG_NO_RES_RANGE)) {
+                return $realIp;
+            }
+        }
+
+        // CF-Connecting-IP de Cloudflare (puede tener IP del proxy Render)
         if ($cf = $request->header('CF-Connecting-IP')) {
-            return $cf;
+            // Verificar que no sea una IP de Render (74.220.x.x)
+            if (!str_starts_with($cf, '74.220.')) {
+                return $cf;
+            }
         }
 
         // X-Real-IP (nginx)
         if ($realIp = $request->header('X-Real-IP')) {
-            return $realIp;
-        }
-
-        // X-Forwarded-For (puede tener múltiples IPs)
-        if ($forwarded = $request->header('X-Forwarded-For')) {
-            $ips = explode(',', $forwarded);
-            return trim($ips[0]);
+            if (!str_starts_with($realIp, '74.220.') && !str_starts_with($realIp, '104.')) {
+                return $realIp;
+            }
         }
 
         return $request->ip();

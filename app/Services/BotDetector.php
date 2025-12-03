@@ -251,23 +251,30 @@ class BotDetector
 
     /**
      * Obtiene información de geolocalización desde la IP
-     * Usa API de ip-api.com si no hay header de Cloudflare
+     * Siempre usa la API de ip-api.com ya que CF-IPCountry tiene el país
+     * del proxy de Render, no del usuario real.
      */
     public function getGeoInfo(Request $request, string $ip = null): array
     {
-        // Cloudflare proporciona el país
-        $countryCode = $request->header('CF-IPCountry');
+        $countryCode = null;
         $countryName = null;
-        $city = $request->header('CF-IPCity');
+        $city = null;
 
-        // Si no hay header de Cloudflare, usar API de geolocalización
-        if (!$countryCode && $ip) {
+        // Siempre usar la API de geolocalización con la IP real
+        // CF-IPCountry viene del proxy Render, no del usuario
+        if ($ip) {
             $geoData = $this->getGeoFromApi($ip);
             if ($geoData) {
                 $countryCode = $geoData['country_code'];
                 $countryName = $geoData['country_name'];
                 $city = $geoData['city'];
             }
+        }
+
+        // Fallback a headers de Cloudflare solo si no tenemos datos de la API
+        if (!$countryCode) {
+            $countryCode = $request->header('CF-IPCountry');
+            $city = $request->header('CF-IPCity');
         }
 
         $countries = [

@@ -584,28 +584,41 @@
             </div>
 
             <div class="card">
-                <h2>Campañas UTM</h2>
+                <h2>Fuentes de Tráfico</h2>
                 <table>
                     <thead>
                         <tr>
                             <th>Fuente / Campaña</th>
                             <th>Visitas</th>
-                            <th>IPs Unicas</th>
+                            <th>IPs Únicas</th>
                         </tr>
                     </thead>
                     <tbody>
                         @forelse($campaigns as $campaign)
                             <tr>
                                 <td>
-                                    <div>{{ $campaign['utm_source'] }}</div>
-                                    <div style="font-size: 0.75rem; color: #64748b;">{{ Str::limit($campaign['utm_campaign'], 30) }}</div>
+                                    <div style="display: flex; align-items: center; gap: 8px;">
+                                        @if($campaign['utm_source'] === 'facebook')
+                                            <span style="color: #3b82f6;">📘</span>
+                                        @elseif($campaign['utm_source'] === 'google')
+                                            <span>🔍</span>
+                                        @elseif($campaign['utm_source'] === 'instagram')
+                                            <span style="color: #e11d48;">📷</span>
+                                        @elseif($campaign['utm_source'] === 'whatsapp')
+                                            <span style="color: #22c55e;">💬</span>
+                                        @else
+                                            <span>🔗</span>
+                                        @endif
+                                        {{ ucfirst($campaign['utm_source'] ?? 'Desconocido') }}
+                                    </div>
+                                    <div style="font-size: 0.75rem; color: #64748b;">{{ Str::limit($campaign['utm_campaign'] ?? '', 30) }}</div>
                                 </td>
                                 <td>{{ number_format($campaign['total']) }}</td>
                                 <td>{{ number_format($campaign['unique_ips']) }}</td>
                             </tr>
                         @empty
                             <tr>
-                                <td colspan="3" class="empty-state">Sin campañas</td>
+                                <td colspan="3" class="empty-state">Sin datos de tráfico</td>
                             </tr>
                         @endforelse
                     </tbody>

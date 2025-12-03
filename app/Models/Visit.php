@@ -321,33 +321,80 @@ class Visit extends Model
     }
 
     /**
-     * Campañas UTM
+     * Campañas y fuentes de tráfico
+     * Incluye UTM campaigns y tráfico de Facebook (fbclid)
      */
     public static function getCampaignStats(string $period = 'today'): array
     {
-        $query = self::query()->whereNotNull('utm_campaign');
+        // Primero obtenemos campañas UTM
+        $queryUtm = self::query()->whereNotNull('utm_campaign');
 
         switch ($period) {
             case 'today':
-                $query->today();
+                $queryUtm->today();
                 break;
             case '24h':
-                $query->lastHours(24);
+                $queryUtm->lastHours(24);
                 break;
             case '7d':
-                $query->lastDays(7);
+                $queryUtm->lastDays(7);
                 break;
             case '30d':
-                $query->lastDays(30);
+                $queryUtm->lastDays(30);
                 break;
         }
 
-        return $query->select('utm_source', 'utm_campaign', DB::raw('COUNT(*) as total'), DB::raw('SUM(CASE WHEN is_bot = 0 THEN 1 ELSE 0 END) as humans'), DB::raw('COUNT(DISTINCT ip) as unique_ips'))
+        $utmCampaigns = $queryUtm->select(
+            'utm_source',
+            'utm_campaign',
+            DB::raw('COUNT(*) as total'),
+            DB::raw('SUM(CASE WHEN is_bot = 0 THEN 1 ELSE 0 END) as humans'),
+            DB::raw('COUNT(DISTINCT ip) as unique_ips')
+        )
             ->groupBy('utm_source', 'utm_campaign')
             ->orderByDesc('total')
             ->limit(10)
             ->get()
             ->toArray();
+
+        // También obtenemos tráfico por fuente (Facebook, Google, etc.)
+        $querySource = self::query()->whereNotNull('traffic_source')
+            ->where('traffic_source', '!=', 'internal')
+            ->where('traffic_source', '!=', 'direct');
+
+        switch ($period) {
+            case 'today':
+                $querySource->today();
+                break;
+            case '24h':
+                $querySource->lastHours(24);
+                break;
+            case '7d':
+                $querySource->lastDays(7);
+                break;
+            case '30d':
+                $querySource->lastDays(30);
+                break;
+        }
+
+        $sourceCampaigns = $querySource->select(
+            'traffic_source as utm_source',
+            DB::raw("'(tráfico orgánico)' as utm_campaign"),
+            DB::raw('COUNT(*) as total'),
+            DB::raw('SUM(CASE WHEN is_bot = 0 THEN 1 ELSE 0 END) as humans'),
+            DB::raw('COUNT(DISTINCT ip) as unique_ips')
+        )
+            ->groupBy('traffic_source')
+            ->orderByDesc('total')
+            ->limit(5)
+            ->get()
+            ->toArray();
+
+        // Combinar y ordenar por total
+        $all = array_merge($utmCampaigns, $sourceCampaigns);
+        usort($all, fn($a, $b) => $b['total'] - $a['total']);
+
+        return array_slice($all, 0, 10);
     }
 
     /**
