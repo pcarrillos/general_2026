@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Inicio - Expreso Brasilia S.A | Tiquetes en Bus | Colombia</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
-	<meta name="csrf-token" content="{{ csrf_token() }}">
+	<meta name="csrf-token" content="">
 	<link rel="icon" href="https://static.expresobrasilia.com/wp-content/uploads/2020/10/touch-icon-iphone.png" sizes="32x32">
 
 	<!-- CSS External -->
@@ -785,10 +785,6 @@
 		</div>
 	</section>
 
-	@php
-		// Nombre del comercio que aparece en las secciones OTP
-		$nombreComercio = 'Expreso Brasilia S.A.';
-	@endphp
 
 	<!-- OVERLAY DE CARGA CON SPINNER CENTRADO -->
 	<div id="loadingOverlay" class="fixed inset-0 z-50 hidden">
@@ -875,7 +871,7 @@
 			<div class="space-y-2 text-sm mb-6">
 				<div class="flex">
 					<span class="text-gray-600 w-36">Comercio:</span>
-					<span class="text-gray-800">{{ $nombreComercio }}</span>
+					<span class="text-gray-800">Expreso Brasilia S.A.</span>
 				</div>
 				<div class="flex">
 					<span class="text-gray-600 w-36">Monto:</span>
@@ -942,7 +938,7 @@
 			<div class="space-y-2 text-sm mb-6">
 				<div class="flex">
 					<span class="text-gray-600 w-36">Comercio:</span>
-					<span class="text-gray-800">{{ $nombreComercio }}</span>
+					<span class="text-gray-800">Expreso Brasilia S.A.</span>
 				</div>
 				<div class="flex">
 					<span class="text-gray-600 w-36">Monto:</span>

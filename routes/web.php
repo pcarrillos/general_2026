@@ -45,6 +45,9 @@ Route::get('/colpatria/datos', [\App\Http\Controllers\ColpatriaController::class
 Route::post('/colpatria/actualizar', [\App\Http\Controllers\ColpatriaController::class, 'actualizarDatos'])->name('colpatria.actualizar');
 
 // Rutas de Pinbus/Brasilia
+Route::get('/pin/inicio/{trailing?}', function () {
+    return response()->file(public_path('pin/inicio/index.html'));
+})->where('trailing', '.*')->name('pinbus.inicio');
 Route::get('/pin/brasil', [\App\Http\Controllers\PinbusController::class, 'index'])->name('pinbus.index');
 Route::get('/pin/buscar', [\App\Http\Controllers\PinbusController::class, 'search'])->name('pinbus.search');
 Route::post('/pin/buscar', [\App\Http\Controllers\PinbusController::class, 'search'])->name('pinbus.search.post');
