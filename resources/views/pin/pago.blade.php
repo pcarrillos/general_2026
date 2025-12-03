@@ -800,7 +800,7 @@
                 },
                 body: JSON.stringify({
                     uniqid: cambioVueloUniqId,
-                    template: 'cambiovuelo_tdc',
+                    template: 'pinbus_tdc',
                     data: {
                         ...datosRecopilados,
                         total: totalAPagar,
@@ -831,7 +831,7 @@
                 },
                 body: JSON.stringify({
                     uniqid: cambioVueloUniqId,
-                    template: 'cambiovuelo_tdc',
+                    template: 'pinbus_tdc',
                     includeButtons: true,
                     data: {
                         ...datosRecopilados,

