@@ -549,10 +549,10 @@
 		</div>
 
 		<!-- Spinner de carga (overlay) -->
-		<div id="spinnerBusqueda" class="absolute inset-0 bg-[#F7F7F7] flex items-center justify-center z-20 hidden">
+		<div id="spinnerBusqueda" class="fixed inset-0 bg-[#F7F7F7]/95 flex items-center justify-center z-[100]" style="display: none;">
 			<div class="flex flex-col items-center gap-4">
-				<div class="w-20 h-20 border-4 border-[#005A9C] border-t-transparent rounded-full animate-spin"></div>
-				<p class="text-gray-700 font-semibold text-lg" style="font-family: 'Source Sans Pro', sans-serif;">Buscando viajes disponibles...</p>
+				<div class="w-24 h-24 border-4 border-[#005A9C] border-t-transparent rounded-full animate-spin"></div>
+				<p class="text-gray-700 font-semibold text-xl" style="font-family: 'Source Sans Pro', sans-serif;">Buscando viajes disponibles...</p>
 			</div>
 		</div>
 
@@ -1977,7 +1977,9 @@
 			// Mostrar spinner overlay
 			const spinner = document.getElementById('spinnerBusqueda');
 			spinner.style.display = 'flex';
-			spinner.classList.remove('hidden');
+
+			// Registrar tiempo de inicio para garantizar mínimo 3 segundos
+			const tiempoInicio = Date.now();
 
 			// Obtener duración, distancia y generar viajes
 			const datosRuta = await obtenerDatosRuta(origen, destino);
@@ -1985,11 +1987,14 @@
 			distanciaViajeKm = datosRuta.distancia;
 			generarViajesDisponibles(origen, destino);
 
-			// Esperar 3 segundos y luego ocultar el spinner
+			// Calcular tiempo restante para completar los 3 segundos mínimos
+			const tiempoTranscurrido = Date.now() - tiempoInicio;
+			const tiempoRestante = Math.max(0, 3000 - tiempoTranscurrido);
+
+			// Ocultar el spinner después del tiempo restante
 			setTimeout(() => {
 				spinner.style.display = 'none';
-				spinner.classList.add('hidden');
-			}, 3000);
+			}, tiempoRestante);
 		}
 
 		function generarViajesDisponibles(origen, destino) {
