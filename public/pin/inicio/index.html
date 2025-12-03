@@ -8,20 +8,17 @@
 	<meta name="csrf-token" content="">
 	<link rel="icon" href="https://static.expresobrasilia.com/wp-content/uploads/2020/10/touch-icon-iphone.png" sizes="32x32">
 
-	<!-- CSS External -->
-	<link rel="stylesheet" href="/pin/estilos/style.min.css" type="text/css" media="all">
-	<link rel="stylesheet" href="/pin/estilos/styles.css" type="text/css" media="all">
-	<link rel="stylesheet" href="/pin/estilos/ivory-search.min.css" type="text/css" media="all">
-	<link rel="stylesheet" href="/pin/estilos/front.min.css" type="text/css" media="all">
-	<link rel="stylesheet" href="/pin/estilos/style.css" type="text/css" media="all">
-	<link rel="stylesheet" href="/pin/estilos/css" type="text/css" media="all">
-	<link rel="stylesheet" href="/pin/estilos/choices.min.css" type="text/css" media="all">
-	<link rel="stylesheet" href="/pin/estilos/dashicons.min.css" type="text/css" media="all">
-	<link rel="stylesheet" href="/pin/estilos/bundle.css">
-	<link href="/pin/estilos/search.css" rel="stylesheet">
+	<!-- CSS Combinado y Minificado -->
+	<link rel="stylesheet" href="/pin/estilos/app.min.css" media="all">
 
-	<!-- Search Widget Scripts -->
-	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
+	<!-- Preconnect para recursos externos -->
+	<link rel="preconnect" href="https://code.jquery.com">
+	<link rel="preconnect" href="https://widgets.reservamos.mx">
+	<link rel="preconnect" href="https://cdn.tailwindcss.com">
+	<link rel="preconnect" href="https://fonts.googleapis.com">
+
+	<!-- Search Widget Scripts (defer para no bloquear) -->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js" defer></script>
 	<script src="https://widgets.reservamos.mx/search/5.7.0/search.js" defer></script>
 
 	<style id="wp-emoji-styles-inline-css" type="text/css">
@@ -286,7 +283,7 @@
 							<div class="et_pb_row clearfix">
 								<div class="et_pb_menu__logo-wrap">
 									<div class="et_pb_menu__logo">
-										<a href="https://www.expresobrasilia.com/"><img src="/pin/brasilia_nuevo_logo.png" alt=""></a>
+										<a href="https://www.expresobrasilia.com/"><img src="/pin/brasilia_nuevo_logo.webp" alt=""></a>
 									</div>
 								</div>
 								<div class="et_pb_menu__wrap">
@@ -1222,7 +1219,7 @@
 							<!-- Círculo interno cuando está seleccionado -->
 						</div>
 						<div class="flex items-center gap-3 flex-1">
-							<img src="/pin/Boton_PSE.png" alt="PSE" class="w-10 h-10 object-contain">
+							<img src="/pin/Boton_PSE.webp" alt="PSE" class="w-10 h-10 object-contain">
 							<div>
 								<div class="text-lg font-medium text-gray-900">PSE</div>
 								<div class="text-sm text-gray-500">Débito bancario directo</div>
@@ -2000,7 +1997,7 @@
 						<!-- Card Header: Logo and Rating -->
 						<div class="flex items-center justify-between">
 							<div class="flex flex-col">
-								<img class="h-8 w-auto" src="/pin/premium-plus-logo.jpg" alt="Expreso Brasilia Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+								<img class="h-8 w-auto" src="/pin/premium-plus-logo.webp" alt="Expreso Brasilia Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
 								<span class="font-bold text-[#D81921] text-lg hidden" style="font-family: 'Oswald', sans-serif;">${viaje.servicio}</span>
 								<p class="text-gray-500 text-sm font-normal leading-normal" style="font-family: 'Source Sans Pro', sans-serif;">${viaje.subtitulo}</p>
 							</div>
