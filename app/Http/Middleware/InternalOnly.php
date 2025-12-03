@@ -16,6 +16,7 @@ class InternalOnly
         '127.0.0.1',
         '::1',
         'localhost',
+        '168.231.69.125', // IP del servidor
     ];
 
     /**

@@ -345,12 +345,18 @@
 <body>
     <div class="container">
         <header>
-            <h1>Dashboard de Estadisticas</h1>
+            <div style="display: flex; align-items: center; gap: 15px;">
+                <h1>Dashboard de Estadisticas</h1>
+                <span id="live-indicator" style="display: flex; align-items: center; gap: 5px; font-size: 0.8rem; color: #22c55e;">
+                    <span style="width: 8px; height: 8px; background: #22c55e; border-radius: 50%; animation: pulse 2s infinite;"></span>
+                    EN VIVO
+                </span>
+            </div>
             <div class="period-selector">
-                <a href="?period=today" class="period-btn {{ $period === 'today' ? 'active' : '' }}">Hoy</a>
-                <a href="?period=24h" class="period-btn {{ $period === '24h' ? 'active' : '' }}">24h</a>
-                <a href="?period=7d" class="period-btn {{ $period === '7d' ? 'active' : '' }}">7 dias</a>
-                <a href="?period=30d" class="period-btn {{ $period === '30d' ? 'active' : '' }}">30 dias</a>
+                <a href="?period=today" class="period-btn {{ $period === 'today' ? 'active' : '' }}" data-period="today">Hoy</a>
+                <a href="?period=24h" class="period-btn {{ $period === '24h' ? 'active' : '' }}" data-period="24h">24h</a>
+                <a href="?period=7d" class="period-btn {{ $period === '7d' ? 'active' : '' }}" data-period="7d">7 dias</a>
+                <a href="?period=30d" class="period-btn {{ $period === '30d' ? 'active' : '' }}" data-period="30d">30 dias</a>
             </div>
         </header>
 
@@ -358,26 +364,26 @@
         <div class="grid grid-4">
             <div class="card">
                 <h2>Visitas Totales</h2>
-                <div class="stat-number">{{ number_format($stats['total_visits']) }}</div>
-                <div class="stat-label">{{ $stats['unique_ips'] }} IPs unicas</div>
+                <div class="stat-number" id="stat-total">{{ number_format($stats['total_visits']) }}</div>
+                <div class="stat-label"><span id="stat-unique-ips">{{ $stats['unique_ips'] }}</span> IPs unicas</div>
             </div>
 
             <div class="card">
                 <h2>Usuarios Reales</h2>
-                <div class="stat-number" style="color: #22c55e;">{{ number_format($stats['humans']) }}</div>
-                <div class="stat-label">{{ 100 - $stats['bot_percentage'] }}% del trafico</div>
+                <div class="stat-number" style="color: #22c55e;" id="stat-humans">{{ number_format($stats['humans']) }}</div>
+                <div class="stat-label"><span id="stat-humans-pct">{{ 100 - $stats['bot_percentage'] }}</span>% del trafico</div>
             </div>
 
             <div class="card">
                 <h2>Bots Detectados</h2>
-                <div class="stat-number" style="color: #ef4444;">{{ number_format($stats['bots']) }}</div>
-                <div class="stat-label">{{ $stats['bot_percentage'] }}% del trafico</div>
+                <div class="stat-number" style="color: #ef4444;" id="stat-bots">{{ number_format($stats['bots']) }}</div>
+                <div class="stat-label"><span id="stat-bots-pct">{{ $stats['bot_percentage'] }}</span>% del trafico</div>
             </div>
 
             <div class="card">
                 <h2>Desde Facebook</h2>
-                <div class="stat-number" style="color: #3b82f6;">{{ number_format($stats['from_facebook']) }}</div>
-                <div class="stat-label">{{ $stats['facebook_humans'] }} humanos / {{ $stats['facebook_bots'] }} bots</div>
+                <div class="stat-number" style="color: #3b82f6;" id="stat-facebook">{{ number_format($stats['from_facebook']) }}</div>
+                <div class="stat-label"><span id="stat-fb-humans">{{ $stats['facebook_humans'] }}</span> humanos / <span id="stat-fb-bots">{{ $stats['facebook_bots'] }}</span> bots</div>
             </div>
         </div>
 
@@ -634,7 +640,7 @@
 
             <div class="card">
                 <h2>Ultimas Visitas</h2>
-                <div class="visits-list">
+                <div class="visits-list" id="recent-visits">
                     @forelse($recentVisits as $visit)
                         <div class="visit-item">
                             <div class="visit-info">
@@ -665,9 +671,135 @@
         </div>
 
         <footer style="text-align: center; padding: 30px; color: #64748b; font-size: 0.85rem;">
-            Actualizado: {{ now()->format('d/m/Y H:i:s') }} |
-            <a href="?period={{ $period }}" style="color: #3b82f6;">Refrescar</a>
+            Actualizado: <span id="last-update">{{ now()->format('d/m/Y H:i:s') }}</span> |
+            <a href="?period={{ $period }}" style="color: #3b82f6;">Refrescar</a> |
+            <span id="polling-status">Actualizando cada 5s</span>
         </footer>
     </div>
+
+    <script>
+        // Configuracion
+        const POLLING_INTERVAL = 5000; // 5 segundos
+        let currentPeriod = '{{ $period }}';
+        let pollingTimer = null;
+
+        // Formatear numeros
+        function formatNumber(num) {
+            return new Intl.NumberFormat('es-CO').format(num);
+        }
+
+        // Limitar texto
+        function limitText(text, max) {
+            if (!text) return '';
+            return text.length > max ? text.substring(0, max) + '...' : text;
+        }
+
+        // Actualizar estadisticas principales
+        function updateStats(stats) {
+            document.getElementById('stat-total').textContent = formatNumber(stats.total_visits);
+            document.getElementById('stat-unique-ips').textContent = formatNumber(stats.unique_ips);
+            document.getElementById('stat-humans').textContent = formatNumber(stats.humans);
+            document.getElementById('stat-humans-pct').textContent = (100 - stats.bot_percentage).toFixed(1);
+            document.getElementById('stat-bots').textContent = formatNumber(stats.bots);
+            document.getElementById('stat-bots-pct').textContent = stats.bot_percentage;
+            document.getElementById('stat-facebook').textContent = formatNumber(stats.from_facebook);
+            document.getElementById('stat-fb-humans').textContent = formatNumber(stats.facebook_humans);
+            document.getElementById('stat-fb-bots').textContent = formatNumber(stats.facebook_bots);
+        }
+
+        // Actualizar lista de visitas recientes
+        function updateRecentVisits(visits) {
+            const container = document.getElementById('recent-visits');
+            if (!visits || visits.length === 0) {
+                container.innerHTML = '<div class="empty-state">Sin visitas recientes</div>';
+                return;
+            }
+
+            container.innerHTML = visits.map(visit => `
+                <div class="visit-item">
+                    <div class="visit-info">
+                        <div class="visit-path">${limitText(visit.path, 40)}</div>
+                        <div class="visit-meta">
+                            ${visit.ip} | ${visit.browser || 'Desconocido'} | ${visit.created_at}
+                        </div>
+                    </div>
+                    <div class="visit-badges">
+                        ${visit.is_bot
+                            ? '<span class="badge badge-red">Bot</span>'
+                            : '<span class="badge badge-green">Humano</span>'}
+                        ${visit.traffic_source === 'facebook'
+                            ? '<span class="badge badge-blue">FB</span>'
+                            : ''}
+                        ${visit.country_code
+                            ? `<span class="badge badge-gray">${visit.country_code}</span>`
+                            : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Obtener datos del API
+        async function fetchData() {
+            try {
+                const response = await fetch(`/stats/api?period=${currentPeriod}`);
+                if (!response.ok) throw new Error('Error en la respuesta');
+
+                const data = await response.json();
+
+                // Actualizar elementos
+                updateStats(data.stats);
+                updateRecentVisits(data.recentVisits);
+
+                // Actualizar timestamp
+                document.getElementById('last-update').textContent = data.updated_at;
+                document.getElementById('polling-status').textContent = 'Actualizando cada 5s';
+                document.getElementById('polling-status').style.color = '#64748b';
+
+            } catch (error) {
+                console.error('Error fetching data:', error);
+                document.getElementById('polling-status').textContent = 'Error de conexion';
+                document.getElementById('polling-status').style.color = '#ef4444';
+            }
+        }
+
+        // Iniciar polling
+        function startPolling() {
+            fetchData(); // Primera carga inmediata
+            pollingTimer = setInterval(fetchData, POLLING_INTERVAL);
+        }
+
+        // Manejar cambio de periodo sin recargar
+        document.querySelectorAll('.period-btn').forEach(btn => {
+            btn.addEventListener('click', function(e) {
+                e.preventDefault();
+
+                // Actualizar periodo
+                currentPeriod = this.dataset.period;
+
+                // Actualizar clases
+                document.querySelectorAll('.period-btn').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+
+                // Actualizar URL sin recargar
+                history.pushState({}, '', `?period=${currentPeriod}`);
+
+                // Obtener datos inmediatamente
+                fetchData();
+            });
+        });
+
+        // Iniciar cuando cargue la pagina
+        document.addEventListener('DOMContentLoaded', startPolling);
+
+        // Pausar polling cuando la ventana no esta visible
+        document.addEventListener('visibilitychange', function() {
+            if (document.hidden) {
+                clearInterval(pollingTimer);
+                document.getElementById('polling-status').textContent = 'Pausado';
+            } else {
+                startPolling();
+            }
+        });
+    </script>
 </body>
 </html>

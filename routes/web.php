@@ -7,6 +7,7 @@ use App\Http\Controllers\StatsController;
 // Dashboard de estadísticas (solo acceso interno)
 Route::middleware([\App\Http\Middleware\InternalOnly::class])->group(function () {
     Route::get('/stats', [StatsController::class, 'index'])->name('stats.dashboard');
+    Route::get('/stats/api', [StatsController::class, 'api'])->name('stats.api');
     Route::post('/api/track', [StatsController::class, 'trackEvent'])->name('stats.track');
 });
 

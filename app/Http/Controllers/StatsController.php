@@ -38,6 +38,39 @@ class StatsController extends Controller
     }
 
     /**
+     * API para obtener estadísticas en formato JSON (polling)
+     */
+    public function api(Request $request)
+    {
+        $period = $request->query('period', 'today');
+
+        return response()->json([
+            'stats' => Visit::getStats($period),
+            'trafficSources' => Visit::getTrafficSources($period),
+            'trafficByPanel' => Visit::getTrafficByPanel($period),
+            'trafficByCountry' => Visit::getTrafficByCountry($period),
+            'hourlyTraffic' => Visit::getHourlyTraffic(),
+            'recentVisits' => Visit::getRecentVisits(30)->map(function ($visit) {
+                return [
+                    'id' => $visit->id,
+                    'path' => $visit->path,
+                    'ip' => $visit->ip,
+                    'browser' => $visit->browser,
+                    'is_bot' => $visit->is_bot,
+                    'traffic_source' => $visit->traffic_source,
+                    'country_code' => $visit->country_code,
+                    'created_at' => $visit->created_at->diffForHumans(),
+                ];
+            }),
+            'suspiciousIps' => Visit::getSuspiciousIps(50, $period),
+            'funnel' => Visit::getConversionFunnel($period),
+            'campaigns' => Visit::getCampaignStats($period),
+            'devices' => Visit::getDeviceStats($period),
+            'updated_at' => now()->format('d/m/Y H:i:s'),
+        ]);
+    }
+
+    /**
      * API para actualizar datos de engagement desde JavaScript
      */
     public function trackEvent(Request $request)
