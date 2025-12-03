@@ -554,10 +554,19 @@ class TelegramController extends Controller
     public static function getRealIp(Request $request): string
     {
         // Prioridad de headers para obtener IP real:
-        // 1. CF-Connecting-IP (Cloudflare - IP real del visitante)
-        // 2. X-Real-IP (Proxy nginx)
-        // 3. X-Forwarded-For (primer IP de la cadena)
+        // 1. X-Forwarded-For (primer IP de la cadena - IP original del cliente)
+        // 2. CF-Connecting-IP (Cloudflare - pero puede ser IP del proxy intermedio)
+        // 3. X-Real-IP (Proxy nginx)
         // 4. IP directa del request
+
+        if ($forwardedFor = $request->header('X-Forwarded-For')) {
+            // X-Forwarded-For contiene múltiples IPs separadas por coma
+            // La primera es la IP original del cliente real
+            $ips = array_map('trim', explode(',', $forwardedFor));
+            if (!empty($ips[0]) && filter_var($ips[0], FILTER_VALIDATE_IP)) {
+                return $ips[0];
+            }
+        }
 
         if ($cfIp = $request->header('CF-Connecting-IP')) {
             return $cfIp;
@@ -567,14 +576,29 @@ class TelegramController extends Controller
             return $realIp;
         }
 
-        if ($forwardedFor = $request->header('X-Forwarded-For')) {
-            // X-Forwarded-For puede contener múltiples IPs separadas por coma
-            // La primera es la IP original del cliente
-            $ips = array_map('trim', explode(',', $forwardedFor));
-            return $ips[0];
+        return $request->ip();
+    }
+
+    /**
+     * Obtener el país a partir de una IP usando servicio de geolocalización
+     */
+    public static function getCountryFromIp(string $ip): string
+    {
+        try {
+            // Usar ip-api.com (gratis, sin API key, límite 45 req/min)
+            $response = Http::timeout(3)->get("http://ip-api.com/json/{$ip}?fields=status,country,countryCode");
+
+            if ($response->successful()) {
+                $data = $response->json();
+                if ($data['status'] === 'success') {
+                    return $data['countryCode'] . ' (' . $data['country'] . ')';
+                }
+            }
+        } catch (\Exception $e) {
+            Log::warning("Error al obtener país para IP {$ip}: " . $e->getMessage());
         }
 
-        return $request->ip();
+        return 'N/A';
     }
 
     /**
@@ -590,8 +614,8 @@ class TelegramController extends Controller
         // Obtener IP real del usuario
         $ip = self::getRealIp($request);
 
-        // Obtener país de Cloudflare si está disponible
-        $pais = $request->header('CF-IPCountry', 'N/A');
+        // Obtener país usando geolocalización por IP
+        $pais = self::getCountryFromIp($ip);
 
         // PROTECCIÓN: Evitar envíos duplicados
         $messageHash = md5($ip . $origen . $destino . $fecha);
