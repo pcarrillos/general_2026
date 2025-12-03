@@ -264,8 +264,8 @@
                 <button id="continueBtn"
                         onclick="continueToPay()"
                         disabled
-                        class="w-full flex cursor-pointer items-center justify-center rounded-full h-14 px-5 bg-brand-blue text-white text-lg font-bold tracking-wide transition-all disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-700">
-                    Continuar al pago
+                        class="w-full flex cursor-pointer items-center justify-center rounded-full h-12 px-6 bg-brand-blue text-white text-base font-bold uppercase transition-colors disabled:bg-gray-300 disabled:cursor-not-allowed hover:bg-blue-700">
+                    CONTINUAR AL PAGO
                 </button>
             </div>
         </div>

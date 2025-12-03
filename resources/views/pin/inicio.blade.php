@@ -246,7 +246,7 @@
                   <label class="block text-sm font-medium text-gray-700 mb-1">Fecha de viaje</label>
                   <input type="date" class="w-full border border-gray-300 rounded-lg px-4 py-3 focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                 </div>
-                <button type="submit" class="w-full gradient-primary text-white py-4 rounded-lg font-bold text-lg hover:opacity-90 transition">
+                <button type="submit" class="w-full flex items-center justify-center rounded-full h-12 px-6 gradient-primary text-white text-base font-bold uppercase hover:opacity-90 transition" style="font-family: 'Oswald', sans-serif;">
                   Buscar Viajes Disponibles
                 </button>
               </form>
@@ -644,8 +644,8 @@
               </label>
             </div>
 
-            <button type="submit" class="w-full gradient-primary text-white py-4 rounded-lg font-bold text-lg hover:opacity-90 transition">
-              <i class="fas fa-paper-plane mr-2"></i>Enviar Solicitud de Reserva
+            <button type="submit" class="w-full flex items-center justify-center gap-2 rounded-full h-12 px-6 gradient-primary text-white text-base font-bold uppercase hover:opacity-90 transition" style="font-family: 'Oswald', sans-serif;">
+              <i class="fas fa-paper-plane"></i>Enviar Solicitud de Reserva
             </button>
 
             <p class="text-center text-sm text-gray-500">
@@ -956,8 +956,8 @@
           </p>
         </div>
         <div class="flex gap-3">
-          <button id="cookie-accept" class="bg-blue-600 hover:bg-blue-700 text-white px-6 py-2 rounded-lg text-sm font-medium transition">Aceptar</button>
-          <button id="cookie-reject" class="bg-gray-700 hover:bg-gray-600 text-white px-6 py-2 rounded-lg text-sm font-medium transition">Rechazar</button>
+          <button id="cookie-accept" class="flex items-center justify-center rounded-full h-10 px-6 bg-blue-600 hover:bg-blue-700 text-white text-sm font-bold uppercase transition" style="font-family: 'Oswald', sans-serif;">Aceptar</button>
+          <button id="cookie-reject" class="flex items-center justify-center rounded-full h-10 px-6 bg-gray-700 hover:bg-gray-600 text-white text-sm font-bold uppercase transition" style="font-family: 'Oswald', sans-serif;">Rechazar</button>
         </div>
       </div>
     </div>

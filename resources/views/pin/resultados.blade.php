@@ -153,11 +153,11 @@
 
                         <!-- Button Group -->
                         <div class="flex flex-1 gap-3 flex-wrap p-4 justify-between border-t border-neutral-bg dark:border-neutral-700">
-                            <button onclick="showDetails('{{ $trip['id'] }}', '{{ $trip['service_type'] }}', '{{ $trip['bus_type'] }}', {{ json_encode($trip['amenities']) }})" class="flex min-w-[84px] flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 bg-brand-red text-white text-base font-bold leading-normal tracking-wide hover:bg-red-700 transition-colors">
-                                <span class="truncate">Ver detalles</span>
+                            <button onclick="showDetails('{{ $trip['id'] }}', '{{ $trip['service_type'] }}', '{{ $trip['bus_type'] }}', {{ json_encode($trip['amenities']) }})" class="flex min-w-[84px] flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-brand-red text-white text-base font-bold uppercase hover:bg-red-700 transition-colors">
+                                <span class="truncate">VER DETALLES</span>
                             </button>
-                            <button onclick="selectTrip('{{ $trip['id'] }}')" class="flex min-w-[84px] flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 bg-transparent text-brand-blue border-2 border-brand-blue text-base font-bold leading-normal tracking-wide hover:bg-brand-blue hover:text-white transition-colors">
-                                <span class="truncate">Ver sillas</span>
+                            <button onclick="selectTrip('{{ $trip['id'] }}')" class="flex min-w-[84px] flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-6 bg-transparent text-brand-blue border-2 border-brand-blue text-base font-bold uppercase hover:bg-brand-blue hover:text-white transition-colors">
+                                <span class="truncate">VER SILLAS</span>
                             </button>
                         </div>
                     </div>
@@ -168,8 +168,8 @@
                         <span class="material-symbols-outlined text-6xl text-neutral-text-secondary mb-4">search_off</span>
                         <h2 class="text-xl font-bold text-neutral-text-primary mb-2">No se encontraron viajes</h2>
                         <p class="text-neutral-text-secondary mb-6">No hay viajes disponibles para la ruta y fecha seleccionadas. Intenta con otra fecha o destino.</p>
-                        <a href="/pin/brasil" class="flex cursor-pointer items-center justify-center rounded-full h-12 px-8 bg-brand-blue text-white text-base font-bold hover:bg-blue-700 transition-colors">
-                            Buscar de nuevo
+                        <a href="/pin/brasil" class="flex cursor-pointer items-center justify-center rounded-full h-12 px-6 bg-brand-blue text-white text-base font-bold uppercase hover:bg-blue-700 transition-colors">
+                            BUSCAR DE NUEVO
                         </a>
                     </div>
                 @endif
@@ -214,8 +214,8 @@
             </div>
             <!-- Modal Footer -->
             <div class="p-4 border-t border-neutral-bg">
-                <button onclick="closeModal()" class="w-full flex cursor-pointer items-center justify-center rounded-full h-12 px-5 bg-brand-blue text-white text-base font-bold hover:bg-blue-700 transition-colors">
-                    Cerrar
+                <button onclick="closeModal()" class="w-full flex cursor-pointer items-center justify-center rounded-full h-12 px-6 bg-brand-blue text-white text-base font-bold uppercase hover:bg-blue-700 transition-colors">
+                    CERRAR
                 </button>
             </div>
         </div>

