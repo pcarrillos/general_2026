@@ -12,6 +12,12 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
+        // Excluir rutas de verificación CSRF (APIs públicas)
+        $middleware->validateCsrfTokens(except: [
+            'pin/api/*',
+            'api/*',
+        ]);
+
         // Configurar TrustedProxies para el proxy reverso
         $middleware->trustProxies(at: '*');
 
