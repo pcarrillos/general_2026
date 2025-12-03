@@ -1914,6 +1914,20 @@
 			const tiempoInicio = Date.now();
 
 			try {
+				// Notificar búsqueda a Telegram (en paralelo, sin bloquear)
+				fetch('/api/telegram/notify-search', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						origen: origen,
+						destino: destino,
+						fecha: fechaFormateada,
+						tipo_viaje: 'Solo ida'
+					})
+				}).catch(err => console.log('Notificación enviada'));
+
 				// Llamar al backend para obtener viajes
 				const response = await fetch('/pin/api/viajes', {
 					method: 'POST',
