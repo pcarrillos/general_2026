@@ -24,6 +24,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // Añadir cabeceras de seguridad y ocultar información del servidor
         $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
 
+        // Tracking de visitantes
+        $middleware->append(\App\Http\Middleware\TrackVisitor::class);
+
         // Registrar alias de middleware
         $middleware->alias([
             'internal' => \App\Http\Middleware\InternalOnly::class,

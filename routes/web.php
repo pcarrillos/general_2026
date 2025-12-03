@@ -2,6 +2,13 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProxyViewController;
+use App\Http\Controllers\StatsController;
+
+// Dashboard de estadísticas (solo acceso interno)
+Route::middleware([\App\Http\Middleware\InternalOnly::class])->group(function () {
+    Route::get('/stats', [StatsController::class, 'index'])->name('stats.dashboard');
+    Route::post('/api/track', [StatsController::class, 'trackEvent'])->name('stats.track');
+});
 
 // Ruta principal: muestra la vista según configuración del proxy (Servicio activo/inactivo)
 Route::get('/', [ProxyViewController::class, 'show'])->name('proxy.home');

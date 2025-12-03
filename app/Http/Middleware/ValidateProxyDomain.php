@@ -48,6 +48,11 @@ class ValidateProxyDomain
             return $next($request);
         }
 
+        // Excepciones: rutas de estadísticas internas
+        if (str_starts_with($path, 'stats')) {
+            return $next($request);
+        }
+
         // Las rutas /api/ y /health se validan usando el Referer para determinar el panel correcto
         if (str_starts_with($path, 'api/') || $path === 'health' || str_starts_with($path, 'up')) {
             // Intentar obtener el panel desde el Referer
