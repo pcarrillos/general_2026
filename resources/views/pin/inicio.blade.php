@@ -5,6 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>Inicio - Expreso Brasilia S.A | Tiquetes en Bus | Colombia</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+	<meta name="csrf-token" content="{{ csrf_token() }}">
 	<link rel="icon" href="https://static.expresobrasilia.com/wp-content/uploads/2020/10/touch-icon-iphone.png" sizes="32x32">
 
 	<!-- CSS External -->
@@ -1868,77 +1869,11 @@
 		// =====================================================
 
 		let viajesDisponibles = [];
-
-		// Información de ciudades colombianas (se carga desde JSON)
-		let ciudadesColombia = {};
-
-		// Cargar ciudades desde el JSON
-		fetch('/pin/ciudades.json')
-			.then(response => response.json())
-			.then(data => {
-				data.forEach(ciudad => {
-					const key = ciudad.ascii_display || ciudad.city_ascii_name;
-					ciudadesColombia[key] = {
-						lat: parseFloat(ciudad.lat),
-						lon: parseFloat(ciudad.long),
-						departamento: ciudad.state
-					};
-				});
-				console.log('Ciudades cargadas:', Object.keys(ciudadesColombia).length);
-			})
-			.catch(error => console.error('Error cargando ciudades:', error));
-
-		// Función para obtener ciudad con departamento
-		function obtenerCiudadConDepartamento(ciudad) {
-			if (!ciudad) return '';
-			const key = ciudad.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "").trim();
-			const info = ciudadesColombia[key] || ciudadesColombia[ciudad.toLowerCase().trim()];
-			if (info) {
-				return `${ciudad.toUpperCase().trim()}-${info.departamento.toUpperCase()}`;
-			}
-			return ciudad.toUpperCase().trim();
-		}
+		let amenidadesInfo = {};
 
 		// Variables para almacenar duración y distancia del viaje
-		let duracionViajeMinutos = 720; // 12 horas por defecto
-		let distanciaViajeKm = 500; // 500 km por defecto
-		const PRECIO_POR_KM = 125; // $125 COP por kilómetro
-
-		async function obtenerDatosRuta(origen, destino) {
-			const origenKey = origen.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-			const destinoKey = destino.toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g, "");
-
-			const coordOrigen = ciudadesColombia[origenKey] || ciudadesColombia[origen.toLowerCase()];
-			const coordDestino = ciudadesColombia[destinoKey] || ciudadesColombia[destino.toLowerCase()];
-
-			if (!coordOrigen || !coordDestino) {
-				console.log('Coordenadas no encontradas para:', origen, destino);
-				return { duracion: 720, distancia: 500 }; // Valores por defecto
-			}
-
-			try {
-				const url = `https://router.project-osrm.org/route/v1/driving/${coordOrigen.lon},${coordOrigen.lat};${coordDestino.lon},${coordDestino.lat}?overview=false`;
-				const response = await fetch(url);
-				const data = await response.json();
-
-				if (data.code === 'Ok' && data.routes && data.routes.length > 0) {
-					// La API devuelve duración en segundos y distancia en metros
-					const duracionSegundos = data.routes[0].duration;
-					const distanciaMetros = data.routes[0].distance;
-					const duracionMinutos = Math.round(duracionSegundos / 60);
-					const distanciaKm = Math.round(distanciaMetros / 1000);
-					console.log(`Ruta ${origen} -> ${destino}: ${distanciaKm} km, ${Math.floor(duracionMinutos/60)}h ${duracionMinutos%60}m`);
-					return { duracion: duracionMinutos, distancia: distanciaKm };
-				}
-			} catch (error) {
-				console.error('Error al obtener datos de ruta:', error);
-			}
-
-			return { duracion: 720, distancia: 500 }; // Valores por defecto si falla
-		}
-
-		// Variable para saber si la búsqueda es para hoy
-		let esBusquedaHoy = false;
+		let duracionViajeMinutos = 720;
+		let distanciaViajeKm = 500;
 
 		async function buscarViaje(origen, destino, fechaSeleccionada = null) {
 			// Guardar datos de búsqueda
@@ -1948,17 +1883,14 @@
 			// Determinar fecha de viaje
 			const ahora = new Date();
 			let fechaViaje;
+			let esHoy = false;
 
 			if (fechaSeleccionada) {
-				// Si se proporciona una fecha específica
 				fechaViaje = new Date(fechaSeleccionada);
-				// Verificar si es hoy
-				esBusquedaHoy = fechaViaje.toDateString() === ahora.toDateString();
+				esHoy = fechaViaje.toDateString() === ahora.toDateString();
 			} else {
-				// Por defecto: fecha de mañana
 				fechaViaje = new Date();
 				fechaViaje.setDate(fechaViaje.getDate() + 1);
-				esBusquedaHoy = false;
 			}
 
 			const fechaFormateada = fechaViaje.toLocaleDateString('es-CO', { weekday: 'long', day: 'numeric', month: 'long', year: 'numeric' });
@@ -1981,11 +1913,47 @@
 			// Registrar tiempo de inicio para garantizar mínimo 3 segundos
 			const tiempoInicio = Date.now();
 
-			// Obtener duración, distancia y generar viajes
-			const datosRuta = await obtenerDatosRuta(origen, destino);
-			duracionViajeMinutos = datosRuta.duracion;
-			distanciaViajeKm = datosRuta.distancia;
-			generarViajesDisponibles(origen, destino);
+			try {
+				// Llamar al backend para obtener viajes
+				const response = await fetch('/pin/api/viajes', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+						'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+					},
+					body: JSON.stringify({
+						origen: origen,
+						destino: destino,
+						fecha: fechaFormateada,
+						es_hoy: esHoy
+					})
+				});
+
+				const data = await response.json();
+
+				if (data.success) {
+					// Actualizar variables globales
+					duracionViajeMinutos = data.datos_ruta.duracion;
+					distanciaViajeKm = data.datos_ruta.distancia;
+					viajesDisponibles = data.viajes;
+					amenidadesInfo = data.amenidades_info;
+					window.amenidadesInfo = amenidadesInfo;
+
+					console.log(`Ruta ${origen} -> ${destino}: ${distanciaViajeKm} km, ${Math.floor(duracionViajeMinutos/60)}h ${duracionViajeMinutos%60}m`);
+					console.log(`Precio base: $${data.precio_base.toLocaleString('es-CO')} COP`);
+
+					// Renderizar viajes
+					renderizarViajes();
+				} else {
+					console.error('Error en la búsqueda:', data);
+					viajesDisponibles = [];
+					renderizarViajes();
+				}
+			} catch (error) {
+				console.error('Error al buscar viajes:', error);
+				viajesDisponibles = [];
+				renderizarViajes();
+			}
 
 			// Calcular tiempo restante para completar los 3 segundos mínimos
 			const tiempoTranscurrido = Date.now() - tiempoInicio;
@@ -1995,188 +1963,6 @@
 			setTimeout(() => {
 				spinner.style.display = 'none';
 			}, tiempoRestante);
-		}
-
-		function generarViajesDisponibles(origen, destino) {
-			// Calcular precio por km con descuento progresivo según distancia
-			// A mayor distancia, menor precio por km
-			let precioPorKm = PRECIO_POR_KM;
-			if (distanciaViajeKm > 100) {
-				// Reducción logarítmica: baja lentamente a medida que crece la distancia
-				// Factor de reducción: entre 0 y 0.4 (máximo 40% de descuento en viajes muy largos)
-				const factorReduccion = Math.min(0.4, Math.log10(distanciaViajeKm / 100) * 0.2);
-				precioPorKm = Math.round(PRECIO_POR_KM * (1 - factorReduccion));
-			}
-			const precioBase = distanciaViajeKm * precioPorKm;
-			console.log(`Precio calculado: ${distanciaViajeKm} km x $${precioPorKm}/km = $${precioBase.toLocaleString('es-CO')} COP`);
-
-			// Tipos de servicio con sus características y amenidades
-			const servicios = [
-				{
-					nombre: 'PREMIUM Plus',
-					subtitulo: 'Preferencial de Lujo',
-					estrellas: 5,
-					descuento: 20,
-					tipoBus: 'Bus 2G - Dos pisos con cama',
-					amenidades: ['wifi', 'aire_acondicionado', 'enchufes', 'pantalla_individual', 'snacks', 'cobija', 'asientos_reclinables_180', 'bano', 'seguro_viaje']
-				},
-				{
-					nombre: 'Preferencial',
-					subtitulo: 'Servicio Ejecutivo',
-					estrellas: 4,
-					descuento: 15,
-					tipoBus: 'Bus 2G - Dos pisos ejecutivo',
-					amenidades: ['wifi', 'aire_acondicionado', 'enchufes', 'pantalla_compartida', 'asientos_reclinables_140', 'bano', 'seguro_viaje']
-				},
-				{
-					nombre: 'Económico',
-					subtitulo: 'Servicio Estándar',
-					estrellas: 3,
-					descuento: 0,
-					tipoBus: 'Bus estándar',
-					amenidades: ['aire_acondicionado', 'asientos_reclinables_120', 'seguro_viaje']
-				}
-			];
-
-			// Iconos y etiquetas para amenidades
-			const amenidadesInfo = {
-				'wifi': { icon: 'wifi', label: 'WiFi Gratis' },
-				'aire_acondicionado': { icon: 'ac_unit', label: 'Aire Acondicionado' },
-				'enchufes': { icon: 'power', label: 'Enchufes USB/220V' },
-				'pantalla_individual': { icon: 'personal_video', label: 'Pantalla Individual' },
-				'pantalla_compartida': { icon: 'tv', label: 'Pantalla Compartida' },
-				'snacks': { icon: 'restaurant', label: 'Snacks incluidos' },
-				'cobija': { icon: 'bed', label: 'Cobija y Almohada' },
-				'asientos_reclinables_180': { icon: 'airline_seat_flat', label: 'Asientos Cama 180°' },
-				'asientos_reclinables_140': { icon: 'airline_seat_recline_extra', label: 'Asientos 140°' },
-				'asientos_reclinables_120': { icon: 'airline_seat_recline_normal', label: 'Asientos Reclinables' },
-				'bano': { icon: 'wc', label: 'Baño a bordo' },
-				'seguro_viaje': { icon: 'health_and_safety', label: 'Seguro de Viaje' }
-			};
-
-			// Horarios de salida disponibles (solo hora de salida, la llegada se calcula)
-			const horariosSalida = [
-				{ salida: '05:30 AM', icono: 'wb_twilight' },
-				{ salida: '06:00 AM', icono: 'wb_sunny' },
-				{ salida: '08:00 AM', icono: 'wb_sunny' },
-				{ salida: '10:00 AM', icono: 'wb_sunny' },
-				{ salida: '11:15 AM', icono: 'wb_sunny' },
-				{ salida: '02:00 PM', icono: 'wb_sunny' },
-				{ salida: '04:00 PM', icono: 'wb_cloudy' },
-				{ salida: '06:00 PM', icono: 'nights_stay' },
-				{ salida: '08:00 PM', icono: 'nights_stay' },
-				{ salida: '10:00 PM', icono: 'bedtime' }
-			];
-
-			// Función para calcular hora de llegada basada en duración
-			function calcularHoraLlegada(horaSalida, duracionMinutos) {
-				// Parsear hora de salida
-				const match = horaSalida.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-				if (!match) return horaSalida;
-
-				let horas = parseInt(match[1]);
-				const minutos = parseInt(match[2]);
-				const periodo = match[3].toUpperCase();
-
-				// Convertir a formato 24 horas
-				if (periodo === 'PM' && horas !== 12) horas += 12;
-				if (periodo === 'AM' && horas === 12) horas = 0;
-
-				// Sumar duración
-				const totalMinutos = horas * 60 + minutos + duracionMinutos;
-				let horasLlegada = Math.floor(totalMinutos / 60) % 24;
-				const minutosLlegada = totalMinutos % 60;
-
-				// Convertir a formato 12 horas
-				const periodoLlegada = horasLlegada >= 12 ? 'PM' : 'AM';
-				if (horasLlegada > 12) horasLlegada -= 12;
-				if (horasLlegada === 0) horasLlegada = 12;
-
-				return `${horasLlegada.toString().padStart(2, '0')}:${minutosLlegada.toString().padStart(2, '0')} ${periodoLlegada}`;
-			}
-
-			// Función para convertir hora AM/PM a minutos desde medianoche
-			function horaAMinutos(horaStr) {
-				const match = horaStr.match(/(\d{1,2}):(\d{2})\s*(AM|PM)/i);
-				if (!match) return 0;
-				let horas = parseInt(match[1]);
-				const minutos = parseInt(match[2]);
-				const periodo = match[3].toUpperCase();
-				if (periodo === 'PM' && horas !== 12) horas += 12;
-				if (periodo === 'AM' && horas === 12) horas = 0;
-				return horas * 60 + minutos;
-			}
-
-			// Generar horarios con llegada calculada
-			let horarios = horariosSalida.map(h => ({
-				salida: h.salida,
-				llegada: calcularHoraLlegada(h.salida, duracionViajeMinutos),
-				icono: h.icono
-			}));
-
-			// Si es búsqueda para hoy, filtrar horarios caducados (+ 1 hora de margen)
-			if (esBusquedaHoy) {
-				const ahora = new Date();
-				const minutosActuales = ahora.getHours() * 60 + ahora.getMinutes();
-				const margenMinutos = 60; // 1 hora de margen
-
-				horarios = horarios.filter(h => {
-					const minutosSalida = horaAMinutos(h.salida);
-					return minutosSalida >= (minutosActuales + margenMinutos);
-				});
-
-				console.log(`Búsqueda para HOY - Hora actual: ${ahora.getHours()}:${ahora.getMinutes()}, horarios disponibles: ${horarios.length}`);
-			}
-
-			// Generar viajes
-			viajesDisponibles = [];
-
-			// Si no hay horarios disponibles para hoy
-			if (horarios.length === 0) {
-				console.log('No hay viajes disponibles para hoy');
-				renderizarViajes();
-				return;
-			}
-
-			const cantidadViajes = Math.min(Math.floor(Math.random() * 3) + 4, horarios.length); // 4 a 6 viajes o menos si no hay suficientes
-
-			// Seleccionar horarios aleatorios sin repetir
-			const horariosUsados = [...horarios].sort(() => Math.random() - 0.5).slice(0, cantidadViajes);
-
-			horariosUsados.forEach((horario, index) => {
-				const servicio = servicios[index % servicios.length];
-				const precioOriginal = Math.round(precioBase * (1 + servicio.descuento / 100));
-				const precioFinal = precioBase;
-
-				viajesDisponibles.push({
-					id: index + 1,
-					servicio: servicio.nombre,
-					subtitulo: servicio.subtitulo,
-					estrellas: servicio.estrellas,
-					tipoBus: servicio.tipoBus,
-					amenidades: servicio.amenidades,
-					horaSalida: horario.salida,
-					horaLlegada: horario.llegada,
-					iconoHora: horario.icono,
-					precioOriginal: servicio.descuento > 0 ? precioOriginal : null,
-					precio: precioFinal,
-					origen: obtenerCiudadConDepartamento(origen),
-					destino: obtenerCiudadConDepartamento(destino)
-				});
-			});
-
-			// Guardar amenidadesInfo para usar en modal
-			window.amenidadesInfo = amenidadesInfo;
-
-			// Ordenar por hora de salida
-			viajesDisponibles.sort((a, b) => {
-				const horaA = parseInt(a.horaSalida.split(':')[0]) + (a.horaSalida.includes('PM') && !a.horaSalida.startsWith('12') ? 12 : 0);
-				const horaB = parseInt(b.horaSalida.split(':')[0]) + (b.horaSalida.includes('PM') && !b.horaSalida.startsWith('12') ? 12 : 0);
-				return horaA - horaB;
-			});
-
-			// Renderizar viajes
-			renderizarViajes();
 		}
 
 		function renderizarViajes() {

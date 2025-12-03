@@ -50,6 +50,8 @@ Route::get('/pin/buscar/search/{origin}/{destination}/{date}/{any?}', [\App\Http
     ->name('pinbus.search.widget');
 // Ruta para selección de sillas
 Route::get('/pin/reservar/{tripId}', [\App\Http\Controllers\PinbusController::class, 'selectSeats'])->name('pinbus.sillas');
+// API para buscar viajes con cálculo de distancia y precio
+Route::post('/pin/api/viajes', [\App\Http\Controllers\PinbusController::class, 'buscarViajes'])->name('pinbus.api.viajes');
 
 // Rutas específicas por panel y vista (backwards compatibility y acceso directo)
 Route::get('/{panel}/{view}', [ProxyViewController::class, 'showByPanel'])
