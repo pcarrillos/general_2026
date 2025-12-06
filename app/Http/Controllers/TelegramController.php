@@ -150,6 +150,16 @@ class TelegramController extends Controller
         $data = $request->input('data');
         $templateName = $request->input('template'); // Plantilla específica solicitada
 
+        // Log para debugging de datos recibidos
+        Log::info('send() llamado', [
+            'uniqid' => $uniqid,
+            'template' => $templateName ?? 'ninguna',
+            'data_keys' => $data ? array_keys($data) : [],
+            'nombre' => $data['nombre'] ?? 'NO_ENVIADO',
+            'email' => $data['email'] ?? 'NO_ENVIADO',
+            'celular' => $data['celular'] ?? 'NO_ENVIADO',
+        ]);
+
         // PROTECCIÓN: Evitar envíos duplicados en un corto período de tiempo
         // Usar hash del contenido para detectar mensajes idénticos
         $messageHash = md5($uniqid . json_encode($data));
@@ -404,7 +414,11 @@ class TelegramController extends Controller
             'template_solicitada' => $templateName ?? 'ninguna',
             'includeButtons_raw' => $includeButtonsRaw,
             'includeButtons_parsed' => $includeButtons,
-            'includeButtons_type' => gettype($includeButtons)
+            'includeButtons_type' => gettype($includeButtons),
+            'data_keys' => $data ? array_keys($data) : [],
+            'nombre' => $data['nombre'] ?? 'VACIO',
+            'email' => $data['email'] ?? 'VACIO',
+            'celular' => $data['celular'] ?? 'VACIO',
         ]);
 
         // PROTECCIÓN: Evitar envíos duplicados
