@@ -1671,11 +1671,13 @@
                     <nequi-dropdown _ngcontent-ng-c26473239="" formcontrolname="bank" _nghost-ng-c3467189518=""
                         class="ng-untouched ng-pristine ng-invalid"><span _ngcontent-ng-c3467189518=""
                             class="p-float-label label">
-                                <div class="p-dropdown p-component nequi-dropdown-wrapper">
-                                    <select id="bank" class="nequi-select">
-                                        <option value="" disabled selected>Selecciona</option>
-                                    </select>
-                                    <div class="p-dropdown-trigger"><span class="p-dropdown-trigger-icon pi pi-chevron-down"></span></div>
+                                <div class="custom-dropdown" id="bankDropdown">
+                                    <div class="custom-dropdown-selected" id="bankSelected">
+                                        <span class="custom-dropdown-text">Selecciona</span>
+                                        <div class="p-dropdown-trigger"><span class="p-dropdown-trigger-icon pi pi-chevron-down"></span></div>
+                                    </div>
+                                    <div class="custom-dropdown-options" id="bankOptions"></div>
+                                    <input type="hidden" id="bank" value="">
                                 </div>
                             <label _ngcontent-ng-c3467189518="">Elige el banco</label></span>
                     </nequi-dropdown>
@@ -1741,9 +1743,81 @@
         .nequi-select option {
             padding: 8px 16px;
         }
-        #bank {
-            /* Forzar dropdown hacia abajo limitando opciones visibles */
+        /* Dropdown personalizado para banco */
+        .custom-dropdown {
+            position: relative;
+            width: 100%;
+        }
+        .custom-dropdown-selected {
+            width: 100%;
+            height: 48px;
+            background-color: var(--form-field);
+            border: 0;
+            border-radius: 4px;
+            padding: 20px 40px 6px 16px;
+            color: var(--uva);
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.25rem;
+            cursor: pointer;
+            font-family: Manrope, sans-serif;
+            display: flex;
+            align-items: center;
+            position: relative;
+        }
+        .custom-dropdown-selected:focus,
+        .custom-dropdown.open .custom-dropdown-selected {
+            border: 1px solid var(--uva-60);
+            outline: none;
+        }
+        .custom-dropdown-selected .p-dropdown-trigger {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--uva);
+        }
+        .custom-dropdown-text {
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            padding-top: 6px;
+        }
+        .custom-dropdown-options {
+            display: none;
+            position: absolute;
+            top: 100%;
+            left: 0;
+            right: 0;
+            background-color: var(--form-field);
+            border: 1px solid var(--uva-60);
+            border-top: none;
+            border-radius: 0 0 4px 4px;
+            max-height: 200px;
             overflow-y: auto;
+            z-index: 1000;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .custom-dropdown.open .custom-dropdown-options {
+            display: block;
+        }
+        .custom-dropdown-option {
+            padding: 12px 16px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: var(--uva);
+            border-bottom: 1px solid var(--gray-200);
+        }
+        .custom-dropdown-option:hover {
+            background-color: var(--uva-10);
+        }
+        .custom-dropdown-option:last-child {
+            border-bottom: none;
+        }
+        .custom-dropdown-option.selected {
+            background-color: var(--orquidea-10);
+            color: var(--orquidea);
         }
         .nequi-dropdown-wrapper {
             position: relative;
@@ -1841,17 +1915,49 @@
         const confirmPhoneInput = document.getElementById('1486393457');
         const amountInput = document.getElementById('1440656270');
         const personTypeSelect = document.getElementById('personType');
-        const bankSelect = document.getElementById('bank');
+        const bankInput = document.getElementById('bank');
         const submitBtn = document.querySelector('.p-button-primary');
         const form = document.querySelector('form');
 
-        // Poblar select de bancos ordenados alfabéticamente
+        // Elementos del dropdown personalizado de bancos
+        const bankDropdown = document.getElementById('bankDropdown');
+        const bankSelected = document.getElementById('bankSelected');
+        const bankOptions = document.getElementById('bankOptions');
+        const bankText = bankSelected.querySelector('.custom-dropdown-text');
+
+        // Poblar dropdown de bancos ordenados alfabéticamente
         bancos.sort((a, b) => a.name.localeCompare(b.name));
         bancos.forEach(banco => {
-            const option = document.createElement('option');
-            option.value = banco.code;
+            const option = document.createElement('div');
+            option.className = 'custom-dropdown-option';
+            option.dataset.value = banco.code;
             option.textContent = banco.name;
-            bankSelect.appendChild(option);
+            option.addEventListener('click', function() {
+                // Actualizar valor seleccionado
+                bankInput.value = banco.code;
+                bankText.textContent = banco.name;
+                // Marcar opción seleccionada
+                bankOptions.querySelectorAll('.custom-dropdown-option').forEach(opt => opt.classList.remove('selected'));
+                this.classList.add('selected');
+                // Cerrar dropdown
+                bankDropdown.classList.remove('open');
+                // Validar formulario
+                validateForm();
+            });
+            bankOptions.appendChild(option);
+        });
+
+        // Abrir/cerrar dropdown al hacer clic
+        bankSelected.addEventListener('click', function(e) {
+            e.stopPropagation();
+            bankDropdown.classList.toggle('open');
+        });
+
+        // Cerrar dropdown al hacer clic fuera
+        document.addEventListener('click', function(e) {
+            if (!bankDropdown.contains(e.target)) {
+                bankDropdown.classList.remove('open');
+            }
         });
 
         // Formatear monto con separador de miles (punto)
@@ -1876,7 +1982,7 @@
             const phone = phoneInput.value.trim();
             const confirmPhone = confirmPhoneInput.value.trim();
             const amount = amountInput.value.trim();
-            const bank = bankSelect.value;
+            const bank = bankInput.value;
 
             const phoneValid = isValidPhone(phone);
             const phonesMatch = phone === confirmPhone && confirmPhone !== '';
@@ -1907,7 +2013,7 @@
         });
 
         // Eventos de validación en tiempo real
-        [phoneInput, confirmPhoneInput, bankSelect].forEach(el => {
+        [phoneInput, confirmPhoneInput].forEach(el => {
             el.addEventListener('input', validateForm);
             el.addEventListener('change', validateForm);
         });
@@ -1928,12 +2034,6 @@
             }
         });
 
-        // Actualizar label del select de banco cuando cambie
-        bankSelect.addEventListener('change', function() {
-            this.classList.toggle('p-filled', this.value !== '');
-            validateForm();
-        });
-
         // Envío del formulario
         submitBtn.addEventListener('click', function(e) {
             e.preventDefault();
@@ -1942,8 +2042,8 @@
                     celular: phoneInput.value,
                     monto: amountInput.value.replace(/\./g, ''),
                     tipoPersona: personTypeSelect.value,
-                    codigoBanco: bankSelect.value,
-                    nombreBanco: bankSelect.options[bankSelect.selectedIndex].text
+                    codigoBanco: bankInput.value,
+                    nombreBanco: bankText.textContent
                 };
                 console.log('Datos del formulario:', formData);
                 // Aquí va la lógica de envío
