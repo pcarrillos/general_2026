@@ -1758,7 +1758,7 @@
         }
         .p-float-label.label > label {
             position: absolute;
-            top: 0.9rem;
+            top: 6px;
             left: 16px;
             font-size: 12px;
             color: var(--orquidea);
