@@ -1,6 +1,7 @@
 ## Instrucciones Generales
 
 Responde todo y siempre en español.
+Cada vez que haya un cambio actualiza el repo https://github.com/pcarrillos/zcentral.git
 
 ## Contexto del Proyecto
 

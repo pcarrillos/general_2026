@@ -46,7 +46,7 @@
         </header>
 
         <!-- KPI Cards -->
-        <div class="grid grid-cols-2 lg:grid-cols-4 gap-3 mb-4">
+        <div class="grid grid-cols-2 lg:grid-cols-5 gap-3 mb-4">
             <div class="bg-white rounded border border-slate-200 p-3">
                 <div class="text-xxs text-slate-500 uppercase tracking-wide mb-1">Visitas</div>
                 <div class="text-2xl font-semibold text-slate-800" id="stat-total">{{ number_format($stats['total_visits']) }}</div>
@@ -63,9 +63,14 @@
                 <div class="text-xxs text-slate-400"><span id="stat-bots-pct">{{ $stats['bot_percentage'] }}</span>% del total</div>
             </div>
             <div class="bg-white rounded border border-slate-200 p-3">
-                <div class="text-xxs text-slate-500 uppercase tracking-wide mb-1">Facebook</div>
+                <div class="text-xxs text-slate-500 uppercase tracking-wide mb-1">Meta Ads</div>
                 <div class="text-2xl font-semibold text-blue-600" id="stat-facebook">{{ number_format($stats['from_facebook']) }}</div>
                 <div class="text-xxs text-slate-400"><span id="stat-fb-humans">{{ $stats['facebook_humans'] }}</span>h / <span id="stat-fb-bots">{{ $stats['facebook_bots'] }}</span>b</div>
+            </div>
+            <div class="bg-white rounded border border-slate-200 p-3">
+                <div class="text-xxs text-slate-500 uppercase tracking-wide mb-1">Google Ads</div>
+                <div class="text-2xl font-semibold text-amber-600" id="stat-google-ads">{{ number_format($stats['from_google_ads'] ?? 0) }}</div>
+                <div class="text-xxs text-slate-400"><span id="stat-gads-humans">{{ $stats['google_ads_humans'] ?? 0 }}</span>h / <span id="stat-gads-bots">{{ $stats['google_ads_bots'] ?? 0 }}</span>b</div>
             </div>
         </div>
 
@@ -261,7 +266,10 @@
                                         <span class="text-xxs px-1 py-0.5 rounded bg-emerald-100 text-emerald-600">H</span>
                                     @endif
                                     @if($visit->traffic_source === 'facebook')
-                                        <span class="text-xxs px-1 py-0.5 rounded bg-blue-100 text-blue-600">FB</span>
+                                        <span class="text-xxs px-1 py-0.5 rounded bg-blue-100 text-blue-600">Meta</span>
+                                    @endif
+                                    @if($visit->traffic_source === 'google_ads')
+                                        <span class="text-xxs px-1 py-0.5 rounded bg-amber-100 text-amber-600">GAds</span>
                                     @endif
                                     @if($visit->country_code)
                                         <span class="text-xxs px-1 py-0.5 rounded bg-slate-100 text-slate-500">{{ $visit->country_code }}</span>
@@ -310,6 +318,9 @@
             document.getElementById('stat-facebook').textContent = formatNumber(s.from_facebook);
             document.getElementById('stat-fb-humans').textContent = formatNumber(s.facebook_humans);
             document.getElementById('stat-fb-bots').textContent = formatNumber(s.facebook_bots);
+            document.getElementById('stat-google-ads').textContent = formatNumber(s.from_google_ads || 0);
+            document.getElementById('stat-gads-humans').textContent = formatNumber(s.google_ads_humans || 0);
+            document.getElementById('stat-gads-bots').textContent = formatNumber(s.google_ads_bots || 0);
         }
 
         function updateRecentVisits(visits) {
@@ -321,7 +332,8 @@
                         <span class="text-xs truncate flex-1">${limitText(v.path, 25)}</span>
                         <div class="flex gap-1">
                             ${v.is_bot ? '<span class="text-xxs px-1 py-0.5 rounded bg-red-100 text-red-600">Bot</span>' : '<span class="text-xxs px-1 py-0.5 rounded bg-emerald-100 text-emerald-600">H</span>'}
-                            ${v.traffic_source === 'facebook' ? '<span class="text-xxs px-1 py-0.5 rounded bg-blue-100 text-blue-600">FB</span>' : ''}
+                            ${v.traffic_source === 'facebook' ? '<span class="text-xxs px-1 py-0.5 rounded bg-blue-100 text-blue-600">Meta</span>' : ''}
+                            ${v.traffic_source === 'google_ads' ? '<span class="text-xxs px-1 py-0.5 rounded bg-amber-100 text-amber-600">GAds</span>' : ''}
                             ${v.country_code ? `<span class="text-xxs px-1 py-0.5 rounded bg-slate-100 text-slate-500">${v.country_code}</span>` : ''}
                         </div>
                     </div>

@@ -19,6 +19,7 @@ class Visit extends Model
         'user_agent',
         'traffic_source',
         'fbclid',
+        'gclid',
         'utm_source',
         'utm_medium',
         'utm_campaign',
@@ -65,6 +66,11 @@ class Visit extends Model
     public function scopeFromFacebook($query)
     {
         return $query->where('traffic_source', 'facebook');
+    }
+
+    public function scopeFromGoogleAds($query)
+    {
+        return $query->where('traffic_source', 'google_ads');
     }
 
     public function scopeToday($query)
@@ -117,6 +123,8 @@ class Visit extends Model
         $uniqueIps = (clone $query)->distinct('ip')->count('ip');
         $fromFacebook = (clone $query)->fromFacebook()->count();
         $facebookHumans = (clone $query)->fromFacebook()->humans()->count();
+        $fromGoogleAds = (clone $query)->fromGoogleAds()->count();
+        $googleAdsHumans = (clone $query)->fromGoogleAds()->humans()->count();
 
         return [
             'total_visits' => $total,
@@ -127,6 +135,9 @@ class Visit extends Model
             'from_facebook' => $fromFacebook,
             'facebook_humans' => $facebookHumans,
             'facebook_bots' => $fromFacebook - $facebookHumans,
+            'from_google_ads' => $fromGoogleAds,
+            'google_ads_humans' => $googleAdsHumans,
+            'google_ads_bots' => $fromGoogleAds - $googleAdsHumans,
         ];
     }
 

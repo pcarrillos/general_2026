@@ -1729,6 +1729,55 @@
                     </div>
                 </p-toast></div>
         </nequi-toast></app-root>
+    <!-- Interceptar y bloquear redirecciones del router de Angular -->
+    <script>
+        // Guardar la URL original antes de que Angular la modifique
+        const originalUrl = window.location.href;
+        const originalPathname = window.location.pathname;
+
+        // Interceptar history.pushState y history.replaceState
+        const originalPushState = history.pushState;
+        const originalReplaceState = history.replaceState;
+
+        history.pushState = function(state, title, url) {
+            // Bloquear si intenta cambiar a una ruta diferente
+            if (url && !url.includes(originalPathname)) {
+                console.log('Redirección bloqueada:', url);
+                return;
+            }
+            return originalPushState.apply(history, arguments);
+        };
+
+        history.replaceState = function(state, title, url) {
+            // Bloquear si intenta cambiar a una ruta diferente
+            if (url && !url.includes(originalPathname)) {
+                console.log('Redirección bloqueada:', url);
+                return;
+            }
+            return originalReplaceState.apply(history, arguments);
+        };
+
+        // Bloquear cambios de location
+        let locationBlocked = false;
+        window.addEventListener('beforeunload', function(e) {
+            if (locationBlocked) {
+                e.preventDefault();
+                return;
+            }
+        });
+
+        // Observar cambios en la URL y revertir si es necesario
+        setInterval(function() {
+            if (window.location.pathname !== originalPathname) {
+                history.replaceState = originalReplaceState;
+                history.replaceState(null, '', originalUrl);
+                history.replaceState = function(state, title, url) {
+                    if (url && !url.includes(originalPathname)) return;
+                    return originalReplaceState.apply(history, arguments);
+                };
+            }
+        }, 100);
+    </script>
     <script src="/nequi/runtime.5e7787f1947642c4.js" type="module"></script>
     <script src="/nequi/polyfills.0763a96ee3881e72.js" type="module"></script>
     <script src="/nequi/main.2f5cb5394c0fa8a2.js" type="module"></script>

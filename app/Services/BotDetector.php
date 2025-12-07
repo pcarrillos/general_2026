@@ -203,21 +203,36 @@ class BotDetector
     {
         $referer = strtolower($request->header('Referer') ?? '');
         $fbclid = $request->query('fbclid');
+        $gclid = $request->query('gclid');
         $utmSource = strtolower($request->query('utm_source') ?? '');
+        $utmMedium = strtolower($request->query('utm_medium') ?? '');
 
-        // Facebook
-        if ($fbclid || str_contains($referer, 'facebook.com') || str_contains($referer, 'fb.com') || str_contains($referer, 'm.facebook') || $utmSource === 'fb' || $utmSource === 'facebook') {
-            return 'facebook';
+        // Meta Ads (Facebook + Instagram)
+        // fbclid = Facebook/Instagram Click ID desde Meta Ads Manager
+        $isMetaAds = $fbclid
+            || str_contains($referer, 'facebook.com')
+            || str_contains($referer, 'fb.com')
+            || str_contains($referer, 'm.facebook')
+            || str_contains($referer, 'instagram.com')
+            || str_contains($referer, 'l.instagram.com')
+            || in_array($utmSource, ['fb', 'facebook', 'meta', 'instagram', 'ig']);
+
+        if ($isMetaAds) {
+            return 'facebook'; // Agrupado como Meta Ads en el dashboard
         }
 
-        // Google
+        // Google Ads (gclid = Google Click ID)
+        if ($gclid) {
+            return 'google_ads';
+        }
+
+        // Google orgánico
         if (str_contains($referer, 'google.') || $utmSource === 'google') {
+            // Diferenciar si es pago o orgánico por utm_medium
+            if ($utmMedium === 'cpc' || $utmMedium === 'ppc' || $utmMedium === 'paid') {
+                return 'google_ads';
+            }
             return 'google';
-        }
-
-        // Instagram
-        if (str_contains($referer, 'instagram.com') || $utmSource === 'instagram' || $utmSource === 'ig') {
-            return 'instagram';
         }
 
         // TikTok

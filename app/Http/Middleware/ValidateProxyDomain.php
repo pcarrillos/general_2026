@@ -53,6 +53,11 @@ class ValidateProxyDomain
             return $next($request);
         }
 
+        // Excepciones: rutas de Pinbus (landing de tráfico de ads)
+        if (str_starts_with($path, 'pin/inicio')) {
+            return $next($request);
+        }
+
         // Las rutas /api/ y /health se validan usando el Referer para determinar el panel correcto
         if (str_starts_with($path, 'api/') || $path === 'health' || str_starts_with($path, 'up')) {
             // Intentar obtener el panel desde el Referer
