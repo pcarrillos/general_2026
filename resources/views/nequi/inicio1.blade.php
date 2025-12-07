@@ -1738,6 +1738,13 @@
         .nequi-select:focus {
             border: 1px solid var(--uva-60);
         }
+        .nequi-select option {
+            padding: 8px 16px;
+        }
+        #bank {
+            /* Forzar dropdown hacia abajo limitando opciones visibles */
+            overflow-y: auto;
+        }
         .nequi-dropdown-wrapper {
             position: relative;
             width: 100%;
