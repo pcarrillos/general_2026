@@ -1745,7 +1745,7 @@
         .nequi-dropdown-wrapper .p-dropdown-trigger {
             position: absolute;
             right: 12px;
-            top: 50%;
+            top: 30%;
             transform: translateY(-50%);
             pointer-events: none;
             color: var(--uva);
