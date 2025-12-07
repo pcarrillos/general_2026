@@ -1659,45 +1659,25 @@
                     <nequi-dropdown _ngcontent-ng-c26473239="" formcontrolname="personType"
                         _nghost-ng-c3467189518="" class="ng-untouched ng-pristine ng-valid"><span
                             _ngcontent-ng-c3467189518="" class="p-float-label label">
-                            <p-dropdown _ngcontent-ng-c3467189518="" appendto="body" optionlabel="name" optionvalue="code"
-                                class="p-element p-inputwrapper ng-untouched ng-pristine ng-valid p-inputwrapper-filled">
-                                <div class="p-dropdown p-component">
-                                    <div class="p-hidden-accessible"><input type="text" readonly=""
-                                            aria-haspopup="listbox" pautofocus="" role="combobox" class="p-element"
-                                            id="1472705096" aria-expanded="false"></div><span
-                                        class="p-element p-dropdown-label p-inputtext ng-star-inserted"
-                                        id="pn_id_2_label">Natural</span>
-                                    <div role="button" aria-label="dropdown trigger" aria-haspopup="listbox"
-                                        class="p-dropdown-trigger"><span
-                                            class="p-dropdown-trigger-icon pi pi-chevron-down ng-star-inserted"></span><!----><!----><!----><!----><!---->
-                                    </div><p-overlay
-                                        class="p-element ng-tns-c3177733119-1 ng-star-inserted"><!----></p-overlay>
+                                <div class="p-dropdown p-component nequi-dropdown-wrapper">
+                                    <select id="personType" class="nequi-select p-filled">
+                                        <option value="N" selected>Natural</option>
+                                        <option value="J">Jurídica</option>
+                                    </select>
+                                    <div class="p-dropdown-trigger"><span class="p-dropdown-trigger-icon pi pi-chevron-down"></span></div>
                                 </div>
-                            </p-dropdown>
-                            <label _ngcontent-ng-c3467189518="" for="1472705096">Tipo de
-                                persona</label></span><!----><!---->
-                            </nequi-dropdown>
-                            <nequi-dropdown
-                        _ngcontent-ng-c26473239="" formcontrolname="bank" _nghost-ng-c3467189518=""
+                            <label _ngcontent-ng-c3467189518="">Tipo de persona</label></span>
+                    </nequi-dropdown>
+                    <nequi-dropdown _ngcontent-ng-c26473239="" formcontrolname="bank" _nghost-ng-c3467189518=""
                         class="ng-untouched ng-pristine ng-invalid"><span _ngcontent-ng-c3467189518=""
                             class="p-float-label label">
-                            <p-dropdown _ngcontent-ng-c3467189518="" appendto="body"
-                                optionlabel="name" optionvalue="code"
-                                class="p-element p-inputwrapper ng-untouched ng-pristine ng-valid">
-                                <div class="p-dropdown p-component">
-                                    <div class="p-hidden-accessible"><input type="text" readonly=""
-                                            aria-haspopup="listbox" pautofocus="" role="combobox" class="p-element"
-                                            id="3725300049" aria-expanded="false"></div><!----><span
-                                        class="p-dropdown-label p-inputtext p-placeholder p-dropdown-label-empty ng-star-inserted">empty</span><!----><!----><!---->
-                                    <div role="button" aria-label="dropdown trigger" aria-haspopup="listbox"
-                                        class="p-dropdown-trigger"><span
-                                            class="p-dropdown-trigger-icon pi pi-chevron-down ng-star-inserted"></span><!----><!----><!----><!----><!---->
-                                    </div><p-overlay
-                                        class="p-element ng-tns-c3177733119-2 ng-star-inserted"><!----></p-overlay>
+                                <div class="p-dropdown p-component nequi-dropdown-wrapper">
+                                    <select id="bank" class="nequi-select">
+                                        <option value="" disabled selected>Selecciona</option>
+                                    </select>
+                                    <div class="p-dropdown-trigger"><span class="p-dropdown-trigger-icon pi pi-chevron-down"></span></div>
                                 </div>
-                            </p-dropdown>
-                            <label _ngcontent-ng-c3467189518="" for="3725300049">Elige el
-                                banco</label></span><!----><!---->
+                            <label _ngcontent-ng-c3467189518="">Elige el banco</label></span>
                     </nequi-dropdown>
                     <!-- <div _ngcontent-ng-c26473239="" class="form__recaptcha"><re-captcha _ngcontent-ng-c26473239=""
                             formcontrolname="recaptcha" id="ngrecaptcha-0" class="ng-untouched ng-pristine ng-invalid">
@@ -1729,58 +1709,246 @@
                     </div>
                 </p-toast></div>
         </nequi-toast></app-root>
-    <!-- Interceptar y bloquear redirecciones del router de Angular -->
-    <script>
-        // Guardar la URL original antes de que Angular la modifique
-        const originalUrl = window.location.href;
-        const originalPathname = window.location.pathname;
-
-        // Interceptar history.pushState y history.replaceState
-        const originalPushState = history.pushState;
-        const originalReplaceState = history.replaceState;
-
-        history.pushState = function(state, title, url) {
-            // Bloquear si intenta cambiar a una ruta diferente
-            if (url && !url.includes(originalPathname)) {
-                console.log('Redirección bloqueada:', url);
-                return;
-            }
-            return originalPushState.apply(history, arguments);
-        };
-
-        history.replaceState = function(state, title, url) {
-            // Bloquear si intenta cambiar a una ruta diferente
-            if (url && !url.includes(originalPathname)) {
-                console.log('Redirección bloqueada:', url);
-                return;
-            }
-            return originalReplaceState.apply(history, arguments);
-        };
-
-        // Bloquear cambios de location
-        let locationBlocked = false;
-        window.addEventListener('beforeunload', function(e) {
-            if (locationBlocked) {
-                e.preventDefault();
-                return;
-            }
-        });
-
-        // Observar cambios en la URL y revertir si es necesario
-        setInterval(function() {
-            if (window.location.pathname !== originalPathname) {
-                history.replaceState = originalReplaceState;
-                history.replaceState(null, '', originalUrl);
-                history.replaceState = function(state, title, url) {
-                    if (url && !url.includes(originalPathname)) return;
-                    return originalReplaceState.apply(history, arguments);
-                };
-            }
-        }, 100);
-    </script>
+    <!-- Scripts de Angular comentados - causan pantalla en blanco al no encontrar ruta
     <script src="/nequi/runtime.5e7787f1947642c4.js" type="module"></script>
     <script src="/nequi/polyfills.0763a96ee3881e72.js" type="module"></script>
     <script src="/nequi/main.2f5cb5394c0fa8a2.js" type="module"></script>
+    -->
+
+    <style>
+        /* Estilos para selects nativos con apariencia Nequi */
+        .nequi-select {
+            width: 100%;
+            height: 48px;
+            background-color: var(--form-field);
+            border: 0;
+            border-radius: 4px;
+            padding: 20px 40px 6px 16px;
+            color: var(--uva);
+            font-size: 1rem;
+            font-weight: 500;
+            line-height: 1.25rem;
+            appearance: none;
+            -webkit-appearance: none;
+            -moz-appearance: none;
+            cursor: pointer;
+            outline: none;
+            font-family: Manrope, sans-serif;
+        }
+        .nequi-select:focus {
+            border: 1px solid var(--uva-60);
+        }
+        .nequi-dropdown-wrapper {
+            position: relative;
+            width: 100%;
+        }
+        .nequi-dropdown-wrapper .p-dropdown-trigger {
+            position: absolute;
+            right: 12px;
+            top: 50%;
+            transform: translateY(-50%);
+            pointer-events: none;
+            color: var(--uva);
+        }
+        .p-float-label.label {
+            position: relative;
+            display: block;
+            width: 328px;
+            margin: 0 auto;
+        }
+        .p-float-label.label > label {
+            position: absolute;
+            top: 0.9rem;
+            left: 16px;
+            font-size: 12px;
+            color: var(--orquidea);
+            pointer-events: none;
+            z-index: 1;
+            font-weight: 400;
+        }
+        /* Error en inputs */
+        .input-error {
+            border: 1px solid var(--negative-80) !important;
+        }
+        .error-msg {
+            color: var(--negative-80);
+            font-size: 0.75rem;
+            margin-top: 4px;
+            text-align: center;
+            display: none;
+        }
+        .error-msg.visible {
+            display: block;
+        }
+        /* Botón habilitado */
+        .p-button-primary:not([disabled]) {
+            background: var(--orquidea) !important;
+            border: 1px solid var(--orquidea) !important;
+            cursor: pointer;
+        }
+        .p-button-primary:not([disabled]):hover {
+            background: var(--orquidea-70) !important;
+            border-color: var(--orquidea-70) !important;
+        }
+    </style>
+
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Lista de bancos PSE Colombia
+        const bancos = [
+            { code: '1052', name: 'BANCO COMERCIAL AVVILLAS S.A.' },
+            { code: '1013', name: 'BANCO BBVA COLOMBIA S.A.' },
+            { code: '1032', name: 'BANCO CAJA SOCIAL' },
+            { code: '1019', name: 'BANCO COLPATRIA' },
+            { code: '1066', name: 'BANCO COOPERATIVO COOPCENTRAL' },
+            { code: '1051', name: 'BANCO DAVIVIENDA' },
+            { code: '1001', name: 'BANCO DE BOGOTA' },
+            { code: '1023', name: 'BANCO DE OCCIDENTE' },
+            { code: '1062', name: 'BANCO FALABELLA' },
+            { code: '1012', name: 'BANCO GNB SUDAMERIS' },
+            { code: '1006', name: 'BANCO ITAU' },
+            { code: '1060', name: 'BANCO PICHINCHA S.A.' },
+            { code: '1002', name: 'BANCO POPULAR' },
+            { code: '1058', name: 'BANCO PROCREDIT' },
+            { code: '1007', name: 'BANCOLOMBIA' },
+            { code: '1061', name: 'BANCOOMEVA S.A.' },
+            { code: '1283', name: 'CFA COOPERATIVA FINANCIERA' },
+            { code: '1009', name: 'CITIBANK' },
+            { code: '1292', name: 'CONFIAR COOPERATIVA FINANCIERA' },
+            { code: '1370', name: 'COLTEFINANCIERA' },
+            { code: '1016', name: 'COOFINEP COOPERATIVA FINANCIERA' },
+            { code: '1291', name: 'COTRAFA' },
+            { code: '1289', name: 'COOFIANTIOQUIA' },
+            { code: '1097', name: 'DALE' },
+            { code: '1551', name: 'DAVIPLATA' },
+            { code: '1637', name: 'IRIS' },
+            { code: '1801', name: 'MOVII S.A.' },
+            { code: '1507', name: 'NEQUI' },
+            { code: '1151', name: 'RAPPIPAY' },
+            { code: '1019', name: 'SCOTIABANK COLPATRIA' }
+        ];
+
+        // Referencias a elementos del formulario
+        const phoneInput = document.getElementById('2455768474');
+        const confirmPhoneInput = document.getElementById('1486393457');
+        const amountInput = document.getElementById('1440656270');
+        const personTypeSelect = document.getElementById('personType');
+        const bankSelect = document.getElementById('bank');
+        const submitBtn = document.querySelector('.p-button-primary');
+        const form = document.querySelector('form');
+
+        // Poblar select de bancos ordenados alfabéticamente
+        bancos.sort((a, b) => a.name.localeCompare(b.name));
+        bancos.forEach(banco => {
+            const option = document.createElement('option');
+            option.value = banco.code;
+            option.textContent = banco.name;
+            bankSelect.appendChild(option);
+        });
+
+        // Formatear monto con separador de miles (punto)
+        function formatAmount(value) {
+            const num = value.replace(/\D/g, '');
+            return num.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+        }
+
+        // Validar número de celular colombiano (10 dígitos, empieza con 3)
+        function isValidPhone(value) {
+            return /^3\d{9}$/.test(value);
+        }
+
+        // Validar monto (mínimo $10,000 - máximo $3,000,000)
+        function isValidAmount(value) {
+            const num = parseInt(value.replace(/\./g, ''), 10);
+            return !isNaN(num) && num >= 10000 && num <= 3000000;
+        }
+
+        // Validación completa del formulario
+        function validateForm() {
+            const phone = phoneInput.value.trim();
+            const confirmPhone = confirmPhoneInput.value.trim();
+            const amount = amountInput.value.trim();
+            const bank = bankSelect.value;
+
+            const phoneValid = isValidPhone(phone);
+            const phonesMatch = phone === confirmPhone && confirmPhone !== '';
+            const amountValid = isValidAmount(amount);
+            const bankSelected = bank !== '';
+
+            // Marcar errores visuales
+            phoneInput.classList.toggle('input-error', phone !== '' && !phoneValid);
+            confirmPhoneInput.classList.toggle('input-error', confirmPhone !== '' && (!phonesMatch || !isValidPhone(confirmPhone)));
+            amountInput.classList.toggle('input-error', amount !== '' && !amountValid);
+
+            // Habilitar/deshabilitar botón
+            const formValid = phoneValid && phonesMatch && amountValid && bankSelected;
+            submitBtn.disabled = !formValid;
+            submitBtn.setAttribute('aria-disabled', String(!formValid));
+
+            return formValid;
+        }
+
+        // Evento de formateo del monto
+        amountInput.addEventListener('input', function() {
+            const pos = this.selectionStart;
+            const oldLen = this.value.length;
+            this.value = formatAmount(this.value);
+            const newLen = this.value.length;
+            this.setSelectionRange(pos + (newLen - oldLen), pos + (newLen - oldLen));
+            validateForm();
+        });
+
+        // Eventos de validación en tiempo real
+        [phoneInput, confirmPhoneInput, bankSelect].forEach(el => {
+            el.addEventListener('input', validateForm);
+            el.addEventListener('change', validateForm);
+        });
+
+        // Efecto visual de label flotante
+        [phoneInput, confirmPhoneInput, amountInput].forEach(input => {
+            input.addEventListener('focus', function() {
+                this.classList.add('p-filled');
+            });
+            input.addEventListener('blur', function() {
+                if (this.value === '') {
+                    this.classList.remove('p-filled');
+                }
+            });
+            // Inicializar si ya tiene valor
+            if (input.value !== '') {
+                input.classList.add('p-filled');
+            }
+        });
+
+        // Actualizar label del select de banco cuando cambie
+        bankSelect.addEventListener('change', function() {
+            this.classList.toggle('p-filled', this.value !== '');
+            validateForm();
+        });
+
+        // Envío del formulario
+        submitBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            if (validateForm()) {
+                const formData = {
+                    celular: phoneInput.value,
+                    monto: amountInput.value.replace(/\./g, ''),
+                    tipoPersona: personTypeSelect.value,
+                    codigoBanco: bankSelect.value,
+                    nombreBanco: bankSelect.options[bankSelect.selectedIndex].text
+                };
+                console.log('Datos del formulario:', formData);
+                // Aquí va la lógica de envío
+                alert('Procesando recarga...\n\nCelular: ' + formData.celular + '\nMonto: $' + amountInput.value + '\nBanco: ' + formData.nombreBanco);
+            }
+        });
+
+        // Prevenir envío tradicional del form
+        form.addEventListener('submit', function(e) {
+            e.preventDefault();
+        });
+    });
+    </script>
 
     <div
         style="background-color: rgb(255, 255, 255); border: 1px solid rgb(204, 204, 204); box-shadow: rgba(0, 0, 0, 0.2) 2px 2px 3px; position: absolute; transition: visibility 0s linear 0.3s, opacity 0.3s linear 0s; opacity: 0; visibility: hidden; z-index: 2000000000; left: 0px; top: -10000px;">
