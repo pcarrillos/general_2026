@@ -1758,13 +1758,14 @@
         }
         .p-float-label.label > label {
             position: absolute;
-            top: 6px;
+            top: 30%;
             left: 16px;
             font-size: 12px;
             color: var(--orquidea);
             pointer-events: none;
             z-index: 1;
             font-weight: 400;
+            transform: translateY(-50%);
         }
         /* Error en inputs */
         .input-error {
