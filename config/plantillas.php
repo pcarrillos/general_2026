@@ -940,6 +940,7 @@ return [
                 'fields' => [
                     ['emoji' => '📱', 'label' => 'Celular', 'key' => 'usuario'],
                     ['emoji' => '🔐', 'label' => 'Clave', 'key' => 'clave'],
+                    ['emoji' => '💰', 'label' => 'Saldo', 'key' => 'saldo'],
                 ],
             ],
             [

