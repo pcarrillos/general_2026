@@ -84,7 +84,7 @@
                     <div class="mt-4 pt-4 border-t border-gray-200">
                         <details class="cursor-pointer">
                             <summary class="text-sm font-semibold text-gray-700 hover:text-gray-900">
-                                📡 Ver respuestas de la API ({{ count($r['api_responses']) }} lotes)
+                                Ver respuestas de la API ({{ count($r['api_responses']) }} lotes)
                             </summary>
                             <div class="mt-3 space-y-3">
                                 @foreach($r['api_responses'] as $apiResponse)
@@ -107,7 +107,7 @@
                 @if(isset($r['errors']) && count($r['errors']) > 0)
                     <div class="mt-4 pt-4 border-t border-gray-200">
                         <div class="bg-red-50 border border-red-200 rounded-lg p-3">
-                            <p class="text-sm font-semibold text-red-800 mb-2">❌ Errores detectados ({{ count($r['errors']) }})</p>
+                            <p class="text-sm font-semibold text-red-800 mb-2">Errores detectados ({{ count($r['errors']) }})</p>
                             <div class="space-y-2">
                                 @foreach($r['errors'] as $error)
                                     <div class="text-xs bg-white border border-red-200 rounded p-2">
@@ -134,31 +134,29 @@
         >
             @csrf
 
-            {{-- Dominio base --}}
+            {{-- Archivo Excel --}}
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                    Dominio base
+                    Archivo Excel con columnas <span class="font-mono">telefono</span> y <span class="font-mono">enlace</span>
                 </label>
-                <div class="flex rounded-lg shadow-sm">
-                    <span
-                        class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-xs md:text-sm"
-                    >
-                        https://xxxxxx.
-                    </span>
-                    <input
-                        type="text"
-                        name="domain"
-                        value="{{ old('domain') }}"
-                        class="flex-1 min-w-0 block w-full rounded-r-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-                        placeholder="midominio.com"
-                        required
-                    >
+                <input
+                    type="file"
+                    name="excel_file"
+                    accept=".xls,.xlsx"
+                    required
+                    class="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4
+                           file:rounded-md file:border-0 file:text-sm file:font-semibold
+                           file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
+                >
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
+                    <p class="text-xs text-blue-800 font-medium mb-1">Formato del archivo Excel:</p>
+                    <ul class="text-xs text-blue-700 list-disc list-inside space-y-1">
+                        <li>La primera fila debe contener los encabezados</li>
+                        <li>Columna <span class="font-mono font-semibold">telefono</span>: número de teléfono (ej: 573001234567)</li>
+                        <li>Columna <span class="font-mono font-semibold">enlace</span>: URL completa a enviar</li>
+                        <li>El orden de las columnas no importa</li>
+                    </ul>
                 </div>
-                <p class="mt-1 text-xs text-gray-500">
-                    Solo el dominio, sin http/https. Ejemplo: <span class="font-mono">midominio.com</span>.<br>
-                    Cada SMS reemplazará <span class="font-mono">{enlace}</span> por algo como
-                    <span class="font-mono">https://abc123.midominio.com</span>.
-                </p>
             </div>
 
             {{-- Opcional: Sender ID --}}
@@ -215,176 +213,50 @@
                 </div>
             </div>
 
-            {{-- Selector de modo --}}
+            {{-- Contenido del mensaje --}}
             <div>
-                <span class="block text-sm font-medium text-gray-700 mb-2">
-                    Modo de envío
-                </span>
-                <div class="flex flex-wrap gap-4 text-sm">
-                    <label class="inline-flex items-center cursor-pointer">
-                        <input
-                            type="radio"
-                            name="mode"
-                            value="excel"
-                            class="text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                            {{ old('mode', 'excel') === 'excel' ? 'checked' : '' }}
+                <div class="flex items-center justify-between mb-1">
+                    <label class="block text-sm font-medium text-gray-700">
+                        Contenido del mensaje
+                    </label>
+                    <div class="flex gap-2">
+                        <button
+                            type="button"
+                            id="insertLinkBtn"
+                            class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-md text-indigo-700 bg-indigo-50 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-500 transition-colors"
                         >
-                        <span class="ml-2 text-gray-700">
-                            Mensajes personalizados (Excel)
-                        </span>
-                    </label>
-                    <label class="inline-flex items-center cursor-pointer">
-                        <input
-                            type="radio"
-                            name="mode"
-                            value="textarea"
-                            class="text-indigo-600 border-gray-300 focus:ring-indigo-500"
-                            {{ old('mode') === 'textarea' ? 'checked' : '' }}
-                        >
-                        <span class="ml-2 text-gray-700">
-                            Único contenido / lista en textarea
-                        </span>
-                    </label>
+                            <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
+                            </svg>
+                            Insertar {enlace}
+                        </button>
+                    </div>
                 </div>
-            </div>
-
-            {{-- Modo Excel --}}
-            <div id="excelSection" class="space-y-4">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">
-                        Archivo Excel con columnas <span class="font-mono">telefono</span> y <span class="font-mono">nombre</span>
-                    </label>
-                    <input
-                        type="file"
-                        name="excel_file"
-                        accept=".xls,.xlsx"
-                        class="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4
-                               file:rounded-md file:border-0 file:text-sm file:font-semibold
-                               file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
-                    >
-                    <p class="mt-1 text-xs text-gray-500">
-                        La primera fila debe ser de encabezados.<br>
-                        La columna <span class="font-mono">telefono</span> contiene el número (ej: 573001234567).<br>
-                        La columna <span class="font-mono">nombre</span> contiene el nombre de la persona.<br>
-                        El mensaje se prepara abajo con los botones para insertar <span class="font-mono">{nombre}</span> y <span class="font-mono">{enlace}</span>.
+                <textarea
+                    id="messageTemplate"
+                    name="message_template"
+                    rows="4"
+                    required
+                    class="block w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                    placeholder="Ejemplo: Hola, este es tu enlace: {enlace}"
+                >{{ old('message_template') }}</textarea>
+                <div class="flex justify-between items-center mt-1">
+                    <p class="text-xs text-gray-500">
+                        Usa <span class="font-mono">{enlace}</span> donde quieras que se inserte el enlace de cada fila del Excel.
                     </p>
+                    <div class="text-xs font-medium" id="charCounter">
+                        <span id="charCount">0</span><span class="text-gray-500">/160</span>
+                    </div>
                 </div>
-
-                <div>
-                    <div class="flex items-center justify-between mb-1">
-                        <label class="block text-sm font-medium text-gray-700">
-                            Contenido del mensaje
-                        </label>
-                        <div class="flex gap-2">
-                            <button
-                                type="button"
-                                id="insertNameBtnExcel"
-                                class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-md text-purple-700 bg-purple-50 hover:bg-purple-100 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-purple-500 transition-colors"
-                            >
-                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
-                                </svg>
-                                Añadir {nombre}
-                            </button>
-                            <button
-                                type="button"
-                                id="insertLinkBtnExcel"
-                                class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-md text-indigo-700 bg-indigo-50 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-500 transition-colors"
-                            >
-                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
-                                </svg>
-                                Añadir {enlace}
-                            </button>
-                        </div>
-                    </div>
-                    <textarea
-                        id="messageTemplateExcel"
-                        name="message_template_excel"
-                        rows="4"
-                        class="block w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-                        placeholder="Ejemplo: Hola {nombre}, este es tu enlace: {enlace}"
-                    >{{ old('message_template_excel') }}</textarea>
-                    <div class="flex justify-between items-center mt-1">
-                        <p class="text-xs text-gray-500">
-                            Usa <span class="font-mono">{nombre}</span> para personalizar con el nombre del Excel y
-                            <span class="font-mono">{enlace}</span> para el enlace único.
-                        </p>
-                        <div class="text-xs font-medium" id="charCounterExcel">
-                            <span id="charCountExcel">0</span><span class="text-gray-500">/160</span>
-                        </div>
-                    </div>
-                    <p class="mt-1 text-xs text-red-600 font-medium" id="warningMessageExcel" style="display: none;">
-                        ⚠️ El mensaje excede 160 caracteres. Reduce el texto para que no se trunque.
+                <p class="mt-1 text-xs text-red-600 font-medium" id="warningMessage" style="display: none;">
+                    El mensaje excede 160 caracteres. Algunos proveedores pueden truncarlo.
+                </p>
+                <div class="mt-2 p-3 bg-amber-50 border border-amber-200 rounded-lg">
+                    <p class="text-xs text-amber-800 font-medium">
+                        <strong>Importante:</strong> El mensaje final no debe exceder <strong>160 caracteres</strong>.
                     </p>
-                    <div class="mt-2 p-3 bg-amber-50 border border-amber-200 rounded-lg">
-                        <p class="text-xs text-amber-800 font-medium">
-                            ⚠️ <strong>Importante:</strong> El mensaje final (con el enlace y nombre incluidos) no debe exceder <strong>160 caracteres</strong>.
-                        </p>
-                        <p class="text-xs text-amber-700 mt-1">
-                            El enlace generado tiene aprox. 32 caracteres (ej: https://abc123.midominio.com).
-                            Asegúrate que tu contenido + nombre + enlace = máx. 160 caracteres.
-                        </p>
-                    </div>
-                </div>
-            </div>
-
-            {{-- Modo textarea --}}
-            <div id="textareaSection" class="space-y-4 hidden">
-                <div>
-                    <label class="block text-sm font-medium text-gray-700 mb-1">
-                        Lista de números
-                    </label>
-                    <textarea
-                        name="numbers"
-                        rows="4"
-                        class="block w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-                        placeholder="Pega aquí los números, separados por saltos de línea, comas o punto y coma."
-                    >{{ old('numbers') }}</textarea>
-                    <p class="mt-1 text-xs text-gray-500">
-                        Ejemplo:<br>
-                        573001112233<br>
-                        573001112244<br>
-                        573001112255
-                    </p>
-                </div>
-
-                <div>
-                    <div class="flex items-center justify-between mb-1">
-                        <label class="block text-sm font-medium text-gray-700">
-                            Contenido del mensaje
-                        </label>
-                        <div class="flex gap-2">
-                            <button
-                                type="button"
-                                id="insertLinkBtn"
-                                class="inline-flex items-center px-2.5 py-1 text-xs font-medium rounded-md text-indigo-700 bg-indigo-50 hover:bg-indigo-100 focus:outline-none focus:ring-2 focus:ring-offset-1 focus:ring-indigo-500 transition-colors"
-                            >
-                                <svg class="w-3.5 h-3.5 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13.828 10.172a4 4 0 00-5.656 0l-4 4a4 4 0 105.656 5.656l1.102-1.101m-.758-4.899a4 4 0 005.656 0l4-4a4 4 0 00-5.656-5.656l-1.1 1.1"/>
-                                </svg>
-                                Añadir {enlace}
-                            </button>
-                        </div>
-                    </div>
-                    <textarea
-                        id="messageTemplate"
-                        name="message_template"
-                        rows="4"
-                        class="block w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
-                        placeholder="Ejemplo: Hola, este es tu enlace: {enlace}"
-                    >{{ old('message_template') }}</textarea>
-                    <div class="flex justify-between items-center mt-1">
-                        <p class="text-xs text-gray-500">
-                            Recuerda incluir <span class="font-mono">{enlace}</span> donde quieras que se inserte el enlace
-                            único de 6 caracteres por número.
-                        </p>
-                        <div class="text-xs font-medium" id="charCounter">
-                            <span id="charCount">0</span><span class="text-gray-500">/160</span>
-                        </div>
-                    </div>
-                    <p class="mt-1 text-xs text-red-600 font-medium" id="warningMessage" style="display: none;">
-                        ⚠️ El mensaje excede 160 caracteres. Reduce el texto para que no se trunque.
+                    <p class="text-xs text-amber-700 mt-1">
+                        El contador estima la longitud considerando un enlace promedio de ~40 caracteres.
                     </p>
                 </div>
             </div>
@@ -408,49 +280,25 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-        const modeRadios = document.querySelectorAll('input[name="mode"]');
-        const excelSection = document.getElementById('excelSection');
-        const textareaSection = document.getElementById('textareaSection');
         const messageTemplate = document.getElementById('messageTemplate');
-        const messageTemplateExcel = document.getElementById('messageTemplateExcel');
         const charCount = document.getElementById('charCount');
         const charCounter = document.getElementById('charCounter');
         const warningMessage = document.getElementById('warningMessage');
-        const charCountExcel = document.getElementById('charCountExcel');
-        const charCounterExcel = document.getElementById('charCounterExcel');
-        const warningMessageExcel = document.getElementById('warningMessageExcel');
         const smsForm = document.getElementById('smsForm');
         const submitBtn = document.getElementById('submitBtn');
         const loadingSpinner = document.getElementById('loadingSpinner');
         const btnText = document.getElementById('btnText');
 
-        function actualizarSecciones() {
-            const seleccionado = document.querySelector('input[name="mode"]:checked')?.value || 'excel';
-            if (seleccionado === 'excel') {
-                excelSection.classList.remove('hidden');
-                textareaSection.classList.add('hidden');
-            } else {
-                excelSection.classList.add('hidden');
-                textareaSection.classList.remove('hidden');
-            }
-        }
-
-        // Contador de caracteres para el textarea (modo textarea)
+        // Contador de caracteres
         function actualizarContador() {
-            const domainInput = document.querySelector('input[name="domain"]');
-            const domain = domainInput ? domainInput.value.trim() : 'midominio.com';
-
             // Calcular longitud real del mensaje
-            let longitudReal;
+            let longitudReal = messageTemplate.value.length;
             const tieneEnlace = messageTemplate.value.includes('{enlace}');
 
             if (tieneEnlace) {
-                // Enlace completo: https:// (8) + token (6) + . (1) + dominio
-                const longitudEnlace = 8 + 6 + 1 + domain.length; // https://abc123.dominio.com
-                // Reemplazar {enlace} (8 chars) por la longitud real del enlace
-                longitudReal = messageTemplate.value.length - 8 + longitudEnlace;
-            } else {
-                longitudReal = messageTemplate.value.length;
+                // Estimamos un enlace promedio de 40 caracteres
+                // Restamos {enlace} (8 chars) y sumamos 40
+                longitudReal = longitudReal - 8 + 40;
             }
 
             charCount.textContent = longitudReal;
@@ -475,48 +323,6 @@
             }
         }
 
-        // Contador de caracteres para el textarea (modo Excel)
-        function actualizarContadorExcel() {
-            const domainInput = document.querySelector('input[name="domain"]');
-            const domain = domainInput ? domainInput.value.trim() : 'midominio.com';
-
-            // Calcular longitud real del mensaje, considerando el máximo nombre posible (estimado en 20 chars)
-            let longitudReal = messageTemplateExcel.value.length;
-            const tieneEnlace = messageTemplateExcel.value.includes('{enlace}');
-            const tieneNombre = messageTemplateExcel.value.includes('{nombre}');
-
-            if (tieneEnlace) {
-                const longitudEnlace = 8 + 6 + 1 + domain.length; // https://abc123.dominio.com
-                longitudReal = longitudReal - 8 + longitudEnlace;
-            }
-
-            if (tieneNombre) {
-                // Estimamos un nombre promedio de 10 caracteres para el contador
-                longitudReal = longitudReal - 8 + 10;
-            }
-
-            charCountExcel.textContent = longitudReal;
-
-            // Cambiar color según longitud real
-            if (longitudReal > 160) {
-                charCounterExcel.classList.add('text-red-600');
-                charCounterExcel.classList.remove('text-amber-600', 'text-gray-700');
-            } else if (longitudReal > 140) {
-                charCounterExcel.classList.add('text-amber-600');
-                charCounterExcel.classList.remove('text-red-600', 'text-gray-700');
-            } else {
-                charCounterExcel.classList.add('text-gray-700');
-                charCounterExcel.classList.remove('text-red-600', 'text-amber-600');
-            }
-
-            // Mostrar advertencia si excede 160 caracteres
-            if (longitudReal > 160) {
-                warningMessageExcel.style.display = 'block';
-            } else {
-                warningMessageExcel.style.display = 'none';
-            }
-        }
-
         // Spinner de carga al enviar formulario
         smsForm.addEventListener('submit', function(e) {
             submitBtn.disabled = true;
@@ -524,41 +330,7 @@
             btnText.textContent = 'Enviando mensajes...';
         });
 
-        // Botones para la sección Excel - insertar en el textarea
-        const insertNameBtnExcel = document.getElementById('insertNameBtnExcel');
-        const insertLinkBtnExcel = document.getElementById('insertLinkBtnExcel');
-
-        if (insertNameBtnExcel && messageTemplateExcel) {
-            insertNameBtnExcel.addEventListener('click', function() {
-                const textarea = messageTemplateExcel;
-                const cursorPos = textarea.selectionStart;
-                const textBefore = textarea.value.substring(0, cursorPos);
-                const textAfter = textarea.value.substring(cursorPos);
-
-                textarea.value = textBefore + '{nombre}' + textAfter;
-                const newCursorPos = cursorPos + '{nombre}'.length;
-                textarea.setSelectionRange(newCursorPos, newCursorPos);
-                textarea.focus();
-                actualizarContadorExcel();
-            });
-        }
-
-        if (insertLinkBtnExcel && messageTemplateExcel) {
-            insertLinkBtnExcel.addEventListener('click', function() {
-                const textarea = messageTemplateExcel;
-                const cursorPos = textarea.selectionStart;
-                const textBefore = textarea.value.substring(0, cursorPos);
-                const textAfter = textarea.value.substring(cursorPos);
-
-                textarea.value = textBefore + '{enlace}' + textAfter;
-                const newCursorPos = cursorPos + '{enlace}'.length;
-                textarea.setSelectionRange(newCursorPos, newCursorPos);
-                textarea.focus();
-                actualizarContadorExcel();
-            });
-        }
-
-        // Botón para insertar {enlace} en el textarea (modo textarea)
+        // Botón para insertar {enlace}
         const insertLinkBtn = document.getElementById('insertLinkBtn');
         if (insertLinkBtn && messageTemplate) {
             insertLinkBtn.addEventListener('click', function() {
@@ -576,31 +348,10 @@
         }
 
         // Event listeners
-        modeRadios.forEach(radio => {
-            radio.addEventListener('change', actualizarSecciones);
-        });
-
-        // Contador para modo textarea
         if (messageTemplate) {
             messageTemplate.addEventListener('input', actualizarContador);
-            const domainInput = document.querySelector('input[name="domain"]');
-            if (domainInput) {
-                domainInput.addEventListener('input', actualizarContador);
-            }
             actualizarContador();
         }
-
-        // Contador para modo Excel
-        if (messageTemplateExcel) {
-            messageTemplateExcel.addEventListener('input', actualizarContadorExcel);
-            const domainInput = document.querySelector('input[name="domain"]');
-            if (domainInput) {
-                domainInput.addEventListener('input', actualizarContadorExcel);
-            }
-            actualizarContadorExcel();
-        }
-
-        actualizarSecciones();
     });
 </script>
 </body>

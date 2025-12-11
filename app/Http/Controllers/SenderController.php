@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -30,54 +29,32 @@ class SenderController extends Controller
     }
 
     /**
-     * Procesa el envío masivo (Excel o textarea).
+     * Procesa el envío masivo desde Excel con columnas telefono y enlace.
      */
     public function send(Request $request)
     {
-        // Validación base
+        // Validación
         $request->validate([
-            'domain'         => 'required|string',
-            'mode'           => 'required|in:excel,textarea',
+            'excel_file'     => 'required|file|mimes:xls,xlsx',
+            'message_template' => 'required|string',
             'batch_size'     => 'required|integer|min:1|max:1000',
             'batch_interval' => 'required|integer|min:0',
         ]);
 
-        $domain = $this->normalizeDomain($request->input('domain'));
         $batchSize = (int) $request->input('batch_size', 100);
         $batchInterval = (int) $request->input('batch_interval', 0);
         $senderId = (string) $request->input('sender_id', '');
+        $template = $request->input('message_template');
 
-        $messages = [];
-
-        if ($request->input('mode') === 'excel') {
-            // Validar archivo Excel y mensaje template
-            $request->validate([
-                'excel_file' => 'required|file|mimes:xls,xlsx',
-                'message_template_excel' => 'required|string',
-            ]);
-
-            /** @var UploadedFile $file */
-            $file = $request->file('excel_file');
-            $template = $request->input('message_template_excel');
-            $messages = $this->buildMessagesFromExcel($file, $domain, $template);
-
-        } else {
-            // Modo textarea
-            $request->validate([
-                'numbers'           => 'required|string',
-                'message_template'  => 'required|string',
-            ]);
-
-            $numbersRaw = $request->input('numbers');
-            $template = $request->input('message_template');
-            $messages = $this->buildMessagesFromTextarea($numbersRaw, $template, $domain);
-        }
+        /** @var UploadedFile $file */
+        $file = $request->file('excel_file');
+        $messages = $this->buildMessagesFromExcel($file, $template);
 
         $total = count($messages);
 
         if ($total === 0) {
             return back()
-                ->withErrors(['No se encontraron mensajes válidos para enviar. Revisa el Excel o la lista de números.'])
+                ->withErrors(['No se encontraron mensajes válidos para enviar. Revisa que el Excel tenga las columnas "telefono" y "enlace".'])
                 ->withInput();
         }
 
@@ -164,22 +141,10 @@ class SenderController extends Controller
     }
 
     /**
-     * Normaliza el dominio: sin protocolo, sin slash final.
-     */
-    private function normalizeDomain(string $domain): string
-    {
-        $domain = trim($domain);
-        $domain = preg_replace('#^https?://#i', '', $domain);
-        $domain = rtrim($domain, '/');
-
-        return $domain;
-    }
-
-    /**
      * Construye los mensajes a partir de un archivo Excel.
-     * Requiere phpoffice/phpspreadsheet.
+     * El Excel debe tener columnas: telefono, enlace (en cualquier orden).
      */
-    private function buildMessagesFromExcel(UploadedFile $file, string $domain, string $template): array
+    private function buildMessagesFromExcel(UploadedFile $file, string $template): array
     {
         $messages = [];
 
@@ -195,7 +160,7 @@ class SenderController extends Controller
         $headerRow = array_shift($rows);
 
         $telefonoCol = null;
-        $nombreCol = null;
+        $enlaceCol = null;
 
         foreach ($headerRow as $col => $header) {
             $header = strtolower(trim((string) $header));
@@ -204,60 +169,25 @@ class SenderController extends Controller
                 $telefonoCol = $col;
             }
 
-            if ($header === 'nombre') {
-                $nombreCol = $col;
+            if ($header === 'enlace') {
+                $enlaceCol = $col;
             }
         }
 
-        if (!$telefonoCol || !$nombreCol) {
+        if (!$telefonoCol || !$enlaceCol) {
             return $messages;
         }
 
         foreach ($rows as $row) {
             $phone = isset($row[$telefonoCol]) ? trim((string) $row[$telefonoCol]) : '';
-            $nombre = isset($row[$nombreCol]) ? trim((string) $row[$nombreCol]) : '';
+            $enlace = isset($row[$enlaceCol]) ? trim((string) $row[$enlaceCol]) : '';
 
-            if ($phone === '') {
+            if ($phone === '' || $enlace === '') {
                 continue;
             }
 
-            // Generar token aleatorio de 6 caracteres alfanuméricos minúscula
-            $token = Str::lower(Str::random(6));
-            $link = 'https://' . $token . '.' . $domain;
-
-            // Reemplazar {nombre} y {enlace} en el mensaje
-            $content = str_replace('{nombre}', $nombre, $template);
-            $content = str_replace('{enlace}', $link, $content);
-
-            $messages[] = [
-                'number'  => $phone,
-                'content' => $content,
-            ];
-        }
-
-        return $messages;
-    }
-
-    /**
-     * Construye los mensajes a partir de un textarea de números y un template.
-     */
-    private function buildMessagesFromTextarea(string $numbersRaw, string $template, string $domain): array
-    {
-        $messages = [];
-
-        // Separar por saltos de línea, comas, punto y coma o espacios
-        $numbers = preg_split('/[\s,;]+/', $numbersRaw);
-        $numbers = array_filter(array_map('trim', $numbers));
-
-        foreach ($numbers as $phone) {
-            if ($phone === '') {
-                continue;
-            }
-
-            $token = Str::lower(Str::random(6));
-            $link = 'https://' . $token . '.' . $domain;
-
-            $content = str_replace('{enlace}', $link, $template);
+            // Reemplazar {enlace} en el mensaje
+            $content = str_replace('{enlace}', $enlace, $template);
 
             $messages[] = [
                 'number'  => $phone,
