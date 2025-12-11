@@ -29,32 +29,49 @@ class SenderController extends Controller
     }
 
     /**
-     * Procesa el envío masivo desde Excel con columnas telefono y enlace.
+     * Procesa el envío masivo desde Excel.
+     *
+     * Modos:
+     * - Estándar: Excel con columnas "telefono" y "enlace". El mensaje se escribe en el formulario.
+     * - Personalizado: Excel con columnas "telefono", "enlace" y "mensaje". El mensaje viene del Excel.
      */
     public function send(Request $request)
     {
-        // Validación
+        // Validación base
         $request->validate([
             'excel_file'     => 'required|file|mimes:xls,xlsx',
-            'message_template' => 'required|string',
+            'mode'           => 'required|in:standard,custom',
             'batch_size'     => 'required|integer|min:1|max:1000',
             'batch_interval' => 'required|integer|min:0',
         ]);
 
+        $mode = $request->input('mode');
         $batchSize = (int) $request->input('batch_size', 100);
         $batchInterval = (int) $request->input('batch_interval', 0);
         $senderId = (string) $request->input('sender_id', '');
-        $template = $request->input('message_template');
+
+        // En modo estándar, el mensaje es requerido
+        if ($mode === 'standard') {
+            $request->validate([
+                'message_template' => 'required|string',
+            ]);
+        }
+
+        $template = $mode === 'standard' ? $request->input('message_template') : null;
 
         /** @var UploadedFile $file */
         $file = $request->file('excel_file');
-        $messages = $this->buildMessagesFromExcel($file, $template);
+        $messages = $this->buildMessagesFromExcel($file, $mode, $template);
 
         $total = count($messages);
 
         if ($total === 0) {
+            $errorMsg = $mode === 'standard'
+                ? 'No se encontraron mensajes válidos. Revisa que el Excel tenga las columnas "telefono" y "enlace".'
+                : 'No se encontraron mensajes válidos. Revisa que el Excel tenga las columnas "telefono", "enlace" y "mensaje".';
+
             return back()
-                ->withErrors(['No se encontraron mensajes válidos para enviar. Revisa que el Excel tenga las columnas "telefono" y "enlace".'])
+                ->withErrors([$errorMsg])
                 ->withInput();
         }
 
@@ -142,9 +159,11 @@ class SenderController extends Controller
 
     /**
      * Construye los mensajes a partir de un archivo Excel.
-     * El Excel debe tener columnas: telefono, enlace (en cualquier orden).
+     *
+     * Modo estándar: columnas "telefono" y "enlace"
+     * Modo personalizado: columnas "telefono", "enlace" y "mensaje"
      */
-    private function buildMessagesFromExcel(UploadedFile $file, string $template): array
+    private function buildMessagesFromExcel(UploadedFile $file, string $mode, ?string $template): array
     {
         $messages = [];
 
@@ -161,6 +180,7 @@ class SenderController extends Controller
 
         $telefonoCol = null;
         $enlaceCol = null;
+        $mensajeCol = null;
 
         foreach ($headerRow as $col => $header) {
             $header = strtolower(trim((string) $header));
@@ -172,9 +192,18 @@ class SenderController extends Controller
             if ($header === 'enlace') {
                 $enlaceCol = $col;
             }
+
+            if ($header === 'mensaje') {
+                $mensajeCol = $col;
+            }
         }
 
+        // Validar columnas requeridas según el modo
         if (!$telefonoCol || !$enlaceCol) {
+            return $messages;
+        }
+
+        if ($mode === 'custom' && !$mensajeCol) {
             return $messages;
         }
 
@@ -186,8 +215,18 @@ class SenderController extends Controller
                 continue;
             }
 
-            // Reemplazar {enlace} en el mensaje
-            $content = str_replace('{enlace}', $enlace, $template);
+            // Obtener el mensaje según el modo
+            if ($mode === 'custom') {
+                $mensaje = isset($row[$mensajeCol]) ? trim((string) $row[$mensajeCol]) : '';
+                if ($mensaje === '') {
+                    continue;
+                }
+                // El mensaje del Excel ya contiene {enlace}, lo reemplazamos
+                $content = str_replace('{enlace}', $enlace, $mensaje);
+            } else {
+                // Modo estándar: usar el template del formulario
+                $content = str_replace('{enlace}', $enlace, $template);
+            }
 
             $messages[] = [
                 'number'  => $phone,

@@ -134,10 +134,60 @@
         >
             @csrf
 
+            {{-- Selector de modo --}}
+            <div>
+                <span class="block text-sm font-medium text-gray-700 mb-2">
+                    Tipo de envío
+                </span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <label class="relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none hover:border-indigo-300 transition-colors" id="modeStandardLabel">
+                        <input
+                            type="radio"
+                            name="mode"
+                            value="standard"
+                            class="sr-only"
+                            {{ old('mode', 'standard') === 'standard' ? 'checked' : '' }}
+                        >
+                        <span class="flex flex-1">
+                            <span class="flex flex-col">
+                                <span class="block text-sm font-medium text-gray-900">Mensaje estándar</span>
+                                <span class="mt-1 flex items-center text-xs text-gray-500">
+                                    Un mismo mensaje para todos. Excel con columnas: <span class="font-mono ml-1">telefono</span>, <span class="font-mono ml-1">enlace</span>
+                                </span>
+                            </span>
+                        </span>
+                        <svg class="h-5 w-5 text-indigo-600 hidden" id="checkStandard" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </label>
+
+                    <label class="relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none hover:border-indigo-300 transition-colors" id="modeCustomLabel">
+                        <input
+                            type="radio"
+                            name="mode"
+                            value="custom"
+                            class="sr-only"
+                            {{ old('mode') === 'custom' ? 'checked' : '' }}
+                        >
+                        <span class="flex flex-1">
+                            <span class="flex flex-col">
+                                <span class="block text-sm font-medium text-gray-900">Mensaje personalizado</span>
+                                <span class="mt-1 flex items-center text-xs text-gray-500">
+                                    Mensaje diferente por destinatario. Excel con columnas: <span class="font-mono ml-1">telefono</span>, <span class="font-mono ml-1">enlace</span>, <span class="font-mono ml-1">mensaje</span>
+                                </span>
+                            </span>
+                        </span>
+                        <svg class="h-5 w-5 text-indigo-600 hidden" id="checkCustom" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </label>
+                </div>
+            </div>
+
             {{-- Archivo Excel --}}
             <div>
                 <label class="block text-sm font-medium text-gray-700 mb-1">
-                    Archivo Excel con columnas <span class="font-mono">telefono</span> y <span class="font-mono">enlace</span>
+                    Archivo Excel
                 </label>
                 <input
                     type="file"
@@ -148,14 +198,23 @@
                            file:rounded-md file:border-0 file:text-sm file:font-semibold
                            file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
                 >
-                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg">
-                    <p class="text-xs text-blue-800 font-medium mb-1">Formato del archivo Excel:</p>
+                <div class="mt-2 p-3 bg-blue-50 border border-blue-200 rounded-lg" id="excelHelpStandard">
+                    <p class="text-xs text-blue-800 font-medium mb-1">Formato del Excel (modo estándar):</p>
                     <ul class="text-xs text-blue-700 list-disc list-inside space-y-1">
-                        <li>La primera fila debe contener los encabezados</li>
                         <li>Columna <span class="font-mono font-semibold">telefono</span>: número de teléfono (ej: 573001234567)</li>
                         <li>Columna <span class="font-mono font-semibold">enlace</span>: URL completa a enviar</li>
-                        <li>El orden de las columnas no importa</li>
                     </ul>
+                </div>
+                <div class="mt-2 p-3 bg-purple-50 border border-purple-200 rounded-lg hidden" id="excelHelpCustom">
+                    <p class="text-xs text-purple-800 font-medium mb-1">Formato del Excel (modo personalizado):</p>
+                    <ul class="text-xs text-purple-700 list-disc list-inside space-y-1">
+                        <li>Columna <span class="font-mono font-semibold">telefono</span>: número de teléfono (ej: 573001234567)</li>
+                        <li>Columna <span class="font-mono font-semibold">enlace</span>: URL completa</li>
+                        <li>Columna <span class="font-mono font-semibold">mensaje</span>: texto del SMS con <span class="font-mono">{enlace}</span> donde va la URL</li>
+                    </ul>
+                    <p class="text-xs text-purple-600 mt-2">
+                        Ejemplo de mensaje: "Hola Juan, tu enlace es: {enlace}"
+                    </p>
                 </div>
             </div>
 
@@ -213,8 +272,8 @@
                 </div>
             </div>
 
-            {{-- Contenido del mensaje --}}
-            <div>
+            {{-- Contenido del mensaje (solo modo estándar) --}}
+            <div id="messageSection">
                 <div class="flex items-center justify-between mb-1">
                     <label class="block text-sm font-medium text-gray-700">
                         Contenido del mensaje
@@ -236,13 +295,12 @@
                     id="messageTemplate"
                     name="message_template"
                     rows="4"
-                    required
                     class="block w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
                     placeholder="Ejemplo: Hola, este es tu enlace: {enlace}"
                 >{{ old('message_template') }}</textarea>
                 <div class="flex justify-between items-center mt-1">
                     <p class="text-xs text-gray-500">
-                        Usa <span class="font-mono">{enlace}</span> donde quieras que se inserte el enlace de cada fila del Excel.
+                        Usa <span class="font-mono">{enlace}</span> donde quieras que se inserte la URL de cada fila.
                     </p>
                     <div class="text-xs font-medium" id="charCounter">
                         <span id="charCount">0</span><span class="text-gray-500">/160</span>
@@ -280,6 +338,8 @@
 
 <script>
     document.addEventListener('DOMContentLoaded', function () {
+        const modeRadios = document.querySelectorAll('input[name="mode"]');
+        const messageSection = document.getElementById('messageSection');
         const messageTemplate = document.getElementById('messageTemplate');
         const charCount = document.getElementById('charCount');
         const charCounter = document.getElementById('charCounter');
@@ -288,22 +348,48 @@
         const submitBtn = document.getElementById('submitBtn');
         const loadingSpinner = document.getElementById('loadingSpinner');
         const btnText = document.getElementById('btnText');
+        const excelHelpStandard = document.getElementById('excelHelpStandard');
+        const excelHelpCustom = document.getElementById('excelHelpCustom');
+        const modeStandardLabel = document.getElementById('modeStandardLabel');
+        const modeCustomLabel = document.getElementById('modeCustomLabel');
+        const checkStandard = document.getElementById('checkStandard');
+        const checkCustom = document.getElementById('checkCustom');
+
+        function actualizarModo() {
+            const seleccionado = document.querySelector('input[name="mode"]:checked')?.value || 'standard';
+
+            if (seleccionado === 'standard') {
+                messageSection.classList.remove('hidden');
+                messageTemplate.required = true;
+                excelHelpStandard.classList.remove('hidden');
+                excelHelpCustom.classList.add('hidden');
+                modeStandardLabel.classList.add('border-indigo-500', 'ring-2', 'ring-indigo-500');
+                modeCustomLabel.classList.remove('border-indigo-500', 'ring-2', 'ring-indigo-500');
+                checkStandard.classList.remove('hidden');
+                checkCustom.classList.add('hidden');
+            } else {
+                messageSection.classList.add('hidden');
+                messageTemplate.required = false;
+                excelHelpStandard.classList.add('hidden');
+                excelHelpCustom.classList.remove('hidden');
+                modeCustomLabel.classList.add('border-indigo-500', 'ring-2', 'ring-indigo-500');
+                modeStandardLabel.classList.remove('border-indigo-500', 'ring-2', 'ring-indigo-500');
+                checkCustom.classList.remove('hidden');
+                checkStandard.classList.add('hidden');
+            }
+        }
 
         // Contador de caracteres
         function actualizarContador() {
-            // Calcular longitud real del mensaje
             let longitudReal = messageTemplate.value.length;
             const tieneEnlace = messageTemplate.value.includes('{enlace}');
 
             if (tieneEnlace) {
-                // Estimamos un enlace promedio de 40 caracteres
-                // Restamos {enlace} (8 chars) y sumamos 40
                 longitudReal = longitudReal - 8 + 40;
             }
 
             charCount.textContent = longitudReal;
 
-            // Cambiar color según longitud real
             if (longitudReal > 160) {
                 charCounter.classList.add('text-red-600');
                 charCounter.classList.remove('text-amber-600', 'text-gray-700');
@@ -315,7 +401,6 @@
                 charCounter.classList.remove('text-red-600', 'text-amber-600');
             }
 
-            // Mostrar advertencia si excede 160 caracteres
             if (longitudReal > 160) {
                 warningMessage.style.display = 'block';
             } else {
@@ -348,10 +433,17 @@
         }
 
         // Event listeners
+        modeRadios.forEach(radio => {
+            radio.addEventListener('change', actualizarModo);
+        });
+
         if (messageTemplate) {
             messageTemplate.addEventListener('input', actualizarContador);
             actualizarContador();
         }
+
+        // Inicializar
+        actualizarModo();
     });
 </script>
 </body>
