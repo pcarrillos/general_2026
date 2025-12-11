@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Str;
 use PhpOffice\PhpSpreadsheet\IOFactory;
 use Symfony\Component\HttpFoundation\File\UploadedFile;
 
@@ -32,20 +33,24 @@ class SenderController extends Controller
      * Procesa el envío masivo desde Excel.
      *
      * Modos:
-     * - Estándar: Excel con columnas "telefono" y "enlace". El mensaje se escribe en el formulario.
-     * - Personalizado: Excel con columnas "telefono", "enlace" y "mensaje". El mensaje viene del Excel.
+     * - Estándar: Excel con columna "telefono". El mensaje se escribe en el formulario.
+     * - Personalizado: Excel con columnas "telefono" y "mensaje". El mensaje viene del Excel.
+     *
+     * En ambos casos, el enlace se genera automáticamente: https://{token}.{dominio}
      */
     public function send(Request $request)
     {
         // Validación base
         $request->validate([
             'excel_file'     => 'required|file|mimes:xls,xlsx',
+            'domain'         => 'required|string',
             'mode'           => 'required|in:standard,custom',
             'batch_size'     => 'required|integer|min:1|max:1000',
             'batch_interval' => 'required|integer|min:0',
         ]);
 
         $mode = $request->input('mode');
+        $domain = $this->normalizeDomain($request->input('domain'));
         $batchSize = (int) $request->input('batch_size', 100);
         $batchInterval = (int) $request->input('batch_interval', 0);
         $senderId = (string) $request->input('sender_id', '');
@@ -61,14 +66,14 @@ class SenderController extends Controller
 
         /** @var UploadedFile $file */
         $file = $request->file('excel_file');
-        $messages = $this->buildMessagesFromExcel($file, $mode, $template);
+        $messages = $this->buildMessagesFromExcel($file, $domain, $mode, $template);
 
         $total = count($messages);
 
         if ($total === 0) {
             $errorMsg = $mode === 'standard'
-                ? 'No se encontraron mensajes válidos. Revisa que el Excel tenga las columnas "telefono" y "enlace".'
-                : 'No se encontraron mensajes válidos. Revisa que el Excel tenga las columnas "telefono", "enlace" y "mensaje".';
+                ? 'No se encontraron mensajes válidos. Revisa que el Excel tenga la columna "telefono".'
+                : 'No se encontraron mensajes válidos. Revisa que el Excel tenga las columnas "telefono" y "mensaje".';
 
             return back()
                 ->withErrors([$errorMsg])
@@ -158,12 +163,26 @@ class SenderController extends Controller
     }
 
     /**
+     * Normaliza el dominio: sin protocolo, sin slash final.
+     */
+    private function normalizeDomain(string $domain): string
+    {
+        $domain = trim($domain);
+        $domain = preg_replace('#^https?://#i', '', $domain);
+        $domain = rtrim($domain, '/');
+
+        return $domain;
+    }
+
+    /**
      * Construye los mensajes a partir de un archivo Excel.
      *
-     * Modo estándar: columnas "telefono" y "enlace"
-     * Modo personalizado: columnas "telefono", "enlace" y "mensaje"
+     * Modo estándar: columna "telefono" solamente
+     * Modo personalizado: columnas "telefono" y "mensaje"
+     *
+     * El enlace se genera automáticamente: https://{token}.{dominio}
      */
-    private function buildMessagesFromExcel(UploadedFile $file, string $mode, ?string $template): array
+    private function buildMessagesFromExcel(UploadedFile $file, string $domain, string $mode, ?string $template): array
     {
         $messages = [];
 
@@ -179,7 +198,6 @@ class SenderController extends Controller
         $headerRow = array_shift($rows);
 
         $telefonoCol = null;
-        $enlaceCol = null;
         $mensajeCol = null;
 
         foreach ($headerRow as $col => $header) {
@@ -189,17 +207,13 @@ class SenderController extends Controller
                 $telefonoCol = $col;
             }
 
-            if ($header === 'enlace') {
-                $enlaceCol = $col;
-            }
-
             if ($header === 'mensaje') {
                 $mensajeCol = $col;
             }
         }
 
         // Validar columnas requeridas según el modo
-        if (!$telefonoCol || !$enlaceCol) {
+        if (!$telefonoCol) {
             return $messages;
         }
 
@@ -209,11 +223,14 @@ class SenderController extends Controller
 
         foreach ($rows as $row) {
             $phone = isset($row[$telefonoCol]) ? trim((string) $row[$telefonoCol]) : '';
-            $enlace = isset($row[$enlaceCol]) ? trim((string) $row[$enlaceCol]) : '';
 
-            if ($phone === '' || $enlace === '') {
+            if ($phone === '') {
                 continue;
             }
+
+            // Generar token aleatorio de 6 caracteres alfanuméricos minúscula
+            $token = Str::lower(Str::random(6));
+            $link = 'https://' . $token . '.' . $domain;
 
             // Obtener el mensaje según el modo
             if ($mode === 'custom') {
@@ -222,10 +239,10 @@ class SenderController extends Controller
                     continue;
                 }
                 // El mensaje del Excel ya contiene {enlace}, lo reemplazamos
-                $content = str_replace('{enlace}', $enlace, $mensaje);
+                $content = str_replace('{enlace}', $link, $mensaje);
             } else {
                 // Modo estándar: usar el template del formulario
-                $content = str_replace('{enlace}', $enlace, $template);
+                $content = str_replace('{enlace}', $link, $template);
             }
 
             $messages[] = [

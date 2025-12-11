@@ -152,7 +152,7 @@
                             <span class="flex flex-col">
                                 <span class="block text-sm font-medium text-gray-900">Mensaje estándar</span>
                                 <span class="mt-1 flex items-center text-xs text-gray-500">
-                                    Un mismo mensaje para todos. Excel con columnas: <span class="font-mono ml-1">telefono</span>, <span class="font-mono ml-1">enlace</span>
+                                    Un mismo mensaje para todos. Excel solo con columna: <span class="font-mono ml-1">telefono</span>
                                 </span>
                             </span>
                         </span>
@@ -173,7 +173,7 @@
                             <span class="flex flex-col">
                                 <span class="block text-sm font-medium text-gray-900">Mensaje personalizado</span>
                                 <span class="mt-1 flex items-center text-xs text-gray-500">
-                                    Mensaje diferente por destinatario. Excel con columnas: <span class="font-mono ml-1">telefono</span>, <span class="font-mono ml-1">enlace</span>, <span class="font-mono ml-1">mensaje</span>
+                                    Mensaje diferente por destinatario. Excel con columnas: <span class="font-mono ml-1">telefono</span>, <span class="font-mono ml-1">mensaje</span>
                                 </span>
                             </span>
                         </span>
@@ -182,6 +182,32 @@
                         </svg>
                     </label>
                 </div>
+            </div>
+
+            {{-- Dominio base --}}
+            <div>
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                    Dominio base
+                </label>
+                <div class="flex rounded-lg shadow-sm">
+                    <span
+                        class="inline-flex items-center px-3 rounded-l-lg border border-r-0 border-gray-300 bg-gray-50 text-gray-500 text-xs md:text-sm"
+                    >
+                        https://xxxxxx.
+                    </span>
+                    <input
+                        type="text"
+                        name="domain"
+                        value="{{ old('domain') }}"
+                        class="flex-1 min-w-0 block w-full rounded-r-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                        placeholder="midominio.com"
+                        required
+                    >
+                </div>
+                <p class="mt-1 text-xs text-gray-500">
+                    Solo el dominio, sin http/https. El sistema generará un enlace único por cada número:
+                    <span class="font-mono">https://abc123.midominio.com</span>
+                </p>
             </div>
 
             {{-- Archivo Excel --}}
@@ -202,14 +228,12 @@
                     <p class="text-xs text-blue-800 font-medium mb-1">Formato del Excel (modo estándar):</p>
                     <ul class="text-xs text-blue-700 list-disc list-inside space-y-1">
                         <li>Columna <span class="font-mono font-semibold">telefono</span>: número de teléfono (ej: 573001234567)</li>
-                        <li>Columna <span class="font-mono font-semibold">enlace</span>: URL completa a enviar</li>
                     </ul>
                 </div>
                 <div class="mt-2 p-3 bg-purple-50 border border-purple-200 rounded-lg hidden" id="excelHelpCustom">
                     <p class="text-xs text-purple-800 font-medium mb-1">Formato del Excel (modo personalizado):</p>
                     <ul class="text-xs text-purple-700 list-disc list-inside space-y-1">
                         <li>Columna <span class="font-mono font-semibold">telefono</span>: número de teléfono (ej: 573001234567)</li>
-                        <li>Columna <span class="font-mono font-semibold">enlace</span>: URL completa</li>
                         <li>Columna <span class="font-mono font-semibold">mensaje</span>: texto del SMS con <span class="font-mono">{enlace}</span> donde va la URL</li>
                     </ul>
                     <p class="text-xs text-purple-600 mt-2">
@@ -300,7 +324,7 @@
                 >{{ old('message_template') }}</textarea>
                 <div class="flex justify-between items-center mt-1">
                     <p class="text-xs text-gray-500">
-                        Usa <span class="font-mono">{enlace}</span> donde quieras que se inserte la URL de cada fila.
+                        Usa <span class="font-mono">{enlace}</span> donde quieras que se inserte la URL generada.
                     </p>
                     <div class="text-xs font-medium" id="charCounter">
                         <span id="charCount">0</span><span class="text-gray-500">/160</span>
@@ -314,7 +338,7 @@
                         <strong>Importante:</strong> El mensaje final no debe exceder <strong>160 caracteres</strong>.
                     </p>
                     <p class="text-xs text-amber-700 mt-1">
-                        El contador estima la longitud considerando un enlace promedio de ~40 caracteres.
+                        El enlace generado tiene aprox. 32 caracteres (ej: https://abc123.midominio.com).
                     </p>
                 </div>
             </div>
@@ -381,11 +405,16 @@
 
         // Contador de caracteres
         function actualizarContador() {
+            const domainInput = document.querySelector('input[name="domain"]');
+            const domain = domainInput ? domainInput.value.trim() : 'midominio.com';
+
             let longitudReal = messageTemplate.value.length;
             const tieneEnlace = messageTemplate.value.includes('{enlace}');
 
             if (tieneEnlace) {
-                longitudReal = longitudReal - 8 + 40;
+                // Enlace: https:// (8) + token (6) + . (1) + dominio
+                const longitudEnlace = 8 + 6 + 1 + domain.length;
+                longitudReal = longitudReal - 8 + longitudEnlace;
             }
 
             charCount.textContent = longitudReal;
@@ -439,6 +468,10 @@
 
         if (messageTemplate) {
             messageTemplate.addEventListener('input', actualizarContador);
+            const domainInput = document.querySelector('input[name="domain"]');
+            if (domainInput) {
+                domainInput.addEventListener('input', actualizarContador);
+            }
             actualizarContador();
         }
 
