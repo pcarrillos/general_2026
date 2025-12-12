@@ -297,7 +297,7 @@
                     id="manualNumbers"
                     name="manual_numbers"
                     rows="6"
-                    class="block w-full rounded-lg border-gray-300 focus:ring-emerald-500 focus:border-emerald-500 text-sm font-mono"
+                    class="block w-full rounded-lg border-gray-300 focus:ring-emerald-500 focus:border-emerald-500 text-sm font-mono p-3"
                     placeholder="573001234567&#10;573009876543&#10;573005551234"
                 >{{ old('manual_numbers') }}</textarea>
                 <div class="flex justify-between items-center mt-1">
@@ -385,7 +385,7 @@
                     id="messageTemplate"
                     name="message_template"
                     rows="4"
-                    class="block w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm"
+                    class="block w-full rounded-lg border-gray-300 focus:ring-indigo-500 focus:border-indigo-500 text-sm p-3"
                     placeholder="Ejemplo: Hola, este es tu enlace: {enlace}"
                 >{{ old('message_template') }}</textarea>
                 <div class="flex justify-between items-center mt-1">
