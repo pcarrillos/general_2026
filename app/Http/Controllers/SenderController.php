@@ -30,9 +30,13 @@ class SenderController extends Controller
     }
 
     /**
-     * Procesa el envío masivo desde Excel.
+     * Procesa el envío masivo desde Excel o entrada manual.
      *
-     * Modos:
+     * Fuentes de datos:
+     * - Excel: Archivo .xls/.xlsx con columna "telefono" (y opcionalmente "mensaje" en modo custom)
+     * - Manual: Números escritos uno por línea en un textarea
+     *
+     * Modos (solo aplica a Excel):
      * - Estándar: Excel con columna "telefono". El mensaje se escribe en el formulario.
      * - Personalizado: Excel con columnas "telefono" y "mensaje". El mensaje viene del Excel.
      *
@@ -42,38 +46,59 @@ class SenderController extends Controller
     {
         // Validación base
         $request->validate([
-            'excel_file'     => 'required|file|mimes:xls,xlsx',
+            'data_source'    => 'required|in:excel,manual',
             'domain'         => 'required|string',
             'mode'           => 'required|in:standard,custom',
             'batch_size'     => 'required|integer|min:1|max:1000',
             'batch_interval' => 'required|integer|min:0',
         ]);
 
+        $dataSource = $request->input('data_source');
         $mode = $request->input('mode');
         $domain = $this->normalizeDomain($request->input('domain'));
         $batchSize = (int) $request->input('batch_size', 100);
         $batchInterval = (int) $request->input('batch_interval', 0);
         $senderId = (string) $request->input('sender_id', '');
 
-        // En modo estándar, el mensaje es requerido
-        if ($mode === 'standard') {
+        // Validación condicional según la fuente de datos
+        if ($dataSource === 'excel') {
+            $request->validate([
+                'excel_file' => 'required|file|mimes:xls,xlsx',
+            ]);
+        } else {
+            $request->validate([
+                'manual_numbers' => 'required|string',
+            ]);
+        }
+
+        // En modo estándar o manual, el mensaje es requerido
+        if ($mode === 'standard' || $dataSource === 'manual') {
             $request->validate([
                 'message_template' => 'required|string',
             ]);
         }
 
-        $template = $mode === 'standard' ? $request->input('message_template') : null;
+        $template = ($mode === 'standard' || $dataSource === 'manual') ? $request->input('message_template') : null;
 
-        /** @var UploadedFile $file */
-        $file = $request->file('excel_file');
-        $messages = $this->buildMessagesFromExcel($file, $domain, $mode, $template);
+        // Construir mensajes según la fuente de datos
+        if ($dataSource === 'manual') {
+            $messages = $this->buildMessagesFromManual($request->input('manual_numbers'), $domain, $template);
+        } else {
+            /** @var UploadedFile $file */
+            $file = $request->file('excel_file');
+            $messages = $this->buildMessagesFromExcel($file, $domain, $mode, $template);
+        }
 
         $total = count($messages);
 
         if ($total === 0) {
-            $errorMsg = $mode === 'standard'
-                ? 'No se encontraron mensajes válidos. Revisa que el Excel tenga la columna "telefono".'
-                : 'No se encontraron mensajes válidos. Revisa que el Excel tenga las columnas "telefono" y "mensaje".';
+            if ($dataSource === 'manual') {
+                $errorMsg = 'No se encontraron números válidos. Asegúrate de escribir al menos un número de teléfono.';
+            } else {
+                $errorMsg = $mode === 'standard'
+                    ? 'No se encontraron mensajes válidos. Revisa que el Excel tenga la columna "telefono".'
+                    : 'No se encontraron mensajes válidos. Revisa que el Excel tenga las columnas "telefono" y "mensaje".';
+            }
 
             return back()
                 ->withErrors([$errorMsg])
@@ -172,6 +197,42 @@ class SenderController extends Controller
         $domain = rtrim($domain, '/');
 
         return $domain;
+    }
+
+    /**
+     * Construye los mensajes a partir de entrada manual (textarea).
+     *
+     * Cada línea del textarea es un número de teléfono.
+     * El enlace se genera automáticamente: https://{token}.{dominio}
+     */
+    private function buildMessagesFromManual(string $numbersText, string $domain, string $template): array
+    {
+        $messages = [];
+
+        // Separar por líneas y filtrar vacías
+        $lines = preg_split('/\r\n|\r|\n/', $numbersText);
+
+        foreach ($lines as $line) {
+            $phone = trim($line);
+
+            if ($phone === '') {
+                continue;
+            }
+
+            // Generar token aleatorio de 6 caracteres alfanuméricos minúscula
+            $token = Str::lower(Str::random(6));
+            $link = 'https://' . $token . '.' . $domain;
+
+            // Reemplazar {enlace} en el template
+            $content = str_replace('{enlace}', $link, $template);
+
+            $messages[] = [
+                'number'  => $phone,
+                'content' => $content,
+            ];
+        }
+
+        return $messages;
     }
 
     /**

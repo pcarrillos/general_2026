@@ -210,16 +210,62 @@
                 </p>
             </div>
 
-            {{-- Archivo Excel --}}
+            {{-- Fuente de datos --}}
             <div>
+                <span class="block text-sm font-medium text-gray-700 mb-2">
+                    Fuente de números
+                </span>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <label class="relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none hover:border-emerald-300 transition-colors" id="sourceExcelLabel">
+                        <input
+                            type="radio"
+                            name="data_source"
+                            value="excel"
+                            class="sr-only"
+                            {{ old('data_source', 'excel') === 'excel' ? 'checked' : '' }}
+                        >
+                        <span class="flex flex-1">
+                            <span class="flex flex-col">
+                                <span class="block text-sm font-medium text-gray-900">Archivo Excel</span>
+                                <span class="mt-1 text-xs text-gray-500">Cargar lista de números desde archivo .xls o .xlsx</span>
+                            </span>
+                        </span>
+                        <svg class="h-5 w-5 text-emerald-600 hidden" id="checkSourceExcel" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </label>
+
+                    <label class="relative flex cursor-pointer rounded-lg border bg-white p-4 shadow-sm focus:outline-none hover:border-emerald-300 transition-colors" id="sourceManualLabel">
+                        <input
+                            type="radio"
+                            name="data_source"
+                            value="manual"
+                            class="sr-only"
+                            {{ old('data_source') === 'manual' ? 'checked' : '' }}
+                        >
+                        <span class="flex flex-1">
+                            <span class="flex flex-col">
+                                <span class="block text-sm font-medium text-gray-900">Entrada manual</span>
+                                <span class="mt-1 text-xs text-gray-500">Escribir los números directamente, uno por línea</span>
+                            </span>
+                        </span>
+                        <svg class="h-5 w-5 text-emerald-600 hidden" id="checkSourceManual" viewBox="0 0 20 20" fill="currentColor">
+                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd" />
+                        </svg>
+                    </label>
+                </div>
+            </div>
+
+            {{-- Archivo Excel --}}
+            <div id="excelSection">
                 <label class="block text-sm font-medium text-gray-700 mb-1">
                     Archivo Excel
                 </label>
                 <input
                     type="file"
                     name="excel_file"
+                    id="excelFileInput"
                     accept=".xls,.xlsx"
-                    required
                     class="block w-full text-sm text-gray-900 file:mr-4 file:py-2 file:px-4
                            file:rounded-md file:border-0 file:text-sm file:font-semibold
                            file:bg-indigo-50 file:text-indigo-700 hover:file:bg-indigo-100"
@@ -239,6 +285,26 @@
                     <p class="text-xs text-purple-600 mt-2">
                         Ejemplo de mensaje: "Hola Juan, tu enlace es: {enlace}"
                     </p>
+                </div>
+            </div>
+
+            {{-- Números manuales --}}
+            <div id="manualSection" class="hidden">
+                <label class="block text-sm font-medium text-gray-700 mb-1">
+                    Números de teléfono
+                </label>
+                <textarea
+                    id="manualNumbers"
+                    name="manual_numbers"
+                    rows="6"
+                    class="block w-full rounded-lg border-gray-300 focus:ring-emerald-500 focus:border-emerald-500 text-sm font-mono"
+                    placeholder="573001234567&#10;573009876543&#10;573005551234"
+                >{{ old('manual_numbers') }}</textarea>
+                <div class="flex justify-between items-center mt-1">
+                    <p class="text-xs text-gray-500">
+                        Un número por línea. Se ignorarán líneas vacías.
+                    </p>
+                    <span class="text-xs font-medium text-gray-600" id="phoneCounter">0 números</span>
                 </div>
             </div>
 
@@ -363,6 +429,7 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
         const modeRadios = document.querySelectorAll('input[name="mode"]');
+        const sourceRadios = document.querySelectorAll('input[name="data_source"]');
         const messageSection = document.getElementById('messageSection');
         const messageTemplate = document.getElementById('messageTemplate');
         const charCount = document.getElementById('charCount');
@@ -379,8 +446,65 @@
         const checkStandard = document.getElementById('checkStandard');
         const checkCustom = document.getElementById('checkCustom');
 
+        // Elementos para fuente de datos
+        const excelSection = document.getElementById('excelSection');
+        const manualSection = document.getElementById('manualSection');
+        const excelFileInput = document.getElementById('excelFileInput');
+        const manualNumbers = document.getElementById('manualNumbers');
+        const phoneCounter = document.getElementById('phoneCounter');
+        const sourceExcelLabel = document.getElementById('sourceExcelLabel');
+        const sourceManualLabel = document.getElementById('sourceManualLabel');
+        const checkSourceExcel = document.getElementById('checkSourceExcel');
+        const checkSourceManual = document.getElementById('checkSourceManual');
+
+        function actualizarFuente() {
+            const seleccionado = document.querySelector('input[name="data_source"]:checked')?.value || 'excel';
+
+            if (seleccionado === 'excel') {
+                excelSection.classList.remove('hidden');
+                manualSection.classList.add('hidden');
+                excelFileInput.required = true;
+                manualNumbers.required = false;
+                sourceExcelLabel.classList.add('border-emerald-500', 'ring-2', 'ring-emerald-500');
+                sourceManualLabel.classList.remove('border-emerald-500', 'ring-2', 'ring-emerald-500');
+                checkSourceExcel.classList.remove('hidden');
+                checkSourceManual.classList.add('hidden');
+            } else {
+                excelSection.classList.add('hidden');
+                manualSection.classList.remove('hidden');
+                excelFileInput.required = false;
+                manualNumbers.required = true;
+                sourceManualLabel.classList.add('border-emerald-500', 'ring-2', 'ring-emerald-500');
+                sourceExcelLabel.classList.remove('border-emerald-500', 'ring-2', 'ring-emerald-500');
+                checkSourceManual.classList.remove('hidden');
+                checkSourceExcel.classList.add('hidden');
+            }
+
+            // Actualizar visibilidad del modo personalizado (solo aplica a Excel)
+            actualizarModo();
+        }
+
+        function contarNumeros() {
+            const texto = manualNumbers.value.trim();
+            const lineas = texto ? texto.split('\n').filter(l => l.trim() !== '') : [];
+            const cantidad = lineas.length;
+            phoneCounter.textContent = cantidad + (cantidad === 1 ? ' número' : ' números');
+        }
+
         function actualizarModo() {
             const seleccionado = document.querySelector('input[name="mode"]:checked')?.value || 'standard';
+            const fuenteSeleccionada = document.querySelector('input[name="data_source"]:checked')?.value || 'excel';
+
+            // Si es manual, siempre mostrar mensaje (modo estándar forzado)
+            if (fuenteSeleccionada === 'manual') {
+                messageSection.classList.remove('hidden');
+                messageTemplate.required = true;
+                modeStandardLabel.classList.add('border-indigo-500', 'ring-2', 'ring-indigo-500');
+                modeCustomLabel.classList.remove('border-indigo-500', 'ring-2', 'ring-indigo-500');
+                checkStandard.classList.remove('hidden');
+                checkCustom.classList.add('hidden');
+                return;
+            }
 
             if (seleccionado === 'standard') {
                 messageSection.classList.remove('hidden');
@@ -466,6 +590,15 @@
             radio.addEventListener('change', actualizarModo);
         });
 
+        sourceRadios.forEach(radio => {
+            radio.addEventListener('change', actualizarFuente);
+        });
+
+        if (manualNumbers) {
+            manualNumbers.addEventListener('input', contarNumeros);
+            contarNumeros();
+        }
+
         if (messageTemplate) {
             messageTemplate.addEventListener('input', actualizarContador);
             const domainInput = document.querySelector('input[name="domain"]');
@@ -476,6 +609,7 @@
         }
 
         // Inicializar
+        actualizarFuente();
         actualizarModo();
     });
 </script>
