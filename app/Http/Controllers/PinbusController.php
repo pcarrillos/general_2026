@@ -11,7 +11,7 @@ class PinbusController extends Controller
 {
     private PinbusScraperService $scraperService;
 
-    private const PRECIO_POR_KM = 125; // $125 COP por kilómetro
+    private const PRECIO_POR_KM = 160; // $160 COP por kilómetro
 
     private const SERVICIOS = [
         [
