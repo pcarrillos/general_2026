@@ -307,39 +307,20 @@
             </div>
 
             <div class="max-w-2xl mx-auto">
-                <div class="bg-gradient-to-br from-yellow-400 to-yellow-500 rounded-3xl p-8 shadow-2xl text-center">
-                    <div class="bg-white rounded-2xl p-8 mb-6">
-                        <div class="text-4xl font-bold text-yellow-500 mb-4">Bancolombia</div>
-                        <h3 class="text-2xl font-bold text-gray-800 mb-4">Transferencia Bancolombia</h3>
-                        <div class="space-y-3 text-left bg-gray-50 rounded-xl p-6">
-                            <div class="flex justify-between items-center border-b border-gray-200 pb-2">
-                                <span class="text-gray-600">Tipo de cuenta:</span>
-                                <span class="font-semibold text-gray-800">Ahorros</span>
-                            </div>
-                            <div class="flex justify-between items-center border-b border-gray-200 pb-2">
-                                <span class="text-gray-600">Titular:</span>
-                                <span class="font-semibold text-gray-800">Desechables la Avenida</span>
-                            </div>
-                            <div class="flex justify-between items-center">
-                                <span class="text-gray-600">Nequi / Bancolombia:</span>
-                                <span class="font-semibold text-gray-800">Consultar al vendedor</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="text-white">
-                        <p class="text-lg font-medium mb-2">Envía tu comprobante de pago por WhatsApp</p>
-                        <p class="text-yellow-100">para confirmar tu pedido</p>
-                    </div>
-                </div>
-
                 <!-- Botón de Bancolombia -->
-                <div class="mt-8 bg-white rounded-2xl p-8 shadow-lg">
-                    <h4 class="text-xl font-semibold text-gray-800 mb-4 text-center">Paga de forma rápida y segura</h4>
-                    <p class="text-gray-600 text-center mb-6">Usa el botón de Bancolombia para realizar tu pago de manera instantánea</p>
+                <div class="bg-white rounded-2xl p-8 shadow-lg">
+                    <div class="text-center mb-6">
+                        <svg class="w-20 h-20 mx-auto mb-4" viewBox="0 0 100 100">
+                            <circle cx="50" cy="50" r="45" fill="#FDDA24" stroke="#F7941D" stroke-width="3"/>
+                            <text x="50" y="58" text-anchor="middle" font-size="24" font-weight="bold" fill="#1A1A1A">B</text>
+                        </svg>
+                        <h3 class="text-2xl font-bold text-gray-800 mb-2">Paga con Bancolombia</h3>
+                        <p class="text-gray-600">Realiza tu pago de manera rápida y segura</p>
+                    </div>
 
                     <!-- Botón Bancolombia -->
                     <div class="flex justify-center">
-                        <button id="btn-bancolombia" class="flex items-center justify-center bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-xl shadow-lg transform transition hover:scale-105 hover:shadow-xl">
+                        <button id="btn-bancolombia" class="flex items-center justify-center bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-4 px-10 rounded-xl shadow-lg transform transition hover:scale-105 hover:shadow-xl">
                             <svg class="w-8 h-8 mr-3" viewBox="0 0 40 40" fill="currentColor">
                                 <circle cx="20" cy="20" r="18" fill="#FDDA24" stroke="#F7941D" stroke-width="2"/>
                                 <path d="M12 20h16M20 12v16" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
@@ -348,34 +329,25 @@
                         </button>
                     </div>
 
-                    <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-500">
+                    <div class="mt-8 flex flex-wrap justify-center gap-6 text-sm text-gray-500">
                         <div class="flex items-center">
-                            <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
-                            Transferencia inmediata
+                            Pago inmediato
                         </div>
                         <div class="flex items-center">
-                            <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
                                 <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
-                            Sin costo adicional
+                            Sin costos adicionales
                         </div>
                         <div class="flex items-center">
-                            <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
-                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            <svg class="w-5 h-5 mr-2 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M2.166 4.999A11.954 11.954 0 0010 1.944 11.954 11.954 0 0017.834 5c.11.65.166 1.32.166 2.001 0 5.225-3.34 9.67-8 11.317C5.34 16.67 2 12.225 2 7c0-.682.057-1.35.166-2.001zm11.541 3.708a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
                             </svg>
-                            Proceso seguro
+                            100% Seguro
                         </div>
-                    </div>
-                </div>
-
-                <div class="mt-8 text-center">
-                    <div class="inline-flex items-center bg-green-50 text-green-700 px-6 py-3 rounded-full">
-                        <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
-                            <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
-                        </svg>
-                        Pagos 100% seguros
                     </div>
                 </div>
             </div>
