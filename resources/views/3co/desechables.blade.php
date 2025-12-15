@@ -332,6 +332,44 @@
                     </div>
                 </div>
 
+                <!-- Botón de Bancolombia -->
+                <div class="mt-8 bg-white rounded-2xl p-8 shadow-lg">
+                    <h4 class="text-xl font-semibold text-gray-800 mb-4 text-center">Paga de forma rápida y segura</h4>
+                    <p class="text-gray-600 text-center mb-6">Usa el botón de Bancolombia para realizar tu pago de manera instantánea</p>
+
+                    <!-- Botón Bancolombia -->
+                    <div class="flex justify-center">
+                        <button id="btn-bancolombia" class="flex items-center justify-center bg-gradient-to-r from-yellow-400 to-yellow-500 hover:from-yellow-500 hover:to-yellow-600 text-gray-900 font-bold py-4 px-8 rounded-xl shadow-lg transform transition hover:scale-105 hover:shadow-xl">
+                            <svg class="w-8 h-8 mr-3" viewBox="0 0 40 40" fill="currentColor">
+                                <circle cx="20" cy="20" r="18" fill="#FDDA24" stroke="#F7941D" stroke-width="2"/>
+                                <path d="M12 20h16M20 12v16" stroke="#1A1A1A" stroke-width="3" stroke-linecap="round"/>
+                            </svg>
+                            <span class="text-lg">Pagar con Bancolombia</span>
+                        </button>
+                    </div>
+
+                    <div class="mt-6 flex flex-wrap justify-center gap-4 text-sm text-gray-500">
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            Transferencia inmediata
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            Sin costo adicional
+                        </div>
+                        <div class="flex items-center">
+                            <svg class="w-4 h-4 mr-1 text-green-500" fill="currentColor" viewBox="0 0 20 20">
+                                <path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zm3.707-9.293a1 1 0 00-1.414-1.414L9 10.586 7.707 9.293a1 1 0 00-1.414 1.414l2 2a1 1 0 001.414 0l4-4z" clip-rule="evenodd"/>
+                            </svg>
+                            Proceso seguro
+                        </div>
+                    </div>
+                </div>
+
                 <div class="mt-8 text-center">
                     <div class="inline-flex items-center bg-green-50 text-green-700 px-6 py-3 rounded-full">
                         <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 20 20">
