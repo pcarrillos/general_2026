@@ -25,8 +25,11 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <span class="text-2xl font-bold text-red-700">Desechables</span>
-                    <span class="text-2xl font-light text-orange-600 ml-1">la Avenida</span>
+                    <img src="/3co/assets/logo-avenida.jpg" alt="ARQUI Distribuciones" class="h-12 w-auto mr-2">
+                    <div class="hidden sm:block">
+                        <span class="text-xl font-bold text-red-700">Desechables</span>
+                        <span class="text-xl font-light text-orange-600 ml-1">la Avenida</span>
+                    </div>
                 </div>
                 <div class="hidden md:flex space-x-8">
                     <a href="#inicio" class="nav-link text-gray-700 hover:text-red-600 transition">Inicio</a>
@@ -419,10 +422,13 @@
     <footer class="bg-gray-950 py-8">
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
-                <div class="text-center md:text-left mb-4 md:mb-0">
-                    <span class="text-xl font-bold text-red-500">Desechables</span>
-                    <span class="text-xl font-light text-orange-400 ml-1">la Avenida</span>
-                    <p class="text-gray-500 text-sm mt-1">Bello, Antioquia - Colombia</p>
+                <div class="flex items-center text-center md:text-left mb-4 md:mb-0">
+                    <img src="/3co/assets/logo-avenida.jpg" alt="ARQUI Distribuciones" class="h-14 w-auto mr-3 rounded-lg">
+                    <div>
+                        <span class="text-xl font-bold text-red-500">Desechables</span>
+                        <span class="text-xl font-light text-orange-400 ml-1">la Avenida</span>
+                        <p class="text-gray-500 text-sm mt-1">Bello, Antioquia - Colombia</p>
+                    </div>
                 </div>
                 <div class="flex space-x-4">
                     <a href="https://www.facebook.com/arquidistribucionessas/" target="_blank" class="bg-gray-800 p-3 rounded-full hover:bg-red-600 transition">
