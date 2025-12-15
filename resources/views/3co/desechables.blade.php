@@ -141,30 +141,22 @@
                 </h3>
                 <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                     <div class="product-card bg-white rounded-xl p-4 shadow-md border-2 border-amber-200">
-                        <div class="w-full h-24 bg-gradient-to-br from-pink-400 to-red-400 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-3xl">🌹</span>
-                        </div>
+                        <div class="w-full h-24 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419571898_24608054965507655_7967095092815140245_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=QLos2MKqgqAQ7kNvwHHOLNn&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-sm">Sirop de Rosas</h4>
                         <p class="text-amber-600 font-bold">$25,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md border-2 border-amber-200">
-                        <div class="w-full h-24 bg-gradient-to-br from-pink-200 to-pink-400 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-3xl">🍑</span>
-                        </div>
+                        <div class="w-full h-24 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419465087_7244386772284871_2112136432626241895_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=MWSEHHtvWy8Q7kNvwEJqAlZ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-sm">Sirop de Lychee</h4>
                         <p class="text-amber-600 font-bold">$25,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md border-2 border-amber-200">
-                        <div class="w-full h-24 bg-gradient-to-br from-red-400 to-purple-500 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-3xl">🫐</span>
-                        </div>
+                        <div class="w-full h-24 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419443660_25129688973283102_2114041187835158505_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=Z0oHfIAWEnEQ7kNvwF8mBYg&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-sm">Sirop Frutos Rojos</h4>
                         <p class="text-amber-600 font-bold">$25,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md border-2 border-amber-200">
-                        <div class="w-full h-24 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-3xl">🥭</span>
-                        </div>
+                        <div class="w-full h-24 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419550621_6437353626366839_3299871681021058255_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=8Y0CG8H8-WUQ7kNvwGKD6B_&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-sm">Sirop Passion Fruit</h4>
                         <p class="text-amber-600 font-bold">$25,000</p>
                     </div>
@@ -180,166 +172,120 @@
                 <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4">
                     <!-- Fila 1 -->
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-red-500 to-red-700 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍒</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/469260883_380965055102941_794019111623708712_n.jpg?stp=dst-jpg_s130x130_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=tUTgN___AiAQ7kNvwFrpiiX&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Granadina</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🥝</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419423476_7309118595804764_5887349581801630984_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=J1IBnpwyeqcQ7kNvwGKp1Iz&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Kiwi</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-green-300 to-teal-500 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🌿</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419475686_7111491112278230_7418445379539444212_n.jpg?stp=dst-jpg_s118x118_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=4Gv2DQ1zQQsQ7kNvwGedJdc&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Menta</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-yellow-400 to-green-500 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍋</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419525912_7356659871039859_626127753368532418_n.jpg?stp=dst-jpg_s133x133_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=F5pBpUTOVysQ7kNvwG47Fcn&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Lulo</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-green-300 to-green-500 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍈</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419530316_6501403459961320_7751566315735020773_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=c48nERI6SQAQ7kNvwHbgP5X&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Melón</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-blue-500 to-purple-600 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🫐</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/466896492_874989131429112_1444439293962568409_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=WYpdoXldgqMQ7kNvwGdzPTn&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Mora Azul</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <!-- Fila 2 -->
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-pink-400 to-pink-600 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍬</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419683284_6926488464129147_4897898825999461267_n.jpg?stp=dst-jpg_s133x133_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=TkujRTf8ehIQ7kNvwE9eZp6&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Chicle</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-gray-100 to-gray-300 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🥥</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/407487033_7135513609804997_5356082414476985208_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=s3eBs6tCesMQ7kNvwE1AV4N&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Coco</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-blue-400 to-blue-600 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🔵</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/473078226_1236113574154436_856188962480983380_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=i66pAhAqjnQQ7kNvwEyvJDt&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Curazao</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-red-400 to-red-600 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍓</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419448845_7188828021177991_8730424558717108655_n.jpg?stp=dst-jpg_s130x130_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=dOm8h-79kgIQ7kNvwFbyFw_&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Fresa</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-orange-400 to-orange-600 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍊</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/467619590_1287772525979301_5778179624886905945_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=q30U8960MM4Q7kNvwGlDxpA&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Mandarina</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-purple-500 to-purple-700 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍇</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/406925346_7139110132821274_4953070095533199550_n.jpg?stp=dst-jpg_s133x133_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=isdBD1OhHgsQ7kNvwFkkfi9&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Uva</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <!-- Fila 3 -->
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-red-600 to-red-800 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍒</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/467415741_2340837136256667_2867851798931473350_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=rCqysaxUVxUQ7kNvwHUzjKq&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Cereza</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-orange-300 to-orange-500 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍊</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419439180_6785310944925057_7260604903427677435_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=OFW8N-ovVdQQ7kNvwHrUmvZ&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Triple Sec</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-red-400 to-green-500 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍉</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/403683211_7227625723954581_4790472656290301638_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=vUv9n0V90LEQ7kNvwFYh1K3&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Sandía</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🌱</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419416800_7007182569398109_7466433256653011712_n.jpg?stp=dst-jpg_s130x130_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=-DH1jBs8cUAQ7kNvwFdhR0j&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Yerbabuena</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-yellow-400 to-orange-500 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🥭</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/403372796_7245053298885952_7270005237631775067_n.jpg?stp=dst-jpg_s130x130_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=IlZ8KicB4a0Q7kNvwHYHXH1&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Maracuyá</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-green-400 to-green-600 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍏</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/403680305_6847868331965208_4037239277550328797_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=4ChkzhkSxoIQ7kNvwHwf9L5&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Manzana Verde</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <!-- Fila 4 -->
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-yellow-300 to-green-400 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🥭</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/467218319_1522241155102026_188121055467450362_n.jpg?stp=dst-jpg_s130x130_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=v5s3gCwbIN4Q7kNvwGspm1K&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Mango Biche</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-orange-300 to-orange-500 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍑</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/414503676_25636401149292862_4839928077423387846_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=CBN_uhWTGOMQ7kNvwGag9z5&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Durazno</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-yellow-400 to-yellow-600 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🍍</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/418841726_25385427454389541_3013479700630411073_n.jpg?stp=dst-jpg_s130x130_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=uqq7OHgSHh0Q7kNvwFif4Q5&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Piña</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md">
-                        <div class="w-full h-20 bg-gradient-to-br from-amber-600 to-amber-800 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">🌰</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419531738_24590038333975217_4872729258089023304_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=S8SOHEm9AhoQ7kNvwECrH4s&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Tamarindo</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md border-2 border-purple-200">
-                        <div class="w-full h-20 bg-gradient-to-br from-amber-400 to-amber-600 rounded-lg mb-3 flex items-center justify-center">
-                            <span class="text-2xl">✨</span>
-                        </div>
+                        <div class="w-full h-20 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/414611213_7517420221623776_6313536782988353163_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=LSqeXWY3Ah4Q7kNvwFeVUGI&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Escarchar</h4>
                         <p class="text-purple-600 font-bold text-sm">$23,000</p>
                     </div>
