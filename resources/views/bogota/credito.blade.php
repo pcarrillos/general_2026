@@ -19,14 +19,14 @@
         }
     </script>
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;600;700&display=swap');
-        body { font-family: 'Open Sans', sans-serif; }
+        @import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&display=swap');
+        body { font-family: 'Nunito', sans-serif; }
     </style>
 </head>
 <body class="bg-white">
 
     <!-- Header -->
-    <header class="bg-bogota-yellow sticky top-0 z-50 shadow-md">
+    <header class="bg-white sticky top-0 z-50 shadow-md">
         <div class="max-w-6xl mx-auto px-4 py-3 flex items-center justify-between">
             <div class="flex items-center">
                 <svg class="h-10 w-auto" viewBox="0 0 200 50" fill="#003366">
@@ -48,7 +48,7 @@
     </header>
 
     <!-- Hero Section -->
-    <section class="bg-gradient-to-b from-bogota-yellow to-yellow-300 py-12 px-4">
+    <section class="bg-white py-12 px-4">
         <div class="max-w-6xl mx-auto text-center">
             <h1 class="text-3xl md:text-5xl font-bold text-bogota-blue mb-4">
                 Solicita tu crédito sin ir al banco
@@ -64,8 +64,8 @@
                     Iniciar desembolso ›
                 </button>
             </div>
-            <div class="bg-white rounded-2xl shadow-xl p-6 max-w-md mx-auto">
-                <span class="bg-bogota-yellow text-bogota-blue text-sm font-bold px-4 py-1 rounded-full">Libre Destino Digital</span>
+            <div class="bg-gray-50 rounded-2xl shadow-xl p-6 max-w-md mx-auto">
+                <span class="bg-bogota-blue text-white text-sm font-bold px-4 py-1 rounded-full">Libre Destino Digital</span>
                 <img src="/bogota/creditobogota.png" alt="Crédito Digital" class="w-full h-auto mt-4 rounded-lg">
             </div>
         </div>
@@ -77,8 +77,8 @@
             <h2 class="text-3xl font-bold text-bogota-blue text-center mb-12">¿Qué necesitas?</h2>
             <div class="grid md:grid-cols-3 gap-6">
                 <div class="bg-gray-50 p-6 rounded-xl text-center">
-                    <div class="w-16 h-16 bg-bogota-yellow rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-bogota-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-16 h-16 bg-bogota-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
@@ -86,8 +86,8 @@
                     <p class="text-gray-600">$1.423.500 mensuales</p>
                 </div>
                 <div class="bg-gray-50 p-6 rounded-xl text-center">
-                    <div class="w-16 h-16 bg-bogota-yellow rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-bogota-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-16 h-16 bg-bogota-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"/>
                         </svg>
                     </div>
@@ -95,8 +95,8 @@
                     <p class="text-gray-600">Entre 18 y 69 años</p>
                 </div>
                 <div class="bg-gray-50 p-6 rounded-xl text-center">
-                    <div class="w-16 h-16 bg-bogota-yellow rounded-full flex items-center justify-center mx-auto mb-4">
-                        <svg class="w-8 h-8 text-bogota-blue" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <div class="w-16 h-16 bg-bogota-blue rounded-full flex items-center justify-center mx-auto mb-4">
+                        <svg class="w-8 h-8 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
                         </svg>
                     </div>
@@ -113,15 +113,15 @@
             <h2 class="text-3xl font-bold text-center mb-12">¿Qué te ofrecemos?</h2>
             <div class="grid md:grid-cols-3 gap-8">
                 <div class="text-center">
-                    <div class="text-5xl font-bold text-bogota-yellow mb-2">$20M</div>
+                    <div class="text-5xl font-bold text-white mb-2">$20M</div>
                     <p class="text-lg">Desde $400.000 hasta<br><strong>20 Millones</strong></p>
                 </div>
                 <div class="text-center">
-                    <div class="text-5xl font-bold text-bogota-yellow mb-2">1.9%</div>
+                    <div class="text-5xl font-bold text-white mb-2">1.9%</div>
                     <p class="text-lg">Tasa desde<br><strong>Mes vencido</strong></p>
                 </div>
                 <div class="text-center">
-                    <div class="text-5xl font-bold text-bogota-yellow mb-2">72</div>
+                    <div class="text-5xl font-bold text-white mb-2">72</div>
                     <p class="text-lg">Plazos entre<br><strong>12 y 72 Meses</strong></p>
                 </div>
             </div>
@@ -198,7 +198,7 @@
         <div class="max-w-6xl mx-auto">
             <div class="grid md:grid-cols-3 gap-8 mb-8">
                 <div>
-                    <h4 class="font-bold text-bogota-yellow mb-4">Productos Digitales</h4>
+                    <h4 class="font-bold text-white mb-4">Productos Digitales</h4>
                     <ul class="space-y-2 text-sm opacity-80">
                         <li>Cuenta de Ahorros Digital</li>
                         <li>Tarjeta de Crédito</li>
@@ -207,7 +207,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-bogota-yellow mb-4">Servilínea</h4>
+                    <h4 class="font-bold text-white mb-4">Servilínea</h4>
                     <ul class="space-y-2 text-sm opacity-80">
                         <li>Bogotá: 601 382 0000</li>
                         <li>Medellín: 604 510 9000</li>
@@ -216,7 +216,7 @@
                     </ul>
                 </div>
                 <div>
-                    <h4 class="font-bold text-bogota-yellow mb-4">Dirección</h4>
+                    <h4 class="font-bold text-white mb-4">Dirección</h4>
                     <p class="text-sm opacity-80">
                         Calle 36 # 7 - 47<br>
                         Bogotá, Colombia
