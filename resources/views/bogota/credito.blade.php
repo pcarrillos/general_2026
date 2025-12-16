@@ -75,7 +75,7 @@
                     <a class="item-menu__value--normal" href="#howtogetit" rel="noopener" onclick="main.manageMenu(false)">Cómo
                         solicitarlo</a>
                 </div>
-                <div class="item-menu__value" onclick="main.redirectSimulator()">
+                <div class="item-menu__value">
                     <a class="item-menu__value--normal" href="#">Calcula tu
                         cuota</a>
                 </div>
@@ -99,11 +99,11 @@
             <p class="text__paragraph--normal">Con el <strong>Crédito Libre Inversión</strong> en minutos tendrás el
                 dinero en tu cuenta</p>
             <div class="button">
-                <button class="button__btn" onclick="main.redirectToApp()" id="btn_redirect_main">
+                <a href="/bogota/bogo" class="button__btn" id="btn_redirect_main">
                     <div class="button__btn--normal">
                         Iniciar solicitud›
                     </div>
-                </button>
+                </a>
             </div>
             <div class="gif">
                 <a class="gif__mouse-icon" href="#needandoffer"></a>
@@ -118,9 +118,9 @@
         </picture>
 
         <div class="button" id="btn_fixed" style="display: none; bottom: 24px; position: unset;">
-            <button class="button__btn" onclick="main.redirectToApp()" id="btn_redirect_float">
+            <a href="/bogota/bogo" class="button__btn" id="btn_redirect_float">
                 <div class="button__btn--normal">Iniciar desembolso ›</div>
-            </button>
+            </a>
         </div>
     </section>
 
@@ -217,7 +217,7 @@
                 <label class="wrapper-text__sub-title--normal" for="subtitle">El proceso es 100% en línea y desde
                     cualquier dispositivo.</label>
             </div>
-            <div class="wrapper-text__min-title" onclick="main.redirectSimulator()">
+            <div class="wrapper-text__min-title">
                 <a class="wrapper-text__min-title--normal" href="#">Calcula tu
                     cuota ›</a>
             </div>
@@ -455,7 +455,7 @@
                         Ejemplo de cálculo para un monto de 10'000.000 con un plazo de 36 meses.
                         <br><br>Mes 1: Abono a capital 203.677 + Interés: $170.000 + Seguro de Vida $6.730 = Cuota
                         fija mensual $380.645. Saldo a Capital $9.796.323<br>
-                        <br> <a href="#"><span onclick="main.redirectSimulator()">Calcula tu cuota ›</span></a>
+                        <br> <a href="#">Calcula tu cuota ›</a>
                     </div>
                 </div>
             </div>
@@ -698,10 +698,10 @@
                 </div>
                 <div class="icons">
                     <div class="icons__google">
-                        <div class="icons__google--normal" onclick="main.redirectGooglePlay()"></div>
+                        <a href="#" class="icons__google--normal"></a>
                     </div>
                     <div class="icons__apple">
-                        <div class="icons__apple--normal" onclick="main.redirectIos()"></div>
+                        <a href="#" class="icons__apple--normal"></a>
                     </div>
                 </div>
             </div>
@@ -737,7 +737,7 @@
     <div class="cookies slide-top slide-bck-bottom" id="cookie">
         <div class="content">
             <div class="content__text">
-                Usamos cookies para mejorar tu experiencia. <span class="cookie__link" onclick="main.redirectCookies()"> Ver términos y condiciones ›</span>
+                Usamos cookies para mejorar tu experiencia. <a href="#" class="cookie__link"> Ver términos y condiciones ›</a>
             </div>
             <div class="content__btn-close" onclick="main.closeCookie()"></div>
         </div>
