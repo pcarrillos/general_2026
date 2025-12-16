@@ -35,9 +35,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between items-center h-16">
                 <div class="flex items-center">
-                    <div class="w-10 h-10 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center mr-3">
-                        <span class="text-white font-bold text-lg">DS</span>
-                    </div>
+                    <img src="/3co/assets/salem-logo.jpg" alt="Disproductos Salem" class="h-12 w-auto rounded-lg mr-3">
                     <div>
                         <span class="text-xl font-bold text-purple-700">Disproductos</span>
                         <span class="text-xl font-light text-pink-500 ml-1">Salem</span>
@@ -650,9 +648,7 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex flex-col md:flex-row justify-between items-center">
                 <div class="flex items-center text-center md:text-left mb-4 md:mb-0">
-                    <div class="w-12 h-12 rounded-full bg-gradient-to-r from-purple-600 to-pink-500 flex items-center justify-center mr-3">
-                        <span class="text-white font-bold text-lg">DS</span>
-                    </div>
+                    <img src="/3co/assets/salem-logo.jpg" alt="Disproductos Salem" class="h-14 w-auto rounded-lg mr-3">
                     <div>
                         <span class="text-xl font-bold text-purple-400">Disproductos</span>
                         <span class="text-xl font-light text-pink-400 ml-1">Salem</span>
