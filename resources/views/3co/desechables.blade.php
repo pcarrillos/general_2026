@@ -702,9 +702,9 @@
             <!-- Cupón de descuento -->
             <div class="border-t border-gray-200 pt-4 mb-4">
                 <label class="block text-sm font-medium text-gray-700 mb-2">¿Tienes un cupón?</label>
-                <div class="flex space-x-2">
-                    <input type="text" id="coupon-input" placeholder="Ingresa tu cupón" class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent uppercase">
-                    <button onclick="aplicarCupon()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">Aplicar</button>
+                <div class="flex flex-col space-y-2">
+                    <input type="text" id="coupon-input" placeholder="Ingresa tu cupón" class="w-full border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent uppercase">
+                    <button onclick="aplicarCupon()" class="w-full bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">Aplicar cupón</button>
                 </div>
                 <div id="coupon-message" class="mt-2 text-sm hidden"></div>
             </div>
