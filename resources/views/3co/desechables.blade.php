@@ -112,7 +112,7 @@
                     </p>
                     <div class="grid grid-cols-2 gap-6 mt-8">
                         <div class="text-center p-4 bg-purple-50 rounded-lg">
-                            <span class="text-3xl font-bold text-purple-700">27+</span>
+                            <span class="text-3xl font-bold text-purple-700">37+</span>
                             <p class="text-gray-600">Sabores</p>
                         </div>
                         <div class="text-center p-4 bg-pink-50 rounded-lg">
@@ -426,6 +426,160 @@
                             <button onclick="updateQty('escarchar', -1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">-</button>
                             <span id="qty-escarchar" class="font-semibold text-gray-800 text-xs">0</span>
                             <button onclick="updateQty('escarchar', 1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">+</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Granizados Mixies Colombia -->
+            <div class="mt-12">
+                <h3 class="text-2xl font-bold text-gray-800 mb-2 flex items-center">
+                    <span class="bg-gradient-to-r from-cyan-500 to-blue-500 text-white px-3 py-1 rounded-full text-sm mr-3">GRANIZADOS</span>
+                    Bases para Granizados - Mixies Colombia
+                </h3>
+                <p class="text-gray-600 mb-6">Mezclas en polvo listas para preparar granizados en máquina. Rinde 18 granizados de 9 oz por kg.</p>
+
+                <!-- Granizados Premium - $46,650 -->
+                <div class="mb-6">
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                        <span class="bg-amber-500 text-white px-2 py-0.5 rounded text-xs mr-2">PREMIUM</span>
+                        Línea Premium - $46,650 COP/kg
+                    </h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <div class="product-card bg-white rounded-xl p-4 shadow-md border-2 border-amber-200" data-product="gra-cafe" data-name="Granizado Café (1kg)" data-price="46650">
+                            <div class="w-full h-24 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=300&fit=crop');"></div>
+                            <h4 class="font-semibold text-gray-800 text-sm">Café</h4>
+                            <p class="text-xs text-gray-500 mb-1">SKU: GRA-CAF | 4L agua</p>
+                            <p class="text-amber-600 font-bold">$46,650</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <button onclick="updateQty('gra-cafe', -1)" class="qty-btn w-8 h-8 rounded-full border-2 border-purple-600 text-purple-600 font-bold flex items-center justify-center">-</button>
+                                <span id="qty-gra-cafe" class="font-semibold text-gray-800">0</span>
+                                <button onclick="updateQty('gra-cafe', 1)" class="qty-btn w-8 h-8 rounded-full border-2 border-purple-600 text-purple-600 font-bold flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                        <div class="product-card bg-white rounded-xl p-4 shadow-md border-2 border-amber-200" data-product="gra-pina-colada" data-name="Granizado Piña Colada (1kg)" data-price="46650">
+                            <div class="w-full h-24 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1587883012610-e3df17d41270?w=400&h=300&fit=crop');"></div>
+                            <h4 class="font-semibold text-gray-800 text-sm">Piña Colada</h4>
+                            <p class="text-xs text-gray-500 mb-1">SKU: GRA-PICOL | 4L agua</p>
+                            <p class="text-amber-600 font-bold">$46,650</p>
+                            <div class="flex items-center justify-between mt-2">
+                                <button onclick="updateQty('gra-pina-colada', -1)" class="qty-btn w-8 h-8 rounded-full border-2 border-purple-600 text-purple-600 font-bold flex items-center justify-center">-</button>
+                                <span id="qty-gra-pina-colada" class="font-semibold text-gray-800">0</span>
+                                <button onclick="updateQty('gra-pina-colada', 1)" class="qty-btn w-8 h-8 rounded-full border-2 border-purple-600 text-purple-600 font-bold flex items-center justify-center">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Granizados Clásicos - $31,100 -->
+                <div>
+                    <h4 class="text-lg font-semibold text-gray-700 mb-3 flex items-center">
+                        <span class="bg-cyan-500 text-white px-2 py-0.5 rounded text-xs mr-2">CLÁSICA</span>
+                        Línea Clásica - $31,100 COP/kg
+                    </h4>
+                    <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
+                        <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-mora-azul" data-name="Granizado Mora Azul (1kg)" data-price="31100">
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1498557850523-fd3d118b962e?w=300&h=200&fit=crop');"></div>
+                            <h4 class="font-semibold text-gray-800 text-xs">Mora Azul (Blueberry)</h4>
+                            <p class="text-xs text-gray-500">SKU: GRA-MOAZ | 5.8L agua</p>
+                            <p class="text-cyan-600 font-bold text-sm">$31,100</p>
+                            <div class="flex items-center justify-between mt-1">
+                                <button onclick="updateQty('gra-mora-azul', -1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">-</button>
+                                <span id="qty-gra-mora-azul" class="font-semibold text-gray-800 text-xs">0</span>
+                                <button onclick="updateQty('gra-mora-azul', 1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">+</button>
+                            </div>
+                        </div>
+                        <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-cereza" data-name="Granizado Cereza (1kg)" data-price="31100">
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1520236060906-9c5ed525b025?w=300&h=200&fit=crop');"></div>
+                            <h4 class="font-semibold text-gray-800 text-xs">Cereza</h4>
+                            <p class="text-xs text-gray-500">SKU: GRA-CER | 5.5L agua</p>
+                            <p class="text-cyan-600 font-bold text-sm">$31,100</p>
+                            <div class="flex items-center justify-between mt-1">
+                                <button onclick="updateQty('gra-cereza', -1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">-</button>
+                                <span id="qty-gra-cereza" class="font-semibold text-gray-800 text-xs">0</span>
+                                <button onclick="updateQty('gra-cereza', 1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">+</button>
+                            </div>
+                        </div>
+                        <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-chicle" data-name="Granizado Chicle (1kg)" data-price="31100">
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop');"></div>
+                            <h4 class="font-semibold text-gray-800 text-xs">Chicle (Bubble Gum)</h4>
+                            <p class="text-xs text-gray-500">SKU: GRA-CHI | 5.5L agua</p>
+                            <p class="text-cyan-600 font-bold text-sm">$31,100</p>
+                            <div class="flex items-center justify-between mt-1">
+                                <button onclick="updateQty('gra-chicle', -1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">-</button>
+                                <span id="qty-gra-chicle" class="font-semibold text-gray-800 text-xs">0</span>
+                                <button onclick="updateQty('gra-chicle', 1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">+</button>
+                            </div>
+                        </div>
+                        <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-mango-biche" data-name="Granizado Mango Biche (1kg)" data-price="31100">
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1553279768-865429fa0078?w=300&h=200&fit=crop');"></div>
+                            <h4 class="font-semibold text-gray-800 text-xs">Mango Biche</h4>
+                            <p class="text-xs text-gray-500">SKU: GRA-MABI | 5.5L agua</p>
+                            <p class="text-cyan-600 font-bold text-sm">$31,100</p>
+                            <div class="flex items-center justify-between mt-1">
+                                <button onclick="updateQty('gra-mango-biche', -1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">-</button>
+                                <span id="qty-gra-mango-biche" class="font-semibold text-gray-800 text-xs">0</span>
+                                <button onclick="updateQty('gra-mango-biche', 1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">+</button>
+                            </div>
+                        </div>
+                        <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-sal-limon" data-name="Granizado Sal Limón (1kg)" data-price="31100">
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1590502593747-42a996133562?w=300&h=200&fit=crop');"></div>
+                            <h4 class="font-semibold text-gray-800 text-xs">Sal Limón</h4>
+                            <p class="text-xs text-gray-500">SKU: GRA-SALIM | 5.5L agua</p>
+                            <p class="text-cyan-600 font-bold text-sm">$31,100</p>
+                            <div class="flex items-center justify-between mt-1">
+                                <button onclick="updateQty('gra-sal-limon', -1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">-</button>
+                                <span id="qty-gra-sal-limon" class="font-semibold text-gray-800 text-xs">0</span>
+                                <button onclick="updateQty('gra-sal-limon', 1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">+</button>
+                            </div>
+                        </div>
+                        <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-maracuya" data-name="Granizado Maracuyá (1kg)" data-price="31100">
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=300&h=200&fit=crop');"></div>
+                            <h4 class="font-semibold text-gray-800 text-xs">Maracuyá</h4>
+                            <p class="text-xs text-gray-500">SKU: GRA-MAR | 5.5L agua</p>
+                            <p class="text-cyan-600 font-bold text-sm">$31,100</p>
+                            <div class="flex items-center justify-between mt-1">
+                                <button onclick="updateQty('gra-maracuya', -1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">-</button>
+                                <span id="qty-gra-maracuya" class="font-semibold text-gray-800 text-xs">0</span>
+                                <button onclick="updateQty('gra-maracuya', 1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">+</button>
+                            </div>
+                        </div>
+                        <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-bombon" data-name="Granizado Bombón (1kg)" data-price="31100">
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300&h=200&fit=crop');"></div>
+                            <h4 class="font-semibold text-gray-800 text-xs">Bombón (Bom Bom)</h4>
+                            <p class="text-xs text-gray-500">5.5L agua</p>
+                            <p class="text-cyan-600 font-bold text-sm">$31,100</p>
+                            <div class="flex items-center justify-between mt-1">
+                                <button onclick="updateQty('gra-bombon', -1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">-</button>
+                                <span id="qty-gra-bombon" class="font-semibold text-gray-800 text-xs">0</span>
+                                <button onclick="updateQty('gra-bombon', 1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">+</button>
+                            </div>
+                        </div>
+                        <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-mandarina" data-name="Granizado Mandarina (1kg)" data-price="31100">
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1509391618207-32f1fa13c1d2?w=300&h=200&fit=crop');"></div>
+                            <h4 class="font-semibold text-gray-800 text-xs">Mandarina</h4>
+                            <p class="text-xs text-gray-500">SKU: GRA-MAN | 5.5L agua</p>
+                            <p class="text-cyan-600 font-bold text-sm">$31,100</p>
+                            <div class="flex items-center justify-between mt-1">
+                                <button onclick="updateQty('gra-mandarina', -1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">-</button>
+                                <span id="qty-gra-mandarina" class="font-semibold text-gray-800 text-xs">0</span>
+                                <button onclick="updateQty('gra-mandarina', 1)" class="qty-btn w-6 h-6 rounded-full border border-purple-600 text-purple-600 text-xs font-bold">+</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Info de Mixies -->
+                <div class="mt-6 bg-gradient-to-r from-cyan-50 to-blue-50 rounded-xl p-4 border border-cyan-200">
+                    <div class="flex items-start space-x-3">
+                        <div class="bg-cyan-500 text-white p-2 rounded-lg">
+                            <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                            </svg>
+                        </div>
+                        <div>
+                            <h5 class="font-semibold text-gray-800 text-sm">Información Mixies Colombia</h5>
+                            <p class="text-gray-600 text-xs mt-1">Cada bolsa de 1kg rinde aproximadamente 18 granizados de 9oz. Vida útil: 6 meses. Conservar en lugar fresco. Compatible con frutas, toppings y licores.</p>
                         </div>
                     </div>
                 </div>
