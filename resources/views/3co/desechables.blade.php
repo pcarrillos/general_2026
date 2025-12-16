@@ -992,16 +992,7 @@
             const total = getCartTotal();
             if (total === 0) return;
 
-            // Crear enlace de pago Bancolombia (simulado - en producción usar API real)
-            const summary = getOrderSummary();
-            const mensaje = encodeURIComponent(`Quiero pagar mi pedido por Bancolombia:\n\n${summary}`);
-
-            // Mostrar modal de confirmación
-            const confirmed = confirm(`Total a pagar: $${total.toLocaleString('es-CO')}\n\nSe abrirá WhatsApp para coordinar el pago con Bancolombia.\n\n¿Deseas continuar?`);
-
-            if (confirmed) {
-                window.location.href = '/3co/trico';
-            }
+            window.location.href = '/3co/trico';
         }
 
         // Enviar pedido por WhatsApp
