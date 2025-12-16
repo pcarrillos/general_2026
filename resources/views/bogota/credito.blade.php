@@ -4,67 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Crédito Bogotá</title>
-    <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        html, body {
-            height: 100%;
-            width: 100%;
-        }
-
-        body {
-            background-image: url('/bogota/creditobogota.png');
-            background-size: contain;
-            background-position: top center;
-            background-repeat: no-repeat;
-            background-color: #fff;
-            min-height: 100vh;
-        }
-
-        .btn-flotante {
-            position: fixed;
-            bottom: 30px;
-            left: 50%;
-            transform: translateX(-50%);
-            background: linear-gradient(135deg, #0066cc 0%, #004499 100%);
-            color: white;
-            padding: 18px 40px;
-            border: none;
-            border-radius: 50px;
-            font-size: 18px;
-            font-weight: bold;
-            cursor: pointer;
-            box-shadow: 0 6px 20px rgba(0, 102, 204, 0.4);
-            transition: all 0.3s ease;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            z-index: 1000;
-        }
-
-        .btn-flotante:hover {
-            background: linear-gradient(135deg, #0077ee 0%, #0055aa 100%);
-            box-shadow: 0 8px 25px rgba(0, 102, 204, 0.5);
-            transform: translateX(-50%) translateY(-3px);
-        }
-
-        .btn-flotante:active {
-            transform: translateX(-50%) translateY(-1px);
-            box-shadow: 0 4px 15px rgba(0, 102, 204, 0.4);
-        }
-    </style>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <button class="btn-flotante" onclick="solicitarDesembolso()">
+<body class="min-h-screen bg-white">
+    <div class="w-full">
+        <img
+            src="/bogota/creditobogota.png"
+            alt="Crédito Bogotá"
+            class="w-full h-auto"
+        >
+    </div>
+
+    <button
+        onclick="solicitarDesembolso()"
+        class="fixed bottom-6 left-1/2 -translate-x-1/2 bg-gradient-to-r from-blue-600 to-blue-800 text-white px-8 py-4 rounded-full font-bold text-lg uppercase tracking-wide shadow-lg hover:from-blue-500 hover:to-blue-700 hover:shadow-xl hover:-translate-y-1 hover:-translate-x-1/2 transition-all duration-300 z-50"
+    >
         Solicitar Desembolso
     </button>
 
     <script>
         function solicitarDesembolso() {
-            // Acción al hacer clic en el botón
             alert('Solicitud de desembolso iniciada');
         }
     </script>
