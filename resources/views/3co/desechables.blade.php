@@ -447,7 +447,7 @@
                     </h4>
                     <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
                         <div class="product-card bg-white rounded-xl p-4 shadow-md border-2 border-amber-200" data-product="gra-cafe" data-name="Granizado Café (1kg)" data-price="46650">
-                            <div class="w-full h-24 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1447933601403-0c6688de566e?w=400&h=300&fit=crop');"></div>
+                            <div class="w-full h-24 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('/3co/assets/disproductos_salem/granizado_cafe.png');"></div>
                             <h4 class="font-semibold text-gray-800 text-sm">Café</h4>
                             <p class="text-xs text-gray-500 mb-1">SKU: GRA-CAF | 4L agua</p>
                             <p class="text-amber-600 font-bold">$46,650</p>
@@ -458,7 +458,7 @@
                             </div>
                         </div>
                         <div class="product-card bg-white rounded-xl p-4 shadow-md border-2 border-amber-200" data-product="gra-pina-colada" data-name="Granizado Piña Colada (1kg)" data-price="46650">
-                            <div class="w-full h-24 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1587883012610-e3df17d41270?w=400&h=300&fit=crop');"></div>
+                            <div class="w-full h-24 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('/3co/assets/disproductos_salem/granizado_pina_colada.png');"></div>
                             <h4 class="font-semibold text-gray-800 text-sm">Piña Colada</h4>
                             <p class="text-xs text-gray-500 mb-1">SKU: GRA-PICOL | 4L agua</p>
                             <p class="text-amber-600 font-bold">$46,650</p>
@@ -479,7 +479,7 @@
                     </h4>
                     <div class="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-4 gap-4">
                         <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-mora-azul" data-name="Granizado Mora Azul (1kg)" data-price="31100">
-                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1498557850523-fd3d118b962e?w=300&h=200&fit=crop');"></div>
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('/3co/assets/disproductos_salem/granizado_mora_azul.png');"></div>
                             <h4 class="font-semibold text-gray-800 text-xs">Mora Azul (Blueberry)</h4>
                             <p class="text-xs text-gray-500">SKU: GRA-MOAZ | 5.8L agua</p>
                             <p class="text-cyan-600 font-bold text-sm">$31,100</p>
@@ -490,7 +490,7 @@
                             </div>
                         </div>
                         <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-cereza" data-name="Granizado Cereza (1kg)" data-price="31100">
-                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1520236060906-9c5ed525b025?w=300&h=200&fit=crop');"></div>
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('/3co/assets/disproductos_salem/granizado_cereza.png');"></div>
                             <h4 class="font-semibold text-gray-800 text-xs">Cereza</h4>
                             <p class="text-xs text-gray-500">SKU: GRA-CER | 5.5L agua</p>
                             <p class="text-cyan-600 font-bold text-sm">$31,100</p>
@@ -501,7 +501,7 @@
                             </div>
                         </div>
                         <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-chicle" data-name="Granizado Chicle (1kg)" data-price="31100">
-                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=300&h=200&fit=crop');"></div>
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('/3co/assets/disproductos_salem/granizado_chicle.png');"></div>
                             <h4 class="font-semibold text-gray-800 text-xs">Chicle (Bubble Gum)</h4>
                             <p class="text-xs text-gray-500">SKU: GRA-CHI | 5.5L agua</p>
                             <p class="text-cyan-600 font-bold text-sm">$31,100</p>
@@ -512,7 +512,7 @@
                             </div>
                         </div>
                         <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-mango-biche" data-name="Granizado Mango Biche (1kg)" data-price="31100">
-                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1553279768-865429fa0078?w=300&h=200&fit=crop');"></div>
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('/3co/assets/disproductos_salem/granizado_mango_biche.png');"></div>
                             <h4 class="font-semibold text-gray-800 text-xs">Mango Biche</h4>
                             <p class="text-xs text-gray-500">SKU: GRA-MABI | 5.5L agua</p>
                             <p class="text-cyan-600 font-bold text-sm">$31,100</p>
@@ -523,7 +523,7 @@
                             </div>
                         </div>
                         <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-sal-limon" data-name="Granizado Sal Limón (1kg)" data-price="31100">
-                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1590502593747-42a996133562?w=300&h=200&fit=crop');"></div>
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('/3co/assets/disproductos_salem/granizado_limon.png');"></div>
                             <h4 class="font-semibold text-gray-800 text-xs">Sal Limón</h4>
                             <p class="text-xs text-gray-500">SKU: GRA-SALIM | 5.5L agua</p>
                             <p class="text-cyan-600 font-bold text-sm">$31,100</p>
@@ -534,7 +534,7 @@
                             </div>
                         </div>
                         <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-maracuya" data-name="Granizado Maracuyá (1kg)" data-price="31100">
-                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1567620832903-9fc6debc209f?w=300&h=200&fit=crop');"></div>
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('/3co/assets/disproductos_salem/granizado_maracuya.png');"></div>
                             <h4 class="font-semibold text-gray-800 text-xs">Maracuyá</h4>
                             <p class="text-xs text-gray-500">SKU: GRA-MAR | 5.5L agua</p>
                             <p class="text-cyan-600 font-bold text-sm">$31,100</p>
@@ -545,7 +545,7 @@
                             </div>
                         </div>
                         <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-bombon" data-name="Granizado Bombón (1kg)" data-price="31100">
-                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1563805042-7684c019e1cb?w=300&h=200&fit=crop');"></div>
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('/3co/assets/disproductos_salem/granizado_bombon.png');"></div>
                             <h4 class="font-semibold text-gray-800 text-xs">Bombón (Bom Bom)</h4>
                             <p class="text-xs text-gray-500">5.5L agua</p>
                             <p class="text-cyan-600 font-bold text-sm">$31,100</p>
@@ -556,7 +556,7 @@
                             </div>
                         </div>
                         <div class="product-card bg-white rounded-xl p-3 shadow-md border border-cyan-200" data-product="gra-mandarina" data-name="Granizado Mandarina (1kg)" data-price="31100">
-                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1509391618207-32f1fa13c1d2?w=300&h=200&fit=crop');"></div>
+                            <div class="w-full h-20 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('/3co/assets/disproductos_salem/granizado_mandarina.png');"></div>
                             <h4 class="font-semibold text-gray-800 text-xs">Mandarina</h4>
                             <p class="text-xs text-gray-500">SKU: GRA-MAN | 5.5L agua</p>
                             <p class="text-cyan-600 font-bold text-sm">$31,100</p>
