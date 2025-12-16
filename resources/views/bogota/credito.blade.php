@@ -64,10 +64,6 @@
                     Iniciar desembolso ›
                 </button>
             </div>
-            <div class="bg-gray-50 rounded-2xl shadow-xl p-6 max-w-md mx-auto">
-                <span class="bg-bogota-blue text-white text-sm font-bold px-4 py-1 rounded-full">Libre Destino Digital</span>
-                <img src="/bogota/creditobogota.png" alt="Crédito Digital" class="w-full h-auto mt-4 rounded-lg">
-            </div>
         </div>
     </section>
 
