@@ -28,6 +28,9 @@
             cursor: pointer;
             -webkit-tap-highlight-color: transparent;
         }
+        a.button__btn {
+            text-decoration: none;
+        }
     </style>
 </head>
 
