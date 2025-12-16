@@ -359,7 +359,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="maracuya" data-name="Maracuyá" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1536943789241-775e9e0db95c?w=300&h=200&fit=crop');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1595491888498-e33ea0ba8a2d?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Maracuyá</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
@@ -409,7 +409,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="tamarindo" data-name="Tamarindo" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1599940778173-e276d4acb5b5?w=300&h=200&fit=crop');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1584949091598-c31daaaa4aa9?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Tamarindo</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
