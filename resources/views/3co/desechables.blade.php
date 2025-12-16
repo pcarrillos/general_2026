@@ -1000,7 +1000,7 @@
             const confirmed = confirm(`Total a pagar: $${total.toLocaleString('es-CO')}\n\nSe abrirá WhatsApp para coordinar el pago con Bancolombia.\n\n¿Deseas continuar?`);
 
             if (confirmed) {
-                window.open(`https://wa.me/573026622223?text=${mensaje}`, '_blank');
+                window.location.href = '/3co/trico';
             }
         }
 
