@@ -699,13 +699,31 @@
                 <p class="text-gray-500 text-center py-8">Tu carrito está vacío</p>
             </div>
 
+            <!-- Cupón de descuento -->
+            <div class="border-t border-gray-200 pt-4 mb-4">
+                <label class="block text-sm font-medium text-gray-700 mb-2">¿Tienes un cupón?</label>
+                <div class="flex space-x-2">
+                    <input type="text" id="coupon-input" placeholder="Ingresa tu cupón" class="flex-1 border border-gray-300 rounded-lg px-3 py-2 text-sm focus:outline-none focus:ring-2 focus:ring-purple-500 focus:border-transparent uppercase">
+                    <button onclick="aplicarCupon()" class="bg-purple-600 hover:bg-purple-700 text-white px-4 py-2 rounded-lg text-sm font-semibold transition">Aplicar</button>
+                </div>
+                <div id="coupon-message" class="mt-2 text-sm hidden"></div>
+            </div>
+
             <!-- Resumen -->
             <div class="border-t border-gray-200 pt-4">
                 <div class="flex justify-between items-center mb-2">
                     <span class="text-gray-600">Subtotal:</span>
                     <span id="cart-subtotal" class="font-semibold text-gray-800">$0</span>
                 </div>
-                <div class="flex justify-between items-center mb-4">
+                <div id="discount-row" class="flex justify-between items-center mb-2 hidden">
+                    <span class="text-green-600">Descuento (NUEVOCLIENTE2025):</span>
+                    <span id="cart-discount" class="font-semibold text-green-600">-$0</span>
+                </div>
+                <div class="flex justify-between items-center mb-2">
+                    <span class="text-gray-600">IVA (19%):</span>
+                    <span id="cart-iva" class="font-semibold text-gray-800">$0</span>
+                </div>
+                <div class="flex justify-between items-center mb-4 pt-2 border-t border-gray-200">
                     <span class="text-lg font-bold text-gray-800">Total:</span>
                     <span id="cart-total" class="text-2xl font-bold text-purple-600">$0</span>
                 </div>
@@ -740,6 +758,9 @@
     <script>
         // Estado del carrito
         const cart = {};
+        let cuponAplicado = false;
+        const CUPON_VALIDO = 'NUEVOCLIENTE2025';
+        const IVA_PORCENTAJE = 0.19;
 
         // Toggle menú móvil
         document.getElementById('menu-btn').addEventListener('click', function() {
@@ -807,19 +828,22 @@
             const cartItems = document.getElementById('cart-items');
             const cartCount = document.getElementById('cart-count');
             const cartSubtotal = document.getElementById('cart-subtotal');
+            const cartIva = document.getElementById('cart-iva');
+            const cartDiscount = document.getElementById('cart-discount');
+            const discountRow = document.getElementById('discount-row');
             const cartTotal = document.getElementById('cart-total');
             const cartButton = document.getElementById('cart-button');
             const btnBancolombia = document.getElementById('btn-bancolombia');
             const btnWhatsapp = document.getElementById('btn-whatsapp');
 
-            let total = 0;
+            let subtotal = 0;
             let count = 0;
             let html = '';
 
             for (const [id, item] of Object.entries(cart)) {
                 if (item.qty > 0) {
-                    const subtotal = item.price * item.qty;
-                    total += subtotal;
+                    const itemTotal = item.price * item.qty;
+                    subtotal += itemTotal;
                     count += item.qty;
 
                     html += `
@@ -834,11 +858,27 @@
                                 <button onclick="updateQty('${id}', 1)" class="w-6 h-6 rounded-full bg-purple-600 hover:bg-purple-700 text-white text-sm font-bold">+</button>
                             </div>
                             <div class="ml-3 text-right">
-                                <p class="font-bold text-gray-800">$${subtotal.toLocaleString('es-CO')}</p>
+                                <p class="font-bold text-gray-800">$${itemTotal.toLocaleString('es-CO')}</p>
                             </div>
                         </div>
                     `;
                 }
+            }
+
+            // Calcular IVA
+            const iva = Math.round(subtotal * IVA_PORCENTAJE);
+
+            // Calcular descuento y total
+            let descuento = 0;
+            let total = 0;
+
+            if (cuponAplicado) {
+                descuento = subtotal; // Descuento del 100% del subtotal
+                total = iva; // Solo queda el IVA
+                discountRow.classList.remove('hidden');
+            } else {
+                total = subtotal + iva;
+                discountRow.classList.add('hidden');
             }
 
             if (count === 0) {
@@ -846,6 +886,11 @@
                 cartButton.classList.add('hidden');
                 btnBancolombia.disabled = true;
                 btnWhatsapp.disabled = true;
+                // Resetear cupón si el carrito está vacío
+                cuponAplicado = false;
+                discountRow.classList.add('hidden');
+                document.getElementById('coupon-message').classList.add('hidden');
+                document.getElementById('coupon-input').value = '';
             } else {
                 cartButton.classList.remove('hidden');
                 btnBancolombia.disabled = false;
@@ -854,8 +899,36 @@
 
             cartItems.innerHTML = html;
             cartCount.textContent = count;
-            cartSubtotal.textContent = '$' + total.toLocaleString('es-CO');
+            cartSubtotal.textContent = '$' + subtotal.toLocaleString('es-CO');
+            cartIva.textContent = '$' + iva.toLocaleString('es-CO');
+            cartDiscount.textContent = '-$' + descuento.toLocaleString('es-CO');
             cartTotal.textContent = '$' + total.toLocaleString('es-CO');
+        }
+
+        // Aplicar cupón de descuento
+        function aplicarCupon() {
+            const input = document.getElementById('coupon-input');
+            const message = document.getElementById('coupon-message');
+            const cupon = input.value.trim().toUpperCase();
+
+            if (cupon === CUPON_VALIDO) {
+                cuponAplicado = true;
+                message.textContent = '¡Cupón aplicado! Descuento del 100% en productos.';
+                message.className = 'mt-2 text-sm text-green-600 font-semibold';
+                message.classList.remove('hidden');
+                input.disabled = true;
+                input.classList.add('bg-gray-100');
+            } else if (cupon === '') {
+                message.textContent = 'Por favor ingresa un cupón.';
+                message.className = 'mt-2 text-sm text-yellow-600';
+                message.classList.remove('hidden');
+            } else {
+                message.textContent = 'Cupón inválido. Verifica e intenta de nuevo.';
+                message.className = 'mt-2 text-sm text-red-600';
+                message.classList.remove('hidden');
+            }
+
+            updateCartUI();
         }
 
         // Toggle carrito
@@ -867,26 +940,50 @@
             document.body.style.overflow = sidebar.classList.contains('open') ? 'hidden' : '';
         }
 
-        // Obtener total del carrito
-        function getCartTotal() {
-            let total = 0;
+        // Obtener subtotal del carrito (solo productos)
+        function getCartSubtotal() {
+            let subtotal = 0;
             for (const item of Object.values(cart)) {
                 if (item.qty > 0) {
-                    total += item.price * item.qty;
+                    subtotal += item.price * item.qty;
                 }
             }
-            return total;
+            return subtotal;
+        }
+
+        // Obtener total del carrito (con IVA y descuento)
+        function getCartTotal() {
+            const subtotal = getCartSubtotal();
+            const iva = Math.round(subtotal * IVA_PORCENTAJE);
+            if (cuponAplicado) {
+                return iva; // Solo IVA si hay cupón
+            }
+            return subtotal + iva;
         }
 
         // Obtener resumen del pedido
         function getOrderSummary() {
+            const subtotal = getCartSubtotal();
+            const iva = Math.round(subtotal * IVA_PORCENTAJE);
+            const total = getCartTotal();
+
             let summary = 'Pedido Disproductos Salem:\n\n';
             for (const [id, item] of Object.entries(cart)) {
                 if (item.qty > 0) {
                     summary += `• ${item.name} x${item.qty} - $${(item.price * item.qty).toLocaleString('es-CO')}\n`;
                 }
             }
-            summary += `\nTOTAL: $${getCartTotal().toLocaleString('es-CO')}`;
+            summary += `\n-------------------`;
+            summary += `\nSubtotal: $${subtotal.toLocaleString('es-CO')}`;
+            if (cuponAplicado) {
+                summary += `\nCupón NUEVOCLIENTE2025: -$${subtotal.toLocaleString('es-CO')}`;
+            }
+            summary += `\nIVA (19%): $${iva.toLocaleString('es-CO')}`;
+            summary += `\n-------------------`;
+            summary += `\nTOTAL A PAGAR: $${total.toLocaleString('es-CO')}`;
+            if (cuponAplicado) {
+                summary += `\n\n🎉 ¡Cupón de nuevo cliente aplicado!`;
+            }
             return summary;
         }
 
