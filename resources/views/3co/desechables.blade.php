@@ -361,7 +361,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="maracuya" data-name="Maracuyá" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/403372796_7245053298885952_7270005237631775067_n.jpg?stp=dst-jpg_s130x130_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=IlZ8KicB4a0Q7kNvwHYHXH1&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1604495772376-9657f79e718e?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Maracuyá</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
@@ -371,7 +371,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="manzana-verde" data-name="Manzana Verde" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/403680305_6847868331965208_4037239277550328797_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=4ChkzhkSxoIQ7kNvwHwf9L5&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1590005354167-6da97870c757?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Manzana Verde</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
@@ -381,7 +381,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="mango-biche" data-name="Mango Biche" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/467218319_1522241155102026_188121055467450362_n.jpg?stp=dst-jpg_s130x130_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=v5s3gCwbIN4Q7kNvwGspm1K&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1553279768-865429fa0078?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Mango Biche</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
@@ -391,7 +391,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="durazno" data-name="Durazno" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/414503676_25636401149292862_4839928077423387846_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=CBN_uhWTGOMQ7kNvwGag9z5&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1517355352485-3c18847c2f7d?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Durazno</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
@@ -401,7 +401,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="pina" data-name="Piña" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/418841726_25385427454389541_3013479700630411073_n.jpg?stp=dst-jpg_s130x130_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=uqq7OHgSHh0Q7kNvwFif4Q5&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1587883012610-e3df17d41270?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Piña</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
@@ -411,7 +411,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="tamarindo" data-name="Tamarindo" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/419531738_24590038333975217_4872729258089023304_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=S8SOHEm9AhoQ7kNvwECrH4s&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1609525278057-de1626e64738?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Tamarindo</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
@@ -421,7 +421,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border-2 border-purple-200" data-product="escarchar" data-name="Escarchar" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://media-sea5-1.cdn.whatsapp.net/v/t45.5328-4/414611213_7517420221623776_6313536782988353163_n.jpg?stp=dst-jpg_s168x128_tt6&ccb=1-7&_nc_sid=657aed&_nc_ohc=LSqeXWY3Ah4Q7kNvwFeVUGI&_nc_ad=z-m&_nc_cid=0&_nc_zt=23&_nc_ht=media-sea5-1.cdn.whatsapp.net');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Escarchar</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
