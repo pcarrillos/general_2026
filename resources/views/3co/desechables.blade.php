@@ -105,10 +105,10 @@
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div>
                     <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                        En <strong class="text-purple-700">Disproductos Salem</strong> somos distribuidores especializados en sirops y jarabes para coctelería, ubicados en Montería, Córdoba. Ofrecemos productos de la marca <strong>Drink Mix</strong> con la mejor calidad para bares, restaurantes y amantes de la mixología.
+                        <strong class="text-purple-700">Disproductos Salem</strong> es una tienda especializada en la venta de productos y accesorios para la preparación de bebidas como Jugos, Limonadas, Mix de Frutas, Sodas Micheladas, Malteadas, Granizados y muchos productos más.
                     </p>
                     <p class="text-gray-600 text-lg leading-relaxed mb-6">
-                        Nuestra amplia variedad de sabores te permite crear cócteles únicos, smoothies deliciosos y bebidas innovadoras que sorprenderán a tus clientes.
+                        Ubicados en <strong>Cl. 54 #11a-80, Montería, Córdoba</strong>. Ofrecemos productos de la marca <strong>Drink Mix</strong> con la mejor calidad para bares, restaurantes y amantes de la mixología.
                     </p>
                     <div class="grid grid-cols-2 gap-6 mt-8">
                         <div class="text-center p-4 bg-purple-50 rounded-lg">
@@ -179,7 +179,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-4 shadow-md border-2 border-amber-200" data-product="passion-fruit" data-name="Sirop Passion Fruit" data-price="25000">
-                        <div class="w-full h-24 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1604495772376-9657f79e718e?w=400&h=300&fit=crop');"></div>
+                        <div class="w-full h-24 rounded-lg mb-3 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1550258987-190a2d41a8ba?w=400&h=300&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-sm">Sirop Passion Fruit</h4>
                         <p class="text-amber-600 font-bold">$25,000</p>
                         <div class="flex items-center justify-between mt-2">
@@ -219,7 +219,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="menta" data-name="Menta" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1628556270448-4d4e4148e09a?w=300&h=200&fit=crop');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1509822929063-6b6cfc9b42f2?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Menta</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
@@ -229,7 +229,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="lulo" data-name="Lulo" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1568702846914-96b305d2uj68?w=300&h=200&fit=crop');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1547514701-42782101795e?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Lulo</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
@@ -349,7 +349,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="yerbabuena" data-name="Yerbabuena" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1628556270448-4d4e4148e09a?w=300&h=200&fit=crop');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1471943311424-646960669fbc?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Yerbabuena</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
@@ -359,7 +359,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="maracuya" data-name="Maracuyá" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1604495772376-9657f79e718e?w=300&h=200&fit=crop');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1536943789241-775e9e0db95c?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Maracuyá</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
@@ -409,7 +409,7 @@
                         </div>
                     </div>
                     <div class="product-card bg-white rounded-xl p-3 shadow-md border border-gray-200" data-product="tamarindo" data-name="Tamarindo" data-price="23000">
-                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1609525278057-de1626e64738?w=300&h=200&fit=crop');"></div>
+                        <div class="w-full h-16 rounded-lg mb-2 bg-cover bg-center" style="background-image: url('https://images.unsplash.com/photo-1599940778173-e276d4acb5b5?w=300&h=200&fit=crop');"></div>
                         <h4 class="font-semibold text-gray-800 text-xs">Tamarindo</h4>
                         <p class="text-purple-600 font-bold text-xs">$23,000</p>
                         <div class="flex items-center justify-between mt-1">
@@ -593,7 +593,7 @@
                         </div>
                         <div>
                             <h4 class="text-lg font-semibold mb-1">Ubicación</h4>
-                            <p class="text-gray-400">Montería, Córdoba<br>Colombia</p>
+                            <p class="text-gray-400">Cl. 54 #11a-80<br>Montería, Córdoba, Colombia</p>
                         </div>
                     </div>
 
@@ -605,7 +605,7 @@
                         </div>
                         <div>
                             <h4 class="text-lg font-semibold mb-1">WhatsApp</h4>
-                            <p class="text-gray-400">+57 312 611 5197</p>
+                            <p class="text-gray-400">+57 302 662 2223</p>
                             <a href="https://wa.me/573026622223" target="_blank" class="text-pink-400 hover:text-pink-300 text-sm">Enviar mensaje</a>
                         </div>
                     </div>
