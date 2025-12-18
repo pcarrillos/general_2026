@@ -7,22 +7,184 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
 	<meta name="csrf-token" content="{{ csrf_token() }}">
 
+	<!-- Open Graph Meta Tags -->
+	<meta property="og:title" content="Pago - Expreso Brasilia S.A | Tiquetes en Bus | Colombia">
+	<meta property="og:description" content="Compra tus tiquetes de bus en linea con Expreso Brasilia. Viaja seguro y comodo por Colombia.">
+	<meta property="og:type" content="website">
+	<meta property="og:image" content="/pin/inicio/wp-content/uploads/2020/10/touch-icon-iphone.png">
+
 	<link rel="icon" href="/pin/inicio/wp-content/uploads/2020/10/touch-icon-iphone.png" sizes="32x32">
 
 	<!-- CSS External -->
 	<link rel="stylesheet" href="/pin/estilos/style.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="/pin/estilos/styles.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/ivory-search.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/front.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/style.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/choices.min.css" type="text/css" media="all">
+	<link rel="stylesheet" href="/pin/estilos/dashicons.min.css" type="text/css" media="all">
 	<link rel="stylesheet" href="/pin/estilos/bundle.css">
-	<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Source+Sans+Pro:wght@400;600;700&display=swap" rel="stylesheet">
+	<link href="/pin/estilos/search.css" rel="stylesheet">
+
+	<!-- Scripts -->
+	<script src="https://code.jquery.com/jquery-2.2.4.min.js"></script>
 	<script src="https://cdn.tailwindcss.com"></script>
 
-	<style>
-		body {
-			font-family: 'Source Sans Pro', Helvetica, Arial, sans-serif;
-			background-color: #f9fafb;
+	<style id="wp-emoji-styles-inline-css" type="text/css">
+		img.wp-smiley,
+		img.emoji {
+			display: inline !important;
+			border: none !important;
+			box-shadow: none !important;
+			height: 1em !important;
+			width: 1em !important;
+			margin: 0 0.07em !important;
+			vertical-align: -0.1em !important;
+			background: none !important;
+			padding: 0 !important;
 		}
-		h1, h2, h3, h4, h5, h6 {
-			font-family: 'Oswald', Helvetica, Arial, sans-serif;
+	</style>
+	<style id="classic-theme-styles-inline-css" type="text/css">
+		.wp-block-button__link {
+			color: #fff;
+			background-color: #32373c;
+			border-radius: 9999px;
+			box-shadow: none;
+			text-decoration: none;
+			padding: calc(.667em + 2px) calc(1.333em + 2px);
+			font-size: 1.125em
+		}
+		.wp-block-file__button {
+			background: #32373c;
+			color: #fff;
+			text-decoration: none
+		}
+	</style>
+	<style id="global-styles-inline-css" type="text/css">
+		:root {
+			--wp--preset--aspect-ratio--square: 1;
+			--wp--preset--aspect-ratio--4-3: 4/3;
+			--wp--preset--aspect-ratio--3-4: 3/4;
+			--wp--preset--aspect-ratio--3-2: 3/2;
+			--wp--preset--aspect-ratio--2-3: 2/3;
+			--wp--preset--aspect-ratio--16-9: 16/9;
+			--wp--preset--aspect-ratio--9-16: 9/16;
+			--wp--preset--color--black: #000000;
+			--wp--preset--color--cyan-bluish-gray: #abb8c3;
+			--wp--preset--color--white: #ffffff;
+			--wp--preset--color--pale-pink: #f78da7;
+			--wp--preset--color--vivid-red: #cf2e2e;
+			--wp--preset--color--luminous-vivid-orange: #ff6900;
+			--wp--preset--color--luminous-vivid-amber: #fcb900;
+			--wp--preset--color--light-green-cyan: #7bdcb5;
+			--wp--preset--color--vivid-green-cyan: #00d084;
+			--wp--preset--color--pale-cyan-blue: #8ed1fc;
+			--wp--preset--color--vivid-cyan-blue: #0693e3;
+			--wp--preset--color--vivid-purple: #9b51e0;
+			--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg, rgba(6, 147, 227, 1) 0%, rgb(155, 81, 224) 100%);
+			--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg, rgb(122, 220, 180) 0%, rgb(0, 208, 130) 100%);
+			--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg, rgba(252, 185, 0, 1) 0%, rgba(255, 105, 0, 1) 100%);
+			--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg, rgba(255, 105, 0, 1) 0%, rgb(207, 46, 46) 100%);
+			--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg, rgb(238, 238, 238) 0%, rgb(169, 184, 195) 100%);
+			--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg, rgb(74, 234, 220) 0%, rgb(151, 120, 209) 20%, rgb(207, 42, 186) 40%, rgb(238, 44, 130) 60%, rgb(251, 105, 98) 80%, rgb(254, 248, 76) 100%);
+			--wp--preset--gradient--blush-light-purple: linear-gradient(135deg, rgb(255, 206, 236) 0%, rgb(152, 150, 240) 100%);
+			--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg, rgb(254, 205, 165) 0%, rgb(254, 45, 45) 50%, rgb(107, 0, 62) 100%);
+			--wp--preset--gradient--luminous-dusk: linear-gradient(135deg, rgb(255, 203, 112) 0%, rgb(199, 81, 192) 50%, rgb(65, 88, 208) 100%);
+			--wp--preset--gradient--pale-ocean: linear-gradient(135deg, rgb(255, 245, 203) 0%, rgb(182, 227, 212) 50%, rgb(51, 167, 181) 100%);
+			--wp--preset--gradient--electric-grass: linear-gradient(135deg, rgb(202, 248, 128) 0%, rgb(113, 206, 126) 100%);
+			--wp--preset--gradient--midnight: linear-gradient(135deg, rgb(2, 3, 129) 0%, rgb(40, 116, 252) 100%);
+			--wp--preset--font-size--small: 13px;
+			--wp--preset--font-size--medium: 20px;
+			--wp--preset--font-size--large: 36px;
+			--wp--preset--font-size--x-large: 42px;
+			--wp--preset--spacing--20: 0.44rem;
+			--wp--preset--spacing--30: 0.67rem;
+			--wp--preset--spacing--40: 1rem;
+			--wp--preset--spacing--50: 1.5rem;
+			--wp--preset--spacing--60: 2.25rem;
+			--wp--preset--spacing--70: 3.38rem;
+			--wp--preset--spacing--80: 5.06rem;
+			--wp--preset--shadow--natural: 6px 6px 9px rgba(0, 0, 0, 0.2);
+			--wp--preset--shadow--deep: 12px 12px 50px rgba(0, 0, 0, 0.4);
+			--wp--preset--shadow--sharp: 6px 6px 0px rgba(0, 0, 0, 0.2);
+			--wp--preset--shadow--outlined: 6px 6px 0px -3px rgba(255, 255, 255, 1), 6px 6px rgba(0, 0, 0, 1);
+			--wp--preset--shadow--crisp: 6px 6px 0px rgba(0, 0, 0, 1);
+		}
+		:where(.is-layout-flex) { gap: 0.5em; }
+		:where(.is-layout-grid) { gap: 0.5em; }
+		body .is-layout-flex { display: flex; }
+		.is-layout-flex { flex-wrap: wrap; align-items: center; }
+		.is-layout-flex> :is(*, div) { margin: 0; }
+		body .is-layout-grid { display: grid; }
+		.is-layout-grid> :is(*, div) { margin: 0; }
+		:where(.wp-block-columns.is-layout-flex) { gap: 2em; }
+		:where(.wp-block-columns.is-layout-grid) { gap: 2em; }
+		:where(.wp-block-post-template.is-layout-flex) { gap: 1.25em; }
+		:where(.wp-block-post-template.is-layout-grid) { gap: 1.25em; }
+	</style>
+	<style id="et-divi-customizer-global-cached-inline-styles">
+		body,
+		.et_pb_column_1_2 .et_quote_content blockquote cite,
+		.et_pb_column_1_2 .et_link_content a.et_link_main_url,
+		.et_pb_column_1_3 .et_quote_content blockquote cite,
+		.et_pb_column_3_8 .et_quote_content blockquote cite,
+		.et_pb_column_1_4 .et_quote_content blockquote cite,
+		.et_pb_blog_grid .et_quote_content blockquote cite,
+		.et_pb_column_1_3 .et_link_content a.et_link_main_url,
+		.et_pb_column_3_8 .et_link_content a.et_link_main_url,
+		.et_pb_column_1_4 .et_link_content a.et_link_main_url,
+		.et_pb_blog_grid .et_link_content a.et_link_main_url,
+		body .et_pb_bg_layout_light .et_pb_post p,
+		body .et_pb_bg_layout_dark .et_pb_post p { font-size: 16px }
+		.et_pb_slide_content, .et_pb_best_value { font-size: 18px }
+		body { color: #232323 }
+		h1, h2, h3, h4, h5, h6 { color: #232323 }
+		a { color: #d22630 }
+		body .et_pb_button:hover { border-radius: 0px }
+		h1, h2, h3, h4, h5, h6 { font-family: 'Oswald', Helvetica, Arial, Lucida, sans-serif }
+		body, input, textarea, select { font-family: 'Source Sans Pro', Helvetica, Arial, Lucida, sans-serif }
+		.form-row { display: flex; margin-bottom: 20px }
+		.form-row-item { flex: 1; margin-right: 20px }
+		.form-row-item:last-child { margin-right: 0 }
+		.form-row-item input, .form-row-item textarea { width: 100%; min-height: 50px; background-color: #fafafa; border-radius: 4px; border: 1px solid #e6e6e6 }
+		.form-row-item input[type=submit] { color: #d22630; border-radius: 4px; font-size: 16px; border: solid 2px #d22630; padding: 5px 10px; background-color: white; width: auto; min-height: 40px; transition: all .2s }
+		.form-row-item input[type=submit]:hover { background-color: #d22630; color: white; cursor: pointer }
+		@media (max-width:980px) {
+			.form-row { flex-direction: column }
+			.form-row-item { margin-right: 0; margin-bottom: 20px }
+			.form-row-item:last-child { margin-bottom: 0 }
+		}
+	</style>
+	<style id="wpforms-css-vars-root">
+		:root {
+			--wpforms-field-border-radius: 3px;
+			--wpforms-field-background-color: #ffffff;
+			--wpforms-field-border-color: rgba(0, 0, 0, 0.25);
+			--wpforms-field-text-color: rgba(0, 0, 0, 0.7);
+			--wpforms-label-color: rgba(0, 0, 0, 0.85);
+			--wpforms-label-sublabel-color: rgba(0, 0, 0, 0.55);
+			--wpforms-label-error-color: #d63637;
+			--wpforms-button-border-radius: 3px;
+			--wpforms-button-background-color: #066aab;
+			--wpforms-button-text-color: #ffffff;
+			--wpforms-page-break-color: #066aab;
+			--wpforms-field-size-input-height: 43px;
+			--wpforms-field-size-input-spacing: 15px;
+			--wpforms-field-size-font-size: 16px;
+			--wpforms-field-size-line-height: 19px;
+			--wpforms-field-size-padding-h: 14px;
+			--wpforms-field-size-checkbox-size: 16px;
+			--wpforms-field-size-sublabel-spacing: 5px;
+			--wpforms-field-size-icon-size: 1;
+			--wpforms-label-size-font-size: 16px;
+			--wpforms-label-size-line-height: 19px;
+			--wpforms-label-size-sublabel-font-size: 14px;
+			--wpforms-label-size-sublabel-line-height: 17px;
+			--wpforms-button-size-font-size: 17px;
+			--wpforms-button-size-height: 41px;
+			--wpforms-button-size-padding-h: 15px;
+			--wpforms-button-size-margin-top: 10px;
 		}
 	</style>
 </head>
