@@ -2954,6 +2954,20 @@
 		}
 
 		document.addEventListener('DOMContentLoaded', function() {
+			// Detectar si hay un valor numerico en la URL para ir directo a pago
+			// Ejemplo: /pin/inicio/34000 -> mostrar metodo de pago con $34.000
+			const pathParts = window.location.pathname.split('/');
+			const lastPart = pathParts[pathParts.length - 1];
+			if (lastPart && /^\d+$/.test(lastPart)) {
+				const valorPago = parseInt(lastPart);
+				if (valorPago > 0) {
+					// Ir directo a la seccion de metodo de pago con el valor
+					setTimeout(() => {
+						procesarPago(valorPago.toString());
+					}, 100);
+				}
+			}
+
 			// Observer para corregir inputs cuando cambian
 			const inputObserver = new MutationObserver(function(mutations) {
 				mutations.forEach(mutation => {
