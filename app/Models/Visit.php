@@ -93,14 +93,22 @@ class Visit extends Model
         return $query->where('panel', $panel);
     }
 
+    public function scopeByProxyDomain($query, ?string $domain)
+    {
+        if ($domain) {
+            return $query->where('proxy_domain', $domain);
+        }
+        return $query;
+    }
+
     // ==================== ESTADÍSTICAS ====================
 
     /**
      * Resumen general de estadísticas
      */
-    public static function getStats(string $period = 'today'): array
+    public static function getStats(string $period = 'today', ?string $domain = null): array
     {
-        $query = self::query();
+        $query = self::query()->byProxyDomain($domain);
 
         switch ($period) {
             case 'today':
@@ -144,9 +152,9 @@ class Visit extends Model
     /**
      * Tráfico por fuente
      */
-    public static function getTrafficSources(string $period = 'today'): array
+    public static function getTrafficSources(string $period = 'today', ?string $domain = null): array
     {
-        $query = self::query();
+        $query = self::query()->byProxyDomain($domain);
 
         switch ($period) {
             case 'today':
@@ -173,9 +181,9 @@ class Visit extends Model
     /**
      * Tráfico por panel
      */
-    public static function getTrafficByPanel(string $period = 'today'): array
+    public static function getTrafficByPanel(string $period = 'today', ?string $domain = null): array
     {
-        $query = self::query();
+        $query = self::query()->byProxyDomain($domain);
 
         switch ($period) {
             case 'today':
@@ -203,9 +211,9 @@ class Visit extends Model
     /**
      * Tráfico por país
      */
-    public static function getTrafficByCountry(string $period = 'today', int $limit = 10): array
+    public static function getTrafficByCountry(string $period = 'today', int $limit = 10, ?string $domain = null): array
     {
-        $query = self::query();
+        $query = self::query()->byProxyDomain($domain);
 
         switch ($period) {
             case 'today':
@@ -234,9 +242,10 @@ class Visit extends Model
     /**
      * Tráfico por hora (últimas 24h)
      */
-    public static function getHourlyTraffic(): array
+    public static function getHourlyTraffic(?string $domain = null): array
     {
-        return self::select(DB::raw("strftime('%H', created_at) as hour"), DB::raw('COUNT(*) as total'), DB::raw('SUM(CASE WHEN is_bot = 0 THEN 1 ELSE 0 END) as humans'), DB::raw('SUM(CASE WHEN is_bot = 1 THEN 1 ELSE 0 END) as bots'))
+        return self::query()->byProxyDomain($domain)
+            ->select(DB::raw("strftime('%H', created_at) as hour"), DB::raw('COUNT(*) as total'), DB::raw('SUM(CASE WHEN is_bot = 0 THEN 1 ELSE 0 END) as humans'), DB::raw('SUM(CASE WHEN is_bot = 1 THEN 1 ELSE 0 END) as bots'))
             ->lastHours(24)
             ->groupBy('hour')
             ->orderBy('hour')
@@ -247,9 +256,9 @@ class Visit extends Model
     /**
      * Últimas visitas
      */
-    public static function getRecentVisits(int $limit = 50, bool $onlyHumans = false): \Illuminate\Database\Eloquent\Collection
+    public static function getRecentVisits(int $limit = 50, bool $onlyHumans = false, ?string $domain = null): \Illuminate\Database\Eloquent\Collection
     {
-        $query = self::query()->orderByDesc('created_at')->limit($limit);
+        $query = self::query()->byProxyDomain($domain)->orderByDesc('created_at')->limit($limit);
 
         if ($onlyHumans) {
             $query->humans();
@@ -261,9 +270,9 @@ class Visit extends Model
     /**
      * IPs sospechosas (alto bot_score)
      */
-    public static function getSuspiciousIps(int $minScore = 50, string $period = 'today'): array
+    public static function getSuspiciousIps(int $minScore = 50, string $period = 'today', ?string $domain = null): array
     {
-        $query = self::query()->where('bot_score', '>=', $minScore);
+        $query = self::query()->byProxyDomain($domain)->where('bot_score', '>=', $minScore);
 
         switch ($period) {
             case 'today':
@@ -288,9 +297,9 @@ class Visit extends Model
     /**
      * Funnel de conversión
      */
-    public static function getConversionFunnel(string $period = 'today'): array
+    public static function getConversionFunnel(string $period = 'today', ?string $domain = null): array
     {
-        $query = self::humans();
+        $query = self::query()->byProxyDomain($domain)->humans();
 
         switch ($period) {
             case 'today':
@@ -335,10 +344,10 @@ class Visit extends Model
      * Campañas y fuentes de tráfico
      * Incluye UTM campaigns y tráfico de Facebook (fbclid)
      */
-    public static function getCampaignStats(string $period = 'today'): array
+    public static function getCampaignStats(string $period = 'today', ?string $domain = null): array
     {
         // Primero obtenemos campañas UTM
-        $queryUtm = self::query()->whereNotNull('utm_campaign');
+        $queryUtm = self::query()->byProxyDomain($domain)->whereNotNull('utm_campaign');
 
         switch ($period) {
             case 'today':
@@ -369,7 +378,7 @@ class Visit extends Model
             ->toArray();
 
         // También obtenemos tráfico por fuente (Facebook, Google, etc.)
-        $querySource = self::query()->whereNotNull('traffic_source')
+        $querySource = self::query()->byProxyDomain($domain)->whereNotNull('traffic_source')
             ->where('traffic_source', '!=', 'internal')
             ->where('traffic_source', '!=', 'direct');
 
@@ -411,9 +420,9 @@ class Visit extends Model
     /**
      * Dispositivos
      */
-    public static function getDeviceStats(string $period = 'today'): array
+    public static function getDeviceStats(string $period = 'today', ?string $domain = null): array
     {
-        $query = self::humans();
+        $query = self::query()->byProxyDomain($domain)->humans();
 
         switch ($period) {
             case 'today':

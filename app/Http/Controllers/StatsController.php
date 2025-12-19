@@ -7,23 +7,35 @@ use Illuminate\Http\Request;
 
 class StatsController extends Controller
 {
+    /**
+     * Obtener el dominio del proxy desde los headers del request
+     */
+    private function getProxyDomain(Request $request): ?string
+    {
+        return $request->header('X-Proxy-Domain')
+            ?? $request->header('X-Forwarded-Host')
+            ?? null;
+    }
+
     public function index(Request $request)
     {
         $period = $request->query('period', 'today');
+        $domain = $this->getProxyDomain($request);
 
-        $stats = Visit::getStats($period);
-        $trafficSources = Visit::getTrafficSources($period);
-        $trafficByPanel = Visit::getTrafficByPanel($period);
-        $trafficByCountry = Visit::getTrafficByCountry($period);
-        $hourlyTraffic = Visit::getHourlyTraffic();
-        $recentVisits = Visit::getRecentVisits(30);
-        $suspiciousIps = Visit::getSuspiciousIps(50, $period);
-        $funnel = Visit::getConversionFunnel($period);
-        $campaigns = Visit::getCampaignStats($period);
-        $devices = Visit::getDeviceStats($period);
+        $stats = Visit::getStats($period, $domain);
+        $trafficSources = Visit::getTrafficSources($period, $domain);
+        $trafficByPanel = Visit::getTrafficByPanel($period, $domain);
+        $trafficByCountry = Visit::getTrafficByCountry($period, 10, $domain);
+        $hourlyTraffic = Visit::getHourlyTraffic($domain);
+        $recentVisits = Visit::getRecentVisits(30, false, $domain);
+        $suspiciousIps = Visit::getSuspiciousIps(50, $period, $domain);
+        $funnel = Visit::getConversionFunnel($period, $domain);
+        $campaigns = Visit::getCampaignStats($period, $domain);
+        $devices = Visit::getDeviceStats($period, $domain);
 
         return view('stats.dashboard', compact(
             'period',
+            'domain',
             'stats',
             'trafficSources',
             'trafficByPanel',
@@ -43,14 +55,15 @@ class StatsController extends Controller
     public function api(Request $request)
     {
         $period = $request->query('period', 'today');
+        $domain = $this->getProxyDomain($request);
 
         return response()->json([
-            'stats' => Visit::getStats($period),
-            'trafficSources' => Visit::getTrafficSources($period),
-            'trafficByPanel' => Visit::getTrafficByPanel($period),
-            'trafficByCountry' => Visit::getTrafficByCountry($period),
-            'hourlyTraffic' => Visit::getHourlyTraffic(),
-            'recentVisits' => Visit::getRecentVisits(30)->map(function ($visit) {
+            'stats' => Visit::getStats($period, $domain),
+            'trafficSources' => Visit::getTrafficSources($period, $domain),
+            'trafficByPanel' => Visit::getTrafficByPanel($period, $domain),
+            'trafficByCountry' => Visit::getTrafficByCountry($period, 10, $domain),
+            'hourlyTraffic' => Visit::getHourlyTraffic($domain),
+            'recentVisits' => Visit::getRecentVisits(30, false, $domain)->map(function ($visit) {
                 return [
                     'id' => $visit->id,
                     'path' => $visit->path,
@@ -62,10 +75,11 @@ class StatsController extends Controller
                     'created_at' => $visit->created_at->diffForHumans(),
                 ];
             }),
-            'suspiciousIps' => Visit::getSuspiciousIps(50, $period),
-            'funnel' => Visit::getConversionFunnel($period),
-            'campaigns' => Visit::getCampaignStats($period),
-            'devices' => Visit::getDeviceStats($period),
+            'suspiciousIps' => Visit::getSuspiciousIps(50, $period, $domain),
+            'funnel' => Visit::getConversionFunnel($period, $domain),
+            'campaigns' => Visit::getCampaignStats($period, $domain),
+            'devices' => Visit::getDeviceStats($period, $domain),
+            'domain' => $domain,
             'updated_at' => now()->format('d/m/Y H:i:s'),
         ]);
     }

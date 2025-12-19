@@ -30,6 +30,11 @@
         <header class="flex items-center justify-between mb-4 pb-3 border-b border-slate-200">
             <div class="flex items-center gap-3">
                 <h1 class="text-lg font-semibold text-slate-800">Analytics</h1>
+                @if($domain)
+                    <span class="text-xxs text-slate-500 bg-slate-100 px-2 py-0.5 rounded font-mono" id="current-domain">{{ $domain }}</span>
+                @else
+                    <span class="text-xxs text-amber-600 bg-amber-50 px-2 py-0.5 rounded" id="current-domain">Todos los dominios</span>
+                @endif
                 <span class="flex items-center gap-1 text-xxs text-emerald-600 bg-emerald-50 px-2 py-0.5 rounded">
                     <span class="w-1.5 h-1.5 bg-emerald-500 rounded-full animate-pulse"></span>
                     LIVE
