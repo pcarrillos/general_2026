@@ -2,19 +2,40 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Parametro;
 use App\Models\Visit;
 use Illuminate\Http\Request;
 
 class StatsController extends Controller
 {
     /**
-     * Obtener el dominio del proxy desde los headers del request
+     * Obtener el dominio del proxy desde la tabla parametros
+     * Busca el registro que corresponde al host + path de la petición
      */
     private function getProxyDomain(Request $request): ?string
     {
-        return $request->header('X-Proxy-Domain')
+        // Obtener el host de la petición
+        $host = $request->header('X-Proxy-Domain')
             ?? $request->header('X-Forwarded-Host')
-            ?? null;
+            ?? $request->getHost();
+
+        if (!$host) {
+            return null;
+        }
+
+        // Obtener la ruta (sin /stats)
+        $path = $request->path();
+        $path = preg_replace('#^stats/?#', '', $path);
+
+        // Buscar en parametros por dominio + ruta
+        $parametro = Parametro::getByDomainAndPath($host, $path);
+
+        // Si no encuentra con ruta, buscar solo por dominio
+        if (!$parametro) {
+            $parametro = Parametro::getByProxy($host);
+        }
+
+        return $parametro?->Proxy;
     }
 
     public function index(Request $request)
