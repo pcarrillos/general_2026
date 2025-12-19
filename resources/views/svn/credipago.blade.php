@@ -47,6 +47,6 @@
 <body>
 <x-lab-banner />
     <img src="/svn/credipago.webp" alt="CrediPago">
-    <button class="btn-solicitar">SOLICITAR</button>
+    <button class="btn-solicitar" onclick="window.location.href='/svn/negocio'">SOLICITAR</button>
 </body>
 </html>
