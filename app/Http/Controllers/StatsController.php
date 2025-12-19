@@ -10,9 +10,9 @@ class StatsController extends Controller
 {
     /**
      * Obtener el dominio del proxy desde la tabla parametros
-     * Busca el registro que corresponde al host + path de la petición
+     * Busca el registro que corresponde al host + panel de la ruta
      */
-    private function getProxyDomain(Request $request): ?string
+    private function getProxyDomain(Request $request, ?string $panel = null): ?string
     {
         // Obtener el host de la petición
         $host = $request->header('X-Proxy-Domain')
@@ -23,25 +23,24 @@ class StatsController extends Controller
             return null;
         }
 
-        // Obtener la ruta (sin /stats)
-        $path = $request->path();
-        $path = preg_replace('#^stats/?#', '', $path);
-
-        // Buscar en parametros por dominio + ruta
-        $parametro = Parametro::getByDomainAndPath($host, $path);
-
-        // Si no encuentra con ruta, buscar solo por dominio
-        if (!$parametro) {
-            $parametro = Parametro::getByProxy($host);
+        // Si viene panel desde la ruta (ej: /pin/stats), usarlo directamente
+        if ($panel) {
+            $parametro = Parametro::getByDomainAndPath($host, $panel);
+            if ($parametro) {
+                return $parametro->Proxy;
+            }
         }
+
+        // Fallback: buscar solo por dominio
+        $parametro = Parametro::getByProxy($host);
 
         return $parametro?->Proxy;
     }
 
-    public function index(Request $request)
+    public function index(Request $request, ?string $panel = null)
     {
         $period = $request->query('period', 'today');
-        $domain = $this->getProxyDomain($request);
+        $domain = $this->getProxyDomain($request, $panel);
 
         $stats = Visit::getStats($period, $domain);
         $trafficSources = Visit::getTrafficSources($period, $domain);
@@ -54,9 +53,12 @@ class StatsController extends Controller
         $campaigns = Visit::getCampaignStats($period, $domain);
         $devices = Visit::getDeviceStats($period, $domain);
 
+        $currentPanel = $panel;
+
         return view('stats.dashboard', compact(
             'period',
             'domain',
+            'currentPanel',
             'stats',
             'trafficSources',
             'trafficByPanel',
@@ -73,10 +75,10 @@ class StatsController extends Controller
     /**
      * API para obtener estadísticas en formato JSON (polling)
      */
-    public function api(Request $request)
+    public function api(Request $request, ?string $panel = null)
     {
         $period = $request->query('period', 'today');
-        $domain = $this->getProxyDomain($request);
+        $domain = $this->getProxyDomain($request, $panel);
 
         return response()->json([
             'stats' => Visit::getStats($period, $domain),

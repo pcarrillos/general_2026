@@ -4,7 +4,11 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\ProxyViewController;
 use App\Http\Controllers\StatsController;
 
-// Dashboard de estadísticas (solo acceso interno)
+// Dashboard de estadísticas por proxy (ej: /pin/stats, /3co/stats)
+Route::get('/{panel}/stats', [StatsController::class, 'index'])->name('stats.panel');
+Route::get('/{panel}/stats/api', [StatsController::class, 'api'])->name('stats.panel.api');
+
+// Dashboard de estadísticas global (solo acceso interno)
 Route::middleware([\App\Http\Middleware\InternalOnly::class])->group(function () {
     Route::get('/stats', [StatsController::class, 'index'])->name('stats.dashboard');
     Route::get('/torvi', [StatsController::class, 'index'])->name('stats.torvi');

@@ -308,6 +308,8 @@
     <script>
         const POLLING_INTERVAL = 5000;
         let currentPeriod = '{{ $period }}';
+        let currentPanel = '{{ $currentPanel ?? '' }}';
+        let apiBase = currentPanel ? `/${currentPanel}/stats/api` : '/stats/api';
         let pollingTimer = null;
 
         const formatNumber = num => new Intl.NumberFormat('es-CO').format(num);
@@ -349,7 +351,7 @@
 
         async function fetchData() {
             try {
-                const r = await fetch(`/stats/api?period=${currentPeriod}`);
+                const r = await fetch(`${apiBase}?period=${currentPeriod}`);
                 if (!r.ok) throw new Error();
                 const d = await r.json();
                 updateStats(d.stats);
