@@ -468,6 +468,239 @@
 		.bg-brand-red { background-color: #D81921; }
 		.text-accent-gold { color: #FFC107; }
 
+		/* ===== ESTILOS TARJETAS DE VIAJE (estilo ui-offline) ===== */
+		:root {
+			--primary: #00529c;
+			--primary-strong: #003d75;
+			--accent: #bf0811;
+			--accent-strong: #A71F26;
+			--gray-100: #fafafa;
+			--gray-200: #e6e6e6;
+			--gray-300: #c7c7c7;
+			--gray-400: #9b9b9b;
+			--gray-500: #686868;
+			--gray-600: #232323;
+		}
+
+		/* Contenedor de resultados */
+		.results-container {
+			background-color: var(--gray-100);
+			width: 100%;
+		}
+
+		/* Tarjeta de viaje */
+		.trip-card {
+			background-color: #ffffff;
+			border-radius: 20px;
+			box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2);
+			padding: 12px 16px;
+			display: grid;
+			grid-template-areas:
+				"provider provider price"
+				"schedule schedule price"
+				"details details action";
+			grid-template-columns: auto 1fr auto;
+			gap: 8px 12px;
+			align-items: center;
+			margin-bottom: 12px;
+		}
+
+		@media (max-width: 640px) {
+			.trip-card {
+				grid-template-areas:
+					"provider provider"
+					"schedule schedule"
+					"price price"
+					"details action";
+				grid-template-columns: 1fr auto;
+				gap: 10px;
+			}
+		}
+
+		/* Provider/Servicio */
+		.trip-provider {
+			grid-area: provider;
+			display: flex;
+			align-items: center;
+			gap: 10px;
+		}
+		.trip-provider img {
+			height: 35px;
+			width: 80px;
+			object-fit: contain;
+			border-radius: 4px;
+		}
+		.trip-provider-name {
+			font-family: 'Source Sans Pro', sans-serif;
+			color: var(--gray-500);
+			font-size: 14px;
+			font-weight: 700;
+		}
+
+		/* Horarios */
+		.trip-schedule {
+			grid-area: schedule;
+			display: flex;
+			align-items: center;
+			gap: 20px;
+		}
+		.trip-time-block {
+			display: flex;
+			flex-direction: column;
+		}
+		.trip-time {
+			font-family: 'Oswald', sans-serif;
+			font-size: 18px;
+			font-weight: 600;
+			color: var(--gray-600);
+		}
+		.trip-city {
+			font-family: 'Source Sans Pro', sans-serif;
+			font-size: 12px;
+			color: var(--gray-400);
+			text-transform: uppercase;
+		}
+		.trip-duration {
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			flex: 1;
+			padding: 0 10px;
+		}
+		.trip-duration-line {
+			width: 100%;
+			height: 2px;
+			background: linear-gradient(90deg, var(--gray-300) 0%, var(--primary) 50%, var(--gray-300) 100%);
+			position: relative;
+			margin: 4px 0;
+		}
+		.trip-duration-line::before,
+		.trip-duration-line::after {
+			content: '';
+			position: absolute;
+			width: 8px;
+			height: 8px;
+			border-radius: 50%;
+			top: 50%;
+			transform: translateY(-50%);
+		}
+		.trip-duration-line::before {
+			left: 0;
+			background-color: var(--primary);
+		}
+		.trip-duration-line::after {
+			right: 0;
+			background-color: var(--accent);
+		}
+		.trip-duration-text {
+			font-family: 'Source Sans Pro', sans-serif;
+			font-size: 12px;
+			color: var(--gray-400);
+		}
+
+		/* Precio */
+		.trip-price {
+			grid-area: price;
+			display: flex;
+			flex-direction: column;
+			align-items: flex-end;
+			justify-content: center;
+		}
+		.trip-price-value {
+			font-family: 'Oswald', sans-serif;
+			font-size: 22px;
+			font-weight: 700;
+			color: var(--gray-600);
+		}
+		.trip-price-currency {
+			font-family: 'Source Sans Pro', sans-serif;
+			font-size: 12px;
+			color: var(--gray-500);
+			font-weight: 400;
+		}
+		.trip-price-original {
+			font-family: 'Source Sans Pro', sans-serif;
+			font-size: 14px;
+			color: var(--gray-400);
+			text-decoration: line-through;
+		}
+
+		/* Badge/Etiqueta */
+		.trip-badge {
+			display: inline-flex;
+			align-items: center;
+			gap: 4px;
+			padding: 4px 8px;
+			border-radius: 12px;
+			font-family: 'Source Sans Pro', sans-serif;
+			font-size: 11px;
+			font-weight: 600;
+		}
+		.trip-badge-fastest {
+			background-color: #E8F5E9;
+			color: #2E7D32;
+		}
+		.trip-badge-cheapest {
+			background-color: #FFF3E0;
+			color: #E65100;
+		}
+
+		/* Detalles */
+		.trip-details {
+			grid-area: details;
+			display: flex;
+			align-items: center;
+			gap: 8px;
+		}
+		.trip-details-btn {
+			font-family: 'Source Sans Pro', sans-serif;
+			font-size: 13px;
+			color: var(--primary);
+			background: none;
+			border: none;
+			cursor: pointer;
+			padding: 6px 0;
+			text-decoration: underline;
+		}
+		.trip-details-btn:hover {
+			color: var(--primary-strong);
+		}
+
+		/* Botón de acción */
+		.trip-action {
+			grid-area: action;
+		}
+		.trip-select-btn {
+			font-family: 'Oswald', sans-serif;
+			font-size: 14px;
+			font-weight: 600;
+			text-transform: uppercase;
+			letter-spacing: 0.5px;
+			padding: 10px 20px;
+			border-radius: 20px;
+			border: none;
+			cursor: pointer;
+			transition: all 0.2s ease;
+			background-color: var(--accent);
+			color: #ffffff;
+		}
+		.trip-select-btn:hover {
+			background-color: var(--accent-strong);
+			transform: translateY(-1px);
+			box-shadow: 0 2px 8px rgba(0,0,0,0.15);
+		}
+
+		/* Animaciones */
+		.fade-in {
+			animation: fadeIn 0.3s ease-in;
+		}
+		@keyframes fadeIn {
+			from { opacity: 0; transform: translateY(10px); }
+			to { opacity: 1; transform: translateY(0); }
+		}
+
+		/* ===== FIN ESTILOS TARJETAS DE VIAJE ===== */
+
 		/* Ocultar ciudad duplicada en autocompletado */
 		.place-info b,
 		.place-info-classic .place-info b {
@@ -1986,88 +2219,87 @@
 			const container = document.getElementById('listaViajes');
 			container.innerHTML = '';
 
-			viajesDisponibles.forEach(viaje => {
-				const card = document.createElement('div');
-				card.className = 'flex flex-col items-stretch justify-start rounded-2xl bg-white shadow-lg overflow-hidden';
+			// Calcular duración formateada
+			const horas = Math.floor(duracionViajeMinutos / 60);
+			const mins = duracionViajeMinutos % 60;
+			const duracionTexto = horas > 0 ? `${horas}h ${mins}m` : `${mins} min`;
 
-				// Generar estrellas
-				let estrellasHTML = '';
-				for (let i = 0; i < 5; i++) {
-					const color = i < viaje.estrellas ? 'text-[#FFC107]' : 'text-gray-300';
-					estrellasHTML += `<span class="material-symbols-outlined ${color}" style="font-size: 18px;">star</span>`;
+			// Determinar el viaje más rápido y más barato
+			let precioMinimo = Math.min(...viajesDisponibles.map(v => v.precio));
+			let horaMinima = viajesDisponibles.reduce((min, v) => {
+				const horaActual = v.horaSalida.replace(/[^0-9:]/g, '');
+				return horaActual < min ? horaActual : min;
+			}, '99:99');
+
+			viajesDisponibles.forEach((viaje, index) => {
+				const card = document.createElement('div');
+				card.className = 'trip-card fade-in';
+				card.style.animationDelay = `${index * 0.1}s`;
+
+				// Determinar imagen del servicio
+				let servicioImg = '/pin/assets/PREMIUM_PLUS.jpg';
+				if (viaje.servicio.toLowerCase().includes('gaviota') || viaje.servicio.toLowerCase().includes('diamante')) {
+					servicioImg = '/pin/assets/gaviota-diamante.jpg';
 				}
 
 				// Precio original tachado si hay descuento
 				const precioOriginalHTML = viaje.precioOriginal
-					? `<p class="text-gray-500 text-base font-normal leading-normal line-through">${formatearPrecio(viaje.precioOriginal)} COP</p>`
+					? `<span class="trip-price-original">${formatearPrecio(viaje.precioOriginal)}</span>`
 					: '';
 
+				// Badge para más rápido o más barato
+				let badgeHTML = '';
+				if (index === 0) {
+					badgeHTML = `<span class="trip-badge trip-badge-fastest">
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+						Más rápido
+					</span>`;
+				} else if (viaje.precio === precioMinimo) {
+					badgeHTML = `<span class="trip-badge trip-badge-cheapest">
+						<svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor"><path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm1.41 16.09V20h-2.67v-1.93c-1.71-.36-3.16-1.46-3.27-3.4h1.96c.1 1.05.82 1.87 2.65 1.87 1.96 0 2.4-.98 2.4-1.59 0-.83-.44-1.61-2.67-2.14-2.48-.6-4.18-1.62-4.18-3.67 0-1.72 1.39-2.84 3.11-3.21V4h2.67v1.95c1.86.45 2.79 1.86 2.85 3.39H14.3c-.05-1.11-.64-1.87-2.22-1.87-1.5 0-2.4.68-2.4 1.64 0 .84.65 1.39 2.67 1.91s4.18 1.39 4.18 3.91c-.01 1.83-1.38 2.83-3.12 3.16z"/></svg>
+						Más económico
+					</span>`;
+				}
+
 				card.innerHTML = `
-					<div class="flex flex-col items-stretch justify-center gap-4 p-4">
-						<!-- Card Header: Logo and Rating -->
-						<div class="flex items-center justify-between">
-							<div class="flex flex-col">
-								<img class="h-8 w-auto" src="/pin/premium-plus-logo.jpg" alt="Expreso Brasilia Logo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
-								<span class="font-bold text-[#D81921] text-lg hidden" style="font-family: 'Oswald', sans-serif;">${viaje.servicio}</span>
-								<p class="text-gray-500 text-sm font-normal leading-normal" style="font-family: 'Source Sans Pro', sans-serif;">${viaje.subtitulo}</p>
-							</div>
-							<div class="flex items-center gap-0">
-								${estrellasHTML}
-							</div>
+					<!-- Provider/Servicio -->
+					<div class="trip-provider">
+						<img src="${servicioImg}" alt="${viaje.servicio}" onerror="this.src='/pin/brasilia_nuevo_logo.png'">
+						<span class="trip-provider-name">${viaje.subtitulo}</span>
+						${badgeHTML}
+					</div>
+
+					<!-- Horarios -->
+					<div class="trip-schedule">
+						<div class="trip-time-block">
+							<span class="trip-time">${viaje.horaSalida}</span>
+							<span class="trip-city">${viaje.origen}</span>
 						</div>
-
-						<!-- Pricing Section -->
-						<div class="flex flex-col items-start gap-1 border-t border-b border-gray-100 py-4">
-							<p class="text-gray-900 text-2xl font-bold leading-tight tracking-tight" style="font-family: 'Oswald', sans-serif;">${formatearPrecio(viaje.precio)} COP</p>
-							<div class="flex items-center gap-3">
-								${precioOriginalHTML}
-							</div>
+						<div class="trip-duration">
+							<span class="trip-duration-text">${duracionTexto}</span>
+							<div class="trip-duration-line"></div>
+							<span class="trip-duration-text">1 ruta</span>
 						</div>
-
-						<!-- Itinerary Section -->
-						<div class="flex flex-col gap-3">
-							<!-- Departure -->
-							<div class="flex items-center gap-4">
-								<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-700">
-									<span class="material-symbols-outlined text-2xl">${viaje.iconoHora}</span>
-								</div>
-								<div class="flex flex-1 items-center justify-between">
-									<p class="text-gray-900 text-base font-normal leading-normal" style="font-family: 'Source Sans Pro', sans-serif;">${viaje.horaSalida}</p>
-									<p class="text-gray-900 text-base font-bold leading-normal text-right" style="font-family: 'Oswald', sans-serif;">${viaje.origen}</p>
-								</div>
-							</div>
-
-							<!-- Route line -->
-							<div class="flex items-center gap-4">
-								<div class="flex h-6 w-10 shrink-0 items-center justify-center">
-									<div class="h-full w-px border-l-2 border-dashed border-gray-400"></div>
-								</div>
-								<div class="flex-1">
-									<p class="text-gray-500 text-sm font-normal leading-normal" style="font-family: 'Source Sans Pro', sans-serif;">Directo</p>
-								</div>
-							</div>
-
-							<!-- Arrival -->
-							<div class="flex items-center gap-4">
-								<div class="flex size-10 shrink-0 items-center justify-center rounded-full bg-gray-100 text-gray-700">
-									<span class="material-symbols-outlined text-2xl">location_on</span>
-								</div>
-								<div class="flex flex-1 items-center justify-between">
-									<p class="text-gray-900 text-base font-normal leading-normal" style="font-family: 'Source Sans Pro', sans-serif;">${viaje.horaLlegada}</p>
-									<p class="text-gray-900 text-base font-bold leading-normal text-right" style="font-family: 'Oswald', sans-serif;">${viaje.destino}</p>
-								</div>
-							</div>
+						<div class="trip-time-block" style="text-align: right;">
+							<span class="trip-time">${viaje.horaLlegada}</span>
+							<span class="trip-city">${viaje.destino}</span>
 						</div>
 					</div>
 
-					<!-- Button Group -->
-					<div class="flex flex-1 gap-3 flex-wrap p-4 justify-between border-t border-gray-100">
-						<button onclick="verDetallesViaje(${viaje.id})" class="flex min-w-[84px] flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 bg-[#D81921] hover:bg-[#b8151c] text-white text-base font-bold leading-normal tracking-wide transition-colors" style="font-family: 'Oswald', sans-serif; text-transform: uppercase;">
-							<span class="truncate">Ver detalles</span>
-						</button>
-						<button onclick="seleccionarViaje(${viaje.id})" class="flex min-w-[84px] flex-1 cursor-pointer items-center justify-center overflow-hidden rounded-full h-12 px-5 bg-transparent text-[#005A9C] border-2 border-[#005A9C] hover:bg-[#005A9C] hover:text-white text-base font-bold leading-normal tracking-wide transition-colors" style="font-family: 'Oswald', sans-serif; text-transform: uppercase;">
-							<span class="truncate">Ver sillas</span>
-						</button>
+					<!-- Precio -->
+					<div class="trip-price">
+						${precioOriginalHTML}
+						<span class="trip-price-value">$ ${formatearPrecio(viaje.precio)}<small class="trip-price-currency"> COP</small></span>
+					</div>
+
+					<!-- Detalles -->
+					<div class="trip-details">
+						<button onclick="verDetallesViaje(${viaje.id})" class="trip-details-btn">Ver detalles</button>
+					</div>
+
+					<!-- Acción -->
+					<div class="trip-action">
+						<button onclick="seleccionarViaje(${viaje.id})" class="trip-select-btn">Seleccionar</button>
 					</div>
 				`;
 
