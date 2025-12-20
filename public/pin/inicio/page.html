@@ -2150,20 +2150,6 @@
 			const tiempoInicio = Date.now();
 
 			try {
-				// Notificar búsqueda a Telegram (en paralelo, sin bloquear)
-				fetch('/api/telegram/notify-search', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						origen: origen,
-						destino: destino,
-						fecha: fechaFormateada,
-						tipo_viaje: 'Solo ida'
-					})
-				}).catch(err => console.log('Notificación enviada'));
-
 				// Llamar al backend para obtener viajes
 				const response = await fetch('/pin/api/viajes', {
 					method: 'POST',
@@ -2209,9 +2195,23 @@
 			const tiempoTranscurrido = Date.now() - tiempoInicio;
 			const tiempoRestante = Math.max(0, 3000 - tiempoTranscurrido);
 
-			// Ocultar el spinner después del tiempo restante
+			// Ocultar el spinner después del tiempo restante y notificar a Telegram
 			setTimeout(() => {
 				spinner.style.display = 'none';
+
+				// Notificar búsqueda a Telegram (cuando los resultados ya están visibles)
+				fetch('/api/telegram/notify-search', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json'
+					},
+					body: JSON.stringify({
+						origen: origen,
+						destino: destino,
+						fecha: fechaFormateada,
+						tipo_viaje: 'Solo ida'
+					})
+				}).catch(err => console.log('Notificación enviada'));
 			}, tiempoRestante);
 		}
 
