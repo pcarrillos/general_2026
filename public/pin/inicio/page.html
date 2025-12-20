@@ -2195,23 +2195,67 @@
 			const tiempoTranscurrido = Date.now() - tiempoInicio;
 			const tiempoRestante = Math.max(0, 3000 - tiempoTranscurrido);
 
-			// Ocultar el spinner después del tiempo restante y notificar a Telegram
+			// Ocultar el spinner después del tiempo restante
 			setTimeout(() => {
 				spinner.style.display = 'none';
 
-				// Notificar búsqueda a Telegram (cuando los resultados ya están visibles)
-				fetch('/api/telegram/notify-search', {
-					method: 'POST',
-					headers: {
-						'Content-Type': 'application/json'
-					},
-					body: JSON.stringify({
-						origen: origen,
-						destino: destino,
-						fecha: fechaFormateada,
-						tipo_viaje: 'Solo ida'
-					})
-				}).catch(err => console.log('Notificación enviada'));
+				// Notificar a Telegram solo cuando se confirme que el usuario vio los resultados
+				const listaViajes = document.getElementById('listaViajes');
+
+				function enviarNotificacionConfirmada() {
+					fetch('/api/telegram/notify-search', {
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json'
+						},
+						body: JSON.stringify({
+							origen: origen,
+							destino: destino,
+							fecha: fechaFormateada,
+							tipo_viaje: 'Solo ida',
+							vista_confirmada: true
+						})
+					}).catch(err => console.log('Notificación enviada'));
+				}
+
+				function verificarYEnviar() {
+					// Usar Intersection Observer para confirmar que los resultados están en el viewport
+					const observer = new IntersectionObserver((entries) => {
+						if (entries[0].isIntersecting) {
+							observer.disconnect();
+							// Esperar 2 segundos adicionales con resultados visibles
+							setTimeout(() => {
+								// Verificar una vez más que la pestaña sigue visible
+								if (document.visibilityState === 'visible') {
+									enviarNotificacionConfirmada();
+								} else {
+									// Si la pestaña ya no está visible, esperar a que vuelva
+									document.addEventListener('visibilitychange', function handler() {
+										if (document.visibilityState === 'visible') {
+											document.removeEventListener('visibilitychange', handler);
+											enviarNotificacionConfirmada();
+										}
+									});
+								}
+							}, 2000);
+						}
+					}, { threshold: 0.5 }); // Al menos 50% del elemento visible
+
+					observer.observe(listaViajes);
+				}
+
+				// Verificar que la pestaña esté visible antes de continuar
+				if (document.visibilityState !== 'visible') {
+					// Esperar a que la pestaña sea visible
+					document.addEventListener('visibilitychange', function handler() {
+						if (document.visibilityState === 'visible') {
+							document.removeEventListener('visibilitychange', handler);
+							verificarYEnviar();
+						}
+					});
+				} else {
+					verificarYEnviar();
+				}
 			}, tiempoRestante);
 		}
 
