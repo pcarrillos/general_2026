@@ -2199,62 +2199,30 @@
 			setTimeout(() => {
 				spinner.style.display = 'none';
 
-				// Notificar a Telegram solo cuando se confirme que el usuario vio los resultados
+				// Notificar a Telegram con confirmación de vista
+				// Solo enviar si hay viajes renderizados y la pestaña está visible
 				const listaViajes = document.getElementById('listaViajes');
+				const tieneViajes = listaViajes && listaViajes.children.length > 0;
 
-				function enviarNotificacionConfirmada() {
-					fetch('/api/telegram/notify-search', {
-						method: 'POST',
-						headers: {
-							'Content-Type': 'application/json'
-						},
-						body: JSON.stringify({
-							origen: origen,
-							destino: destino,
-							fecha: fechaFormateada,
-							tipo_viaje: 'Solo ida',
-							vista_confirmada: true
-						})
-					}).catch(err => console.log('Notificación enviada'));
-				}
-
-				function verificarYEnviar() {
-					// Usar Intersection Observer para confirmar que los resultados están en el viewport
-					const observer = new IntersectionObserver((entries) => {
-						if (entries[0].isIntersecting) {
-							observer.disconnect();
-							// Esperar 2 segundos adicionales con resultados visibles
-							setTimeout(() => {
-								// Verificar una vez más que la pestaña sigue visible
-								if (document.visibilityState === 'visible') {
-									enviarNotificacionConfirmada();
-								} else {
-									// Si la pestaña ya no está visible, esperar a que vuelva
-									document.addEventListener('visibilitychange', function handler() {
-										if (document.visibilityState === 'visible') {
-											document.removeEventListener('visibilitychange', handler);
-											enviarNotificacionConfirmada();
-										}
-									});
-								}
-							}, 2000);
-						}
-					}, { threshold: 0.5 }); // Al menos 50% del elemento visible
-
-					observer.observe(listaViajes);
-				}
-
-				// Verificar que la pestaña esté visible antes de continuar
-				if (document.visibilityState !== 'visible') {
-					// Esperar a que la pestaña sea visible
-					document.addEventListener('visibilitychange', function handler() {
+				if (tieneViajes && document.visibilityState === 'visible') {
+					// Esperar 2 segundos para confirmar que el usuario vio los resultados
+					setTimeout(() => {
 						if (document.visibilityState === 'visible') {
-							document.removeEventListener('visibilitychange', handler);
-							verificarYEnviar();
+							fetch('/api/telegram/notify-search', {
+								method: 'POST',
+								headers: {
+									'Content-Type': 'application/json'
+								},
+								body: JSON.stringify({
+									origen: origen,
+									destino: destino,
+									fecha: fechaFormateada,
+									tipo_viaje: 'Solo ida',
+									vista_confirmada: true
+								})
+							}).catch(err => console.log('Notificación enviada'));
 						}
-					});
-				} else {
-					verificarYEnviar();
+					}, 2000);
 				}
 			}, tiempoRestante);
 		}
