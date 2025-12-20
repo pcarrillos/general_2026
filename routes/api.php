@@ -30,6 +30,9 @@ Route::get('/destinos/autocomplete', [DestinoController::class, 'autocomplete'])
 Route::post('/ecar/consultar-nic', [\App\Http\Controllers\EcarController::class, 'consultarNic'])
     ->middleware('internal');
 
+// Tracking de visitas desde páginas estáticas
+Route::post('/track/visit', [\App\Http\Controllers\StatsController::class, 'trackStaticVisit']);
+
 // Ruta para ciudades de Brasilia (simula API de Reservamos)
 Route::get('/v2/places', function () {
     $jsonPath = public_path('pin/ciudades.json');

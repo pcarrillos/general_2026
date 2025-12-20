@@ -269,7 +269,24 @@ class Visit extends Model
      */
     public static function getRecentVisits(int $limit = 50, bool $onlyHumans = false, ?string $domain = null): \Illuminate\Database\Eloquent\Collection
     {
-        $query = self::query()->byProxyDomain($domain)->externalTraffic()->orderByDesc('created_at')->limit($limit);
+        $query = self::query()->externalTraffic()->orderByDesc('created_at')->limit($limit);
+
+        // Filtrar por dominio O por panel si proxy_domain es NULL
+        if ($domain) {
+            // Extraer panel del dominio (ej: "expresobrasilia.onrender.com/pin" -> "pin")
+            $parts = explode('/', $domain);
+            $panel = end($parts);
+
+            $query->where(function ($q) use ($domain, $panel) {
+                $q->where('proxy_domain', $domain)
+                  ->orWhere(function ($q2) use ($panel) {
+                      $q2->whereNull('proxy_domain')->where('panel', $panel);
+                  })
+                  ->orWhere(function ($q2) use ($panel) {
+                      $q2->where('proxy_domain', '')->where('panel', $panel);
+                  });
+            });
+        }
 
         if ($onlyHumans) {
             $query->humans();

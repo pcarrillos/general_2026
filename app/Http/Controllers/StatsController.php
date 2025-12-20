@@ -136,4 +136,73 @@ class StatsController extends Controller
 
         return response()->json(['status' => 'ok']);
     }
+
+    /**
+     * Registrar visita desde página estática (servida por nginx)
+     */
+    public function trackStaticVisit(Request $request)
+    {
+        $path = $request->input('path', 'unknown');
+        $referer = $request->input('referer');
+
+        // Obtener IP real
+        $ip = $request->header('X-Forwarded-For')
+            ? explode(',', $request->header('X-Forwarded-For'))[0]
+            : $request->ip();
+        $ip = trim($ip);
+
+        // Obtener host y buscar proxy_domain
+        $host = $request->header('X-Proxy-Domain')
+            ?? $request->header('X-Forwarded-Host')
+            ?? $request->getHost();
+
+        // Extraer panel del path (ej: pin/inicio -> pin)
+        $segments = explode('/', trim($path, '/'));
+        $panel = $segments[0] ?? null;
+
+        // Buscar en parametros
+        $parametro = \App\Models\Parametro::getByDomainAndPath($host, $panel);
+        $proxyDomain = $parametro?->Proxy;
+
+        // Analizar bot
+        $botDetector = app(\App\Services\BotDetector::class);
+        $botAnalysis = $botDetector->analyze($request);
+        $uaInfo = $botDetector->parseUserAgent($request->userAgent());
+        $trafficSource = $botDetector->detectTrafficSource($request);
+        $geoInfo = $botDetector->getGeoInfo($request, $ip);
+
+        // Crear visita
+        Visit::create([
+            'session_id' => $request->input('session_id', session()->getId()),
+            'ip' => $ip,
+            'method' => 'GET',
+            'host' => $host,
+            'path' => $path,
+            'full_url' => $request->input('url', ''),
+            'referer' => $referer,
+            'user_agent' => $request->userAgent(),
+            'traffic_source' => $trafficSource,
+            'fbclid' => $request->input('fbclid'),
+            'gclid' => $request->input('gclid'),
+            'utm_source' => $request->input('utm_source'),
+            'utm_medium' => $request->input('utm_medium'),
+            'utm_campaign' => $request->input('utm_campaign'),
+            'utm_content' => $request->input('utm_content'),
+            'utm_term' => $request->input('utm_term'),
+            'country_code' => $geoInfo['country_code'],
+            'country_name' => $geoInfo['country_name'],
+            'city' => $geoInfo['city'],
+            'panel' => $panel,
+            'proxy_domain' => $proxyDomain,
+            'bot_score' => $botAnalysis['score'],
+            'is_bot' => $botAnalysis['is_bot'],
+            'bot_reason' => $botAnalysis['reasons'],
+            'browser' => $uaInfo['browser'],
+            'browser_version' => $uaInfo['browser_version'],
+            'platform' => $uaInfo['platform'],
+            'device_type' => $uaInfo['device_type'],
+        ]);
+
+        return response()->json(['status' => 'ok']);
+    }
 }
