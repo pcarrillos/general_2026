@@ -54,7 +54,22 @@ class ValidateProxyDomain
         }
 
         // Excepciones: rutas de Pinbus (landing de tráfico de ads)
+        // Aún así configuramos proxy_info para tracking
         if (str_starts_with($path, 'pin/inicio')) {
+            $parametro = Parametro::getByDomainAndPath($host, 'pin');
+            if ($parametro) {
+                $request->merge([
+                    'proxy_info' => [
+                        'domain' => $parametro->Proxy,
+                        'name' => $parametro->Nombre,
+                        'panel' => $parametro->Panel,
+                        'enabled' => $parametro->isEstadoActivo(),
+                        'chat_ids' => $parametro->getChatIdsArray(),
+                        'servicio_activo' => $parametro->isServicioActivo(),
+                        'vista' => $parametro->getVista(),
+                    ]
+                ]);
+            }
             return $next($request);
         }
 
