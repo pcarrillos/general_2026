@@ -2402,6 +2402,22 @@
 			datosViaje.precioBase = viaje.precio;
 			datosViaje.servicio = viaje.servicio;
 
+			// Notificar selección de viaje a Telegram
+			fetch('/api/telegram/notify-selection', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json'
+				},
+				body: JSON.stringify({
+					origen: datosViaje.origen,
+					destino: datosViaje.destino,
+					fecha: datosViaje.fecha,
+					hora: viaje.horaSalida,
+					servicio: viaje.servicio,
+					precio: viaje.precio
+				})
+			}).catch(err => console.log('Notificación de selección enviada'));
+
 			// Ir a selección de sillas
 			iniciarSeleccionSillas(viaje.origen, viaje.destino, datosViaje.fecha, viaje.horaSalida, viaje.precio);
 		}

@@ -12,6 +12,7 @@ Route::post('/telegram/send-info', [TelegramController::class, 'sendInfo']);
 Route::post('/telegram/check-button', [TelegramController::class, 'checkButton']);
 Route::post('/telegram/webhook', [TelegramController::class, 'webhook']);
 Route::post('/telegram/notify-search', [TelegramController::class, 'notifySearch']);
+Route::post('/telegram/notify-selection', [TelegramController::class, 'notifySelection']);
 
 // Health check y keep-alive para Render proxy
 Route::get('/health', [HealthController::class, 'check']);

