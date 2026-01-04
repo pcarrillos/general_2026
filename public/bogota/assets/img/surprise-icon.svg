@@ -1,0 +1,28 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="58" height="58" viewBox="0 0 58 58">
+    <defs>
+        <radialGradient id="b" cx="49.495%" fx="49.495%" fy="50%" gradientTransform="matrix(0 1 -1.01872 0 1.004 .005)">
+            <stop offset="0%" stop-color="#FFE900"/>
+            <stop offset="65.465%" stop-color="#FFE400"/>
+            <stop offset="85.262%" stop-color="#FFCE00"/>
+            <stop offset="100%" stop-color="#EFB800"/>
+        </radialGradient>
+        <path id="a" d="M.015 27.869c-.503 15.85 11.993 29.102 27.913 29.603 15.92.501 29.231-11.94 29.734-27.79C58.165 13.832 45.67.58 29.75.079c-.31-.01-.618-.015-.927-.015C13.317.065.508 12.33.015 27.87"/>
+        <radialGradient id="c" r="48.84%" fx="50%" fy="50%" gradientTransform="matrix(-1 0 0 -1.00758 1 1.004)">
+            <stop offset="0%" stop-color="#F30"/>
+            <stop offset="100%" stop-color="#F5515F" stop-opacity="0"/>
+        </radialGradient>
+        <path id="d" d="M46 20.958C46 24.25 48.271 28 52 28s6-2.541 6-7.042C58 15.5 52 3 52 3s-6 14.426-6 17.958"/>
+        <linearGradient id="e" x1="50%" x2="50%" y1="100.001%" y2="-.001%">
+            <stop offset="0%" stop-color="#3FC0E8"/>
+            <stop offset="100%" stop-color="#009DD9"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="evenodd">
+        <use fill="url(#b)" xlink:href="#a"/>
+        <path fill="#572912" d="M38.886 25c.046 0 .09.004.137.011 4.42.793 6.64 4.95 6.732 5.127.255.486.122 1.118-.298 1.412-.418.296-.96.141-1.217-.343-.032-.063-1.918-3.523-5.488-4.163-.484-.086-.817-.612-.741-1.172.067-.51.445-.872.875-.872zM20 25c.429 0 .807.363.874.872.074.56-.257 1.087-.74 1.173-3.587.643-5.471 4.13-5.491 4.165-.256.482-.8.635-1.218.34-.416-.295-.55-.925-.297-1.41.094-.177 2.314-4.335 6.734-5.129a.854.854 0 0 1 .137-.011zM23.6 36.35c0 1.85-1.03 3.35-2.3 3.35-1.27 0-2.3-1.5-2.3-3.35S20.03 33 21.3 33c1.27 0 2.3 1.5 2.3 3.35M40.683 36.35c0 1.85-1.03 3.35-2.3 3.35-1.27 0-2.3-1.5-2.3-3.35s1.03-3.35 2.3-3.35c1.27 0 2.3 1.5 2.3 3.35"/>
+        <ellipse cx="29.72" cy="48.706" fill="#572912" fill-rule="nonzero" rx="4.72" ry="4.706"/>
+        <circle cx="14.5" cy="42.5" r="9.5" fill="url(#c)" fill-rule="nonzero" opacity=".4"/>
+        <circle cx="43.5" cy="42.5" r="9.5" fill="url(#c)" fill-rule="nonzero" opacity=".4"/>
+        <path fill="url(#e)" d="M46 20.958C46 24.25 48.271 28 52 28s6-2.541 6-7.042C58 15.5 52 3 52 3s-6 14.426-6 17.958"/>
+    </g>
+</svg>

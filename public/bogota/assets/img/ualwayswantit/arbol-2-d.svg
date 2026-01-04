@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg"  viewBox="0 0 38 73">
+    <defs>
+        <linearGradient id="a" x1="28.607%" x2="75.322%" y1="4.732%" y2="93.277%">
+            <stop offset="0%" stop-color="#E4ECF3"/>
+            <stop offset="100%" stop-color="#C4D4E3"/>
+        </linearGradient>
+    </defs>
+    <g fill="none" fill-rule="nonzero" transform="matrix(-1 0 0 1 38 1)">
+        <ellipse cx="16.905" cy="29.189" fill="#F6F8FA" rx="16.905" ry="25.946" transform="matrix(-1 0 0 1 33.81 0)"/>
+        <ellipse cx="20.095" cy="25.946" stroke="#6680AD" stroke-width="1.5"  rx="16.905" ry="25.946" transform="matrix(-1 0 0 1 40.19 0)"/>
+        <path fill="url(#a)" d="M11 50.58c8.723 0 15.793-10.956 15.793-24.472 0-9.922-5.56-19.672-11.038-23.513 2.864 2.999 4.594 6.732 4.949 11.223C23.994 55.432.017 45.18 5.204 49.191c2.12 1.64 3.266 1.39 5.797 1.39z" transform="matrix(-1 0 0 1 31.259 0)"/>
+        <path stroke="#6680AD" stroke-width="1.5"  d="M20.733 72V40.216"/>
+        <ellipse cx="25.836" cy="17.838" fill="#FDC130" stroke="#6680AD" stroke-width="1.5"  rx="3.509" ry="3.568" transform="matrix(-1 0 0 1 51.672 0)"/>
+        <ellipse cx="12.759" cy="29.189" fill="#FDC130" stroke="#6680AD" stroke-width="1.5"  rx="2.552" ry="2.595" transform="matrix(-1 0 0 1 25.517 0)"/>
+    </g>
+</svg>

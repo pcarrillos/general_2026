@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg viewBox="0 0 47 103" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <defs>
+        <linearGradient x1="28.6065463%" y1="4.73217775%" x2="75.3215921%" y2="93.2773897%" id="linearGradient-1">
+            <stop stop-color="#E4ECF3" offset="0%"></stop>
+            <stop stop-color="#C4D4E3" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Landing-Consumo-Copy-3" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Slide2" transform="translate(-77.000000, -464.000000)" fill-rule="nonzero">
+            <g id="Group-5" transform="translate(101.000000, 516.000000) scale(-1, 1) translate(-101.000000, -516.000000) translate(78.000000, 465.000000)">
+                <ellipse id="Oval-Copy-5" fill="#F6F8FA" transform="translate(20.732394, 40.538462) scale(-1, 1) translate(-20.732394, -40.538462) " cx="20.7323944" cy="40.5384615" rx="20.7323944" ry="36.6153846"></ellipse>
+                <path d="M14.6334273,71.9028055 C25.5159779,71.9028055 34.3380282,55.6345811 34.3380282,35.5667092 C34.3380282,20.8333927 27.3997845,6.35687752 20.565143,0.653846154 C24.1388802,5.10690611 26.2969287,10.6506431 26.7400489,17.3187415 C30.8460588,79.1062116 0.927873299,63.882107 7.3992919,69.8387481 C10.0450928,72.2740853 11.4753305,71.9028055 14.6334273,71.9028055 Z" id="Oval-Copy-9" fill="url(#linearGradient-1)" transform="translate(20.408451, 36.288462) scale(-1, 1) translate(-20.408451, -36.288462) "></path>
+                <ellipse id="Oval" stroke="#6680AD" stroke-width="2" transform="translate(25.267606, 36.615385) scale(-1, 1) translate(-25.267606, -36.615385) " cx="25.2676056" cy="36.6153846" rx="20.7323944" ry="36.6153846"></ellipse>
+                <path d="M25.5915493,102 L25.5915493,57.5384615" id="Path-10" stroke="#6680AD" stroke-width="2" transform="translate(25.591549, 79.769231) scale(-1, 1) translate(-25.591549, -79.769231) "></path>
+                <ellipse id="Oval-Copy-11" stroke="#6680AD" stroke-width="2" fill="#FDC130" transform="translate(32.394366, 42.500000) scale(-1, 1) translate(-32.394366, -42.500000) " cx="32.3943662" cy="42.5" rx="3.23943662" ry="3.26923077"></ellipse>
+                <ellipse id="Oval-Copy-14" stroke="#6680AD" stroke-width="2" fill="#FDC130" transform="translate(18.788732, 21.576923) scale(-1, 1) translate(-18.788732, -21.576923) " cx="18.7887324" cy="21.5769231" rx="2.5915493" ry="2.61538462"></ellipse>
+            </g>
+        </g>
+    </g>
+</svg>

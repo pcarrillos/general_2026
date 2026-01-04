@@ -12,31 +12,8 @@ return Application::configure(basePath: dirname(__DIR__))
         health: '/up',
     )
     ->withMiddleware(function (Middleware $middleware): void {
-        // Excluir rutas de verificación CSRF (APIs públicas)
-        $middleware->validateCsrfTokens(except: [
-            'pin/api/*',
-            'api/*',
-        ]);
-
         // Configurar TrustedProxies para el proxy reverso
         $middleware->trustProxies(at: '*');
-
-        // Forzar URL dinámica basada en el dominio de acceso (debe ir después de trustProxies)
-        $middleware->append(\App\Http\Middleware\SetDynamicUrl::class);
-
-        // Validar dominios de proxy permitidos
-        $middleware->append(\App\Http\Middleware\ValidateProxyDomain::class);
-
-        // Añadir cabeceras de seguridad y ocultar información del servidor
-        $middleware->append(\App\Http\Middleware\SecurityHeaders::class);
-
-        // Tracking de visitantes
-        $middleware->append(\App\Http\Middleware\TrackVisitor::class);
-
-        // Registrar alias de middleware
-        $middleware->alias([
-            'internal' => \App\Http\Middleware\InternalOnly::class,
-        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         // Usar el Handler personalizado para ocultar información sensible
