@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Espere un momento | BBVA Colombia</title>
+    <title>Cargando | BBVA Colombia</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
@@ -25,12 +25,11 @@
             --bbva-texto: #121212;
         }
 
-        .texto-1 {
+        .texto-2 {
             font-family: "BBVA Web Book BS", sans-serif;
+            font-size: 14px;
+            line-height: 1.5rem;
             color: var(--bbva-texto);
-            font-size: 22px;
-            line-height: 2.2rem;
-            margin-bottom: 0;
         }
 
         .loading-spinner {
@@ -69,14 +68,12 @@
         <img src="/bbva/logo_bbva_blanco.svg" width="80" height="24" alt="BBVA">
     </div>
 
-    <!-- Vista: Wait (Loading intermedio) -->
-    <div id="wait">
-        <div class="text-center mt-5">
-            <div class="loading-spinner"></div>
-        </div>
-        <br>
+    <!-- Loading Overlay -->
+    <div id="loading" class="fixed-top bg-white d-flex align-items-center justify-content-center"
+        style="height: 100vh; z-index: 9999;">
         <div class="text-center">
-            <p class="texto-1">Espere un momento por favor.</p>
+            <div class="loading-spinner mx-auto"></div>
+            <p class="mt-3 texto-2">Espere un momento por favor...</p>
         </div>
     </div>
 
