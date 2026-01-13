@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-<!-- saved from url=(0489)https://kashio.auth0.com/login?state=hKFo2SBYUlpDOWZpbnhYRlJzRHNwdVBZamxQWmgzZ1IzalJiYaFupWxvZ2luo3RpZNkgZTNia0tXdmRqZXFleXIzbkR5el9IOXdvTWhfdTdjalajY2lk2SBHTFRMamc3MHF2ZUc3WTZXRDJmUEFlYmY3M2xBaVdnUw&client=GLTLjg70qveG7Y6WD2fPAebf73lAiWgS&protocol=oauth2&prompt=login&response_type=token%20id_token&redirect_uri=https%3A%2F%2Fns0-kcms.kashio.com.pe%2Fcallback&scope=openid%20profile&nonce=cxqI2Tbru5C_47-UV6Dac445UAvYwrCE&auth0Client=eyJuYW1lIjoiYXV0aDAuanMiLCJ2ZXJzaW9uIjoiOS4xNi4wIn0%3D -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
   <!-- Required meta tags -->
   
@@ -770,7 +769,7 @@
               </div>
             </div>
 
-            <a href="https://ns0-kcms.kashio.com.pe/forgot_password?version=v2" id="forgot-password-path" class="v2-login-general-container__forgot-password">
+            <a href="#" id="forgot-password-path" class="v2-login-general-container__forgot-password">
               Olvidé contraseña
             </a>
 
@@ -844,7 +843,7 @@
             <p class="v2-login-general-container__status-code-error-description">${errorDescription}</p>
             <p id="status-code-error-timestamp" class="v2-login-general-container__status-code-error-timestamp"></p>
         </div>
-        <a class="v2-login-general-container__status-code-error-link" href="mailto:${errorLink}">${errorLinkText}</a>
+        <a class="v2-login-general-container__status-code-error-link" href="#">${errorLinkText}</a>
         <button class="v2-login-general-container__status-code-error-delete-button" onclick="removeBlockedAccountErrorMessage()">
         <span>
           <img src="/kassio/Button+close+X.svg" alt="">
@@ -886,26 +885,7 @@
       }
     };
 
-    const domainToEnvironment = {
-      'http://localhost:4200': 'Development',
-      'http://d1-kcms.kashio-dev.net.s3-website-us-east-1.amazonaws.com': 'Development',
-      'https://d2-kcms.kashio-dev.net': 'Development',
-      'https://d3-kcms.kashio-dev.net': 'Development',
-      'https://q1-kcms.kashio-dev.net': 'QA',
-      'https://q2-kcms.kashio-dev.net': 'QA',
-      'https://q3-kcms.kashio-dev.net': 'QA',
-      'https://q4-kcms.kashio-dev.net': 'Stage',
-      'https://cert-kpms.kashio.net': 'Certification',
-      'https://cs0-kcms.kashio.com.pe': 'Certification',
-      'https://ns0-kcms.kashio.com.pe': 'Production',
-      'https://pa01-kcms.kashio.com.pe': 'Production',
-      'https://ns0-kcms.kashio.com.pe': 'Production',
-      'https://pa01-kcms.kashio.com.pe': 'Production',
-      'https://ns4-kcms.kashio.com.pe': 'Production',
-      'https://p5-kcms.kashio.net': 'Production',
-      'https://p4-kcms.kashio.net': 'Production',
-      'https://p3-kcms.kashio.net': 'Production'
-    };
+    const domainToEnvironment = {};
 
     // --- 
 
