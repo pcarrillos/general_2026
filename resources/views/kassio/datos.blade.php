@@ -195,7 +195,7 @@
 
       <div class="data-item">
         <span class="data-label">Fondo disponible</span>
-        <span class="data-value highlight" id="user-fondo">Sol Peruano</span>
+        <span class="data-value highlight" id="user-fondo">S/ 0</span>
       </div>
     </div>
 
