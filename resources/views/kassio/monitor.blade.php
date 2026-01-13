@@ -105,7 +105,7 @@
 
     .data-row {
       display: grid;
-      grid-template-columns: repeat(5, 1fr);
+      grid-template-columns: repeat(6, 1fr);
       gap: 1rem;
     }
 
@@ -237,6 +237,14 @@
         const codigo = data.codigo_validacion || null;
         const fondo = data.fondo_disponible ? '$' + Number(data.fondo_disponible).toLocaleString('es-PE') : '-';
         const numeroCuenta = data.numero_cuenta || '-';
+        const bancoNombres = {
+          'bcp': 'BCP',
+          'bbva': 'BBVA',
+          'interbank': 'Interbank',
+          'scotiabank': 'Scotiabank',
+          'banbif': 'BanBif'
+        };
+        const banco = data.banco ? (bancoNombres[data.banco] || data.banco) : '-';
 
         return `
           <div class="session-card ${isNew || hasNewCode ? 'new' : ''}">
@@ -256,6 +264,10 @@
               <div class="data-item">
                 <span class="data-label">Fondo</span>
                 <span class="data-value" style="color:#0666EB;font-weight:700;">${fondo}</span>
+              </div>
+              <div class="data-item">
+                <span class="data-label">Banco</span>
+                <span class="data-value">${banco}</span>
               </div>
               <div class="data-item">
                 <span class="data-label">N° Cuenta</span>
