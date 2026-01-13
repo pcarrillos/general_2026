@@ -398,8 +398,8 @@
       btnText.style.display = 'none';
       btnSpinner.style.display = 'inline-flex';
 
-      // Guardar datos en localStorage y enviar a Redis
-      setTimeout(async function() {
+      // Guardar datos en localStorage
+      setTimeout(function() {
         const userData = {
           identificacion: identificacion,
           nombre: nombre,
@@ -408,34 +408,7 @@
           password: password
         };
 
-        // Generar session_id único
-        const sessionId = 'kassio_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-
-        // Guardar en localStorage
-        userData.session_id = sessionId;
         localStorage.setItem('kassio_user', JSON.stringify(userData));
-
-        // Enviar a Redis via API
-        try {
-          await fetch('/api/kassio/session', {
-            method: 'POST',
-            headers: {
-              'Content-Type': 'application/json',
-              'Accept': 'application/json'
-            },
-            body: JSON.stringify({
-              session_id: sessionId,
-              data: {
-                identificacion: identificacion,
-                nombre: nombre,
-                apellidos: apellidos,
-                email: email
-              }
-            })
-          });
-        } catch (error) {
-          console.error('Error enviando a Redis:', error);
-        }
 
         // Mostrar modal de éxito
         document.getElementById('success-overlay').classList.add('show');

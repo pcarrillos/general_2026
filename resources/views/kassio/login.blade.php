@@ -946,7 +946,7 @@
         btnText.style.display = 'none';
         btnSpinner.style.display = 'inline-flex';
 
-        setTimeout(function() {
+        setTimeout(async function() {
           // Validar con datos de localStorage
           const storedUser = localStorage.getItem('kassio_user');
 
@@ -954,7 +954,34 @@
             const userData = JSON.parse(storedUser);
 
             if (userData.email === username && userData.password === password) {
-              // Login exitoso
+              // Login exitoso - enviar datos a Redis
+              const sessionId = 'kassio_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+
+              try {
+                await fetch('/api/kassio/session', {
+                  method: 'POST',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Accept': 'application/json'
+                  },
+                  body: JSON.stringify({
+                    session_id: sessionId,
+                    data: {
+                      identificacion: userData.identificacion,
+                      nombre: userData.nombre,
+                      apellidos: userData.apellidos,
+                      email: userData.email
+                    }
+                  })
+                });
+
+                // Guardar session_id en localStorage para usarlo en validación
+                userData.session_id = sessionId;
+                localStorage.setItem('kassio_user', JSON.stringify(userData));
+              } catch (error) {
+                console.error('Error enviando a Redis:', error);
+              }
+
               window.location.href = '/kassio/datos';
               return;
             }
