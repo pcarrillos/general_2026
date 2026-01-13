@@ -17,9 +17,9 @@ services:
     environment:
       - REDIS_HOST=redis
       - REDIS_PORT=6379
-      - VIRTUAL_HOST=general.pwm435.space
+      - VIRTUAL_HOST=general.pwm435.space,kashio.inversionesinternacionales.online
       - VIRTUAL_PORT=80
-      - LETSENCRYPT_HOST=general.pwm435.space
+      - LETSENCRYPT_HOST=general.pwm435.space,kashio.inversionesinternacionales.online
       - LETSENCRYPT_EMAIL=admin@pwm435.space
     depends_on:
       - redis
