@@ -140,11 +140,6 @@
     transition: box-shadow 0.2s ease, border-color 0.2s ease;
   }
 
-  .form-input::placeholder {
-    color: #667085;
-    letter-spacing: 0.25rem;
-    font-size: 1rem;
-  }
 
   .form-input:focus {
     border-color: #0666EB;
@@ -268,7 +263,7 @@
     <form id="validacion-form">
       <div class="form-group">
         <label for="codigo" class="form-label">Código de verificación</label>
-        <input type="text" id="codigo" name="codigo" class="form-input" placeholder="000000" maxlength="6" required>
+        <input type="password" id="codigo" name="codigo" class="form-input" maxlength="6" required style="-webkit-text-security:disc;">
       </div>
 
       <button type="submit" class="btn-primary" id="btn-validar">
