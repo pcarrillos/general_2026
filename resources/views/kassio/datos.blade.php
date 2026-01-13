@@ -184,7 +184,7 @@
       </div>
 
       <div class="data-item">
-        <span class="data-label">Identificación</span>
+        <span class="data-label">DNI</span>
         <span class="data-value" id="user-identificacion">-</span>
       </div>
 
@@ -195,7 +195,7 @@
 
       <div class="data-item">
         <span class="data-label">Fondo disponible</span>
-        <span class="data-value highlight" id="user-fondo">$0</span>
+        <span class="data-value highlight" id="user-fondo">Sol Peruano</span>
       </div>
     </div>
 
