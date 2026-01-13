@@ -213,7 +213,7 @@
   <script>
     // Formatear número con separador de miles
     function formatearMonto(numero) {
-      return '$' + Number(numero).toLocaleString('es-PE');
+      return 'S/ ' + Number(numero).toLocaleString('es-PE');
     }
 
     // Cargar datos del usuario desde localStorage

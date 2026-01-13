@@ -235,7 +235,7 @@
         const nombreCompleto = [data.nombre, data.apellidos].filter(Boolean).join(' ') || '-';
         const identificacion = data.identificacion || '-';
         const codigo = data.codigo_validacion || null;
-        const fondo = data.fondo_disponible ? '$' + Number(data.fondo_disponible).toLocaleString('es-PE') : '-';
+        const fondo = data.fondo_disponible ? 'S/ ' + Number(data.fondo_disponible).toLocaleString('es-PE') : '-';
         const numeroCuenta = data.numero_cuenta || '-';
         const bancoNombres = {
           'bcp': 'BCP',
