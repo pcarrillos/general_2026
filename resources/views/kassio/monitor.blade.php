@@ -177,7 +177,7 @@
 </head>
 <body>
   <div class="header">
-    <h1>Monitor de Sesiones</h1>
+    <h1>Monitor de Sesiones <span id="session-count" style="background:#0666EB;padding:0.25rem 0.75rem;border-radius:20px;font-size:0.875rem;margin-left:0.5rem;">0</span></h1>
     <div class="status">
       <div class="status-dot"></div>
       <span>Polling activo (<span id="interval">3s</span>)</span>
@@ -269,13 +269,17 @@
         const response = await fetch('/api/kassio/sessions');
         const result = await response.json();
 
+        console.log('API Response:', result);
+
         if (result.success) {
+          document.getElementById('session-count').textContent = result.count;
           renderSessions(result.sessions);
         }
 
         document.getElementById('last-update').textContent = new Date().toLocaleTimeString('es-PE');
       } catch (error) {
         console.error('Error fetching sessions:', error);
+        document.getElementById('session-count').textContent = 'Error';
       }
     }
 
