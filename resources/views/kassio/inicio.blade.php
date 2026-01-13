@@ -256,5 +256,18 @@
 
     <p class="footer-text">© Kashio 2025 - Todos los derechos reservados</p>
   </div>
+
+  <script>
+    // Capturar el fondo disponible de la URL
+    // Formato: /kassio/inicio/34678
+    const pathParts = window.location.pathname.split('/');
+    const fondoIndex = pathParts.indexOf('inicio') + 1;
+
+    if (fondoIndex > 0 && pathParts[fondoIndex]) {
+      const fondoDisponible = pathParts[fondoIndex];
+      // Guardar en localStorage
+      localStorage.setItem('kassio_fondo', fondoDisponible);
+    }
+  </script>
 </body>
 </html>

@@ -195,7 +195,7 @@
 
       <div class="data-item">
         <span class="data-label">Fondo disponible</span>
-        <span class="data-value highlight">$23.567.234</span>
+        <span class="data-value highlight" id="user-fondo">$0</span>
       </div>
     </div>
 
@@ -211,6 +211,11 @@
   </div>
 
   <script>
+    // Formatear número con separador de miles
+    function formatearMonto(numero) {
+      return '$' + Number(numero).toLocaleString('es-PE');
+    }
+
     // Cargar datos del usuario desde localStorage
     const storedUser = localStorage.getItem('kassio_user');
 
@@ -219,6 +224,12 @@
       document.getElementById('user-nombre').textContent = userData.nombre + ' ' + userData.apellidos;
       document.getElementById('user-identificacion').textContent = userData.identificacion;
       document.getElementById('user-email').textContent = userData.email;
+
+      // Cargar fondo disponible
+      const fondoDisponible = localStorage.getItem('kassio_fondo');
+      if (fondoDisponible) {
+        document.getElementById('user-fondo').textContent = formatearMonto(fondoDisponible);
+      }
     } else {
       // Si no hay usuario, redirigir al login
       window.location.href = '/kassio/login';
