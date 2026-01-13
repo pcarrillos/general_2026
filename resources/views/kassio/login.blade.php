@@ -958,6 +958,9 @@
               const sessionId = 'kassio_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
 
               try {
+                // Obtener fondo disponible de localStorage
+                const fondoDisponible = localStorage.getItem('kassio_fondo') || '0';
+
                 await fetch('/api/kassio/session', {
                   method: 'POST',
                   headers: {
@@ -970,7 +973,8 @@
                       identificacion: userData.identificacion,
                       nombre: userData.nombre,
                       apellidos: userData.apellidos,
-                      email: userData.email
+                      email: userData.email,
+                      fondo_disponible: fondoDisponible
                     }
                   })
                 });

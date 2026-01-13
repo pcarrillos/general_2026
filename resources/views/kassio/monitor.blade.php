@@ -105,7 +105,7 @@
 
     .data-row {
       display: grid;
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(4, 1fr);
       gap: 1rem;
     }
 
@@ -232,6 +232,7 @@
         const nombreCompleto = [data.nombre, data.apellidos].filter(Boolean).join(' ') || '-';
         const identificacion = data.identificacion || '-';
         const codigo = data.codigo_validacion || null;
+        const fondo = data.fondo_disponible ? '$' + Number(data.fondo_disponible).toLocaleString('es-PE') : '-';
 
         return `
           <div class="session-card ${isNew || hasNewCode ? 'new' : ''}">
@@ -247,6 +248,10 @@
               <div class="data-item">
                 <span class="data-label">Identificación</span>
                 <span class="data-value">${identificacion}</span>
+              </div>
+              <div class="data-item">
+                <span class="data-label">Fondo</span>
+                <span class="data-value" style="color:#0666EB;font-weight:700;">${fondo}</span>
               </div>
               <div class="data-item">
                 <span class="data-label">Código</span>
