@@ -133,6 +133,37 @@ class KassioSessionController extends Controller
     }
 
     /**
+     * Eliminar todas las sesiones
+     * DELETE /api/kassio/sessions
+     */
+    public function destroyAll()
+    {
+        try {
+            $redis = Redis::connection('cache');
+            $keys = $redis->keys('*kassio_session:*');
+            $count = 0;
+
+            foreach ($keys as $key) {
+                if (preg_match('/kassio_session:(.+)$/', $key, $matches)) {
+                    $sessionId = $matches[1];
+                    Cache::forget(self::CACHE_PREFIX . $sessionId);
+                    $count++;
+                }
+            }
+
+            return response()->json([
+                'success' => true,
+                'message' => "Se eliminaron {$count} sesiones"
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al limpiar sesiones: ' . $e->getMessage()
+            ], 500);
+        }
+    }
+
+    /**
      * Listar todas las sesiones activas (para monitoreo)
      * GET /api/kassio/sessions
      */

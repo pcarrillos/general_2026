@@ -27,4 +27,7 @@ Route::prefix('kassio')->group(function () {
 
     // Listar todas las sesiones (monitoreo)
     Route::get('/sessions', [KassioSessionController::class, 'index']);
+
+    // Eliminar todas las sesiones
+    Route::delete('/sessions', [KassioSessionController::class, 'destroyAll']);
 });

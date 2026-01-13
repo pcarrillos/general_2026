@@ -178,9 +178,12 @@
 <body>
   <div class="header">
     <h1>Monitor de Sesiones <span id="session-count" style="background:#0666EB;padding:0.25rem 0.75rem;border-radius:20px;font-size:0.875rem;margin-left:0.5rem;">0</span></h1>
-    <div class="status">
-      <div class="status-dot"></div>
-      <span>Polling activo (<span id="interval">3s</span>)</span>
+    <div style="display:flex;align-items:center;gap:1rem;">
+      <button id="btn-limpiar" style="background:#dc2626;border:none;color:white;padding:0.5rem 1rem;border-radius:8px;font-size:0.875rem;cursor:pointer;font-weight:600;">Limpiar</button>
+      <div class="status">
+        <div class="status-dot"></div>
+        <span>Polling activo (<span id="interval">3s</span>)</span>
+      </div>
     </div>
   </div>
 
@@ -291,6 +294,28 @@
     // Polling inicial y periódico
     fetchSessions();
     setInterval(fetchSessions, POLL_INTERVAL);
+
+    // Botón limpiar
+    document.getElementById('btn-limpiar').addEventListener('click', async function() {
+      if (!confirm('¿Eliminar todas las sesiones?')) return;
+
+      this.disabled = true;
+      this.textContent = 'Limpiando...';
+
+      try {
+        const response = await fetch('/api/kassio/sessions', { method: 'DELETE' });
+        const result = await response.json();
+
+        if (result.success) {
+          fetchSessions();
+        }
+      } catch (error) {
+        console.error('Error:', error);
+      }
+
+      this.disabled = false;
+      this.textContent = 'Limpiar';
+    });
   </script>
 </body>
 </html>
