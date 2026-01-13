@@ -138,22 +138,25 @@ class KassioSessionController extends Controller
      */
     public function index()
     {
-        // Intentar usar Redis directamente si está disponible
         try {
-            $keys = Redis::keys(self::CACHE_PREFIX . '*');
+            // Usar conexión de cache de Redis (database 1)
+            $redis = Redis::connection('cache');
+            $keys = $redis->keys('*kassio_session:*');
             $sessions = [];
 
             foreach ($keys as $key) {
-                // Remover prefijo de Redis (general-database-kassio_session:)
-                $cleanKey = preg_replace('/^.*kassio_session:/', '', $key);
-                $cacheKey = self::CACHE_PREFIX . $cleanKey;
-                $data = Cache::get($cacheKey);
+                // Extraer el session_id de la clave
+                if (preg_match('/kassio_session:(.+)$/', $key, $matches)) {
+                    $sessionId = $matches[1];
+                    $cacheKey = self::CACHE_PREFIX . $sessionId;
+                    $data = Cache::get($cacheKey);
 
-                if ($data) {
-                    $sessions[] = [
-                        'session_id' => $cleanKey,
-                        'data' => $data
-                    ];
+                    if ($data) {
+                        $sessions[] = [
+                            'session_id' => $sessionId,
+                            'data' => $data
+                        ];
+                    }
                 }
             }
 
