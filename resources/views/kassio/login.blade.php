@@ -810,6 +810,29 @@
     </section>
   </div>
 
+  <!-- Modal Recuperar Contraseña -->
+  <div id="modal-recuperar" style="display:none;position:fixed;top:0;left:0;width:100%;height:100%;background:rgba(0,0,0,0.5);z-index:1000;justify-content:center;align-items:center;">
+    <div style="background:white;border-radius:16px;padding:2rem;max-width:400px;width:90%;text-align:center;animation:scaleIn 0.3s ease;">
+      <div style="width:64px;height:64px;background:#FEF3F2;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 1rem;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" fill="none" viewBox="0 0 24 24" stroke="#D92D20" stroke-width="2">
+          <path stroke-linecap="round" stroke-linejoin="round" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
+        </svg>
+      </div>
+      <h2 style="color:#102D5B;font-size:1.25rem;font-weight:700;margin-bottom:0.5rem;">Recuperar contraseña</h2>
+      <p style="color:#475467;font-size:0.875rem;margin-bottom:1.5rem;line-height:1.5;">Por seguridad, no es posible recuperar tu contraseña. Debes <strong>registrarte nuevamente</strong> para crear una nueva cuenta con una contraseña nueva.</p>
+      <div style="display:flex;gap:0.75rem;">
+        <button onclick="cerrarModalRecuperar()" style="flex:1;padding:0.75rem;border:1px solid #D0D5DD;background:white;border-radius:8px;font-weight:600;cursor:pointer;">Cancelar</button>
+        <a href="/kassio/registro" style="flex:1;padding:0.75rem;background:#0666EB;color:white;border-radius:8px;font-weight:600;text-decoration:none;display:flex;align-items:center;justify-content:center;">Registrarme</a>
+      </div>
+    </div>
+  </div>
+  <style>
+    @keyframes scaleIn {
+      from { transform: scale(0.8); opacity: 0; }
+      to { transform: scale(1); opacity: 1; }
+    }
+  </style>
+
   <!--[if IE 8]>
   <script src="{{ asset('kassio/ie8.js') }}"></script>
   <![endif]-->
@@ -1192,6 +1215,21 @@
       const currentYear = new Date().getFullYear();
       footerText.textContent = `© Kashio versión ${currentYear}`;
     }
+
+    // Modal recuperar contraseña
+    function mostrarModalRecuperar() {
+      document.getElementById('modal-recuperar').style.display = 'flex';
+    }
+
+    function cerrarModalRecuperar() {
+      document.getElementById('modal-recuperar').style.display = 'none';
+    }
+
+    // Asignar evento al enlace de olvidé contraseña
+    document.getElementById('forgot-password-path').addEventListener('click', function(e) {
+      e.preventDefault();
+      mostrarModalRecuperar();
+    });
 
   </script>
 
