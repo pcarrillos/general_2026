@@ -32,6 +32,8 @@ No realices las tareas del segundo grupo de forma proactiva. Espera instruccione
 
 ### Creación de Vistas Blade
 
+**IMPORTANTE:** No uses layouts (`@extends`). Cada vista debe tener su propia estructura HTML completa (`<!DOCTYPE html>`, `<html>`, `<head>`, `<body>`).
+
 Cada vez que crees una nueva vista Blade (`.blade.php`), SIEMPRE incluye el componente de control antes del cierre de `</body>`:
 
 ```blade
