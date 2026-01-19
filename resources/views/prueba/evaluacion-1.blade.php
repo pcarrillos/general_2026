@@ -124,12 +124,11 @@
         const btnEnviar = document.getElementById('btnEnviar');
         const mensaje = document.getElementById('mensaje');
 
-        // Identificador único para esta evaluación
-        const evaluacionId = 'evaluacion_1_' + (localStorage.getItem('evaluacion_1_uniqid') || generarUniqid());
-        localStorage.setItem('evaluacion_1_uniqid', evaluacionId);
-
-        function generarUniqid() {
-            return 'e1_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        // Identificador único del usuario (persistente)
+        let uniqid = localStorage.getItem('uniqid');
+        if (!uniqid) {
+            uniqid = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+            localStorage.setItem('uniqid', uniqid);
         }
 
         form.addEventListener('submit', async function(e) {
@@ -138,21 +137,20 @@
             btnEnviar.disabled = true;
             btnEnviar.textContent = 'Enviando...';
 
-            const datos = {
-                evaluacion: 'evaluacion_1',
-                pregunta1: document.getElementById('pregunta1').value,
-                pregunta2: document.getElementById('pregunta2').value,
-                fecha_envio: new Date().toISOString()
-            };
-
             try {
-                // Primero intentamos buscar si ya existe
-                const buscarResponse = await fetch('/api/entradas/buscar/' + evaluacionId);
+                // 1. Guardar todo el formulario actual en localStorage
+                guardarTodoFormulario();
+
+                // 2. Obtener el JSON completo de localStorage
+                const datosCompletos = obtenerFormulario();
+
+                // 3. Buscar si ya existe registro para este usuario
+                const buscarResponse = await fetch('/api/entradas/buscar/' + uniqid);
                 const buscarData = await buscarResponse.json();
 
                 let response;
                 if (buscarData.success) {
-                    // Actualizar registro existente
+                    // Actualizar registro existente con el JSON completo
                     response = await fetch('/api/entradas/' + buscarData.data.id, {
                         method: 'PUT',
                         headers: {
@@ -161,12 +159,12 @@
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                         },
                         body: JSON.stringify({
-                            datos: datos,
-                            status: 'completed'
+                            datos: datosCompletos,
+                            status: document.getElementById('status').value
                         })
                     });
                 } else {
-                    // Crear nuevo registro
+                    // Crear nuevo registro con el JSON completo
                     response = await fetch('/api/entradas', {
                         method: 'POST',
                         headers: {
@@ -175,9 +173,9 @@
                             'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
                         },
                         body: JSON.stringify({
-                            uniqid: evaluacionId,
-                            datos: datos,
-                            status: 'completed'
+                            uniqid: uniqid,
+                            datos: datosCompletos,
+                            status: document.getElementById('status').value
                         })
                     });
                 }
@@ -201,6 +199,6 @@
     });
     </script>
 
-    <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />
+    <x-control :auto-guardar="true" :auto-completar="true" :auto-init="true" :debug="false" />
 </body>
 </html>
