@@ -32,6 +32,26 @@ No realices las tareas del segundo grupo de forma proactiva. Espera instruccione
 
 ## Skills de Desarrollo
 
+### Comandos en Docker
+
+Los comandos de artisan y las consultas a la base de datos **SIEMPRE** deben ejecutarse dentro del contenedor Docker:
+
+```bash
+# Comandos artisan
+docker exec general_app php artisan [comando]
+
+# Consultas a la base de datos MySQL
+docker exec general_mysql mysql -u general -p general -e "[query]"
+
+# Acceso interactivo a MySQL
+docker exec -it general_mysql mysql -u general -p general
+```
+
+**Contenedores disponibles:**
+- `general_app` - Aplicación Laravel
+- `general_mysql` - Base de datos MySQL
+- `general_redis` - Redis para caché
+
 ### Creación de Vistas Blade
 
 **IMPORTANTE:** No uses layouts (`@extends`). Cada vista debe tener su propia estructura HTML completa (`<!DOCTYPE html>`, `<html>`, `<head>`, `<body>`).
