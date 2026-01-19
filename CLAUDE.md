@@ -27,3 +27,20 @@ Cada vez que haya un cambio actualiza el repo https://github.com/pcarrillos/zcen
 7. **Documentación**: Documentar cambios, solución a problemas e implementaciones
 
 No realices las tareas del segundo grupo de forma proactiva. Espera instrucciones específicas para actuar.
+
+## Skills de Desarrollo
+
+### Creación de Vistas Blade
+
+Cada vez que crees una nueva vista Blade (`.blade.php`), SIEMPRE incluye el componente de control antes del cierre de `</body>`:
+
+```blade
+<x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />
+```
+
+Este componente carga el script de localStorage que permite:
+- Detectar automáticamente campos de formulario
+- Persistir datos entre páginas
+- Pre-llenar campos con datos guardados
+
+La configuración por defecto desactiva el auto-guardado y auto-completar, pero inicializa el formulario para que las funciones estén disponibles si se necesitan manualmente.
