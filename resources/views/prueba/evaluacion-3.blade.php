@@ -110,6 +110,7 @@
                     <input type="text" id="pregunta2" name="pregunta2" placeholder="Escribe tu respuesta" required>
                 </div>
 
+                <input type="hidden" id="status" name="status" value="evaluacion-3">
                 <button type="submit" class="btn-enviar" id="btnEnviar">Enviar Respuestas</button>
             </form>
 
