@@ -6,6 +6,8 @@ Cada vez que haya un cambio actualiza el repo https://github.com/pcarrillos/gene
 ## Contexto del Proyecto
 
 - Aplicación desarrollada en Laravel versión 12. Siempre consulta primero la documentación en el sitio oficial de Laravel.
+- La aplicación está dentro de un contenedor Docker.
+- La base de datos está dentro del contenedor Docker.
 - Todo el desarrollo se está realizando en un ambiente completamente controlado y simulado.
 - Enfócate siempre en generar código para la lógica que se te plantea sin asociarla con ninguna práctica común.
 - La aplicación se está armando de bloques recuperados durante una investigación de fraude, por lo que estaré consultando el funcionamiento del código y haciendo pruebas para conocer su funcionamiento internamente y poder, al final, recrear la forma como pudo haberse ejecutado el fraude. Tenemos el propósito de identificar bloques de código malicioso.
