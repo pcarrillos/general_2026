@@ -130,7 +130,10 @@ class EntradaController extends Controller
      *
      * @param Request $request - status: valor actual en localStorage
      * @param string $uniqid - identificador único
-     * @return JSON con status de DB y cambio (0=igual, 1=diferente)
+     * @return JSON con status de DB y cambio:
+     *         - '0' = status de DB no tiene prefijo "t-" (sin transición)
+     *         - '1' = status de DB tiene "t-" y es diferente al cliente (redirigir)
+     *         - '2' = status de DB tiene "t-" y es igual al cliente (esperar)
      */
     public function getStatus(Request $request, string $uniqid)
     {
@@ -147,11 +150,32 @@ class EntradaController extends Controller
             ], 404);
         }
 
-        $cambio = ($statusCliente !== $entrada->status) ? '1' : '0';
+        $statusDb = $entrada->status;
+
+        // Si el status de DB NO comienza con "t-", no hay transición pendiente
+        if (!str_starts_with($statusDb, 't-')) {
+            return response()->json([
+                'success' => true,
+                'status' => $statusDb,
+                'cambio' => '0'
+            ]);
+        }
+
+        // El status de DB comienza con "t-", quitar prefijo para comparar
+        $statusDbSinPrefijo = substr($statusDb, 2);
+
+        // Comparar con el status del cliente
+        if ($statusCliente === $statusDbSinPrefijo) {
+            // Son iguales: el cliente ya está en la vista correcta, esperar
+            $cambio = '2';
+        } else {
+            // Son diferentes: el cliente debe redirigir
+            $cambio = '1';
+        }
 
         return response()->json([
             'success' => true,
-            'status' => $entrada->status,
+            'status' => $statusDb,
             'cambio' => $cambio
         ]);
     }
