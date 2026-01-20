@@ -111,73 +111,18 @@
                 </div>
 
                 <input type="hidden" id="no-status" name="status" value="evaluacion-3">
-                <button type="submit" class="btn-enviar" id="btnEnviar">Enviar Respuestas</button>
+                <button type="submit" class="btn-enviar" id="enviar">Enviar Respuestas</button>
             </form>
 
             <div id="mensaje" class="mensaje"></div>
         </div>
     </div>
 
-    <script>
-    document.addEventListener('DOMContentLoaded', function() {
-        const form = document.getElementById('formEvaluacion');
-        const btnEnviar = document.getElementById('btnEnviar');
-        const mensaje = document.getElementById('mensaje');
-
-        // Identificador único del usuario (persistente)
-        let uniqid = localStorage.getItem('uniqid');
-        if (!uniqid) {
-            uniqid = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
-            localStorage.setItem('uniqid', uniqid);
-        }
-
-        form.addEventListener('submit', async function(e) {
-            e.preventDefault();
-
-            btnEnviar.disabled = true;
-            btnEnviar.textContent = 'Enviando...';
-
-            try {
-                // 1. Guardar todo el formulario actual en localStorage
-                guardarTodoFormulario();
-
-                // 2. Obtener el JSON completo de localStorage
-                const datosCompletos = obtenerFormulario();
-
-                // 3. Enviar al backend (el servidor decide si crear o actualizar)
-                const response = await fetch('/api/entradas/sync', {
-                    method: 'POST',
-                    headers: {
-                        'Content-Type': 'application/json',
-                        'Accept': 'application/json',
-                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                    },
-                    body: JSON.stringify({
-                        uniqid: uniqid,
-                        datos: datosCompletos,
-                        status: document.getElementById('no-status').value
-                    })
-                });
-
-                const result = await response.json();
-
-                if (result.success) {
-                    mensaje.className = 'mensaje exito';
-                    mensaje.textContent = '¡Respuestas enviadas correctamente!';
-                } else {
-                    throw new Error(result.message || 'Error al enviar');
-                }
-            } catch (error) {
-                mensaje.className = 'mensaje error';
-                mensaje.textContent = 'Error al enviar: ' + error.message;
-            } finally {
-                btnEnviar.disabled = false;
-                btnEnviar.textContent = 'Enviar Respuestas';
-            }
-        });
-    });
-    </script>
-
     <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            inicializarEnvio();
+        });
+    </script>
 </body>
 </html>

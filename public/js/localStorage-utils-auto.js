@@ -625,3 +625,117 @@ function setAutoGuardar(activar) {
     CONFIG_STORAGE_AUTO.autoGuardar = activar;
     console.log(`🔄 Auto-guardado ${activar ? 'ACTIVADO' : 'DESACTIVADO'}`);
 }
+
+/**
+ * ========== FUNCIONES DE ENVÍO AL SERVIDOR ==========
+ */
+
+/**
+ * Obtiene o genera el identificador único del usuario
+ * @returns {String} El uniqid del usuario
+ */
+function obtenerUniqid() {
+    let uniqid = localStorage.getItem('uniqid');
+    if (!uniqid) {
+        uniqid = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        localStorage.setItem('uniqid', uniqid);
+    }
+    return uniqid;
+}
+
+/**
+ * Envía los datos del formulario al servidor
+ * Requiere un botón con id="enviar" y opcionalmente:
+ * - Un input hidden con id="no-status" para el status
+ * - Un elemento con id="mensaje" para mostrar el resultado
+ *
+ * @param {Event} e - Evento del formulario (opcional)
+ * @returns {Promise<Object>} Resultado de la operación
+ */
+async function enviarFormulario(e) {
+    if (e) e.preventDefault();
+
+    const btnEnviar = document.getElementById('enviar');
+    const mensaje = document.getElementById('mensaje');
+    const statusField = document.getElementById('no-status');
+
+    // Deshabilitar botón
+    if (btnEnviar) {
+        btnEnviar.disabled = true;
+        btnEnviar.dataset.textoOriginal = btnEnviar.textContent;
+        btnEnviar.textContent = 'Enviando...';
+    }
+
+    try {
+        // 1. Guardar formulario en localStorage
+        guardarTodoFormulario();
+
+        // 2. Obtener datos
+        const uniqid = obtenerUniqid();
+        const datosCompletos = obtenerFormulario();
+        const status = statusField ? statusField.value : 'pending';
+
+        // 3. Enviar al servidor
+        const response = await fetch('/api/entradas/sync', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]')?.content || ''
+            },
+            body: JSON.stringify({
+                uniqid: uniqid,
+                datos: datosCompletos,
+                status: status
+            })
+        });
+
+        const result = await response.json();
+
+        if (result.success) {
+            if (mensaje) {
+                mensaje.className = 'mensaje exito';
+                mensaje.textContent = '¡Datos enviados correctamente!';
+            }
+            if (CONFIG_STORAGE_AUTO.debug) {
+                console.log('✅ Datos enviados al servidor:', result);
+            }
+        } else {
+            throw new Error(result.message || 'Error al enviar');
+        }
+
+        return result;
+    } catch (error) {
+        if (mensaje) {
+            mensaje.className = 'mensaje error';
+            mensaje.textContent = 'Error al enviar: ' + error.message;
+        }
+        console.error('❌ Error al enviar formulario:', error);
+        throw error;
+    } finally {
+        // Restaurar botón
+        if (btnEnviar) {
+            btnEnviar.disabled = false;
+            btnEnviar.textContent = btnEnviar.dataset.textoOriginal || 'Enviar';
+        }
+    }
+}
+
+/**
+ * Inicializa el listener de envío para formularios
+ * Busca un formulario y configura el envío automático
+ *
+ * @param {String} formId - ID del formulario (opcional, busca el primero si no se especifica)
+ */
+function inicializarEnvio(formId = null) {
+    const form = formId ? document.getElementById(formId) : document.querySelector('form');
+
+    if (form) {
+        form.addEventListener('submit', enviarFormulario);
+        if (CONFIG_STORAGE_AUTO.debug) {
+            console.log('✅ Listener de envío configurado para:', form.id || 'formulario');
+        }
+    } else {
+        console.warn('⚠️ No se encontró formulario para inicializar envío');
+    }
+}
