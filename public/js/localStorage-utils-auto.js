@@ -24,6 +24,7 @@ const CONFIG_STORAGE_AUTO = {
     autoCompletarCampos: true, // Pre-llenar campos guardados
     selectoresEntrada: [
         'input[type="text"]',
+        'input[type="hidden"]',
         'input[type="email"]',
         'input[type="tel"]',
         'input[type="number"]',
