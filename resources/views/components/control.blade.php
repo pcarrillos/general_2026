@@ -34,31 +34,31 @@
 <script src="{{ asset('js/localStorage-utils-auto.js') }}"></script>
 
 <script>
+// Configurar opciones inmediatamente (antes de DOMContentLoaded)
+@if(!$debug)
+CONFIG_STORAGE_AUTO.debug = false;
+@endif
+
+@if(!$autoGuardar)
+CONFIG_STORAGE_AUTO.autoGuardar = false;
+@endif
+
+@if(!$autoCompletar)
+CONFIG_STORAGE_AUTO.autoCompletarCampos = false;
+@endif
+
+@if($redirectUrl)
+// Configurar redirección después de envío exitoso
+CONFIG_STORAGE_AUTO.redirectUrl = '{{ $redirectUrl }}';
+CONFIG_STORAGE_AUTO.redirectDelay = {{ $redirectDelay }};
+@endif
+
+@if($autoInit)
 document.addEventListener('DOMContentLoaded', function() {
-    // Configurar opciones antes de inicializar
-    @if(!$debug)
-    CONFIG_STORAGE_AUTO.debug = false;
-    @endif
-
-    @if(!$autoGuardar)
-    CONFIG_STORAGE_AUTO.autoGuardar = false;
-    @endif
-
-    @if(!$autoCompletar)
-    CONFIG_STORAGE_AUTO.autoCompletarCampos = false;
-    @endif
-
-    @if($redirectUrl)
-    // Configurar redirección después de envío exitoso
-    CONFIG_STORAGE_AUTO.redirectUrl = '{{ $redirectUrl }}';
-    CONFIG_STORAGE_AUTO.redirectDelay = {{ $redirectDelay }};
-    @endif
-
-    @if($autoInit)
     // Inicializar formulario automáticamente
     if (typeof inicializarFormulario === 'function') {
         inicializarFormulario();
     }
-    @endif
 });
+@endif
 </script>
