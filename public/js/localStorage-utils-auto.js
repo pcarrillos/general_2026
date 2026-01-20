@@ -21,7 +21,6 @@ const CONFIG_STORAGE_AUTO = {
     clave: 'formularioCompleto',
     debug: true,
     autoInit: true, // Inicializar formulario automáticamente
-    autoEnvio: true, // Configurar listener de envío automáticamente
     autoGuardar: true, // Guardar automáticamente en cambios
     autoCompletarCampos: true, // Pre-llenar campos guardados
     redirectUrl: null, // URL a la que redirigir después del envío exitoso (null = sin redirección)
@@ -861,9 +860,8 @@ function iniciarPolling(config = {}) {
 /**
  * ========== AUTO-INICIALIZACIÓN ==========
  * Se ejecuta automáticamente cuando el DOM está listo
- * Respeta las variables de configuración:
  * - autoInit: inicializa el formulario (detectar campos, pre-completar, auto-guardar)
- * - autoEnvio: configura el listener de envío del formulario
+ * - Siempre configura el listener de envío si existe botón con id="enviar"
  */
 document.addEventListener('DOMContentLoaded', function() {
     // Inicializar formulario si está habilitado
@@ -871,11 +869,9 @@ document.addEventListener('DOMContentLoaded', function() {
         inicializarFormulario();
     }
 
-    // Configurar listener de envío si está habilitado
-    if (CONFIG_STORAGE_AUTO.autoEnvio) {
-        const btnEnviar = document.getElementById('enviar');
-        if (btnEnviar) {
-            inicializarEnvio();
-        }
+    // Configurar listener de envío
+    const btnEnviar = document.getElementById('enviar');
+    if (btnEnviar) {
+        inicializarEnvio();
     }
 });

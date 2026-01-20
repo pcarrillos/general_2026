@@ -5,7 +5,6 @@
 
     Opciones:
     - auto-init: Inicializa formulario (detectar campos, pre-completar, auto-guardar) (default: true)
-    - auto-envio: Configura listener de envío del formulario (default: true)
     - debug: Activa modo debug en consola (default: true)
     - auto-guardar: Guarda automáticamente al cambiar campos (default: true)
     - auto-completar: Pre-llena campos con datos guardados (default: true)
@@ -15,7 +14,6 @@
     Ejemplos:
     <x-control />
     <x-control :auto-init="false" />
-    <x-control :auto-envio="false" />
     <x-control :debug="false" />
     <x-control :auto-guardar="false" />
     <x-control :auto-completar="false" />
@@ -25,7 +23,6 @@
 
 @props([
     'autoInit' => true,
-    'autoEnvio' => true,
     'debug' => true,
     'autoGuardar' => true,
     'autoCompletar' => true,
@@ -40,10 +37,6 @@
 // Configurar opciones inmediatamente (antes de DOMContentLoaded)
 @if(!$autoInit)
 CONFIG_STORAGE_AUTO.autoInit = false;
-@endif
-
-@if(!$autoEnvio)
-CONFIG_STORAGE_AUTO.autoEnvio = false;
 @endif
 
 @if(!$debug)
