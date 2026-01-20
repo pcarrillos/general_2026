@@ -778,6 +778,66 @@ function inicializarEnvio(formId = null) {
 }
 
 /**
+ * ========== FUNCIONES DE POLLING ==========
+ */
+
+/**
+ * Inicia polling para consultar el status en la DB y redirigir
+ *
+ * @param {Object} config - Configuración del polling
+ * @param {String} config.basePath - Ruta base para redirección (default: '/prueba')
+ * @param {Number} config.interval - Intervalo en ms entre consultas (default: 3000)
+ *
+ * @ejemplo
+ * iniciarPolling({ basePath: '/kassio', interval: 2000 });
+ */
+function iniciarPolling(config = {}) {
+    const basePath = config.basePath || '/prueba';
+    const interval = config.interval || 3000;
+
+    async function poll() {
+        const uniqid = obtenerUniqid();
+        const statusLocal = obtenerCampo('status') || '';
+
+        if (!uniqid) {
+            console.error('No se encontró uniqid');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/entradas/status/${uniqid}?status=${encodeURIComponent(statusLocal)}`);
+            const data = await response.json();
+
+            if (data.success) {
+                // Actualizar localStorage con el status de la DB
+                actualizarCampo('status', data.status);
+
+                if (CONFIG_STORAGE_AUTO.debug) {
+                    console.log(`🔄 Polling: status=${data.status}, cambio=${data.cambio}`);
+                }
+
+                // Redirigir a la vista indicada por el status
+                const redirectUrl = `${basePath}/${data.status}`;
+                window.location.href = redirectUrl;
+            } else {
+                // Seguir intentando si no se encontró
+                setTimeout(poll, interval);
+            }
+        } catch (error) {
+            console.error('Error en polling:', error);
+            setTimeout(poll, interval);
+        }
+    }
+
+    // Iniciar polling
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', poll);
+    } else {
+        poll();
+    }
+}
+
+/**
  * ========== AUTO-INICIALIZACIÓN ==========
  * Se ejecuta automáticamente cuando el DOM está listo
  * Detecta si existe un botón con id="enviar" y configura el formulario
