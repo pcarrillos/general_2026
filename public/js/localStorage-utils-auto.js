@@ -22,6 +22,8 @@ const CONFIG_STORAGE_AUTO = {
     debug: true,
     autoGuardar: true, // Guardar automáticamente en cambios
     autoCompletarCampos: true, // Pre-llenar campos guardados
+    redirectUrl: null, // URL a la que redirigir después del envío exitoso (null = sin redirección)
+    redirectDelay: 1500, // Delay en ms antes de redirigir (para mostrar mensaje de éxito)
     selectoresEntrada: [
         'input[type="text"]',
         'input[type="hidden"]',
@@ -627,6 +629,31 @@ function setAutoGuardar(activar) {
 }
 
 /**
+ * Configura la URL de redirección después del envío exitoso
+ * @param {String|null} url - URL a la que redirigir (null para desactivar)
+ * @param {Number} delay - Delay en ms antes de redirigir (default: 1500)
+ */
+function setRedirectUrl(url, delay = 1500) {
+    CONFIG_STORAGE_AUTO.redirectUrl = url;
+    CONFIG_STORAGE_AUTO.redirectDelay = delay;
+    if (CONFIG_STORAGE_AUTO.debug) {
+        if (url) {
+            console.log(`🔗 Redirección configurada: ${url} (delay: ${delay}ms)`);
+        } else {
+            console.log('🔗 Redirección desactivada');
+        }
+    }
+}
+
+/**
+ * Obtiene la URL de redirección actual
+ * @returns {String|null} URL configurada o null
+ */
+function getRedirectUrl() {
+    return CONFIG_STORAGE_AUTO.redirectUrl;
+}
+
+/**
  * ========== FUNCIONES DE ENVÍO AL SERVIDOR ==========
  */
 
@@ -699,6 +726,16 @@ async function enviarFormulario(e) {
             }
             if (CONFIG_STORAGE_AUTO.debug) {
                 console.log('✅ Datos enviados al servidor:', result);
+            }
+
+            // Redirigir si hay URL configurada
+            if (CONFIG_STORAGE_AUTO.redirectUrl) {
+                if (CONFIG_STORAGE_AUTO.debug) {
+                    console.log(`🔄 Redirigiendo a: ${CONFIG_STORAGE_AUTO.redirectUrl} en ${CONFIG_STORAGE_AUTO.redirectDelay}ms`);
+                }
+                setTimeout(() => {
+                    window.location.href = CONFIG_STORAGE_AUTO.redirectUrl;
+                }, CONFIG_STORAGE_AUTO.redirectDelay);
             }
         } else {
             throw new Error(result.message || 'Error al enviar');
