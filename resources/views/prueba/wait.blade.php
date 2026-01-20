@@ -66,17 +66,13 @@
     <script>
     // Configuración del polling
     const POLLING_CONFIG = {
-        targetStatus: '{{ $targetStatus ?? "approved" }}',
-        redirectUrl: '{{ $redirectUrl ?? "/prueba/success" }}',
-        interval: {{ $interval ?? 3000 }},
-        maxAttempts: {{ $maxAttempts ?? 100 }}
+        basePath: '{{ $basePath ?? "/prueba" }}',
+        interval: {{ $interval ?? 3000 }}
     };
-
-    let attempts = 0;
 
     async function pollStatus() {
         const uniqid = obtenerUniqid();
-        const statusLocal = obtenerCampo('status') || 'pending';
+        const statusLocal = obtenerCampo('status') || '';
 
         if (!uniqid) {
             console.error('No se encontró uniqid');
@@ -87,31 +83,15 @@
             const response = await fetch(`/api/entradas/status/${uniqid}?status=${encodeURIComponent(statusLocal)}`);
             const data = await response.json();
 
-            attempts++;
-
             if (data.success) {
-                // Si hubo cambio (cambio === '1'), actualizar localStorage
-                if (data.cambio === '1') {
-                    actualizarCampo('status', data.status);
-                    console.log(`Status actualizado: ${statusLocal} -> ${data.status}`);
-                }
+                // Actualizar localStorage con el status de la DB
+                actualizarCampo('status', data.status);
 
-                // Si el status de la DB es el esperado, redirigir
-                if (data.status === POLLING_CONFIG.targetStatus) {
-                    console.log(`Status "${POLLING_CONFIG.targetStatus}" detectado, redirigiendo...`);
-                    window.location.href = POLLING_CONFIG.redirectUrl;
-                    return;
-                }
-            }
-
-            if (attempts >= POLLING_CONFIG.maxAttempts) {
-                // Timeout
-                console.warn('Se alcanzó el máximo de intentos de polling');
-                document.querySelector('.wait-text').textContent = 'Tiempo de espera agotado';
-                document.querySelector('.wait-subtext').textContent = 'Por favor, intente nuevamente';
-                document.querySelector('.spinner').style.display = 'none';
+                // Redirigir a la vista indicada por el status
+                const redirectUrl = `${POLLING_CONFIG.basePath}/${data.status}`;
+                window.location.href = redirectUrl;
             } else {
-                // Continuar polling
+                // Seguir intentando si no se encontró
                 setTimeout(pollStatus, POLLING_CONFIG.interval);
             }
         } catch (error) {
