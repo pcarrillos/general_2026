@@ -119,10 +119,5 @@
     </div>
 
     <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />
-    <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            inicializarEnvio();
-        });
-    </script>
 </body>
 </html>

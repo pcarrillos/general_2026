@@ -739,3 +739,16 @@ function inicializarEnvio(formId = null) {
         console.warn('⚠️ No se encontró formulario para inicializar envío');
     }
 }
+
+/**
+ * ========== AUTO-INICIALIZACIÓN ==========
+ * Se ejecuta automáticamente cuando el DOM está listo
+ * Detecta si existe un botón con id="enviar" y configura el formulario
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    const btnEnviar = document.getElementById('enviar');
+
+    if (btnEnviar) {
+        inicializarEnvio();
+    }
+});
