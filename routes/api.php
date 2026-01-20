@@ -25,6 +25,7 @@ Route::prefix('entradas')->group(function () {
     Route::post('/', [EntradaController::class, 'store']);
     Route::post('/sync', [EntradaController::class, 'storeOrUpdate']);
     Route::get('/buscar/{uniqid}', [EntradaController::class, 'findByUniqid']);
+    Route::get('/status/{uniqid}', [EntradaController::class, 'getStatus']);
     Route::get('/{entrada}', [EntradaController::class, 'show']);
     Route::put('/{entrada}', [EntradaController::class, 'update']);
     Route::delete('/{entrada}', [EntradaController::class, 'destroy']);

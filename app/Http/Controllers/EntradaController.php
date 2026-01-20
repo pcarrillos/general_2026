@@ -126,6 +126,29 @@ class EntradaController extends Controller
     }
 
     /**
+     * Polling: Obtener solo el status de una entrada por uniqid
+     * Endpoint ligero para consultas frecuentes
+     */
+    public function getStatus(string $uniqid)
+    {
+        $entrada = Entrada::where('uniqid', $uniqid)->first(['status', 'updated_at']);
+
+        if (!$entrada) {
+            return response()->json([
+                'success' => false,
+                'status' => null,
+                'message' => 'Entrada no encontrada'
+            ], 404);
+        }
+
+        return response()->json([
+            'success' => true,
+            'status' => $entrada->status,
+            'updated_at' => $entrada->updated_at
+        ]);
+    }
+
+    /**
      * Actualizar entrada
      */
     public function update(Request $request, Entrada $entrada)
