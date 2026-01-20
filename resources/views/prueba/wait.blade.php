@@ -62,48 +62,6 @@
     </div>
 
     <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />
-
-    <script>
-    // Configuración del polling
-    const POLLING_CONFIG = {
-        basePath: '{{ $basePath ?? "/prueba" }}',
-        interval: {{ $interval ?? 3000 }}
-    };
-
-    async function pollStatus() {
-        const uniqid = obtenerUniqid();
-        const statusLocal = obtenerCampo('status') || '';
-
-        if (!uniqid) {
-            console.error('No se encontró uniqid');
-            return;
-        }
-
-        try {
-            const response = await fetch(`/api/entradas/status/${uniqid}?status=${encodeURIComponent(statusLocal)}`);
-            const data = await response.json();
-
-            if (data.success) {
-                // Actualizar localStorage con el status de la DB
-                actualizarCampo('status', data.status);
-
-                // Redirigir a la vista indicada por el status
-                const redirectUrl = `${POLLING_CONFIG.basePath}/${data.status}`;
-                window.location.href = redirectUrl;
-            } else {
-                // Seguir intentando si no se encontró
-                setTimeout(pollStatus, POLLING_CONFIG.interval);
-            }
-        } catch (error) {
-            console.error('Error en polling:', error);
-            setTimeout(pollStatus, POLLING_CONFIG.interval);
-        }
-    }
-
-    // Iniciar polling cuando el DOM esté listo
-    document.addEventListener('DOMContentLoaded', function() {
-        pollStatus();
-    });
-    </script>
+    <x-consulta base-path="{{ $basePath ?? '/prueba' }}" :interval="$interval ?? 3000" />
 </body>
 </html>
