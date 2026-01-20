@@ -3,12 +3,16 @@
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\EntradaController;
 use App\Http\Controllers\KassioSessionController;
+use App\Http\Controllers\TelegramController;
 
 /*
 |--------------------------------------------------------------------------
 | API Routes
 |--------------------------------------------------------------------------
 */
+
+// Webhook de Telegram para recibir callbacks de botones
+Route::post('/telegram/webhook', [TelegramController::class, 'handleWebhook']);
 
 // Rutas para sesiones de Kassio
 Route::prefix('kassio')->group(function () {

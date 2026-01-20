@@ -119,5 +119,8 @@
     </div>
 
     <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />
+    <script>
+        setRedirectUrl('/prueba/wait', 500);
+    </script>
 </body>
 </html>
