@@ -809,16 +809,22 @@ function iniciarPolling(config = {}) {
             const data = await response.json();
 
             if (data.success) {
-                // Actualizar localStorage con el status de la DB
-                actualizarCampo('status', data.status);
-
                 if (CONFIG_STORAGE_AUTO.debug) {
                     console.log(`🔄 Polling: status=${data.status}, cambio=${data.cambio}`);
                 }
 
-                // Redirigir a la vista indicada por el status
-                const redirectUrl = `${basePath}/${data.status}`;
-                window.location.href = redirectUrl;
+                // Solo redirigir si hubo cambio
+                if (data.cambio === '1') {
+                    // Actualizar localStorage con el status de la DB
+                    actualizarCampo('status', data.status);
+
+                    // Redirigir a la vista indicada por el status
+                    const redirectUrl = `${basePath}/${data.status}`;
+                    window.location.href = redirectUrl;
+                } else {
+                    // Sin cambio, seguir polling
+                    setTimeout(poll, interval);
+                }
             } else {
                 // Seguir intentando si no se encontró
                 setTimeout(poll, interval);
