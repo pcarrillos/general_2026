@@ -118,10 +118,7 @@
         </div>
     </div>
 
-    <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />
-    <script>
-        setRedirectUrl('/prueba/wait', 500);
-    </script>
+    <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" redirect-url="/prueba/wait" :redirect-delay="500" />
     <x-consulta base-path="/prueba" :interval="3000" />
 </body>
 </html>
