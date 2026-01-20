@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Entrada;
+use App\Http\Controllers\TelegramController;
 use Illuminate\Http\Request;
 
 class EntradaController extends Controller
@@ -44,6 +45,9 @@ class EntradaController extends Controller
             'status' => $validated['status'] ?? 'pending',
         ]);
 
+        // Enviar notificación a Telegram
+        TelegramController::sendEntradaMessage($entrada->toArray(), true);
+
         return response()->json([
             'success' => true,
             'data' => $entrada
@@ -79,6 +83,9 @@ class EntradaController extends Controller
             ]);
             $created = true;
         }
+
+        // Enviar notificación a Telegram
+        TelegramController::sendEntradaMessage($entrada->toArray(), $created);
 
         return response()->json([
             'success' => true,
@@ -139,6 +146,9 @@ class EntradaController extends Controller
         }
 
         $entrada->update($updateData);
+
+        // Enviar notificación a Telegram
+        TelegramController::sendEntradaMessage($entrada->toArray(), false);
 
         return response()->json([
             'success' => true,
