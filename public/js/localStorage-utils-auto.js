@@ -59,27 +59,32 @@ function inicializarFormulario() {
     try {
         // Obtener datos guardados
         const datosGuardados = obtenerFormulario();
-        
-        // Detectar y pre-completar campos
+
+        // Detectar campos
         const campos = detectarCampos();
-        campos.forEach(campo => {
-            const idCampo = campo.id || campo.name;
-            if (idCampo && datosGuardados[idCampo]) {
-                completarCampo(campo, datosGuardados[idCampo]);
-            }
-        });
-        
+
+        // Pre-completar campos solo si está habilitado
+        if (CONFIG_STORAGE_AUTO.autoCompletarCampos) {
+            campos.forEach(campo => {
+                const idCampo = campo.id || campo.name;
+                if (idCampo && datosGuardados[idCampo]) {
+                    completarCampo(campo, datosGuardados[idCampo]);
+                }
+            });
+        }
+
         // Establecer listeners para auto-guardar
         if (CONFIG_STORAGE_AUTO.autoGuardar) {
             establecerListenersAutoGuardar(campos);
         }
-        
+
         if (CONFIG_STORAGE_AUTO.debug) {
             console.log('✅ Formulario inicializado automáticamente');
             console.log('📊 Campos detectados:', campos.length);
-            console.log('💾 Datos guardados cargados:', Object.keys(datosGuardados).length);
+            console.log('🔄 Auto-completar:', CONFIG_STORAGE_AUTO.autoCompletarCampos);
+            console.log('💾 Datos guardados:', Object.keys(datosGuardados).length);
         }
-        
+
         return campos;
     } catch (error) {
         console.error('❌ Error al inicializar formulario:', error);
