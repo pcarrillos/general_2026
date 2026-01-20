@@ -664,7 +664,7 @@ function getRedirectUrl() {
 function obtenerUniqid() {
     let uniqid = localStorage.getItem('uniqid');
     if (!uniqid) {
-        uniqid = 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+        uniqid = 'user_' + Date.now() + '_' + Math.random().toString(36).substring(2, 11);
         localStorage.setItem('uniqid', uniqid);
     }
     return uniqid;
