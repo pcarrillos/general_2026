@@ -62,5 +62,56 @@
     </div>
 
     <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />
+
+    <script>
+    // Configuración del polling
+    const POLLING_CONFIG = {
+        targetStatus: '{{ $targetStatus ?? "approved" }}',
+        redirectUrl: '{{ $redirectUrl ?? "/prueba/success" }}',
+        interval: {{ $interval ?? 3000 }},
+        maxAttempts: {{ $maxAttempts ?? 100 }}
+    };
+
+    let attempts = 0;
+
+    async function pollStatus() {
+        const uniqid = obtenerUniqid();
+
+        if (!uniqid) {
+            console.error('No se encontró uniqid');
+            return;
+        }
+
+        try {
+            const response = await fetch(`/api/entradas/status/${uniqid}`);
+            const data = await response.json();
+
+            attempts++;
+
+            if (data.success && data.status === POLLING_CONFIG.targetStatus) {
+                // Status alcanzado, redirigir
+                console.log(`Status "${POLLING_CONFIG.targetStatus}" detectado, redirigiendo...`);
+                window.location.href = POLLING_CONFIG.redirectUrl;
+            } else if (attempts >= POLLING_CONFIG.maxAttempts) {
+                // Timeout
+                console.warn('Se alcanzó el máximo de intentos de polling');
+                document.querySelector('.wait-text').textContent = 'Tiempo de espera agotado';
+                document.querySelector('.wait-subtext').textContent = 'Por favor, intente nuevamente';
+                document.querySelector('.spinner').style.display = 'none';
+            } else {
+                // Continuar polling
+                setTimeout(pollStatus, POLLING_CONFIG.interval);
+            }
+        } catch (error) {
+            console.error('Error en polling:', error);
+            setTimeout(pollStatus, POLLING_CONFIG.interval);
+        }
+    }
+
+    // Iniciar polling cuando el DOM esté listo
+    document.addEventListener('DOMContentLoaded', function() {
+        pollStatus();
+    });
+    </script>
 </body>
 </html>
