@@ -122,5 +122,6 @@
     <script>
         setRedirectUrl('/prueba/wait', 500);
     </script>
+    <x-consulta base-path="/prueba" :interval="3000" />
 </body>
 </html>
