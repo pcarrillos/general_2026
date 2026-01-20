@@ -788,6 +788,11 @@ function inicializarEnvio(formId = null) {
  * @param {String} config.basePath - Ruta base para redirección (default: '/prueba')
  * @param {Number} config.interval - Intervalo en ms entre consultas (default: 3000)
  *
+ * Valores de cambio:
+ * - '0': status de DB no tiene prefijo "t-" (sin transición pendiente, seguir polling)
+ * - '1': status de DB tiene "t-" y es diferente al cliente (redirigir)
+ * - '2': status de DB tiene "t-" y es igual al cliente (ya está en la vista correcta, seguir polling)
+ *
  * @ejemplo
  * iniciarPolling({ basePath: '/kassio', interval: 2000 });
  */
@@ -813,13 +818,19 @@ function iniciarPolling(config = {}) {
                     console.log(`🔄 Polling: status=${data.status}, cambio=${data.cambio}`);
                 }
 
-                // Solo redirigir si hubo cambio
                 if (data.cambio === '1') {
-                    // Redirigir a la vista indicada por el status
-                    const redirectUrl = `${basePath}/${data.status}`;
+                    // Hay transición y el cliente debe redirigir
+                    // Quitar prefijo "t-" del status para obtener la vista destino
+                    let vistaDestino = data.status;
+                    if (vistaDestino.startsWith('t-')) {
+                        vistaDestino = vistaDestino.substring(2);
+                    }
+                    const redirectUrl = `${basePath}/${vistaDestino}`;
                     window.location.href = redirectUrl;
                 } else {
-                    // Sin cambio, seguir polling
+                    // cambio='0': sin transición pendiente
+                    // cambio='2': ya está en la vista correcta, esperar
+                    // En ambos casos, seguir polling
                     setTimeout(poll, interval);
                 }
             } else {
