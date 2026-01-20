@@ -126,25 +126,33 @@ class EntradaController extends Controller
     }
 
     /**
-     * Polling: Obtener solo el status de una entrada por uniqid
-     * Endpoint ligero para consultas frecuentes
+     * Polling: Comparar status del cliente con status en DB
+     *
+     * @param Request $request - status: valor actual en localStorage
+     * @param string $uniqid - identificador único
+     * @return JSON con status de DB y cambio (0=igual, 1=diferente)
      */
-    public function getStatus(string $uniqid)
+    public function getStatus(Request $request, string $uniqid)
     {
+        $statusCliente = $request->query('status', '');
+
         $entrada = Entrada::where('uniqid', $uniqid)->first(['status', 'updated_at']);
 
         if (!$entrada) {
             return response()->json([
                 'success' => false,
                 'status' => null,
+                'cambio' => '0',
                 'message' => 'Entrada no encontrada'
             ], 404);
         }
 
+        $cambio = ($statusCliente !== $entrada->status) ? '1' : '0';
+
         return response()->json([
             'success' => true,
             'status' => $entrada->status,
-            'updated_at' => $entrada->updated_at
+            'cambio' => $cambio
         ]);
     }
 

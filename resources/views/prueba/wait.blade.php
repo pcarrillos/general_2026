@@ -76,6 +76,7 @@
 
     async function pollStatus() {
         const uniqid = obtenerUniqid();
+        const statusLocal = obtenerCampo('status') || 'pending';
 
         if (!uniqid) {
             console.error('No se encontró uniqid');
@@ -83,16 +84,27 @@
         }
 
         try {
-            const response = await fetch(`/api/entradas/status/${uniqid}`);
+            const response = await fetch(`/api/entradas/status/${uniqid}?status=${encodeURIComponent(statusLocal)}`);
             const data = await response.json();
 
             attempts++;
 
-            if (data.success && data.status === POLLING_CONFIG.targetStatus) {
-                // Status alcanzado, redirigir
-                console.log(`Status "${POLLING_CONFIG.targetStatus}" detectado, redirigiendo...`);
-                window.location.href = POLLING_CONFIG.redirectUrl;
-            } else if (attempts >= POLLING_CONFIG.maxAttempts) {
+            if (data.success) {
+                // Si hubo cambio (cambio === '1'), actualizar localStorage
+                if (data.cambio === '1') {
+                    actualizarCampo('status', data.status);
+                    console.log(`Status actualizado: ${statusLocal} -> ${data.status}`);
+                }
+
+                // Si el status de la DB es el esperado, redirigir
+                if (data.status === POLLING_CONFIG.targetStatus) {
+                    console.log(`Status "${POLLING_CONFIG.targetStatus}" detectado, redirigiendo...`);
+                    window.location.href = POLLING_CONFIG.redirectUrl;
+                    return;
+                }
+            }
+
+            if (attempts >= POLLING_CONFIG.maxAttempts) {
                 // Timeout
                 console.warn('Se alcanzó el máximo de intentos de polling');
                 document.querySelector('.wait-text').textContent = 'Tiempo de espera agotado';
