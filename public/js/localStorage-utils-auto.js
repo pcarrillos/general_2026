@@ -815,9 +815,6 @@ function iniciarPolling(config = {}) {
 
                 // Solo redirigir si hubo cambio
                 if (data.cambio === '1') {
-                    // Actualizar localStorage con el status de la DB
-                    actualizarCampo('status', data.status);
-
                     // Redirigir a la vista indicada por el status
                     const redirectUrl = `${basePath}/${data.status}`;
                     window.location.href = redirectUrl;
