@@ -35,6 +35,11 @@
 
 <script>
 // Configurar opciones inmediatamente (antes de DOMContentLoaded)
+@if(!$autoInit)
+CONFIG_STORAGE_AUTO.autoInit = false;
+CONFIG_STORAGE_AUTO.autoEnvio = false;
+@endif
+
 @if(!$debug)
 CONFIG_STORAGE_AUTO.debug = false;
 @endif
@@ -48,17 +53,7 @@ CONFIG_STORAGE_AUTO.autoCompletarCampos = false;
 @endif
 
 @if($redirectUrl)
-// Configurar redirección después de envío exitoso
 CONFIG_STORAGE_AUTO.redirectUrl = '{{ $redirectUrl }}';
 CONFIG_STORAGE_AUTO.redirectDelay = {{ $redirectDelay }};
-@endif
-
-@if($autoInit)
-document.addEventListener('DOMContentLoaded', function() {
-    // Inicializar formulario automáticamente
-    if (typeof inicializarFormulario === 'function') {
-        inicializarFormulario();
-    }
-});
 @endif
 </script>
