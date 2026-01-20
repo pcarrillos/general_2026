@@ -199,6 +199,6 @@
     });
     </script>
 
-    <x-control :auto-guardar="true" :auto-completar="true" :auto-init="true" :debug="false" />
+    <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />
 </body>
 </html>
