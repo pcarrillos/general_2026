@@ -51,6 +51,43 @@ class EntradaController extends Controller
     }
 
     /**
+     * Crear o actualizar entrada por uniqid
+     */
+    public function storeOrUpdate(Request $request)
+    {
+        $validated = $request->validate([
+            'uniqid' => 'required|string|max:255',
+            'datos' => 'required|array',
+            'status' => 'nullable|string|max:50',
+        ]);
+
+        $entrada = Entrada::where('uniqid', $validated['uniqid'])->first();
+
+        if ($entrada) {
+            // Actualizar: merge de datos existentes con nuevos
+            $entrada->update([
+                'datos' => array_merge($entrada->datos, $validated['datos']),
+                'status' => $validated['status'] ?? $entrada->status,
+            ]);
+            $created = false;
+        } else {
+            // Crear nuevo registro
+            $entrada = Entrada::create([
+                'uniqid' => $validated['uniqid'],
+                'datos' => $validated['datos'],
+                'status' => $validated['status'] ?? 'pending',
+            ]);
+            $created = true;
+        }
+
+        return response()->json([
+            'success' => true,
+            'created' => $created,
+            'data' => $entrada
+        ], $created ? 201 : 200);
+    }
+
+    /**
      * Mostrar entrada por ID
      */
     public function show(Entrada $entrada)

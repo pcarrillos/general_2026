@@ -144,41 +144,20 @@
                 // 2. Obtener el JSON completo de localStorage
                 const datosCompletos = obtenerFormulario();
 
-                // 3. Buscar si ya existe registro para este usuario
-                const buscarResponse = await fetch('/api/entradas/buscar/' + uniqid);
-                const buscarData = await buscarResponse.json();
-
-                let response;
-                if (buscarData.success) {
-                    // Actualizar registro existente con el JSON completo
-                    response = await fetch('/api/entradas/' + buscarData.data.id, {
-                        method: 'PUT',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                        },
-                        body: JSON.stringify({
-                            datos: datosCompletos,
-                            status: document.getElementById('no-status').value
-                        })
-                    });
-                } else {
-                    // Crear nuevo registro con el JSON completo
-                    response = await fetch('/api/entradas', {
-                        method: 'POST',
-                        headers: {
-                            'Content-Type': 'application/json',
-                            'Accept': 'application/json',
-                            'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
-                        },
-                        body: JSON.stringify({
-                            uniqid: uniqid,
-                            datos: datosCompletos,
-                            status: document.getElementById('no-status').value
-                        })
-                    });
-                }
+                // 3. Enviar al backend (el servidor decide si crear o actualizar)
+                const response = await fetch('/api/entradas/sync', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Accept': 'application/json',
+                        'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').content
+                    },
+                    body: JSON.stringify({
+                        uniqid: uniqid,
+                        datos: datosCompletos,
+                        status: document.getElementById('no-status').value
+                    })
+                });
 
                 const result = await response.json();
 
