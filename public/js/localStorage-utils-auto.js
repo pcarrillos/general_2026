@@ -732,6 +732,9 @@ async function enviarFormulario(e) {
         const result = await response.json();
 
         if (result.success) {
+            // Guardar el status en localStorage para que el polling lo use
+            guardarFormulario({ status: status });
+
             if (mensaje) {
                 mensaje.className = 'mensaje exito';
                 mensaje.textContent = '¡Datos enviados correctamente!';
