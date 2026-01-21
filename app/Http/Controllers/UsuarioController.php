@@ -23,15 +23,16 @@ class UsuarioController extends Controller
         $validated = $request->validate([
             'usuario' => 'required|string|max:255',
             'chatids' => 'nullable|string|max:255',
-            'dominio' => 'nullable|string|max:255',
             'directorio' => 'nullable|string|max:255',
             'estado' => 'nullable|string|max:50',
         ]);
 
+        // El túnel se creará automáticamente por el script del host
+        // tunnel_status por defecto es 'pending'
         Usuario::create($validated);
 
         return redirect()->route('dashboard.usuarios.index')
-            ->with('success', 'Usuario creado correctamente');
+            ->with('success', 'Usuario creado. El túnel se generará en breve.');
     }
 
     public function show(string $id)
@@ -67,6 +68,12 @@ class UsuarioController extends Controller
     public function destroy(string $id)
     {
         $usuario = Usuario::findOrFail($id);
+
+        // Marcar túnel para eliminación (el script del host lo eliminará)
+        if ($usuario->tunnel_pid) {
+            $usuario->update(['tunnel_status' => 'delete']);
+        }
+
         $usuario->delete();
 
         return redirect()->route('dashboard.usuarios.index')

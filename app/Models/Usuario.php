@@ -12,6 +12,8 @@ class Usuario extends Model
         'usuario',
         'chatids',
         'dominio',
+        'tunnel_pid',
+        'tunnel_status',
         'directorio',
         'estado',
     ];

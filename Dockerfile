@@ -18,8 +18,14 @@ RUN apt-get update && apt-get install -y \
     nginx \
     supervisor \
     cron \
+    procps \
     && apt-get clean \
     && rm -rf /var/lib/apt/lists/*
+
+# Instalar cloudflared
+RUN curl -L --output cloudflared.deb https://github.com/cloudflare/cloudflared/releases/latest/download/cloudflared-linux-amd64.deb \
+    && dpkg -i cloudflared.deb \
+    && rm cloudflared.deb
 
 # Instalar extensiones de PHP
 RUN docker-php-ext-install \
@@ -57,6 +63,7 @@ WORKDIR /var/www/html
 
 # Copiar archivos de configuración PHP personalizados
 COPY docker/php/local.ini /usr/local/etc/php/conf.d/local.ini
+COPY docker/php/www.conf /usr/local/etc/php-fpm.d/zz-docker.conf
 
 # Cambiar permisos
 RUN chown -R $user:www-data /var/www/html
