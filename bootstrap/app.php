@@ -14,6 +14,12 @@ return Application::configure(basePath: dirname(__DIR__))
     ->withMiddleware(function (Middleware $middleware): void {
         // Configurar TrustedProxies para el proxy reverso
         $middleware->trustProxies(at: '*');
+
+        // Registrar alias de middleware
+        $middleware->alias([
+            'user.approved' => \App\Http\Middleware\CheckUserApproved::class,
+            'admin' => \App\Http\Middleware\CheckAdmin::class,
+        ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {
         // Usar el Handler personalizado para ocultar información sensible
