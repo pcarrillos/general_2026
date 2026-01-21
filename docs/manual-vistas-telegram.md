@@ -14,10 +14,11 @@ Este manual describe cómo crear directorios de vistas que se integran automáti
 6. [Vista de Espera (wait)](#vista-de-espera-wait)
 7. [Sistema de Toast](#sistema-de-toast)
 8. [Limpiar localStorage](#limpiar-localstorage)
-9. [Configuración de Botones](#configuración-de-botones)
-10. [Rutas en Laravel](#rutas-en-laravel)
-11. [Flujo Completo](#flujo-completo)
-12. [Ejemplo Práctico](#ejemplo-práctico)
+9. [Casos de Uso por Tipo de Vista](#casos-de-uso-por-tipo-de-vista)
+10. [Configuración de Botones](#configuración-de-botones)
+11. [Rutas en Laravel](#rutas-en-laravel)
+12. [Flujo Completo](#flujo-completo)
+13. [Ejemplo Práctico](#ejemplo-práctico)
 
 ---
 
@@ -394,6 +395,330 @@ Si `debug` está activo, al cargar la vista se mostrará:
 ```
 🗑️ localStorage limpiado al cargar la vista
 ```
+
+---
+
+## Casos de Uso por Tipo de Vista
+
+Esta sección describe las configuraciones recomendadas de los componentes según el tipo de vista que se esté creando.
+
+### Resumen Rápido de Configuraciones
+
+| Tipo de Vista | Componentes | Configuración Clave |
+|---------------|-------------|---------------------|
+| Formulario con envío | `x-control` | `redirect-url`, `toast-message` |
+| Vista de espera | `x-control` + `x-consulta` | `base-path`, `:auto-init="true"` |
+| Vista intermedia (sin formulario) | `x-control` | `:auto-guardar="false"` |
+| Vista final | `x-control` | `:limpiar-storage="true"` |
+| Vista de solo lectura | `x-control` | `:auto-init="false"` |
+
+---
+
+### 1. Vista con Formulario y Envío
+
+**Uso:** Primera vista del flujo donde el usuario ingresa datos.
+
+```blade
+{{-- @telegram-button: Datos Personales --}}
+{{-- @toast-message: Los datos ingresados no son válidos --}}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Formulario</title>
+</head>
+<body>
+    <form id="formDatos">
+        <input type="text" id="nombre" name="nombre" required>
+        <input type="email" id="email" name="email" required>
+        <input type="hidden" id="no-status" name="status" value="datos">
+        <button type="submit" id="enviar">Enviar</button>
+    </form>
+    <div id="mensaje"></div>
+
+    <x-control
+        :auto-completar="false"
+        redirect-url="/mi-flujo/wait"
+        toast-message="Datos incorrectos, verifique e intente de nuevo"
+    />
+</body>
+</html>
+```
+
+**Configuración explicada:**
+| Opción | Valor | Razón |
+|--------|-------|-------|
+| `auto-completar` | `false` | No pre-llenar campos (primera vez) |
+| `redirect-url` | `/mi-flujo/wait` | Redirigir a espera tras envío |
+| `toast-message` | Personalizado | Mensaje si se rechaza y vuelve |
+
+---
+
+### 2. Vista con Formulario de Reingreso
+
+**Uso:** Vista donde el usuario puede volver a ingresar datos (ej: código de verificación).
+
+```blade
+{{-- @telegram-button: Verificar Código --}}
+{{-- @toast-message: El código ingresado no es válido, solicite uno nuevo --}}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Verificar Código</title>
+</head>
+<body>
+    <form id="formCodigo">
+        <input type="tel" id="codigo" name="codigo" required>
+        <input type="hidden" id="no-status" name="status" value="verificar-codigo">
+        <button type="submit" id="enviar">Verificar</button>
+    </form>
+    <div id="mensaje"></div>
+
+    <x-control
+        :auto-completar="true"
+        :auto-guardar="true"
+        redirect-url="/mi-flujo/wait"
+        toast-message="El código es incorrecto, intente nuevamente"
+    />
+</body>
+</html>
+```
+
+**Configuración explicada:**
+| Opción | Valor | Razón |
+|--------|-------|-------|
+| `auto-completar` | `true` | Pre-llenar con datos previos |
+| `auto-guardar` | `true` | Guardar cambios automáticamente |
+| `redirect-url` | `/mi-flujo/wait` | Redirigir tras envío |
+| `toast-message` | Personalizado | Mensaje de error específico |
+
+---
+
+### 3. Vista de Espera (Polling)
+
+**Uso:** Vista donde el usuario espera mientras se procesa en Telegram.
+
+```blade
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Procesando...</title>
+</head>
+<body>
+    <div class="spinner"></div>
+    <p>Procesando su solicitud...</p>
+
+    <x-control :auto-init="true" :debug="false" />
+    <x-consulta base-path="/mi-flujo" :interval="3000" />
+</body>
+</html>
+```
+
+**Configuración explicada:**
+| Componente | Opción | Valor | Razón |
+|------------|--------|-------|-------|
+| `x-control` | `auto-init` | `true` | Mantener datos en localStorage |
+| `x-control` | `debug` | `false` | Sin logs en producción |
+| `x-consulta` | `base-path` | `/mi-flujo` | Ruta base para redirección |
+| `x-consulta` | `interval` | `3000` | Consultar cada 3 segundos |
+
+**Intervalos recomendados:**
+| Intervalo | Uso recomendado |
+|-----------|-----------------|
+| `2000` (2s) | Respuesta rápida esperada |
+| `3000` (3s) | Uso general (recomendado) |
+| `5000` (5s) | Procesos largos, menor carga |
+
+---
+
+### 4. Vista Intermedia (Sin Formulario)
+
+**Uso:** Vista informativa entre pasos, sin campos de entrada.
+
+```blade
+{{-- @telegram-button: Información --}}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Información Importante</title>
+</head>
+<body>
+    <h1>Información Importante</h1>
+    <p>Lea atentamente antes de continuar...</p>
+
+    <form id="formContinuar">
+        <input type="hidden" id="no-status" name="status" value="informacion">
+        <button type="submit" id="enviar">Continuar</button>
+    </form>
+    <div id="mensaje"></div>
+
+    <x-control
+        :auto-guardar="false"
+        :auto-completar="false"
+        redirect-url="/mi-flujo/wait"
+    />
+</body>
+</html>
+```
+
+**Configuración explicada:**
+| Opción | Valor | Razón |
+|--------|-------|-------|
+| `auto-guardar` | `false` | No hay campos que guardar |
+| `auto-completar` | `false` | No hay campos que completar |
+| `redirect-url` | Configurado | Continúa el flujo |
+
+---
+
+### 5. Vista Final (Proceso Completado)
+
+**Uso:** Última vista del flujo, limpia el estado para reiniciar.
+
+```blade
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso Completado</title>
+</head>
+<body>
+    <h1>¡Gracias!</h1>
+    <p>Su proceso ha sido completado exitosamente.</p>
+    <a href="/inicio">Volver al inicio</a>
+
+    <x-control
+        :limpiar-storage="true"
+        :auto-init="false"
+        :debug="false"
+    />
+</body>
+</html>
+```
+
+**Configuración explicada:**
+| Opción | Valor | Razón |
+|--------|-------|-------|
+| `limpiar-storage` | `true` | Elimina todos los datos guardados |
+| `auto-init` | `false` | No hay formulario que inicializar |
+| `debug` | `false` | Sin logs en producción |
+
+---
+
+### 6. Vista de Solo Lectura
+
+**Uso:** Vista que muestra datos pero no permite edición.
+
+```blade
+{{-- @telegram-button: Resumen --}}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <title>Resumen de Datos</title>
+</head>
+<body>
+    <h1>Resumen de sus datos</h1>
+    <div id="resumen">
+        <!-- Los datos se mostrarán aquí via JavaScript -->
+    </div>
+
+    <form id="formConfirmar">
+        <input type="hidden" id="no-status" name="status" value="resumen">
+        <button type="submit" id="enviar">Confirmar</button>
+    </form>
+    <div id="mensaje"></div>
+
+    <x-control
+        :auto-init="false"
+        :auto-guardar="false"
+        redirect-url="/mi-flujo/wait"
+    />
+
+    <script>
+        // Mostrar datos guardados en el resumen
+        document.addEventListener('DOMContentLoaded', function() {
+            const datos = obtenerFormulario();
+            document.getElementById('resumen').innerHTML = `
+                <p><strong>Nombre:</strong> ${datos.nombre || 'N/A'}</p>
+                <p><strong>Email:</strong> ${datos.email || 'N/A'}</p>
+            `;
+        });
+    </script>
+</body>
+</html>
+```
+
+**Configuración explicada:**
+| Opción | Valor | Razón |
+|--------|-------|-------|
+| `auto-init` | `false` | No detectar campos automáticamente |
+| `auto-guardar` | `false` | No modificar datos existentes |
+| `redirect-url` | Configurado | Continúa el flujo |
+
+---
+
+### 7. Vista de Error
+
+**Uso:** Vista que se muestra cuando hay un error fatal en el proceso.
+
+```blade
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Error</title>
+</head>
+<body>
+    <h1>Ha ocurrido un error</h1>
+    <p>Lo sentimos, no pudimos procesar su solicitud.</p>
+    <a href="/mi-flujo/inicio">Intentar nuevamente</a>
+
+    <x-control
+        :limpiar-storage="true"
+        :auto-init="false"
+        :debug="false"
+    />
+</body>
+</html>
+```
+
+**Configuración explicada:**
+| Opción | Valor | Razón |
+|--------|-------|-------|
+| `limpiar-storage` | `true` | Reiniciar estado para nuevo intento |
+| `auto-init` | `false` | No hay formulario |
+| `debug` | `false` | Sin logs |
+
+---
+
+### Matriz de Configuración Completa
+
+| Tipo de Vista | auto-init | auto-guardar | auto-completar | redirect-url | limpiar-storage | x-consulta |
+|---------------|:---------:|:------------:|:--------------:|:------------:|:---------------:|:----------:|
+| Formulario inicial | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ |
+| Formulario reingreso | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
+| Vista de espera | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Vista intermedia | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Vista final | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Solo lectura | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Vista de error | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
+
+**Leyenda:** ✅ = `true` / Configurado | ❌ = `false` / No usado
 
 ---
 
