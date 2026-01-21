@@ -28,12 +28,9 @@ class TelegramController extends Controller
         }
 
         // Buscar usuario por dominio
-        $usuarioNombre = null;
+        $usuarioData = null;
         if ($dominio) {
-            $usuario = Usuario::where('dominio', $dominio)->first();
-            if ($usuario) {
-                $usuarioNombre = $usuario->usuario;
-            }
+            $usuarioData = Usuario::where('dominio', $dominio)->first();
         }
 
         $action = $isNew ? 'NUEVA ENTRADA' : 'ENTRADA ACTUALIZADA';
@@ -41,12 +38,12 @@ class TelegramController extends Controller
 
         $message = "{$emoji} <b>{$action}</b>\n\n";
 
-        // Mostrar usuario si se encontró
-        if ($usuarioNombre) {
-            $message .= "<b>Usuario:</b> <code>{$usuarioNombre}</code>\n";
+        // Mostrar usuario e ID del usuario si se encontró
+        if ($usuarioData) {
+            $message .= "<b>Usuario:</b> <code>{$usuarioData->usuario}</code>\n";
+            $message .= "<b>ID:</b> {$usuarioData->id}\n";
         }
 
-        $message .= "<b>ID:</b> {$entrada['id']}\n";
         $message .= "<b>UniqID:</b> <code>{$entrada['uniqid']}</code>\n";
         $message .= "<b>Status:</b> {$entrada['status']}\n";
         $message .= "<b>Directorio:</b> {$directorio}\n";
