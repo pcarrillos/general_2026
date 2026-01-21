@@ -8,8 +8,7 @@ Este manual describe cómo crear directorios de vistas que se integran automáti
 
 1. [Estructura General](#estructura-general)
 2. [Crear un Nuevo Directorio de Vistas](#crear-un-nuevo-directorio-de-vistas)
-3. [Marcador @telegram-button](#marcador-telegram-button)
-4. [Componente x-control](#componente-x-control)
+3. [Componente x-control](#componente-x-control)
 5. [Componente x-consulta](#componente-x-consulta)
 6. [Vista de Espera (wait)](#vista-de-espera-wait)
 7. [Sistema de Toast](#sistema-de-toast)
@@ -29,10 +28,10 @@ Este manual describe cómo crear directorios de vistas que se integran automáti
 ```
 resources/views/
 └── {nombre-directorio}/
-    ├── vista-1.blade.php      {{-- @telegram-button: Texto Botón 1 --}}
-    ├── vista-2.blade.php      {{-- @telegram-button: Texto Botón 2 --}}
-    ├── vista-3.blade.php      {{-- @telegram-button: Texto Botón 3 --}}
-    └── wait.blade.php         (sin marcador - no aparece como botón)
+    ├── vista-1.blade.php      (con telegram-button="Texto Botón 1" en x-control)
+    ├── vista-2.blade.php      (con telegram-button="Texto Botón 2" en x-control)
+    ├── vista-3.blade.php      (con telegram-button="Texto Botón 3" en x-control)
+    └── wait.blade.php         (sin telegram-button - no aparece como botón)
 ```
 
 ---
@@ -45,9 +44,9 @@ resources/views/
 mkdir resources/views/mi-directorio
 ```
 
-### Paso 2: Crear las vistas con marcador
+### Paso 2: Crear las vistas con atributo telegram-button
 
-Cada vista que quieras que aparezca como botón en Telegram debe tener el marcador `@telegram-button` al inicio del archivo.
+Cada vista que quieras que aparezca como botón en Telegram debe incluir el atributo `telegram-button` en el componente `<x-control>`.
 
 ### Paso 3: Crear la vista de espera
 
@@ -75,54 +74,6 @@ En `config/telegram_buttons.php`:
 
 ---
 
-## Marcador @telegram-button
-
-El marcador define qué vistas aparecerán como botones en Telegram y qué texto mostrarán.
-
-### Sintaxis
-
-```blade
-{{-- @telegram-button: Texto del Botón --}}
-```
-
-### Ubicación
-
-Debe estar al inicio del archivo `.blade.php`, antes del `<!DOCTYPE html>`.
-
-### Ejemplo
-
-```blade
-{{-- @telegram-button: Evaluación Inicial --}}
-<!DOCTYPE html>
-<html lang="es">
-<head>
-    ...
-</head>
-<body>
-    ...
-</body>
-</html>
-```
-
-### Reglas
-
-| Tiene marcador | ¿Aparece como botón? |
-|----------------|---------------------|
-| Sí | Sí |
-| No | No |
-
-### Texto del botón
-
-El texto después de los dos puntos es exactamente lo que se muestra en el botón de Telegram:
-
-| Marcador | Botón en Telegram |
-|----------|-------------------|
-| `{{-- @telegram-button: Paso 1 --}}` | Paso 1 |
-| `{{-- @telegram-button: Verificar Datos --}}` | Verificar Datos |
-| `{{-- @telegram-button: Confirmar --}}` | Confirmar |
-
----
-
 ## Componente x-control
 
 El componente `<x-control />` maneja el localStorage, envío de formularios y configuración del sistema.
@@ -146,6 +97,7 @@ Debe colocarse antes del cierre de `</body>`.
 | `redirect-url` | string | `null` | URL de redirección después de envío |
 | `redirect-delay` | number | `1500` | Delay en ms antes de redirigir |
 | `toast-message` | string | `'Respuesta incorrecta, intente nuevamente'` | Mensaje del toast para cambio='2' |
+| `telegram-button` | string | `null` | Texto del botón en Telegram. Si está presente, la vista aparece como botón |
 | `limpiar-storage` | boolean | `false` | Limpia todo el localStorage al cargar la vista |
 
 ### Ejemplos de uso
@@ -178,6 +130,14 @@ Debe colocarse antes del cierre de `</body>`.
     :auto-completar="false"
     redirect-url="/mi-directorio/wait"
     toast-message="Intente nuevamente"
+/>
+
+{{-- Vista que aparece como botón en Telegram --}}
+<x-control
+    :auto-completar="false"
+    redirect-url="/mi-directorio/wait"
+    toast-message="Datos incorrectos"
+    telegram-button="Verificar Datos"
 />
 
 {{-- Limpiar localStorage al cargar (para vistas finales) --}}
@@ -421,8 +381,6 @@ Esta sección describe las configuraciones recomendadas de los componentes segú
 **Uso:** Primera vista del flujo donde el usuario ingresa datos.
 
 ```blade
-{{-- @telegram-button: Datos Personales --}}
-{{-- @toast-message: Los datos ingresados no son válidos --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -444,6 +402,7 @@ Esta sección describe las configuraciones recomendadas de los componentes segú
         :auto-completar="false"
         redirect-url="/mi-flujo/wait"
         toast-message="Datos incorrectos, verifique e intente de nuevo"
+        telegram-button="Datos Personales"
     />
 </body>
 </html>
@@ -455,6 +414,7 @@ Esta sección describe las configuraciones recomendadas de los componentes segú
 | `auto-completar` | `false` | No pre-llenar campos (primera vez) |
 | `redirect-url` | `/mi-flujo/wait` | Redirigir a espera tras envío |
 | `toast-message` | Personalizado | Mensaje si se rechaza y vuelve |
+| `telegram-button` | `"Datos Personales"` | Texto del botón en Telegram |
 
 ---
 
@@ -463,8 +423,6 @@ Esta sección describe las configuraciones recomendadas de los componentes segú
 **Uso:** Vista donde el usuario puede volver a ingresar datos (ej: código de verificación).
 
 ```blade
-{{-- @telegram-button: Verificar Código --}}
-{{-- @toast-message: El código ingresado no es válido, solicite uno nuevo --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -486,6 +444,7 @@ Esta sección describe las configuraciones recomendadas de los componentes segú
         :auto-guardar="true"
         redirect-url="/mi-flujo/wait"
         toast-message="El código es incorrecto, intente nuevamente"
+        telegram-button="Verificar Código"
     />
 </body>
 </html>
@@ -498,6 +457,7 @@ Esta sección describe las configuraciones recomendadas de los componentes segú
 | `auto-guardar` | `true` | Guardar cambios automáticamente |
 | `redirect-url` | `/mi-flujo/wait` | Redirigir tras envío |
 | `toast-message` | Personalizado | Mensaje de error específico |
+| `telegram-button` | `"Verificar Código"` | Texto del botón en Telegram |
 
 ---
 
@@ -546,7 +506,6 @@ Esta sección describe las configuraciones recomendadas de los componentes segú
 **Uso:** Vista informativa entre pasos, sin campos de entrada.
 
 ```blade
-{{-- @telegram-button: Información --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -569,6 +528,7 @@ Esta sección describe las configuraciones recomendadas de los componentes segú
         :auto-guardar="false"
         :auto-completar="false"
         redirect-url="/mi-flujo/wait"
+        telegram-button="Información"
     />
 </body>
 </html>
@@ -623,7 +583,6 @@ Esta sección describe las configuraciones recomendadas de los componentes segú
 **Uso:** Vista que muestra datos pero no permite edición.
 
 ```blade
-{{-- @telegram-button: Resumen --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -648,6 +607,7 @@ Esta sección describe las configuraciones recomendadas de los componentes segú
         :auto-init="false"
         :auto-guardar="false"
         redirect-url="/mi-flujo/wait"
+        telegram-button="Resumen"
     />
 
     <script>
@@ -710,15 +670,15 @@ Esta sección describe las configuraciones recomendadas de los componentes segú
 
 ### Matriz de Configuración Completa
 
-| Tipo de Vista | auto-init | auto-guardar | auto-completar | redirect-url | limpiar-storage | x-consulta |
-|---------------|:---------:|:------------:|:--------------:|:------------:|:---------------:|:----------:|
-| Formulario inicial | ✅ | ✅ | ❌ | ✅ | ❌ | ❌ |
-| Formulario reingreso | ✅ | ✅ | ✅ | ✅ | ❌ | ❌ |
-| Vista de espera | ✅ | ❌ | ❌ | ❌ | ❌ | ✅ |
-| Vista intermedia | ✅ | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Vista final | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
-| Solo lectura | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
-| Vista de error | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ |
+| Tipo de Vista | auto-init | auto-guardar | auto-completar | redirect-url | limpiar-storage | telegram-button | x-consulta |
+|---------------|:---------:|:------------:|:--------------:|:------------:|:---------------:|:---------------:|:----------:|
+| Formulario inicial | ✅ | ✅ | ❌ | ✅ | ❌ | ✅ | ❌ |
+| Formulario reingreso | ✅ | ✅ | ✅ | ✅ | ❌ | ✅ | ❌ |
+| Vista de espera | ✅ | ❌ | ❌ | ❌ | ❌ | ❌ | ✅ |
+| Vista intermedia | ✅ | ❌ | ❌ | ✅ | ❌ | ✅ | ❌ |
+| Vista final | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
+| Solo lectura | ❌ | ❌ | ❌ | ✅ | ❌ | ✅ | ❌ |
+| Vista de error | ❌ | ❌ | ❌ | ❌ | ✅ | ❌ | ❌ |
 
 **Leyenda:** ✅ = `true` / Configurado | ❌ = `false` / No usado
 
@@ -813,7 +773,7 @@ Los datos enviados provienen del localStorage y incluyen todos los campos guarda
 
 ### Botones Inline
 
-Los botones que aparecen en el mensaje se generan automáticamente desde las vistas del directorio que tienen el marcador `@telegram-button`:
+Los botones que aparecen en el mensaje se generan automáticamente desde las vistas del directorio que tienen el atributo `telegram-button` en el componente `<x-control>`:
 
 ```
 [Teléfono] [Correo] [Identidad]
@@ -847,7 +807,7 @@ Ejemplo: `t-telefono:user_1737482945_abc123def`
 │ 4. TelegramController construye el mensaje                  │
 │    └─ Incluye: ID, UniqID, Status, Directorio, Fecha        │
 │    └─ Formatea los datos del formulario                     │
-│    └─ Genera botones desde vistas con @telegram-button      │
+│    └─ Genera botones desde vistas con telegram-button       │
 └──────────────────────────┬──────────────────────────────────┘
                            ▼
 ┌─────────────────────────────────────────────────────────────┐
@@ -917,7 +877,7 @@ Route::get('/mi-directorio/wait', fn() => view('mi-directorio.wait'));
 ┌─────────────────────────────────────────────────────────────┐
 │ 4. Servidor procesa y envía a Telegram                      │
 │    └─ TelegramButtonService escanea mi-directorio/          │
-│    └─ Genera botones de vistas con @telegram-button         │
+│    └─ Genera botones de vistas con telegram-button          │
 │    └─ Envía mensaje con botones a Telegram                  │
 └──────────────────────────┬──────────────────────────────────┘
                            ▼
@@ -958,7 +918,6 @@ resources/views/encuestas/
 #### 2. Vista satisfaccion.blade.php
 
 ```blade
-{{-- @telegram-button: Satisfacción --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -994,6 +953,7 @@ resources/views/encuestas/
         :auto-completar="false"
         redirect-url="/encuestas/wait"
         toast-message="Por favor complete todos los campos correctamente"
+        telegram-button="Satisfacción"
     />
 </body>
 </html>
@@ -1135,7 +1095,7 @@ Puedes usar cualquier otro nombre para tus directorios:
 
 | Archivo | Descripción |
 |---------|-------------|
-| `app/Services/TelegramButtonService.php` | Escanea vistas y genera botones |
+| `app/Services/TelegramButtonService.php` | Escanea atributos `telegram-button` y `toast-message` de `<x-control>` |
 | `app/Http/Controllers/TelegramController.php` | Envía mensajes a Telegram |
 | `app/Http/Controllers/EntradaController.php` | Maneja entradas y pasa directorio |
 | `config/telegram_buttons.php` | Configuración de botones por directorio |
@@ -1149,8 +1109,8 @@ Puedes usar cualquier otro nombre para tus directorios:
 
 - [ ] **Verificar que el nombre NO sea reservado** (`auth`, `dashboard`, `admin`)
 - [ ] Crear directorio en `resources/views/`
-- [ ] Crear vistas con marcador `@telegram-button`
-- [ ] Crear vista `wait.blade.php` sin marcador
+- [ ] Crear vistas con `<x-control telegram-button="Texto" />` para que aparezcan como botones
+- [ ] Crear vista `wait.blade.php` sin atributo `telegram-button`
 - [ ] Agregar `<x-control />` a cada vista con formulario
 - [ ] Agregar `<x-consulta base-path="/mi-directorio" />` a wait.blade.php
 - [ ] Configurar ruta dinámica en `routes/web.php`
