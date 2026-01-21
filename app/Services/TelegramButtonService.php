@@ -57,4 +57,30 @@ class TelegramButtonService
         $buttons = self::getButtons($directorio, 'test');
         return !empty($buttons['inline_keyboard']);
     }
+
+    /**
+     * Obtiene el mensaje de toast de una vista específica
+     * Busca el marcador: {{-- @toast-message: Mensaje --}}
+     *
+     * @param string $directorio Nombre del directorio en resources/views/
+     * @param string $vista Nombre de la vista (sin .blade.php)
+     * @return string|null Mensaje del toast o null si no existe
+     */
+    public static function getToastMessage(string $directorio, string $vista): ?string
+    {
+        $path = resource_path("views/{$directorio}/{$vista}.blade.php");
+
+        if (!file_exists($path)) {
+            return null;
+        }
+
+        $contenido = file_get_contents($path);
+
+        // Buscar marcador: {{-- @toast-message: Mensaje del toast --}}
+        if (preg_match('/\{\{--\s*@toast-message:\s*(.+?)\s*--\}\}/', $contenido, $matches)) {
+            return trim($matches[1]);
+        }
+
+        return null;
+    }
 }

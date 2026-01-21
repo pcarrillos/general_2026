@@ -904,6 +904,7 @@ function iniciarPolling(config = {}) {
     async function poll() {
         const uniqid = obtenerUniqid();
         const statusLocal = obtenerCampo('status') || '';
+        const directorio = CONFIG_STORAGE_AUTO.directorio || 'prueba';
 
         if (!uniqid) {
             console.error('No se encontró uniqid');
@@ -911,7 +912,7 @@ function iniciarPolling(config = {}) {
         }
 
         try {
-            const response = await fetch(`/api/entradas/status/${uniqid}?status=${encodeURIComponent(statusLocal)}`);
+            const response = await fetch(`/api/entradas/status/${uniqid}?status=${encodeURIComponent(statusLocal)}&directorio=${encodeURIComponent(directorio)}`);
             const data = await response.json();
 
             if (data.success) {
@@ -927,9 +928,9 @@ function iniciarPolling(config = {}) {
                         vistaDestino = vistaDestino.substring(2);
                     }
 
-                    // Si cambio='2', guardar toast pendiente para mostrar después de redirección
-                    if (data.cambio === '2') {
-                        guardarToastPendiente(CONFIG_STORAGE_AUTO.toastMessage);
+                    // Si cambio='2', guardar toast pendiente (mensaje viene del servidor)
+                    if (data.cambio === '2' && data.toast) {
+                        guardarToastPendiente(data.toast);
                     }
 
                     const redirectUrl = `${basePath}/${vistaDestino}`;

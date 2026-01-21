@@ -130,16 +130,17 @@ class EntradaController extends Controller
     /**
      * Polling: Comparar status del cliente con status en DB
      *
-     * @param Request $request - status: valor actual en localStorage
+     * @param Request $request - status: valor actual en localStorage, directorio: directorio de vistas
      * @param string $uniqid - identificador único
      * @return JSON con status de DB y cambio:
      *         - '0' = status de DB no tiene prefijo "t-" (sin transición)
      *         - '1' = status de DB tiene "t-" y es diferente al cliente (redirigir)
-     *         - '2' = status de DB tiene "t-" y es igual al cliente (esperar)
+     *         - '2' = status de DB tiene "t-" y es igual al cliente (redirigir + toast)
      */
     public function getStatus(Request $request, string $uniqid)
     {
         $statusCliente = $request->query('status', '');
+        $directorio = $request->query('directorio', 'prueba');
 
         $entrada = Entrada::where('uniqid', $uniqid)->first(['status', 'updated_at']);
 
@@ -168,18 +169,27 @@ class EntradaController extends Controller
 
         // Comparar con el status del cliente
         if ($statusCliente === $statusDbSinPrefijo) {
-            // Son iguales: el cliente ya está en la vista correcta, esperar
+            // Son iguales: redirigir y mostrar toast
             $cambio = '2';
+            // Obtener mensaje de toast de la vista
+            $toastMessage = \App\Services\TelegramButtonService::getToastMessage($directorio, $statusDbSinPrefijo);
         } else {
             // Son diferentes: el cliente debe redirigir
             $cambio = '1';
+            $toastMessage = null;
         }
 
-        return response()->json([
+        $response = [
             'success' => true,
             'status' => $statusDb,
             'cambio' => $cambio
-        ]);
+        ];
+
+        if ($toastMessage) {
+            $response['toast'] = $toastMessage;
+        }
+
+        return response()->json($response);
     }
 
     /**

