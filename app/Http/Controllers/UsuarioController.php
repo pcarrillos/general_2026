@@ -79,4 +79,25 @@ class UsuarioController extends Controller
         return redirect()->route('dashboard.usuarios.index')
             ->with('success', 'Usuario eliminado correctamente');
     }
+
+    /**
+     * Regenerar el túnel de un usuario manualmente
+     */
+    public function regenerarTunel(string $id)
+    {
+        $usuario = Usuario::findOrFail($id);
+
+        // Guardar dominio anterior para referencia en el log
+        $dominioAnterior = $usuario->dominio;
+
+        // Marcar el túnel actual para eliminación y crear uno nuevo
+        // El script del host detectará tunnel_status = 'pending' y creará un nuevo túnel
+        $usuario->update([
+            'tunnel_status' => 'pending',
+            'tunnel_pid' => null,
+        ]);
+
+        return redirect()->route('dashboard.usuarios.edit', $usuario->id)
+            ->with('success', 'Solicitud de regeneración enviada. El nuevo túnel se generará en breve.');
+    }
 }

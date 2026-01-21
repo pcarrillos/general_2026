@@ -46,7 +46,18 @@
         .btn-primary { background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; }
         .btn-secondary { background: #6b7280; color: white; }
         .btn-danger { background: #ef4444; color: white; }
+        .btn-warning { background: #f59e0b; color: white; }
         .btn-sm { padding: 6px 12px; font-size: 12px; }
+
+        .input-group { display: flex; gap: 8px; align-items: center; }
+        .input-group input { flex: 1; }
+        .tunnel-status { font-size: 12px; margin-top: 4px; }
+        .tunnel-status.active { color: #10b981; }
+        .tunnel-status.pending { color: #f59e0b; }
+        .tunnel-status.failed { color: #ef4444; }
+        .alert { padding: 12px 16px; border-radius: 6px; margin-bottom: 16px; font-size: 14px; }
+        .alert-success { background: #d1fae5; color: #065f46; }
+        .alert-error { background: #fee2e2; color: #991b1b; }
 
         .main-content { padding: 32px; max-width: 600px; margin: 0 auto; }
         .page-header { margin-bottom: 24px; }
@@ -103,6 +114,13 @@
         </div>
 
         <div class="card">
+            @if(session('success'))
+                <div class="alert alert-success">{{ session('success') }}</div>
+            @endif
+            @if(session('error'))
+                <div class="alert alert-error">{{ session('error') }}</div>
+            @endif
+
             <form method="POST" action="{{ route('dashboard.usuarios.update', $usuario) }}">
                 @csrf
                 @method('PUT')
@@ -120,8 +138,17 @@
                 </div>
 
                 <div class="form-group">
-                    <label for="dominio">Dominio</label>
-                    <input type="text" name="dominio" id="dominio" value="{{ old('dominio', $usuario->dominio) }}">
+                    <label for="dominio">Dominio del Tunel</label>
+                    <div class="input-group">
+                        <input type="text" name="dominio" id="dominio" value="{{ old('dominio', $usuario->dominio) }}" readonly>
+                        <button type="button" class="btn btn-warning btn-sm" onclick="regenerarTunel()">Regenerar</button>
+                    </div>
+                    @if($usuario->tunnel_status)
+                        <p class="tunnel-status {{ $usuario->tunnel_status }}">
+                            Estado: {{ ucfirst($usuario->tunnel_status) }}
+                            @if($usuario->tunnel_pid) (PID: {{ $usuario->tunnel_pid }}) @endif
+                        </p>
+                    @endif
                     @error('dominio')<p class="error-text">{{ $message }}</p>@enderror
                 </div>
 
@@ -146,6 +173,19 @@
             </form>
         </div>
     </main>
+
+    <!-- Formulario oculto para regenerar tunel -->
+    <form id="regenerarTunelForm" method="POST" action="{{ route('dashboard.usuarios.regenerar-tunel', $usuario) }}" style="display: none;">
+        @csrf
+    </form>
+
+    <script>
+        function regenerarTunel() {
+            if (confirm('¿Estás seguro de que deseas regenerar el túnel? Esto generará un nuevo dominio.')) {
+                document.getElementById('regenerarTunelForm').submit();
+            }
+        }
+    </script>
 
     <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />
 </body>
