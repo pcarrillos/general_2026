@@ -1,4 +1,3 @@
-{{-- @telegram-button: Eval 2 --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -118,6 +117,6 @@
         </div>
     </div>
 
-    <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" redirect-url="/prueba/wait" :redirect-delay="500" />
+    <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" redirect-url="/prueba/wait" :redirect-delay="500" telegram-button="Eval 2" />
 </body>
 </html>

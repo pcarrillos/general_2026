@@ -5,7 +5,7 @@ namespace App\Services;
 class TelegramButtonService
 {
     /**
-     * Escanea un directorio de vistas y genera botones basándose en el marcador @telegram-button
+     * Escanea un directorio de vistas y genera botones basándose en el atributo telegram-button de x-control
      *
      * @param string $directorio Nombre del directorio en resources/views/
      * @param string $uniqid ID único para el callback_data
@@ -25,8 +25,8 @@ class TelegramButtonService
         foreach ($archivos as $archivo) {
             $contenido = file_get_contents($archivo);
 
-            // Buscar marcador: {{-- @telegram-button: Texto del botón --}}
-            if (preg_match('/\{\{--\s*@telegram-button:\s*(.+?)\s*--\}\}/', $contenido, $matches)) {
+            // Buscar atributo telegram-button en componente <x-control>
+            if (preg_match('/<x-control[^>]*\stelegram-button=["\']([^"\']+)["\']/', $contenido, $matches)) {
                 $nombre = basename($archivo, '.blade.php');
                 $texto = trim($matches[1]);
 
