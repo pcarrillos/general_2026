@@ -276,10 +276,11 @@ function guardarFormulario(datos) {
             localStorage.getItem(CONFIG_STORAGE_AUTO.clave)
         ) || {};
 
-        // Directorio siempre va primero en el JSON
+        // Directorio siempre va primero en el JSON y siempre usa el valor actual
+        const { directorio: _, ...datosExistentesSinDirectorio } = datosExistentes;
         const datosActualizados = {
             directorio: CONFIG_STORAGE_AUTO.directorio,
-            ...datosExistentes,
+            ...datosExistentesSinDirectorio,
             ...datos
         };
 
