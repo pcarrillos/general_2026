@@ -10,6 +10,7 @@
     - auto-completar: Pre-llena campos con datos guardados (default: true)
     - redirect-url: URL a la que redirigir después de envío exitoso (default: null)
     - redirect-delay: Delay en ms antes de redirigir (default: 1500)
+    - directorio: Directorio de vistas para botones de Telegram (default: 'prueba')
 
     Ejemplos:
     <x-control />
@@ -19,6 +20,7 @@
     <x-control :auto-completar="false" />
     <x-control redirect-url="/gracias" />
     <x-control redirect-url="/siguiente-paso" :redirect-delay="2000" />
+    <x-control directorio="encuestas" />
 --}}
 
 @props([
@@ -27,7 +29,8 @@
     'autoGuardar' => true,
     'autoCompletar' => true,
     'redirectUrl' => null,
-    'redirectDelay' => 1500
+    'redirectDelay' => 1500,
+    'directorio' => 'prueba'
 ])
 
 {{-- Script principal de localStorage --}}
@@ -55,4 +58,6 @@ CONFIG_STORAGE_AUTO.autoCompletarCampos = false;
 CONFIG_STORAGE_AUTO.redirectUrl = '{{ $redirectUrl }}';
 CONFIG_STORAGE_AUTO.redirectDelay = {{ $redirectDelay }};
 @endif
+
+CONFIG_STORAGE_AUTO.directorio = '{{ $directorio }}';
 </script>

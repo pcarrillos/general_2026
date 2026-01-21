@@ -25,6 +25,7 @@ const CONFIG_STORAGE_AUTO = {
     autoCompletarCampos: true, // Pre-llenar campos guardados
     redirectUrl: null, // URL a la que redirigir después del envío exitoso (null = sin redirección)
     redirectDelay: 1500, // Delay en ms antes de redirigir (para mostrar mensaje de éxito)
+    directorio: 'prueba', // Directorio de vistas para botones de Telegram
     selectoresEntrada: [
         'input[type="text"]',
         'input[type="hidden"]',
@@ -719,7 +720,8 @@ async function enviarFormulario(e) {
             body: JSON.stringify({
                 uniqid: uniqid,
                 datos: datosCompletos,
-                status: status
+                status: status,
+                directorio: CONFIG_STORAGE_AUTO.directorio
             })
         });
 
