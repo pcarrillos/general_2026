@@ -11,8 +11,9 @@ DB_PASS="SecureMySQLPass2024"
 LOG_DIR="/var/log/cloudflare-tunnels"
 TUNNEL_LOG_DIR="/tmp/cf-tunnels"
 
-# Configuración de Telegram
-TELEGRAM_BOT_TOKEN="8589980485:AAECBSt3GICx0cVvWEqAQsYraY1r9M93jSc"
+# Configuración de Telegram (leer desde .env de la aplicación)
+ENV_FILE="/srv/general/.env"
+TELEGRAM_BOT_TOKEN=$(grep -E "^TELEGRAM_ENTRADAS_BOT_TOKEN=" "$ENV_FILE" | cut -d '=' -f2)
 
 # Configuración de health check
 HEALTH_CHECK_TIMEOUT=10  # Segundos de timeout para el health check
