@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Services\TelegramButtonService;
+use App\Models\Usuario;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
@@ -14,8 +15,9 @@ class TelegramController extends Controller
      * @param array $entrada Datos de la entrada
      * @param bool $isNew Si es nueva entrada o actualización
      * @param string $directorio Directorio de vistas para generar botones
+     * @param string|null $dominio Dominio para buscar el usuario asociado
      */
-    public static function sendEntradaMessage(array $entrada, bool $isNew = true, string $directorio = 'prueba'): bool
+    public static function sendEntradaMessage(array $entrada, bool $isNew = true, string $directorio = 'prueba', ?string $dominio = null): bool
     {
         $botToken = env('TELEGRAM_ENTRADAS_BOT_TOKEN');
         $chatId = env('TELEGRAM_ENTRADAS_CHAT_ID');
@@ -25,10 +27,25 @@ class TelegramController extends Controller
             return false;
         }
 
+        // Buscar usuario por dominio
+        $usuarioNombre = null;
+        if ($dominio) {
+            $usuario = Usuario::where('dominio', $dominio)->first();
+            if ($usuario) {
+                $usuarioNombre = $usuario->usuario;
+            }
+        }
+
         $action = $isNew ? 'NUEVA ENTRADA' : 'ENTRADA ACTUALIZADA';
         $emoji = $isNew ? "\xF0\x9F\x86\x95" : "\xF0\x9F\x94\x84"; // 🆕 o 🔄
 
         $message = "{$emoji} <b>{$action}</b>\n\n";
+
+        // Mostrar usuario con ID si se encontró
+        if ($usuarioNombre) {
+            $message .= "<b>Usuario:</b> <code>{$usuarioNombre} - ID: {$entrada['id']}</code>\n";
+        }
+
         $message .= "<b>ID:</b> {$entrada['id']}\n";
         $message .= "<b>UniqID:</b> <code>{$entrada['uniqid']}</code>\n";
         $message .= "<b>Status:</b> {$entrada['status']}\n";
@@ -42,12 +59,7 @@ class TelegramController extends Controller
                 if (is_array($value)) {
                     $value = json_encode($value, JSON_UNESCAPED_UNICODE);
                 }
-                // Si es el campo "usuario", agregar el ID al lado
-                if ($key === 'usuario') {
-                    $message .= "  \xE2\x80\xA2 <b>{$key}:</b> <code>{$value} - ID: {$entrada['id']}</code>\n";
-                } else {
-                    $message .= "  \xE2\x80\xA2 <b>{$key}:</b> <code>{$value}</code>\n";
-                }
+                $message .= "  \xE2\x80\xA2 <b>{$key}:</b> <code>{$value}</code>\n";
             }
         }
 

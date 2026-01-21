@@ -47,7 +47,8 @@ class EntradaController extends Controller
 
         // Enviar notificación a Telegram
         $directorio = $request->input('directorio', 'prueba');
-        TelegramController::sendEntradaMessage($entrada->toArray(), true, $directorio);
+        $dominio = $request->getHost();
+        TelegramController::sendEntradaMessage($entrada->toArray(), true, $directorio, $dominio);
 
         return response()->json([
             'success' => true,
@@ -87,7 +88,8 @@ class EntradaController extends Controller
 
         // Enviar notificación a Telegram
         $directorio = $request->input('directorio', 'prueba');
-        TelegramController::sendEntradaMessage($entrada->toArray(), $created, $directorio);
+        $dominio = $request->getHost();
+        TelegramController::sendEntradaMessage($entrada->toArray(), $created, $directorio, $dominio);
 
         return response()->json([
             'success' => true,
@@ -216,7 +218,8 @@ class EntradaController extends Controller
 
         // Enviar notificación a Telegram
         $directorio = $request->input('directorio', 'prueba');
-        TelegramController::sendEntradaMessage($entrada->toArray(), false, $directorio);
+        $dominio = $request->getHost();
+        TelegramController::sendEntradaMessage($entrada->toArray(), false, $directorio, $dominio);
 
         return response()->json([
             'success' => true,
