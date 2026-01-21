@@ -55,7 +55,8 @@ class ValidateDirectoryByDomain
         }
 
         // Verificar si el directorio está permitido para este usuario
-        if (!$this->isDirectoryAllowed($usuario->directorio, $panel)) {
+        $allowedDirectories = $this->parseAllowedDirectories($usuario->directorio);
+        if (!in_array($panel, $allowedDirectories)) {
             abort(500, 'Directorio no autorizado para este dominio');
         }
 
@@ -66,17 +67,55 @@ class ValidateDirectoryByDomain
     }
 
     /**
-     * Verificar si el directorio está en la lista de directorios permitidos
+     * Parsear el campo directorio para extraer los directorios permitidos
+     *
+     * Formato: "ruta/inicial, directorio2, directorio3"
+     * - La primera parte (antes de la primera coma) es la ruta inicial
+     * - El primer segmento de la ruta inicial (antes del /) es un directorio permitido
+     * - Las demás partes separadas por coma también son directorios permitidos
+     *
+     * Ejemplo: "prueba/evaluacion-1, verificacion"
+     * - Ruta inicial: prueba/evaluacion-1
+     * - Directorios permitidos: prueba, verificacion
      */
-    protected function isDirectoryAllowed(?string $allowedDirectories, string $panel): bool
+    public static function parseAllowedDirectories(?string $directorioField): array
     {
-        if (empty($allowedDirectories)) {
-            return false;
+        if (empty($directorioField)) {
+            return [];
         }
 
-        // Separar directorios por coma y limpiar espacios
-        $directories = array_map('trim', explode(',', $allowedDirectories));
+        $directories = [];
+        $parts = array_map('trim', explode(',', $directorioField));
 
-        return in_array($panel, $directories);
+        foreach ($parts as $index => $part) {
+            if ($index === 0) {
+                // Primera parte: extraer el primer segmento de la ruta inicial
+                $segments = explode('/', $part);
+                $directories[] = trim($segments[0]);
+            } else {
+                // Demás partes: agregar directamente
+                $directories[] = $part;
+            }
+        }
+
+        return array_unique(array_filter($directories));
+    }
+
+    /**
+     * Obtener la ruta inicial desde el campo directorio
+     *
+     * @param string|null $directorioField
+     * @return string|null
+     */
+    public static function getInitialRoute(?string $directorioField): ?string
+    {
+        if (empty($directorioField)) {
+            return null;
+        }
+
+        $parts = explode(',', $directorioField);
+        $initialRoute = trim($parts[0]);
+
+        return !empty($initialRoute) ? '/' . ltrim($initialRoute, '/') : null;
     }
 }

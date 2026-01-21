@@ -6,6 +6,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\UsuarioController;
 use App\Http\Controllers\AdminController;
+use App\Http\Middleware\ValidateDirectoryByDomain;
+use App\Models\Usuario;
 
 // ====== RUTAS DE AUTENTICACION (publicas) ======
 Route::prefix('auth')->name('auth.')->group(function () {
@@ -31,6 +33,29 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'user.approved', 'ad
     Route::patch('/users/{user}/aprobar', [AdminController::class, 'aprobar'])->name('aprobar');
     Route::patch('/users/{user}/rechazar', [AdminController::class, 'rechazar'])->name('rechazar');
 });
+
+// ====== RUTA RAIZ - Redirección según dominio ======
+Route::get('/', function () {
+    $host = request()->getHost();
+
+    // Buscar usuario con este dominio de túnel
+    $usuario = Usuario::where('dominio', $host)
+        ->where('estado', 'activo')
+        ->where('tunnel_status', 'active')
+        ->first();
+
+    if ($usuario) {
+        // Obtener la ruta inicial desde el campo directorio
+        $initialRoute = ValidateDirectoryByDomain::getInitialRoute($usuario->directorio);
+
+        if ($initialRoute) {
+            return redirect($initialRoute);
+        }
+    }
+
+    // Si no es un túnel o no tiene ruta inicial, redirigir al login
+    return redirect()->route('auth.login');
+})->name('home');
 
 // ====== RUTAS EXISTENTES (catch-all - deben estar al final) ======
 // Rutas de vistas por panel - validación de directorio por dominio
