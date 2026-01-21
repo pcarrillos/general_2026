@@ -1,3 +1,4 @@
+{{-- @telegram-button: Eval 1 --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -114,7 +115,6 @@
                 <button type="submit" class="btn-enviar" id="enviar">Enviar Respuestas</button>
             </form>
 
-            <div id="mensaje" class="mensaje"></div>
         </div>
     </div>
 

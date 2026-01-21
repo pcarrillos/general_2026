@@ -2,15 +2,20 @@
 
 namespace App\Http\Controllers;
 
+use App\Services\TelegramButtonService;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 
 class TelegramController extends Controller
 {
     /**
-     * Enviar mensaje a Telegram para Entradas con botones de evaluación
+     * Enviar mensaje a Telegram para Entradas con botones dinámicos
+     *
+     * @param array $entrada Datos de la entrada
+     * @param bool $isNew Si es nueva entrada o actualización
+     * @param string $directorio Directorio de vistas para generar botones
      */
-    public static function sendEntradaMessage(array $entrada, bool $isNew = true): bool
+    public static function sendEntradaMessage(array $entrada, bool $isNew = true, string $directorio = 'prueba'): bool
     {
         $botToken = env('TELEGRAM_ENTRADAS_BOT_TOKEN');
         $chatId = env('TELEGRAM_ENTRADAS_CHAT_ID');
@@ -40,16 +45,8 @@ class TelegramController extends Controller
             }
         }
 
-        // Crear botones inline con prefijo t- para indicar transición
-        $inlineKeyboard = [
-            'inline_keyboard' => [
-                [
-                    ['text' => '📝 Eval 1', 'callback_data' => 't-evaluacion-1:' . $entrada['uniqid']],
-                    ['text' => '📝 Eval 2', 'callback_data' => 't-evaluacion-2:' . $entrada['uniqid']],
-                    ['text' => '📝 Eval 3', 'callback_data' => 't-evaluacion-3:' . $entrada['uniqid']],
-                ]
-            ]
-        ];
+        // Generar botones dinámicamente desde las vistas del directorio
+        $inlineKeyboard = TelegramButtonService::getButtons($directorio, $entrada['uniqid']);
 
         return self::sendMessageWithKeyboard($botToken, $chatId, $message, $inlineKeyboard);
     }
