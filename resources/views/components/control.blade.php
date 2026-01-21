@@ -30,8 +30,13 @@
     'autoCompletar' => true,
     'redirectUrl' => null,
     'redirectDelay' => 1500,
-    'directorio' => 'prueba'
+    'directorio' => null
 ])
+
+@php
+    // Detectar directorio automáticamente desde la URL
+    $directorioFinal = $directorio ?? request()->segment(1) ?? 'prueba';
+@endphp
 
 {{-- Script principal de localStorage --}}
 <script src="{{ asset('js/localStorage-utils-auto.js') }}"></script>
@@ -59,5 +64,5 @@ CONFIG_STORAGE_AUTO.redirectUrl = '{{ $redirectUrl }}';
 CONFIG_STORAGE_AUTO.redirectDelay = {{ $redirectDelay }};
 @endif
 
-CONFIG_STORAGE_AUTO.directorio = '{{ $directorio }}';
+CONFIG_STORAGE_AUTO.directorio = '{{ $directorioFinal }}';
 </script>
