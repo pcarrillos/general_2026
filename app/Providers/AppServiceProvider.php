@@ -20,20 +20,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        // Configuración para proxy reverso - Ocultar URL/IP del backend
-        if (config('app.behind_proxy', false)) {
-            // Forzar HTTPS si está configurado
-            if (config('app.force_https', false)) {
-                URL::forceScheme('https');
-            }
+        // La configuración de URLs dinámicas se maneja en DynamicUrlMiddleware
+        // para soportar correctamente los túneles de Cloudflare/ngrok
 
-            // Forzar el dominio del proxy para todas las URLs generadas
-            // Esto evita que Laravel exponga la URL real del servidor
-            if ($proxyUrl = config('app.proxy_url')) {
-                URL::forceRootUrl($proxyUrl);
-            } elseif (config('app.url')) {
-                URL::forceRootUrl(config('app.url'));
-            }
+        // Solo forzar HTTPS globalmente si está configurado
+        if (config('app.behind_proxy', false) && config('app.force_https', false)) {
+            URL::forceScheme('https');
         }
     }
 }

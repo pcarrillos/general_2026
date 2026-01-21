@@ -15,6 +15,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // Configurar TrustedProxies para el proxy reverso
         $middleware->trustProxies(at: '*');
 
+        // Middleware global para manejar URLs dinámicas de túneles
+        $middleware->prepend(\App\Http\Middleware\DynamicUrlMiddleware::class);
+
         // Registrar alias de middleware
         $middleware->alias([
             'user.approved' => \App\Http\Middleware\CheckUserApproved::class,
