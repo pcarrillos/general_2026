@@ -87,6 +87,146 @@
 
         .error-text { color: #ef4444; font-size: 12px; margin-top: 4px; }
         .form-actions { display: flex; gap: 12px; margin-top: 24px; }
+
+        /* Toast Notifications */
+        .toast-container {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 9999;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .toast {
+            min-width: 300px;
+            max-width: 400px;
+            padding: 16px 20px;
+            border-radius: 8px;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            animation: toastSlideIn 0.3s ease-out;
+            position: relative;
+        }
+
+        .toast.hiding {
+            animation: toastSlideOut 0.3s ease-in forwards;
+        }
+
+        @keyframes toastSlideIn {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
+        }
+
+        @keyframes toastSlideOut {
+            from { transform: translateX(0); opacity: 1; }
+            to { transform: translateX(100%); opacity: 0; }
+        }
+
+        .toast-success {
+            background: #10b981;
+            color: white;
+        }
+
+        .toast-error {
+            background: #ef4444;
+            color: white;
+        }
+
+        .toast-warning {
+            background: #f59e0b;
+            color: white;
+        }
+
+        .toast-info {
+            background: #3b82f6;
+            color: white;
+        }
+
+        .toast-icon {
+            font-size: 20px;
+            flex-shrink: 0;
+        }
+
+        .toast-message {
+            flex: 1;
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .toast-close {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 18px;
+            opacity: 0.8;
+            padding: 0;
+            line-height: 1;
+        }
+
+        .toast-close:hover {
+            opacity: 1;
+        }
+
+        /* Modal de confirmación */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0, 0, 0, 0.5);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9998;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.2s, visibility 0.2s;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            max-width: 400px;
+            width: 90%;
+            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+            transform: scale(0.9);
+            transition: transform 0.2s;
+        }
+
+        .modal-overlay.active .modal-content {
+            transform: scale(1);
+        }
+
+        .modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1f2937;
+            margin-bottom: 12px;
+        }
+
+        .modal-message {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 24px;
+        }
+
+        .modal-actions {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+        }
     </style>
 </head>
 <body>
@@ -114,13 +254,6 @@
         </div>
 
         <div class="card">
-            @if(session('success'))
-                <div class="alert alert-success">{{ session('success') }}</div>
-            @endif
-            @if(session('error'))
-                <div class="alert alert-error">{{ session('error') }}</div>
-            @endif
-
             <form method="POST" action="{{ route('dashboard.usuarios.update', $usuario) }}">
                 @csrf
                 @method('PUT')
@@ -179,14 +312,104 @@
         @csrf
     </form>
 
+    <!-- Contenedor de Toast -->
+    <div id="toastContainer" class="toast-container"></div>
+
+    <!-- Modal de confirmación -->
+    <div id="confirmModal" class="modal-overlay">
+        <div class="modal-content">
+            <h3 class="modal-title" id="modalTitle">Confirmar acción</h3>
+            <p class="modal-message" id="modalMessage">¿Estás seguro?</p>
+            <div class="modal-actions">
+                <button type="button" class="btn btn-secondary" onclick="cerrarModal()">Cancelar</button>
+                <button type="button" class="btn btn-warning" id="modalConfirmBtn">Confirmar</button>
+            </div>
+        </div>
+    </div>
+
     <script>
+        // ===== Sistema de Toast =====
+        const Toast = {
+            container: null,
+            icons: {
+                success: '✓',
+                error: '✕',
+                warning: '⚠',
+                info: 'ℹ'
+            },
+
+            init() {
+                this.container = document.getElementById('toastContainer');
+            },
+
+            show(type, message, duration = 5000) {
+                const toast = document.createElement('div');
+                toast.className = `toast toast-${type}`;
+                toast.innerHTML = `
+                    <span class="toast-icon">${this.icons[type]}</span>
+                    <span class="toast-message">${message}</span>
+                    <button class="toast-close" onclick="Toast.close(this.parentElement)">&times;</button>
+                `;
+                this.container.appendChild(toast);
+
+                if (duration > 0) {
+                    setTimeout(() => this.close(toast), duration);
+                }
+
+                return toast;
+            },
+
+            close(toast) {
+                if (toast && toast.parentElement) {
+                    toast.classList.add('hiding');
+                    setTimeout(() => toast.remove(), 300);
+                }
+            },
+
+            success(message, duration) { return this.show('success', message, duration); },
+            error(message, duration) { return this.show('error', message, duration); },
+            warning(message, duration) { return this.show('warning', message, duration); },
+            info(message, duration) { return this.show('info', message, duration); }
+        };
+
+        // ===== Sistema de Modal =====
+        let modalCallback = null;
+
+        function mostrarConfirmacion(titulo, mensaje, onConfirm) {
+            document.getElementById('modalTitle').textContent = titulo;
+            document.getElementById('modalMessage').textContent = mensaje;
+            document.getElementById('confirmModal').classList.add('active');
+            modalCallback = onConfirm;
+        }
+
+        function cerrarModal() {
+            document.getElementById('confirmModal').classList.remove('active');
+            modalCallback = null;
+        }
+
+        document.getElementById('modalConfirmBtn').addEventListener('click', function() {
+            cerrarModal();
+            if (modalCallback) modalCallback();
+        });
+
+        // Cerrar modal con Escape
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape') cerrarModal();
+        });
+
+        // ===== Funciones del túnel =====
         let pollingInterval = null;
         const statusUrl = "{{ route('dashboard.usuarios.estado-tunel', $usuario) }}";
 
         function regenerarTunel() {
-            if (confirm('¿Estás seguro de que deseas regenerar el túnel? Esto generará un nuevo dominio.')) {
-                document.getElementById('regenerarTunelForm').submit();
-            }
+            mostrarConfirmacion(
+                'Regenerar Túnel',
+                '¿Estás seguro de que deseas regenerar el túnel? Esto generará un nuevo dominio.',
+                function() {
+                    Toast.info('Solicitando regeneración del túnel...');
+                    document.getElementById('regenerarTunelForm').submit();
+                }
+            );
         }
 
         function actualizarEstadoTunel(data) {
@@ -212,23 +435,11 @@
             if (data.tunnel_status === 'active' || data.tunnel_status === 'failed') {
                 detenerPolling();
                 if (data.tunnel_status === 'active') {
-                    mostrarAlerta('success', 'Túnel regenerado exitosamente: ' + data.dominio);
+                    Toast.success('Túnel regenerado exitosamente: ' + data.dominio);
                 } else {
-                    mostrarAlerta('error', 'Error al regenerar el túnel. Intente nuevamente.');
+                    Toast.error('Error al regenerar el túnel. Intente nuevamente.');
                 }
             }
-        }
-
-        function mostrarAlerta(tipo, mensaje) {
-            // Eliminar alertas anteriores
-            const alertasAnteriores = document.querySelectorAll('.alert-polling');
-            alertasAnteriores.forEach(a => a.remove());
-
-            const card = document.querySelector('.card');
-            const alerta = document.createElement('div');
-            alerta.className = 'alert alert-' + tipo + ' alert-polling';
-            alerta.textContent = mensaje;
-            card.insertBefore(alerta, card.firstChild);
         }
 
         function consultarEstado() {
@@ -240,7 +451,7 @@
 
         function iniciarPolling() {
             if (!pollingInterval) {
-                pollingInterval = setInterval(consultarEstado, 3000); // Cada 3 segundos
+                pollingInterval = setInterval(consultarEstado, 3000);
             }
         }
 
@@ -251,10 +462,22 @@
             }
         }
 
-        // Iniciar polling automáticamente si el estado es pending
+        // ===== Inicialización =====
         document.addEventListener('DOMContentLoaded', function() {
+            Toast.init();
+
+            // Mostrar mensajes de sesión como Toast
+            @if(session('success'))
+                Toast.success("{{ session('success') }}");
+            @endif
+            @if(session('error'))
+                Toast.error("{{ session('error') }}");
+            @endif
+
+            // Iniciar polling si el estado es pending
             const statusElement = document.querySelector('.tunnel-status');
             if (statusElement && statusElement.classList.contains('pending')) {
+                Toast.info('Generando túnel, por favor espere...', 0);
                 iniciarPolling();
             }
         });
