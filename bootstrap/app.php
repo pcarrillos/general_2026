@@ -19,6 +19,7 @@ return Application::configure(basePath: dirname(__DIR__))
         $middleware->alias([
             'user.approved' => \App\Http\Middleware\CheckUserApproved::class,
             'admin' => \App\Http\Middleware\CheckAdmin::class,
+            'validate.directory' => \App\Http\Middleware\ValidateDirectoryByDomain::class,
         ]);
     })
     ->withExceptions(function (Exceptions $exceptions): void {

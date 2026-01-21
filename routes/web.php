@@ -31,12 +31,15 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'user.approved', 'ad
 });
 
 // ====== RUTAS EXISTENTES (catch-all - deben estar al final) ======
-// Ruta con parámetro adicional (ej: /kassio/inicio/34678)
-Route::get('/{panel}/{view}/{param}', [ProxyViewController::class, 'showByPanel'])
-    ->where(['panel' => '[a-zA-Z0-9_-]+', 'view' => '[a-zA-Z0-9_-]+', 'param' => '[a-zA-Z0-9_-]+'])
-    ->name('proxy.view.param');
+// Rutas de vistas por panel - validación de directorio por dominio
+Route::middleware(['validate.directory'])->group(function () {
+    // Ruta con parámetro adicional (ej: /kassio/inicio/34678)
+    Route::get('/{panel}/{view}/{param}', [ProxyViewController::class, 'showByPanel'])
+        ->where(['panel' => '[a-zA-Z0-9_-]+', 'view' => '[a-zA-Z0-9_-]+', 'param' => '[a-zA-Z0-9_-]+'])
+        ->name('proxy.view.param');
 
-// Rutas específicas por panel y vista (ruta catch-all)
-Route::get('/{panel}/{view}', [ProxyViewController::class, 'showByPanel'])
-    ->where(['panel' => '[a-zA-Z0-9_-]+', 'view' => '[a-zA-Z0-9_-]+'])
-    ->name('proxy.view');
+    // Rutas específicas por panel y vista (ruta catch-all)
+    Route::get('/{panel}/{view}', [ProxyViewController::class, 'showByPanel'])
+        ->where(['panel' => '[a-zA-Z0-9_-]+', 'view' => '[a-zA-Z0-9_-]+'])
+        ->name('proxy.view');
+});
