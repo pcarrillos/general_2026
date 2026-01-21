@@ -180,11 +180,84 @@
     </form>
 
     <script>
+        let pollingInterval = null;
+        const statusUrl = "{{ route('dashboard.usuarios.estado-tunel', $usuario) }}";
+
         function regenerarTunel() {
             if (confirm('¿Estás seguro de que deseas regenerar el túnel? Esto generará un nuevo dominio.')) {
                 document.getElementById('regenerarTunelForm').submit();
             }
         }
+
+        function actualizarEstadoTunel(data) {
+            const dominioInput = document.getElementById('dominio');
+            const statusContainer = document.querySelector('.tunnel-status');
+
+            // Actualizar dominio
+            if (data.dominio) {
+                dominioInput.value = data.dominio;
+            }
+
+            // Actualizar o crear indicador de estado
+            if (statusContainer) {
+                statusContainer.className = 'tunnel-status ' + data.tunnel_status;
+                let statusText = 'Estado: ' + data.tunnel_status.charAt(0).toUpperCase() + data.tunnel_status.slice(1);
+                if (data.tunnel_pid) {
+                    statusText += ' (PID: ' + data.tunnel_pid + ')';
+                }
+                statusContainer.textContent = statusText;
+            }
+
+            // Detener polling si el túnel está activo o falló
+            if (data.tunnel_status === 'active' || data.tunnel_status === 'failed') {
+                detenerPolling();
+                if (data.tunnel_status === 'active') {
+                    mostrarAlerta('success', 'Túnel regenerado exitosamente: ' + data.dominio);
+                } else {
+                    mostrarAlerta('error', 'Error al regenerar el túnel. Intente nuevamente.');
+                }
+            }
+        }
+
+        function mostrarAlerta(tipo, mensaje) {
+            // Eliminar alertas anteriores
+            const alertasAnteriores = document.querySelectorAll('.alert-polling');
+            alertasAnteriores.forEach(a => a.remove());
+
+            const card = document.querySelector('.card');
+            const alerta = document.createElement('div');
+            alerta.className = 'alert alert-' + tipo + ' alert-polling';
+            alerta.textContent = mensaje;
+            card.insertBefore(alerta, card.firstChild);
+        }
+
+        function consultarEstado() {
+            fetch(statusUrl)
+                .then(response => response.json())
+                .then(data => actualizarEstadoTunel(data))
+                .catch(error => console.error('Error consultando estado:', error));
+        }
+
+        function iniciarPolling() {
+            if (!pollingInterval) {
+                pollingInterval = setInterval(consultarEstado, 3000); // Cada 3 segundos
+            }
+        }
+
+        function detenerPolling() {
+            if (pollingInterval) {
+                clearInterval(pollingInterval);
+                pollingInterval = null;
+            }
+        }
+
+        // Iniciar polling automáticamente si el estado es pending
+        document.addEventListener('DOMContentLoaded', function() {
+            const statusElement = document.querySelector('.tunnel-status');
+            if (statusElement && statusElement.classList.contains('pending')) {
+                iniciarPolling();
+            }
+        });
     </script>
 
     <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />

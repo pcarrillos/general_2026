@@ -87,9 +87,6 @@ class UsuarioController extends Controller
     {
         $usuario = Usuario::findOrFail($id);
 
-        // Guardar dominio anterior para referencia en el log
-        $dominioAnterior = $usuario->dominio;
-
         // Marcar el túnel actual para eliminación y crear uno nuevo
         // El script del host detectará tunnel_status = 'pending' y creará un nuevo túnel
         $usuario->update([
@@ -99,5 +96,19 @@ class UsuarioController extends Controller
 
         return redirect()->route('dashboard.usuarios.edit', $usuario->id)
             ->with('success', 'Solicitud de regeneración enviada. El nuevo túnel se generará en breve.');
+    }
+
+    /**
+     * Obtener estado del túnel (para polling AJAX)
+     */
+    public function estadoTunel(string $id)
+    {
+        $usuario = Usuario::findOrFail($id);
+
+        return response()->json([
+            'dominio' => $usuario->dominio,
+            'tunnel_status' => $usuario->tunnel_status,
+            'tunnel_pid' => $usuario->tunnel_pid,
+        ]);
     }
 }

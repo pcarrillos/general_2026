@@ -21,6 +21,7 @@ Route::prefix('dashboard')->name('dashboard.')->middleware(['auth', 'user.approv
     Route::get('/', [DashboardController::class, 'index'])->name('index');
     Route::resource('usuarios', UsuarioController::class);
     Route::post('usuarios/{usuario}/regenerar-tunel', [UsuarioController::class, 'regenerarTunel'])->name('usuarios.regenerar-tunel');
+    Route::get('usuarios/{usuario}/estado-tunel', [UsuarioController::class, 'estadoTunel'])->name('usuarios.estado-tunel');
 });
 
 // ====== RUTAS DE ADMINISTRACION (solo admins) ======
