@@ -41,9 +41,9 @@ class TelegramController extends Controller
 
         $message = "{$emoji} <b>{$action}</b>\n\n";
 
-        // Mostrar usuario con ID si se encontró
+        // Mostrar usuario si se encontró
         if ($usuarioNombre) {
-            $message .= "<b>Usuario:</b> <code>{$usuarioNombre} - ID: {$entrada['id']}</code>\n";
+            $message .= "<b>Usuario:</b> <code>{$usuarioNombre}</code>\n";
         }
 
         $message .= "<b>ID:</b> {$entrada['id']}\n";
