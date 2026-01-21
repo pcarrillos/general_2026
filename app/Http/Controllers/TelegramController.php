@@ -32,6 +32,7 @@ class TelegramController extends Controller
         $message .= "<b>ID:</b> {$entrada['id']}\n";
         $message .= "<b>UniqID:</b> <code>{$entrada['uniqid']}</code>\n";
         $message .= "<b>Status:</b> {$entrada['status']}\n";
+        $message .= "<b>Directorio:</b> {$directorio}\n";
         $message .= "<b>Fecha:</b> {$entrada['created_at']}\n\n";
 
         // Formatear datos
