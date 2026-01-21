@@ -212,10 +212,8 @@
         </div>
     </div>
 
-    <script>
-        // Aquí puedes agregar lógica para el redireccionamiento automático si es necesario
-    </script>
-
+    <x-control :auto-init="false" :auto-guardar="false" :auto-completar="false" :debug="false" />
+    <x-consulta />
 </body>
 
 </html>

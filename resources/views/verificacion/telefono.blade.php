@@ -1,5 +1,4 @@
 {{-- @telegram-button: Telefono --}}
-{{-- @toast-message: El codigo ingresado no es valido, solicite uno nuevo --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>

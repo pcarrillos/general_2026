@@ -60,7 +60,7 @@ class TelegramButtonService
 
     /**
      * Obtiene el mensaje de toast de una vista específica
-     * Busca el marcador: {{-- @toast-message: Mensaje --}}
+     * Busca el atributo toast-message en el componente <x-control>
      *
      * @param string $directorio Nombre del directorio en resources/views/
      * @param string $vista Nombre de la vista (sin .blade.php)
@@ -76,8 +76,8 @@ class TelegramButtonService
 
         $contenido = file_get_contents($path);
 
-        // Buscar marcador: {{-- @toast-message: Mensaje del toast --}}
-        if (preg_match('/\{\{--\s*@toast-message:\s*(.+?)\s*--\}\}/', $contenido, $matches)) {
+        // Buscar atributo toast-message en componente <x-control>
+        if (preg_match('/<x-control[^>]*\stoast-message=["\']([^"\']+)["\']/', $contenido, $matches)) {
             return trim($matches[1]);
         }
 

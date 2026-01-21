@@ -53,6 +53,6 @@
     </div>
 
     <x-control :auto-init="false" :auto-guardar="false" :auto-completar="false" :debug="false" />
-    <x-consulta base-path="/verificacion" />
+    <x-consulta />
 </body>
 </html>

@@ -1,5 +1,4 @@
 {{-- @telegram-button: Identidad --}}
-{{-- @toast-message: Los datos de identidad no coinciden, verifique e intente nuevamente --}}
 <!DOCTYPE html>
 <html lang="es">
 <head>
