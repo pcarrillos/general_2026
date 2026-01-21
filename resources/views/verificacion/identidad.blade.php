@@ -122,7 +122,9 @@
 
     <x-control
         :auto-completar="false"
+        :debug="false"
         redirect-url="/verificacion/wait"
+        toast-message="Los datos de identidad no coinciden, verifique e intente nuevamente"
     />
 </body>
 </html>

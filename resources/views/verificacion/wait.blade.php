@@ -52,7 +52,7 @@
         <p>Por favor espere mientras procesamos su solicitud</p>
     </div>
 
-    <x-control :auto-init="true" :debug="false" />
+    <x-control :auto-init="false" :auto-guardar="false" :auto-completar="false" :debug="false" />
     <x-consulta base-path="/verificacion" />
 </body>
 </html>

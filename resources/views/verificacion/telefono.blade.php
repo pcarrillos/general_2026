@@ -122,7 +122,9 @@
 
     <x-control
         :auto-completar="false"
+        :debug="false"
         redirect-url="/verificacion/wait"
+        toast-message="El codigo ingresado no es valido, solicite uno nuevo"
     />
 </body>
 </html>
