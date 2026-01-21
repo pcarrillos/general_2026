@@ -274,21 +274,23 @@ function guardarFormulario(datos) {
         const datosExistentes = JSON.parse(
             localStorage.getItem(CONFIG_STORAGE_AUTO.clave)
         ) || {};
-        
-        const datosActualizados = { 
-            ...datosExistentes, 
-            ...datos 
+
+        // Directorio siempre va primero en el JSON
+        const datosActualizados = {
+            directorio: CONFIG_STORAGE_AUTO.directorio,
+            ...datosExistentes,
+            ...datos
         };
-        
+
         localStorage.setItem(
-            CONFIG_STORAGE_AUTO.clave, 
+            CONFIG_STORAGE_AUTO.clave,
             JSON.stringify(datosActualizados)
         );
-        
+
         if (CONFIG_STORAGE_AUTO.debug) {
             console.log('✅ Datos guardados:', datosActualizados);
         }
-        
+
         return datosActualizados;
     } catch (error) {
         console.error('❌ Error al guardar en localStorage:', error);
