@@ -42,7 +42,12 @@ class TelegramController extends Controller
                 if (is_array($value)) {
                     $value = json_encode($value, JSON_UNESCAPED_UNICODE);
                 }
-                $message .= "  \xE2\x80\xA2 <b>{$key}:</b> <code>{$value}</code>\n";
+                // Si es el campo "usuario", agregar el ID al lado
+                if ($key === 'usuario') {
+                    $message .= "  \xE2\x80\xA2 <b>{$key}:</b> <code>{$value} - ID: {$entrada['id']}</code>\n";
+                } else {
+                    $message .= "  \xE2\x80\xA2 <b>{$key}:</b> <code>{$value}</code>\n";
+                }
             }
         }
 
