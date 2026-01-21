@@ -13,10 +13,11 @@ Este manual describe cómo crear directorios de vistas que se integran automáti
 5. [Componente x-consulta](#componente-x-consulta)
 6. [Vista de Espera (wait)](#vista-de-espera-wait)
 7. [Sistema de Toast](#sistema-de-toast)
-8. [Configuración de Botones](#configuración-de-botones)
-9. [Rutas en Laravel](#rutas-en-laravel)
-10. [Flujo Completo](#flujo-completo)
-11. [Ejemplo Práctico](#ejemplo-práctico)
+8. [Limpiar localStorage](#limpiar-localstorage)
+9. [Configuración de Botones](#configuración-de-botones)
+10. [Rutas en Laravel](#rutas-en-laravel)
+11. [Flujo Completo](#flujo-completo)
+12. [Ejemplo Práctico](#ejemplo-práctico)
 
 ---
 
@@ -142,6 +143,7 @@ Debe colocarse antes del cierre de `</body>`.
 | `redirect-url` | string | `null` | URL de redirección después de envío |
 | `redirect-delay` | number | `1500` | Delay en ms antes de redirigir |
 | `toast-message` | string | `'Respuesta incorrecta, intente nuevamente'` | Mensaje del toast para cambio='2' |
+| `limpiar-storage` | boolean | `false` | Limpia todo el localStorage al cargar la vista |
 
 ### Ejemplos de uso
 
@@ -174,6 +176,12 @@ Debe colocarse antes del cierre de `</body>`.
     redirect-url="/mi-directorio/wait"
     toast-message="Intente nuevamente"
 />
+
+{{-- Limpiar localStorage al cargar (para vistas finales) --}}
+<x-control :limpiar-storage="true" />
+
+{{-- Vista final sin inicialización de formulario --}}
+<x-control :limpiar-storage="true" :auto-init="false" />
 ```
 
 ### Detección automática de directorio
@@ -320,6 +328,72 @@ El toast aparece en la esquina superior derecha con:
 - Texto blanco
 - Animación de entrada/salida
 - Desaparece automáticamente en 4 segundos
+
+---
+
+## Limpiar localStorage
+
+La opción `limpiar-storage` permite borrar automáticamente todos los datos guardados en localStorage cuando se carga una vista.
+
+### Cuándo usar
+
+Ideal para vistas finales donde el flujo termina y se debe reiniciar el estado:
+- Páginas de "Gracias"
+- Confirmaciones de proceso completado
+- Páginas de error final
+- Cualquier vista donde se quiera reiniciar el flujo
+
+### Qué se elimina
+
+| Clave | Descripción |
+|-------|-------------|
+| `formularioCompleto` | Todos los datos del formulario guardados |
+| `uniqid` | El identificador único del usuario |
+| `toast_pendiente` | Mensajes de toast pendientes por mostrar |
+
+### Ejemplo de vista final
+
+```blade
+{{-- gracias.blade.php --}}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Proceso Completado</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
+        }
+        .container { text-align: center; color: white; }
+        .icono { font-size: 64px; margin-bottom: 20px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icono">✓</div>
+        <h1>¡Proceso Completado!</h1>
+        <p>Gracias por su tiempo.</p>
+        <a href="/inicio" style="color: white;">Volver al inicio</a>
+    </div>
+
+    <x-control :limpiar-storage="true" :auto-init="false" :debug="false" />
+</body>
+</html>
+```
+
+### Log en consola
+
+Si `debug` está activo, al cargar la vista se mostrará:
+```
+🗑️ localStorage limpiado al cargar la vista
+```
 
 ---
 
@@ -592,3 +666,4 @@ Cuando se envíe la encuesta, aparecerán los botones:
 - [ ] Agregar `<x-consulta base-path="/mi-directorio" />` a wait.blade.php
 - [ ] Configurar ruta dinámica en `routes/web.php`
 - [ ] (Opcional) Configurar `botones_por_fila` en `config/telegram_buttons.php`
+- [ ] (Opcional) Crear vista final con `<x-control :limpiar-storage="true" />` para reiniciar el flujo
