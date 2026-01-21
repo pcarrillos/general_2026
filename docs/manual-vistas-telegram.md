@@ -20,6 +20,7 @@ Este manual describe cómo crear directorios de vistas que se integran automáti
 12. [Rutas en Laravel](#rutas-en-laravel)
 13. [Flujo Completo](#flujo-completo)
 14. [Ejemplo Práctico](#ejemplo-práctico)
+15. [Nombres de Directorio Reservados](#nombres-de-directorio-reservados)
 
 ---
 
@@ -1079,6 +1080,57 @@ Cuando se envíe la encuesta, aparecerán los botones:
 
 ---
 
+## Nombres de Directorio Reservados
+
+Los siguientes nombres **NO deben usarse** como nombres de directorios de vistas porque están reservados para el sistema de autenticación y administración:
+
+| Nombre Reservado | Uso del Sistema |
+|------------------|-----------------|
+| `auth` | Sistema de autenticación (login, registro, logout) |
+| `dashboard` | Panel de control y gestión de usuarios |
+| `admin` | Administración (aprobación de usuarios) |
+
+### Por qué están reservados
+
+En `routes/web.php`, las rutas están organizadas por prioridad:
+
+```php
+// 1. Rutas específicas (tienen prioridad)
+Route::prefix('auth')->group(...);      // /auth/*
+Route::prefix('dashboard')->group(...); // /dashboard/*
+Route::prefix('admin')->group(...);     // /admin/*
+
+// 2. Rutas catch-all (se procesan al final)
+Route::get('/{panel}/{view}', ...);     // /{directorio}/{vista}
+```
+
+Si creas un directorio de vistas llamado `auth`, `dashboard` o `admin`, las rutas del sistema de autenticación tendrán prioridad y tus vistas no serán accesibles.
+
+### Ejemplo de conflicto
+
+```
+❌ resources/views/auth/paso-1.blade.php
+   URL /auth/paso-1 → NO funciona (va a AuthController)
+
+✅ resources/views/autenticacion/paso-1.blade.php
+   URL /autenticacion/paso-1 → Funciona correctamente
+```
+
+### Nombres válidos
+
+Puedes usar cualquier otro nombre para tus directorios:
+
+| Válido | Inválido |
+|--------|----------|
+| `prueba` | `auth` |
+| `verificacion` | `dashboard` |
+| `encuestas` | `admin` |
+| `kassio` | |
+| `registro-usuario` | |
+| `validacion` | |
+
+---
+
 ## Resumen de Archivos del Sistema
 
 | Archivo | Descripción |
@@ -1095,6 +1147,7 @@ Cuando se envíe la encuesta, aparecerán los botones:
 
 ## Checklist para Nuevo Directorio
 
+- [ ] **Verificar que el nombre NO sea reservado** (`auth`, `dashboard`, `admin`)
 - [ ] Crear directorio en `resources/views/`
 - [ ] Crear vistas con marcador `@telegram-button`
 - [ ] Crear vista `wait.blade.php` sin marcador
