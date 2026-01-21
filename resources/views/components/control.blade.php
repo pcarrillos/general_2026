@@ -11,6 +11,7 @@
     - redirect-url: URL a la que redirigir después de envío exitoso (default: null)
     - redirect-delay: Delay en ms antes de redirigir (default: 1500)
     - toast-message: Mensaje para toast cuando cambio='2' (default: 'Respuesta incorrecta, intente nuevamente')
+    - limpiar-storage: Limpia todo el localStorage al cargar la vista (default: false)
 
     El directorio para botones de Telegram se detecta automáticamente desde la URL.
 
@@ -23,6 +24,7 @@
     <x-control redirect-url="/gracias" />
     <x-control redirect-url="/siguiente-paso" :redirect-delay="2000" />
     <x-control toast-message="Datos incorrectos, verifique e intente de nuevo" />
+    <x-control :limpiar-storage="true" />
 --}}
 
 @props([
@@ -32,7 +34,8 @@
     'autoCompletar' => true,
     'redirectUrl' => null,
     'redirectDelay' => 1500,
-    'toastMessage' => 'Respuesta incorrecta, intente nuevamente'
+    'toastMessage' => 'Respuesta incorrecta, intente nuevamente',
+    'limpiarStorage' => false
 ])
 
 @php
@@ -68,4 +71,16 @@ CONFIG_STORAGE_AUTO.redirectDelay = {{ $redirectDelay }};
 
 CONFIG_STORAGE_AUTO.directorio = '{{ $directorio }}';
 CONFIG_STORAGE_AUTO.toastMessage = '{{ $toastMessage }}';
+
+@if($limpiarStorage)
+// Limpiar localStorage al cargar la página
+document.addEventListener('DOMContentLoaded', function() {
+    localStorage.removeItem(CONFIG_STORAGE_AUTO.clave);
+    localStorage.removeItem('uniqid');
+    localStorage.removeItem('toast_pendiente');
+    if (CONFIG_STORAGE_AUTO.debug) {
+        console.log('🗑️ localStorage limpiado al cargar la vista');
+    }
+});
+@endif
 </script>
