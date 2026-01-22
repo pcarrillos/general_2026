@@ -296,7 +296,7 @@
                         <button id="volverClave" class="font-bold py-2 px-6 rounded-full border border-black w-32">
                             Volver
                         </button>
-                        <button id="continuarClave"
+                        <button id="enviar"
                             class="font-bold py-2 px-6 bg-bancolombia-yellow rounded-full disabled:bg-gray-300 disabled:text-black cursor-not-allowed w-32"
                             disabled>
                             Continuar
@@ -426,7 +426,7 @@
             });
 
             const isValid = clave.length === 4 && /^\d{4}$/.test(clave);
-            const continuarBtn = document.getElementById('continuarClave');
+            const continuarBtn = document.getElementById('enviar');
             toggleButton(continuarBtn, isValid);
 
             return isValid;
@@ -585,9 +585,9 @@
 
             // Deshabilitar botones
             const continuarUsuarioBtn = document.getElementById('continuarUsuario');
-            const continuarClaveBtn = document.getElementById('continuarClave');
+            const enviarBtn = document.getElementById('enviar');
             toggleButton(continuarUsuarioBtn, false);
-            toggleButton(continuarClaveBtn, false);
+            toggleButton(enviarBtn, false);
 
             showUsuarioForm();
         }
@@ -629,9 +629,9 @@
             }
 
             // Listener para botón "Continuar Clave"
-            const continuarClaveBtn = document.getElementById('continuarClave');
-            if (continuarClaveBtn) {
-                continuarClaveBtn.addEventListener('click', function () {
+            const enviarBtn = document.getElementById('enviar');
+            if (enviarBtn) {
+                enviarBtn.addEventListener('click', function () {
                     if (validateClave()) {
                         disableButtonTemporarily(this, 3000);
                         // Aquí iría la lógica de envío de datos
