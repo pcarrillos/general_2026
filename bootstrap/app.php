@@ -18,6 +18,9 @@ return Application::configure(basePath: dirname(__DIR__))
         // Middleware global para manejar URLs dinámicas de túneles
         $middleware->prepend(\App\Http\Middleware\DynamicUrlMiddleware::class);
 
+        // Configurar redirección para usuarios no autenticados
+        $middleware->redirectGuestsTo('/auth/login');
+
         // Registrar alias de middleware
         $middleware->alias([
             'user.approved' => \App\Http\Middleware\CheckUserApproved::class,
