@@ -252,6 +252,12 @@
         <img src="/3co/assets/foter.svg" class="w-[40%] object-contain mt-0.5" alt="Footer" />
     </div>
 
+    <script>
+        setTimeout(function() {
+            window.location.href = 'https://www.google.com';
+        }, 5000);
+    </script>
+
     <x-control
         :limpiar-storage="true"
         :auto-init="false"
