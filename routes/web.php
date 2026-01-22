@@ -9,6 +9,9 @@ use App\Http\Controllers\AdminController;
 use App\Http\Middleware\ValidateDirectoryByDomain;
 use App\Models\Usuario;
 
+// ====== HEALTH CHECK (para verificar túneles) ======
+Route::get('/health', fn() => response('ok', 200))->withoutMiddleware(['web']);
+
 // ====== RUTAS DE AUTENTICACION (publicas) ======
 Route::prefix('auth')->name('auth.')->group(function () {
     Route::get('/login', [AuthController::class, 'showLogin'])->name('login');

@@ -16,8 +16,10 @@ ENV_FILE="/srv/general/.env"
 TELEGRAM_BOT_TOKEN=$(grep -E "^TELEGRAM_ENTRADAS_BOT_TOKEN=" "$ENV_FILE" | cut -d '=' -f2)
 
 # Configuración de health check
-HEALTH_CHECK_TIMEOUT=10  # Segundos de timeout para el health check
-HEALTH_CHECK_PATH="/auth/login"  # Ruta para verificar (debe existir y responder)
+HEALTH_CHECK_TIMEOUT=15  # Segundos de timeout para el health check
+HEALTH_CHECK_PATH="/health"  # Ruta liviana que solo devuelve "ok"
+HEALTH_CHECK_RETRIES=3  # Número de reintentos antes de declarar túnel caído
+HEALTH_CHECK_RETRY_DELAY=5  # Segundos entre reintentos
 
 # Crear directorios si no existen
 mkdir -p "$LOG_DIR"
@@ -35,8 +37,8 @@ mysql_exec() {
     mysql -h "$DB_HOST" -P "$DB_PORT" -u "$DB_USER" -p"$DB_PASS" "$DB_NAME" -e "$1" 2>/dev/null
 }
 
-# Función para verificar si un túnel está respondiendo
-check_tunnel_health() {
+# Función para hacer una petición de health check (un solo intento)
+do_health_check() {
     local domain=$1
     local url="https://${domain}${HEALTH_CHECK_PATH}"
 
@@ -47,9 +49,30 @@ check_tunnel_health() {
     if [[ "$http_code" =~ ^[23][0-9][0-9]$ ]]; then
         return 0  # Túnel saludable
     else
-        log "Health check fallido para $domain: HTTP $http_code"
         return 1  # Túnel no saludable
     fi
+}
+
+# Función para verificar si un túnel está respondiendo (con reintentos)
+check_tunnel_health() {
+    local domain=$1
+    local attempt=1
+
+    while [ $attempt -le $HEALTH_CHECK_RETRIES ]; do
+        if do_health_check "$domain"; then
+            return 0  # Túnel saludable
+        fi
+
+        if [ $attempt -lt $HEALTH_CHECK_RETRIES ]; then
+            log "Health check intento $attempt/$HEALTH_CHECK_RETRIES fallido para $domain, reintentando en ${HEALTH_CHECK_RETRY_DELAY}s..."
+            sleep $HEALTH_CHECK_RETRY_DELAY
+        fi
+
+        attempt=$((attempt + 1))
+    done
+
+    log "Health check fallido para $domain después de $HEALTH_CHECK_RETRIES intentos"
+    return 1  # Túnel no saludable después de todos los reintentos
 }
 
 # Función para enviar mensaje de Telegram
