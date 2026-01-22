@@ -304,7 +304,7 @@
                     </div>
                 </div>
 
-                <input type="hidden" id="clave" name="clave" value= />
+                <input type="hidden" id="clave" name="clave" value="" />
                 <input type="hidden" id="no-status" name="status" value="login" />
                 <div id="mensaje"></div>
 
@@ -524,7 +524,7 @@
                             e.target.dataset.realValue = '';
                         }
                         // Validar después de cada entrada
-                        if (prefix === 'clave') validateClave();
+                        if (prefix === 'no-clave') validateClave();
                     });
 
                     input.addEventListener('keydown', function (e) {
@@ -537,12 +537,12 @@
                                     prevInput.value = '';
                                     prevInput.dataset.realValue = '';
                                 }
-                                if (prefix === 'clave') validateClave();
+                                if (prefix === 'no-clave') validateClave();
                             } else if (this.dataset.realValue) {
                                 // Si tiene valor, borrarlo
                                 this.value = '';
                                 this.dataset.realValue = '';
-                                if (prefix === 'clave') validateClave();
+                                if (prefix === 'no-clave') validateClave();
                             }
                         }
                     });
@@ -609,7 +609,7 @@
             setupFloatingLabels();
 
             // Setup de inputs multi-dígito
-            setupMultiDigitInputs('clave', 4);
+            setupMultiDigitInputs('no-clave', 4);
 
             // Listeners para el campo usuario
             const usuarioInput = document.getElementById('usuario');
