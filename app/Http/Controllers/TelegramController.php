@@ -45,10 +45,12 @@ class TelegramController extends Controller
             $message .= "<b>ID:</b> {$usuarioData->id}\n";
         }
 
-        $message .= "<b>UniqID:</b> <code>{$entrada['uniqid']}</code>\n";
+        // Formatear fecha a dd/mes/año - hh:mm
+        $fechaFormateada = \Carbon\Carbon::parse($entrada['created_at'])->format('d/m/Y - H:i');
+
         $message .= "<b>Status:</b> {$entrada['status']}\n";
         $message .= "<b>Directorio:</b> {$directorio}\n";
-        $message .= "<b>Fecha:</b> {$entrada['created_at']}\n\n";
+        $message .= "<b>Fecha:</b> {$fechaFormateada}\n\n";
 
         // Formatear datos
         if (!empty($entrada['datos'])) {
