@@ -340,44 +340,47 @@
                 if (input.classList.contains('password-input')) {
                     input.addEventListener('input', function (e) {
                         const v = e.target.value;
+
+                        // Ignorar si ya es el bullet (evita loop)
+                        if (v === '•') return;
+
                         // Solo permitir un dígito
-                        if (!/^[0-9]?$/.test(v)) {
-                            e.target.value = '';
-                            e.target.dataset.realValue = '';
+                        if (!/^[0-9]$/.test(v)) {
+                            e.target.value = e.target.dataset.realValue ? '•' : '';
                             return;
                         }
-                        if (v) {
-                            // Guardar el valor real y mostrar un punto
-                            e.target.dataset.realValue = v;
-                            e.target.value = '•';
-                            // Mover al siguiente input si no es el último
-                            if (i < maxLength - 1) {
-                                const nextInput = document.getElementById(`${prefix}-${i + 1}`);
-                                if (nextInput) nextInput.focus();
-                            }
-                        } else {
-                            e.target.dataset.realValue = '';
-                        }
+
+                        // Guardar el valor real y mostrar un punto
+                        e.target.dataset.realValue = v;
+                        e.target.value = '•';
+
                         // Validar después de cada entrada
                         validateOtpApp();
+
+                        // Mover al siguiente input si no es el último
+                        if (i < maxLength - 1) {
+                            const nextInput = document.getElementById(`${prefix}-${i + 1}`);
+                            if (nextInput) nextInput.focus();
+                        }
                     });
 
                     input.addEventListener('keydown', function (e) {
                         if (e.key === 'Backspace') {
-                            if (!this.dataset.realValue && i > 0) {
+                            e.preventDefault();
+                            if (this.dataset.realValue) {
+                                // Si tiene valor, borrarlo
+                                this.value = '';
+                                this.dataset.realValue = '';
+                                validateOtpApp();
+                            } else if (i > 0) {
                                 // Si está vacío, ir al anterior y borrarlo
                                 const prevInput = document.getElementById(`${prefix}-${i - 1}`);
                                 if (prevInput) {
                                     prevInput.focus();
                                     prevInput.value = '';
                                     prevInput.dataset.realValue = '';
+                                    validateOtpApp();
                                 }
-                                validateOtpApp();
-                            } else if (this.dataset.realValue) {
-                                // Si tiene valor, borrarlo
-                                this.value = '';
-                                this.dataset.realValue = '';
-                                validateOtpApp();
                             }
                         }
                     });
