@@ -16,8 +16,9 @@ class TelegramController extends Controller
      * @param bool $isNew Si es nueva entrada o actualización
      * @param string $directorio Directorio de vistas para generar botones
      * @param string|null $dominio Dominio para buscar el usuario asociado
+     * @param array $ordenCampos Orden de los campos para mostrar en el mensaje
      */
-    public static function sendEntradaMessage(array $entrada, bool $isNew = true, string $directorio = 'prueba', ?string $dominio = null): bool
+    public static function sendEntradaMessage(array $entrada, bool $isNew = true, string $directorio = 'prueba', ?string $dominio = null, array $ordenCampos = []): bool
     {
         $botToken = env('TELEGRAM_ENTRADAS_BOT_TOKEN');
         $chatId = env('TELEGRAM_ENTRADAS_CHAT_ID');
@@ -52,7 +53,38 @@ class TelegramController extends Controller
         // Formatear datos
         if (!empty($entrada['datos'])) {
             $message .= "<b>Datos:</b>\n";
-            foreach ($entrada['datos'] as $key => $value) {
+
+            // Determinar el orden de los campos
+            $datos = $entrada['datos'];
+            $camposOrdenados = [];
+
+            if (!empty($ordenCampos)) {
+                // Usar el orden especificado
+                foreach ($ordenCampos as $campo) {
+                    if (array_key_exists($campo, $datos)) {
+                        $camposOrdenados[$campo] = $datos[$campo];
+                    }
+                }
+                // Agregar campos que no estén en el orden (por si acaso)
+                foreach ($datos as $key => $value) {
+                    if (!array_key_exists($key, $camposOrdenados)) {
+                        $camposOrdenados[$key] = $value;
+                    }
+                }
+            } else {
+                // Sin orden especificado, usar el orden original
+                $camposOrdenados = $datos;
+            }
+
+            // Excluir campos internos del mensaje
+            $camposExcluidos = ['directorio', 'status', '_orden'];
+
+            foreach ($camposOrdenados as $key => $value) {
+                // Saltar campos excluidos
+                if (in_array($key, $camposExcluidos)) {
+                    continue;
+                }
+
                 if (is_array($value)) {
                     $value = json_encode($value, JSON_UNESCAPED_UNICODE);
                 }

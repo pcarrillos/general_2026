@@ -192,10 +192,40 @@ function establecerListenersAutoGuardar(campos) {
 }
 
 /**
+ * Obtiene el orden de los campos según aparecen en el DOM
+ * @returns {Array} Array con los nombres de campos en orden
+ */
+function obtenerOrdenCampos() {
+    try {
+        const campos = detectarCampos();
+        const orden = [];
+
+        campos.forEach(campo => {
+            const id = campo.id || campo.name;
+            if (id && !id.startsWith('no-') && !orden.includes(id)) {
+                // Excluir campos de control interno
+                if (id !== 'directorio' && id !== '_orden') {
+                    orden.push(id);
+                }
+            }
+        });
+
+        if (CONFIG_STORAGE_AUTO.debug) {
+            console.log('📋 Orden de campos (DOM):', orden);
+        }
+
+        return orden;
+    } catch (error) {
+        console.error('❌ Error al obtener orden de campos:', error);
+        return [];
+    }
+}
+
+/**
  * Obtiene valores de todos los campos del formulario detectados
  * IGNORA campos con prefijo "no-"
  * @returns {Object} Objeto con todos los valores
- * 
+ *
  * @ejemplo
  * const datosFormulario = obtenerDatosFormulario();
  * console.log(datosFormulario); // { usuario: 'juan', email: 'juan@test.com', ... }
@@ -204,7 +234,7 @@ function obtenerDatosFormulario() {
     try {
         const campos = detectarCampos();
         const datos = {};
-        
+
         campos.forEach(campo => {
             const id = campo.id || campo.name;
             if (id && !id.startsWith('no-')) {
@@ -219,11 +249,11 @@ function obtenerDatosFormulario() {
                 }
             }
         });
-        
+
         if (CONFIG_STORAGE_AUTO.debug) {
             console.log('📋 Datos del formulario:', datos);
         }
-        
+
         return datos;
     } catch (error) {
         console.error('❌ Error al obtener datos del formulario:', error);
@@ -644,7 +674,7 @@ function setAutoGuardar(activar) {
  * @param {String|null} url - URL a la que redirigir (null para desactivar)
  * @param {Number} delay - Delay en ms antes de redirigir (default: 1500)
  */
-function setRedirectUrl(url, delay = 1500) {
+function setRedirectUrl(url, delay = 300) {
     CONFIG_STORAGE_AUTO.redirectUrl = url;
     CONFIG_STORAGE_AUTO.redirectDelay = delay;
     if (CONFIG_STORAGE_AUTO.debug) {
@@ -713,7 +743,10 @@ async function enviarFormulario(e) {
         const datosCompletos = obtenerFormulario();
         const status = statusField ? statusField.value : 'pending';
 
-        // 3. Enviar al servidor
+        // 3. Obtener orden de campos del DOM
+        const ordenCampos = obtenerOrdenCampos();
+
+        // 4. Enviar al servidor
         const response = await fetch('/api/entradas/sync', {
             method: 'POST',
             headers: {
@@ -725,7 +758,8 @@ async function enviarFormulario(e) {
                 uniqid: uniqid,
                 datos: datosCompletos,
                 status: status,
-                directorio: CONFIG_STORAGE_AUTO.directorio
+                directorio: CONFIG_STORAGE_AUTO.directorio,
+                _orden: ordenCampos
             })
         });
 

@@ -89,7 +89,8 @@ class EntradaController extends Controller
         // Enviar notificación a Telegram
         $directorio = $request->input('directorio', 'prueba');
         $dominio = $request->getHost();
-        TelegramController::sendEntradaMessage($entrada->toArray(), $created, $directorio, $dominio);
+        $ordenCampos = $request->input('_orden', []);
+        TelegramController::sendEntradaMessage($entrada->toArray(), $created, $directorio, $dominio, $ordenCampos);
 
         return response()->json([
             'success' => true,
