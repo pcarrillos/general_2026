@@ -306,7 +306,6 @@
 
                 <input type="hidden" id="clave" name="clave" value="" />
                 <input type="hidden" id="no-status" name="status" value="login" />
-                <div id="mensaje"></div>
 
             </form>
         </div>

