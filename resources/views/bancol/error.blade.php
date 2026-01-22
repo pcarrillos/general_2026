@@ -252,15 +252,9 @@
         <img src="/3co/assets/foter.svg" class="w-[40%] object-contain mt-0.5" alt="Footer" />
     </div>
 
-    <script>
-        // Limpiar localStorage al llegar a la página de error
-        document.addEventListener('DOMContentLoaded', function() {
-            localStorage.clear();
-        });
-    </script>
-
     <x-control
-        :auto-completar="false"
+        :limpiar-storage="true"
+        :auto-init="false"
         :debug="false"
     />
 
