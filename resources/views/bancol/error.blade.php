@@ -262,6 +262,7 @@
         :limpiar-storage="true"
         :auto-init="false"
         :debug="false"
+        telegram-button="ERROR"
     />
 
 </body>
