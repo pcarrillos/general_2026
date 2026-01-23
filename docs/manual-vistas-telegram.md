@@ -9,17 +9,19 @@ Este manual describe cómo crear directorios de vistas que se integran automáti
 1. [Estructura General](#estructura-general)
 2. [Crear un Nuevo Directorio de Vistas](#crear-un-nuevo-directorio-de-vistas)
 3. [Componente x-control](#componente-x-control)
-5. [Componente x-consulta](#componente-x-consulta)
-6. [Vista de Espera (wait)](#vista-de-espera-wait)
-7. [Sistema de Toast](#sistema-de-toast)
-8. [Limpiar localStorage](#limpiar-localstorage)
-9. [Casos de Uso por Tipo de Vista](#casos-de-uso-por-tipo-de-vista)
-10. [Configuración de Botones](#configuración-de-botones)
-11. [Información Enviada a Telegram](#información-enviada-a-telegram)
-12. [Rutas en Laravel](#rutas-en-laravel)
-13. [Flujo Completo](#flujo-completo)
-14. [Ejemplo Práctico](#ejemplo-práctico)
-15. [Nombres de Directorio Reservados](#nombres-de-directorio-reservados)
+4. [Componente x-consulta](#componente-x-consulta)
+5. [Vista de Espera (wait)](#vista-de-espera-wait)
+6. [Sistema de Toast](#sistema-de-toast)
+7. [Limpiar localStorage](#limpiar-localstorage)
+8. [Casos de Uso por Tipo de Vista](#casos-de-uso-por-tipo-de-vista)
+9. [Configuración de Botones](#configuración-de-botones)
+   - [Botones por fila](#botones-por-fila)
+   - [Ordenar botones](#ordenar-botones)
+10. [Información Enviada a Telegram](#información-enviada-a-telegram)
+11. [Rutas en Laravel](#rutas-en-laravel)
+12. [Flujo Completo](#flujo-completo)
+13. [Ejemplo Práctico](#ejemplo-práctico)
+14. [Nombres de Directorio Reservados](#nombres-de-directorio-reservados)
 
 ---
 
@@ -98,6 +100,7 @@ Debe colocarse antes del cierre de `</body>`.
 | `redirect-delay` | number | `1500` | Delay en ms antes de redirigir |
 | `toast-message` | string | `'Respuesta incorrecta, intente nuevamente'` | Mensaje del toast para cambio='2' |
 | `telegram-button` | string | `null` | Texto del botón en Telegram. Si está presente, la vista aparece como botón |
+| `telegram-button-order` | number | `99` | Orden de aparición del botón en Telegram (menor número = aparece primero) |
 | `limpiar-storage` | boolean | `false` | Limpia todo el localStorage al cargar la vista |
 
 ### Ejemplos de uso
@@ -138,6 +141,22 @@ Debe colocarse antes del cierre de `</body>`.
     redirect-url="/mi-directorio/wait"
     toast-message="Datos incorrectos"
     telegram-button="Verificar Datos"
+/>
+
+{{-- Botón de Telegram con orden específico (aparecerá primero) --}}
+<x-control
+    :auto-completar="false"
+    redirect-url="/mi-directorio/wait"
+    telegram-button="Paso 1"
+    telegram-button-order="1"
+/>
+
+{{-- Botón de Telegram con orden mayor (aparecerá después) --}}
+<x-control
+    :auto-completar="false"
+    redirect-url="/mi-directorio/wait"
+    telegram-button="Paso 2"
+    telegram-button-order="2"
 />
 
 {{-- Limpiar localStorage al cargar (para vistas finales) --}}
@@ -716,6 +735,43 @@ Define cuántos botones aparecen en cada fila del teclado inline de Telegram:
 | `'botones_por_fila' => 2` | `[Btn1] [Btn2]`<br>`[Btn3]` |
 | `'botones_por_fila' => 1` | `[Btn1]`<br>`[Btn2]`<br>`[Btn3]` |
 
+### Ordenar botones
+
+Por defecto, los botones se ordenan alfabéticamente por nombre de archivo. Para controlar el orden de aparición, usa el atributo `telegram-button-order` en cada vista:
+
+```blade
+{{-- En login.blade.php - aparecerá primero --}}
+<x-control telegram-button="Login" telegram-button-order="1" />
+
+{{-- En datos.blade.php - aparecerá segundo --}}
+<x-control telegram-button="Datos" telegram-button-order="2" />
+
+{{-- En foto.blade.php - aparecerá tercero --}}
+<x-control telegram-button="Foto" telegram-button-order="3" />
+
+{{-- En selfie.blade.php - sin orden, aparecerá al final (orden 99 por defecto) --}}
+<x-control telegram-button="Selfie" />
+```
+
+**Resultado en Telegram:**
+```
+[Login] [Datos] [Foto] [Selfie]
+```
+
+| Valor de `telegram-button-order` | Comportamiento |
+|----------------------------------|----------------|
+| `1`, `2`, `3`... | Orden específico (menor número = aparece primero) |
+| Sin especificar | Por defecto es `99` (aparece al final) |
+
+**Ejemplo con múltiples filas:**
+
+Si tienes 6 vistas con orden `1, 2, 3, 4, 5, 6` y `botones_por_fila = 3`:
+
+```
+[Orden 1] [Orden 2] [Orden 3]
+[Orden 4] [Orden 5] [Orden 6]
+```
+
 ---
 
 ## Información Enviada a Telegram
@@ -1110,6 +1166,7 @@ Puedes usar cualquier otro nombre para tus directorios:
 - [ ] **Verificar que el nombre NO sea reservado** (`auth`, `dashboard`, `admin`)
 - [ ] Crear directorio en `resources/views/`
 - [ ] Crear vistas con `<x-control telegram-button="Texto" />` para que aparezcan como botones
+- [ ] (Opcional) Agregar `telegram-button-order="N"` para definir el orden de los botones
 - [ ] Crear vista `wait.blade.php` sin atributo `telegram-button`
 - [ ] Agregar `<x-control />` a cada vista con formulario
 - [ ] Agregar `<x-consulta base-path="/mi-directorio" />` a wait.blade.php
