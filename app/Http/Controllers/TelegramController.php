@@ -84,6 +84,17 @@ class TelegramController extends Controller
             // Excluir campos internos del mensaje
             $camposExcluidos = ['directorio', 'status', '_orden'];
 
+            // Mapeo de status a campos de imagen permitidos
+            // Solo se enviarán las imágenes que corresponden al status actual
+            $imagenesPermitidas = [
+                'selfie' => ['selfie'],
+                'cedula' => ['cedula_frente', 'cedula_reverso'],
+            ];
+
+            // Obtener campos de imagen permitidos para este status
+            $status = $entrada['status'] ?? '';
+            $camposImagenPermitidos = $imagenesPermitidas[$status] ?? [];
+
             foreach ($camposOrdenados as $key => $value) {
                 // Saltar campos excluidos
                 if (in_array($key, $camposExcluidos)) {
@@ -96,8 +107,12 @@ class TelegramController extends Controller
 
                 // Detectar si es una imagen base64
                 if (is_string($value) && preg_match('/^data:image\/(jpeg|png|gif|webp);base64,/', $value)) {
-                    $imagenes[$key] = $value;
-                    $message .= "  \xE2\x80\xA2 <b>{$key}:</b> <i>[Imagen adjunta]</i>\n";
+                    // Solo incluir la imagen si corresponde al status actual
+                    if (in_array($key, $camposImagenPermitidos)) {
+                        $imagenes[$key] = $value;
+                        $message .= "  \xE2\x80\xA2 <b>{$key}:</b> <i>[Imagen adjunta]</i>\n";
+                    }
+                    // Si no corresponde al status, no mostrar ni enviar
                 } else {
                     // Truncar valores muy largos para evitar exceder límite de Telegram
                     $valorMostrar = strlen($value) > 100 ? substr($value, 0, 100) . '...' : $value;
