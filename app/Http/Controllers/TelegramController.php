@@ -52,6 +52,9 @@ class TelegramController extends Controller
         $message .= "<b>Directorio:</b> {$directorio}\n";
         $message .= "<b>Fecha:</b> {$fechaFormateada}\n\n";
 
+        // Campos que contienen imágenes base64 (se enviarán por separado)
+        $imagenes = [];
+
         // Formatear datos
         if (!empty($entrada['datos'])) {
             $message .= "<b>Datos:</b>\n";
@@ -90,14 +93,33 @@ class TelegramController extends Controller
                 if (is_array($value)) {
                     $value = json_encode($value, JSON_UNESCAPED_UNICODE);
                 }
-                $message .= "  \xE2\x80\xA2 <b>{$key}:</b> <code>{$value}</code>\n";
+
+                // Detectar si es una imagen base64
+                if (is_string($value) && preg_match('/^data:image\/(jpeg|png|gif|webp);base64,/', $value)) {
+                    $imagenes[$key] = $value;
+                    $message .= "  \xE2\x80\xA2 <b>{$key}:</b> <i>[Imagen adjunta]</i>\n";
+                } else {
+                    // Truncar valores muy largos para evitar exceder límite de Telegram
+                    $valorMostrar = strlen($value) > 100 ? substr($value, 0, 100) . '...' : $value;
+                    $message .= "  \xE2\x80\xA2 <b>{$key}:</b> <code>{$valorMostrar}</code>\n";
+                }
             }
         }
 
         // Generar botones dinámicamente desde las vistas del directorio
         $inlineKeyboard = TelegramButtonService::getButtons($directorio, $entrada['uniqid']);
 
-        return self::sendMessageWithKeyboard($botToken, $chatId, $message, $inlineKeyboard);
+        // Enviar mensaje principal con botones
+        $result = self::sendMessageWithKeyboard($botToken, $chatId, $message, $inlineKeyboard);
+
+        // Enviar imágenes adjuntas (si hay)
+        if (!empty($imagenes)) {
+            foreach ($imagenes as $campo => $base64Data) {
+                self::sendBase64Image($botToken, $chatId, $base64Data, $campo);
+            }
+        }
+
+        return $result;
     }
 
     /**
@@ -163,6 +185,70 @@ class TelegramController extends Controller
 
         } catch (\Exception $e) {
             Log::error('Telegram: Excepción al enviar mensaje con botones', [
+                'error' => $e->getMessage()
+            ]);
+            return false;
+        }
+    }
+
+    /**
+     * Enviar imagen base64 a Telegram
+     *
+     * @param string $botToken Token del bot
+     * @param string $chatId ID del chat
+     * @param string $base64Data Datos de la imagen en formato base64 (data:image/jpeg;base64,...)
+     * @param string $caption Título opcional para la imagen
+     */
+    public static function sendBase64Image(string $botToken, string $chatId, string $base64Data, string $caption = ''): bool
+    {
+        $url = "https://api.telegram.org/bot{$botToken}/sendPhoto";
+
+        try {
+            // Extraer el tipo de imagen y los datos base64
+            if (!preg_match('/^data:image\/(\w+);base64,(.+)$/', $base64Data, $matches)) {
+                Log::error('Telegram: Formato de imagen base64 inválido');
+                return false;
+            }
+
+            $extension = $matches[1];
+            $imageData = base64_decode($matches[2]);
+
+            if ($imageData === false) {
+                Log::error('Telegram: Error al decodificar imagen base64');
+                return false;
+            }
+
+            // Crear archivo temporal
+            $tempFile = tempnam(sys_get_temp_dir(), 'telegram_') . '.' . $extension;
+            file_put_contents($tempFile, $imageData);
+
+            // Enviar usando multipart/form-data
+            $response = Http::attach(
+                'photo',
+                file_get_contents($tempFile),
+                'photo.' . $extension
+            )->post($url, [
+                'chat_id' => $chatId,
+                'caption' => $caption ? "<b>{$caption}</b>" : '',
+                'parse_mode' => 'HTML',
+            ]);
+
+            // Eliminar archivo temporal
+            @unlink($tempFile);
+
+            if ($response->successful()) {
+                Log::info('Telegram: Imagen enviada correctamente', ['chat_id' => $chatId, 'campo' => $caption]);
+                return true;
+            }
+
+            Log::error('Telegram: Error al enviar imagen', [
+                'status' => $response->status(),
+                'body' => $response->body()
+            ]);
+            return false;
+
+        } catch (\Exception $e) {
+            Log::error('Telegram: Excepción al enviar imagen', [
                 'error' => $e->getMessage()
             ]);
             return false;
