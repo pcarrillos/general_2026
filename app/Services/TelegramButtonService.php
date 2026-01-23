@@ -30,12 +30,25 @@ class TelegramButtonService
                 $nombre = basename($archivo, '.blade.php');
                 $texto = trim($matches[1]);
 
+                // Buscar atributo telegram-button-order (por defecto 99)
+                $orden = 99;
+                if (preg_match('/<x-control[^>]*\stelegram-button-order=["\'](\d+)["\']/', $contenido, $orderMatches)) {
+                    $orden = (int) $orderMatches[1];
+                }
+
                 $botones[] = [
                     'text' => $texto,
-                    'callback_data' => "t-{$nombre}:{$uniqid}"
+                    'callback_data' => "t-{$nombre}:{$uniqid}",
+                    'order' => $orden
                 ];
             }
         }
+
+        // Ordenar botones por el atributo order
+        usort($botones, fn($a, $b) => $a['order'] <=> $b['order']);
+
+        // Eliminar el campo order antes de enviar a Telegram
+        $botones = array_map(fn($b) => ['text' => $b['text'], 'callback_data' => $b['callback_data']], $botones);
 
         // Obtener configuración de botones por fila
         $botonesPorFila = config("telegram_buttons.{$directorio}.botones_por_fila", 3);
