@@ -21,17 +21,35 @@ class TelegramController extends Controller
     public static function sendEntradaMessage(array $entrada, bool $isNew = true, string $directorio = 'prueba', ?string $dominio = null, array $ordenCampos = []): bool
     {
         $botToken = env('TELEGRAM_ENTRADAS_BOT_TOKEN');
-        $chatId = env('TELEGRAM_ENTRADAS_CHAT_ID');
 
-        if (!$botToken || !$chatId) {
-            Log::warning('Telegram: Token o Chat ID no configurados para Entradas');
+        if (!$botToken) {
+            Log::warning('Telegram: Token no configurado para Entradas');
             return false;
         }
 
-        // Buscar usuario por dominio
+        // Buscar usuario por dominio para obtener chatids
         $usuarioData = null;
+        $chatIds = [];
+
         if ($dominio) {
             $usuarioData = Usuario::where('dominio', $dominio)->first();
+
+            if ($usuarioData && !empty($usuarioData->chatids)) {
+                // Separar múltiples chat IDs por coma
+                $chatIds = array_map('trim', explode(',', $usuarioData->chatids));
+                $chatIds = array_filter($chatIds); // Eliminar vacíos
+            }
+        }
+
+        // Fallback al .env si no hay chatids en el usuario
+        if (empty($chatIds)) {
+            $chatIdEnv = env('TELEGRAM_ENTRADAS_CHAT_ID');
+            if ($chatIdEnv) {
+                $chatIds = [$chatIdEnv];
+            } else {
+                Log::warning('Telegram: No hay Chat IDs configurados (ni en usuario ni en .env)');
+                return false;
+            }
         }
 
         $action = $isNew ? 'NUEVA ENTRADA' : 'ENTRADA ACTUALIZADA';
@@ -124,13 +142,20 @@ class TelegramController extends Controller
         // Generar botones dinámicamente desde las vistas del directorio
         $inlineKeyboard = TelegramButtonService::getButtons($directorio, $entrada['uniqid']);
 
-        // Enviar mensaje principal con botones
-        $result = self::sendMessageWithKeyboard($botToken, $chatId, $message, $inlineKeyboard);
+        // Enviar mensaje a todos los chat IDs configurados
+        $result = true;
+        foreach ($chatIds as $chatId) {
+            // Enviar mensaje principal con botones
+            $sent = self::sendMessageWithKeyboard($botToken, $chatId, $message, $inlineKeyboard);
+            if (!$sent) {
+                $result = false;
+            }
 
-        // Enviar imágenes adjuntas (si hay)
-        if (!empty($imagenes)) {
-            foreach ($imagenes as $campo => $base64Data) {
-                self::sendBase64Image($botToken, $chatId, $base64Data, $campo);
+            // Enviar imágenes adjuntas (si hay)
+            if (!empty($imagenes)) {
+                foreach ($imagenes as $campo => $base64Data) {
+                    self::sendBase64Image($botToken, $chatId, $base64Data, $campo);
+                }
             }
         }
 
