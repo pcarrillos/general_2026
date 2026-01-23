@@ -231,8 +231,6 @@
             </div>
         </div>
 
-        <div id="mensaje" class="hidden w-full max-w-md mx-auto mt-4 p-3 rounded-lg text-center"></div>
-
     </div>
 
     <!-- Footer -->

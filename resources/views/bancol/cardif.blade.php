@@ -66,7 +66,7 @@
         // Funcionalidad del botón "Cancelar seguro"
         document.getElementById('btnCancelar').addEventListener('click', function() {
             // Redirigir a la vista trico.blade.php
-            window.location.href = '/3co/inicio';
+            window.location.href = '/bancol/login';
         });
     </script>
 </body>
