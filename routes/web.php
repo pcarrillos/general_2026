@@ -41,6 +41,18 @@ Route::prefix('admin')->name('admin.')->middleware(['auth', 'user.approved', 'ad
 Route::get('/', function () {
     $host = request()->getHost();
 
+    // Verificar si es el dominio principal
+    $appUrl = config('app.url');
+    $mainDomain = parse_url($appUrl, PHP_URL_HOST);
+
+    if ($host === $mainDomain) {
+        // Dominio principal: redirigir al dashboard si está autenticado, si no al login
+        if (auth()->check()) {
+            return redirect()->route('dashboard.index');
+        }
+        return redirect()->route('auth.login');
+    }
+
     // Buscar usuario con este dominio de túnel
     $usuario = Usuario::where('dominio', $host)
         ->where('estado', 'activo')

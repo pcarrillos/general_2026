@@ -43,6 +43,11 @@ class ValidateDirectoryByDomain
         // Obtener el dominio del host
         $host = $request->getHost();
 
+        // Verificar si es el dominio principal (sin restricciones)
+        if ($this->isMainDomain($host)) {
+            return $next($request);
+        }
+
         // Buscar usuario con este dominio
         $usuario = Usuario::where('dominio', $host)
             ->where('estado', 'activo')
@@ -64,6 +69,20 @@ class ValidateDirectoryByDomain
         view()->share('tunnelUsuario', $usuario);
 
         return $next($request);
+    }
+
+    /**
+     * Verificar si el host es el dominio principal de la aplicación
+     *
+     * @param string $host
+     * @return bool
+     */
+    protected function isMainDomain(string $host): bool
+    {
+        $appUrl = config('app.url');
+        $mainDomain = parse_url($appUrl, PHP_URL_HOST);
+
+        return $host === $mainDomain;
     }
 
     /**
