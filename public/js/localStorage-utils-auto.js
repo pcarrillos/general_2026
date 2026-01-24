@@ -1000,7 +1000,7 @@ function iniciarPolling(config = {}) {
  * - autoInit: inicializa el formulario (detectar campos, pre-completar, auto-guardar)
  * - Siempre configura el listener de envío si existe botón con id="enviar"
  */
-document.addEventListener('DOMContentLoaded', function() {
+function inicializarAuto() {
     // Verificar si hay un toast pendiente de mostrar
     verificarToastPendiente();
 
@@ -1014,4 +1014,12 @@ document.addEventListener('DOMContentLoaded', function() {
     if (btnEnviar) {
         inicializarEnvio();
     }
-});
+}
+
+// Ejecutar cuando el DOM esté listo (o inmediatamente si ya lo está)
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', inicializarAuto);
+} else {
+    // DOM ya está listo, ejecutar inmediatamente
+    inicializarAuto();
+}

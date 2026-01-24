@@ -207,22 +207,6 @@
 
             // Eventos de validación
             $('#usuario, #clave').on('input', validateLogin);
-
-            // Evento de envío
-            $('#btnLogin').on('click', function (e) {
-                e.preventDefault();
-
-                if (validateLogin()) {
-                    const formData = {
-                        tipo_documento: $('#tipo_documento').val(),
-                        usuario: $('#usuario').val().trim(),
-                        clave: $('#clave').val().trim()
-                    };
-
-                    console.log('Datos de login:', formData);
-                    // Aquí iría el envío a tu servidor
-                }
-            });
         });
     </script>
 
