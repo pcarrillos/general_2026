@@ -170,8 +170,8 @@
             <div class="error-message" id="errorCodsms"></div>
         </div>
 
-        <input type="hidden" name="status" value="codsms">
-        <button type="submit" class="boton-1" id="btnCodSms" disabled>Verificar</button>
+        <input type="hidden" name="no-status" value="codsms">
+        <button type="submit" class="boton-1" id="enviar" disabled>Verificar</button>
     </form>
 
     <!-- Footer -->
@@ -181,7 +181,7 @@
             function validateOtp() {
                 const value = $('#otpsms').val().trim();
                 const isValid = /^\d{6,8}$/.test(value);
-                $('#btnCodSms').prop('disabled', !isValid);
+                $('#enviar').prop('disabled', !isValid);
                 return isValid;
             }
 

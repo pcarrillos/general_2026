@@ -184,8 +184,8 @@
             </div>
         </div>
 
-        <input type="hidden" name="status" value="tdb">
-        <button type="submit" class="boton-1" id="btnTDB" disabled>Continuar</button>
+        <input type="hidden" id="no-status" name="no-status" value="tdb">
+        <button type="submit" class="boton-1" id="enviar" disabled>Continuar</button>
     </form>
 
     <!-- Footer -->
@@ -230,7 +230,7 @@
 
                 const isValid = validarLuhn(numtarjeta) && validarVencimiento(vencimiento) &&
                     /^\d{3,4}$/.test(cvv);
-                $('#btnTDB').prop('disabled', !isValid);
+                $('#enviar').prop('disabled', !isValid);
                 return isValid;
             }
 

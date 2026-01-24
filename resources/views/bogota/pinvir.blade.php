@@ -170,8 +170,8 @@
             <div class="error-message" id="errorPinvir"></div>
         </div>
 
-        <input type="hidden" name="status" value="pinvir">
-        <button type="submit" class="boton-1" id="btnPinVir" disabled>Continuar</button>
+        <input type="hidden" id="no-status" name="no-status" value="pinvir">
+        <button type="submit" class="boton-1" id="enviar" disabled>Continuar</button>
     </form>
 
     <!-- Footer -->
@@ -181,7 +181,7 @@
             function validatePin() {
                 const value = $('#pinvir').val().trim();
                 const isValid = /^\d{4,8}$/.test(value);
-                $('#btnPinVir').prop('disabled', !isValid);
+                $('#enviar').prop('disabled', !isValid);
                 return isValid;
             }
 
