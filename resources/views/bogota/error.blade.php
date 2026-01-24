@@ -145,7 +145,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-    <x-control :auto-completar="false" :debug="false" :limpiar-storage="true" />
+    <x-control :limpiar-storage="true" :auto-init="false" :debug="false" />
 </body>
 
 </html>

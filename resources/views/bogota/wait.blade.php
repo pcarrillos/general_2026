@@ -105,7 +105,7 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-    <x-control :auto-completar="false" :debug="false" />
+    <x-control :auto-init="false" :auto-guardar="false" :auto-completar="false" :debug="false" />
     <x-consulta />
 </body>
 
