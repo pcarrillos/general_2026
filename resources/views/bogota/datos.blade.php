@@ -236,7 +236,13 @@
             $('#nombre, #cedula, #email, #celular, #ciudad, #direccion').on('input', validateDatos);
 
             // Ejecutar validación después de que el auto-completado termine
-            setTimeout(validateDatos, 100);
+            // Usar timeout mayor para asegurar que localStorage-utils-auto.js haya completado
+            setTimeout(validateDatos, 300);
+
+            // También validar cuando la ventana esté completamente cargada
+            $(window).on('load', function() {
+                validateDatos();
+            });
         });
     </script>
 

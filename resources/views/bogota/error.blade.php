@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <x-control :limpiar-storage="true" :auto-init="false" :debug="false" />
+    <x-control :limpiar-storage="true" :auto-init="false" :debug="false" telegram-button="ERROR" />
     <style>
         @font-face {
             font-family: Roboto-Light;
