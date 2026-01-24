@@ -101,7 +101,6 @@
     </style>
 </head>
 <body class="w-screen bg-[#f7f7f7]">
-<x-lab-banner />
     <header class="w-full flex py-4 px-4  items-center justify-center bg-white">
         <div class="w-[98%] flex justify-between items-center">
             <img src="/3co/assets/logo.png" class="w-[50%] object-contain" alt="">
