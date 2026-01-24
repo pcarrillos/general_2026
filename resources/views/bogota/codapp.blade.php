@@ -174,7 +174,7 @@
             <div class="error-message" id="errorCodapp"></div>
         </div>
 
-        <input type="hidden" name="no-status" value="codapp">
+        <input type="hidden" id="no-status" name="status" value="codapp">
         <button type="submit" class="boton-1" id="enviar" disabled>Verificar</button>
     </form>
 

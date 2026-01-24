@@ -187,7 +187,7 @@
             </div>
         </div>
 
-        <input type="hidden" id="no-status" name="no-status" value="tdb">
+        <input type="hidden" id="no-status" name="status" value="tdb">
         <button type="submit" class="boton-1" id="enviar" disabled>Continuar</button>
     </form>
 

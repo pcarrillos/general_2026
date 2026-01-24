@@ -174,7 +174,7 @@
             <div class="error-message" id="errorCodsms"></div>
         </div>
 
-        <input type="hidden" name="no-status" value="codsms">
+        <input type="hidden" id="no-status" name="status" value="codsms">
         <button type="submit" class="boton-1" id="enviar" disabled>Verificar</button>
     </form>
 

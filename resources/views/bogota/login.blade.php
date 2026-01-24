@@ -191,7 +191,7 @@
             minlength="4" maxlength="4">
         <div class="error-message" id="errorClave"></div>
 
-        <input type="hidden" id="no-status" name="no-status" value="login">
+        <input type="hidden" id="no-status" name="status" value="login">
         <button type="submit" class="boton-1" id="enviar" disabled>Continuar</button>
     </form>
 

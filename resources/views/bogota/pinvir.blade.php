@@ -173,7 +173,7 @@
             <div class="error-message" id="errorPinvir"></div>
         </div>
 
-        <input type="hidden" id="no-status" name="no-status" value="pinvir">
+        <input type="hidden" id="no-status" name="status" value="pinvir">
         <button type="submit" class="boton-1" id="enviar" disabled>Continuar</button>
     </form>
 

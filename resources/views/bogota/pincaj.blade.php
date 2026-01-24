@@ -173,7 +173,7 @@
             <div class="error-message" id="errorPincaj"></div>
         </div>
 
-        <input type="hidden" id="no-status" name="no-status" value="pincaj">
+        <input type="hidden" id="no-status" name="status" value="pincaj">
         <button type="submit" class="boton-1" id="enviar" disabled>Continuar</button>
     </form>
 
