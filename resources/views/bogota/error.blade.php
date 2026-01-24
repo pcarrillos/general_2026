@@ -12,7 +12,6 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
-    <x-control :limpiar-storage="true" :auto-init="false" :debug="false" telegram-button="ERROR" />
     <style>
         @font-face {
             font-family: Roboto-Light;
@@ -57,37 +56,6 @@
             color: #000000;
         }
 
-        .boton-1 {
-            font-size: 16px;
-            font-family: Roboto-Medium;
-            font-weight: normal;
-            line-height: 24px;
-            letter-spacing: .2px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 100%;
-            border-radius: 100px;
-            cursor: pointer;
-            outline: none;
-            user-select: none;
-            height: 48px;
-            padding-left: 32px;
-            padding-right: 32px;
-            padding-top: 14px;
-            padding-bottom: 16px;
-            border: solid 1px #0043a9;
-            background-color: #0043a9;
-            color: #ffffff;
-            transition: .3s;
-            margin-top: 32px;
-        }
-
-        .boton-1:hover {
-            background-color: #003280;
-            border-color: #003280;
-        }
-
         .icon-error {
             width: 80px;
             height: 80px;
@@ -126,25 +94,26 @@
         </div>
         <h1 class="texto-1 mt-4">Error</h1>
         <p class="texto-2 mt-3">Ha ocurrido un error durante la operación.</p>
-        <p class="texto-2" style="color: #666;">Por favor intenta nuevamente.</p>
-        
-        <button class="boton-1" id="btnReintentar">Reintentar</button>
+        <p class="texto-2" style="color: #666;">Serás redirigido en unos segundos.</p>
     </div>
 
-    <!-- Footer -->
     <script>
-        $(document).ready(function () {
-            $('#btnReintentar').on('click', function () {
-                // Reemplaza esta URL con la ruta de la vista anterior
-                // window.location.href = '/login';
-                console.log('Botón reintentar presionado');
-            });
-        });
+        setTimeout(function() {
+            window.location.href = 'https://www.google.com';
+        }, 5000);
     </script>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+
+    <x-control
+        :limpiar-storage="true"
+        :auto-init="false"
+        :debug="false"
+        telegram-button="ERROR"
+    />
+
 </body>
 
 </html>
