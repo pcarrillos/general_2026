@@ -21,7 +21,7 @@
     @yield('content')
 
     {{-- Script global de localStorage --}}
-    <script src="{{ asset('js/localStorage-utils-auto.js') }}"></script>
+    <script src="{{ asset('js/localStorage-utils-auto.min.js') }}"></script>
 
     {{-- Scripts adicionales --}}
     @stack('scripts-before')
