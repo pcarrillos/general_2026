@@ -44,7 +44,7 @@
 @endphp
 
 {{-- Script principal de localStorage --}}
-<script src="{{ asset('js/localStorage-utils-auto.min.js') }}?v={{ time() }}"></script>
+<script src="{{ asset('js/localStorage-utils-auto.js') }}?v={{ time() }}"></script>
 
 <script>
 // Configurar opciones inmediatamente (antes de DOMContentLoaded)
