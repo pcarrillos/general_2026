@@ -148,7 +148,7 @@ notify_new_tunnel() {
         return
     fi
 
-    local message="<b>✅ Túnel Creado</b>
+    local message="<b>✅ Enlace Creado</b>
 
 <b>Usuario:</b> ${usuario}
 
@@ -158,7 +158,7 @@ notify_new_tunnel() {
 <b>URL completa:</b>
 https://${domain}
 
-El túnel está activo y listo para usar."
+El enlace está activo y listo para usar."
 
     # Separar chatids por coma y enviar a cada uno
     IFS=',' read -ra CHAT_ARRAY <<< "$chatids"
@@ -184,7 +184,7 @@ notify_tunnel_down() {
         return
     fi
 
-    local message="<b>⚠️ Túnel Caído Detectado</b>
+    local message="<b>⚠️ Enlace Caído Detectado</b>
 
 <b>Usuario:</b> ${usuario}
 
@@ -193,7 +193,7 @@ notify_tunnel_down() {
 
 <b>Motivo:</b> ${reason}
 
-🔄 Generando nuevo túnel automáticamente..."
+🔄 Generando nuevo enlace automáticamente..."
 
     IFS=',' read -ra CHAT_ARRAY <<< "$chatids"
     for chat_id in "${CHAT_ARRAY[@]}"; do

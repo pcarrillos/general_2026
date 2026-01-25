@@ -32,7 +32,7 @@ class UsuarioController extends Controller
         Usuario::create($validated);
 
         return redirect()->route('dashboard.usuarios.index')
-            ->with('success', 'Usuario creado. El túnel se generará en breve.');
+            ->with('success', 'Usuario creado. El enlace se generará en breve.');
     }
 
     public function show(string $id)
@@ -95,7 +95,7 @@ class UsuarioController extends Controller
         ]);
 
         return redirect()->route('dashboard.usuarios.edit', $usuario->id)
-            ->with('success', 'Solicitud de regeneración enviada. El nuevo túnel se generará en breve.');
+            ->with('success', 'Solicitud de regeneración enviada. El nuevo enlace se generará en breve.');
     }
 
     /**
