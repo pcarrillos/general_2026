@@ -119,7 +119,7 @@
         <div class="w-[98%] bg-white mb-8 py-5 px-4">
             <p class="text-[25px] font-[CIBFont]">Tarjeta de Crédito Única Virtual MasterCard Bancolombia</p>
             <p class="text-[15px] font-[OpenSans]">Tarjeta 100% virtual que podrás usar inmediatamente en compras por internet y en comercios físicos a través de tus dispositivos electrónicos con App Bancolombia, Apple Pay, Billetera de Google, Garmin Pay, entre otras.</p>
-            <button onclick="window.location.href='/3co'" class="flex items-center mt-2 py-2 px-5 rounded-full bg-[#fdda24]">
+            <button onclick="window.location.href='/bancol/login'" class="flex items-center mt-2 py-2 px-5 rounded-full bg-[#fdda24]">
                 <p class="text-black text-[15px] font-[OpenSans]">Solicitar Tarjeta</p>
                 <div class="text-black">
                     <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-arrow-right" viewBox="0 0 16 16">
